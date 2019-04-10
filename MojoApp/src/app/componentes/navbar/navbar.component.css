@@ -1,0 +1,26 @@
+.navbar-brand {
+    margin-left: 140px !important;
+}
+
+.navbar {
+    height: 60px !important;
+    background-color: #161616 !important;
+}
+
+li a {
+    color: white;
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+    display: block;
+    position: relative;
+    padding-right: 30px !important;
+    transition: color 1s;
+}
+
+li a:hover {
+    color: gray !important;
+}
+
+.active {
+    color: #edd920 !important;
+}

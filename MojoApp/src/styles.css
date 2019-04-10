@@ -1,0 +1,27 @@
+/* You can add global styles to this file, and also import other style files */
+
+.button-style {
+    color: #edd920;
+    height: 30px;
+    line-height: 10px;
+}
+
+.form-control:focus {
+    border-color: #edd920 !important;
+    box-shadow: 0 0 0 0.1rem #edd920 !important;
+}
+
+.table {
+    width: 100% !important;
+}
+
+.thead-dark th {
+    background-color: #161616 !important;
+    color: #edd920 !important;
+    padding: 0.25rem;
+    text-align: center;
+}
+
+tr {
+    text-align: center !important;
+}
