@@ -1,26 +1,40 @@
 .navbar-brand {
-    margin-left: 140px !important;
+    margin-left: 10% !important;
 }
 
 .navbar {
-    height: 60px !important;
     background-color: #161616 !important;
 }
 
 li a {
-    color: white;
+    color: white !important;
     font-size: 16px;
     font-family: Arial, Helvetica, sans-serif;
-    display: block;
-    position: relative;
     padding-right: 30px !important;
     transition: color 1s;
 }
 
 li a:hover {
     color: gray !important;
+    font-size: 19px !important;
 }
 
 .active {
     color: #edd920 !important;
+}
+
+.ml-auto {
+    margin-left: 50% !important;
+}
+
+@media screen and (max-width:992px) {
+    .ml-auto {
+        margin-left: auto!important;
+    }
+    .navbar-brand {
+        margin-left: 0% !important;
+    }
+    .navbar-light .navbar-toggler {
+        border-color: #161616 !important;
+    }
 }

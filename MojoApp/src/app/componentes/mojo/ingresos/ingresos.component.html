@@ -44,26 +44,26 @@
 </div>
 <br>
 <div class="row">
-    <div class="col-md-4 classDiv">
+    <div class="col-md-4">
         <div class="form-group">
             <label for="exampleFormControlInput1">Canal:</label>
             <input style="height: 30px;" class="form-control" id="exampleFormControlInput1" placeholder="Canal">
         </div>
     </div>
-    <div class="col-md-4 classDiv ">
+    <div class="col-md-4 ">
         <div class="form-group">
             <label for="exampleFormControlInput1">Artista:</label>
             <input style="height: 30px;" type="email" class="form-control" id="exampleFormControlInput1" placeholder="Artista">
         </div>
     </div>
-    <div class="col-md-2 classDiv" style="margin-top:31px;">
+    <div class="col-md-2" style="margin-top:31px;">
         <button type="button" class="btn btn-dark button-style "><strong>Exportar</strong></button>
     </div>
 
 </div>
 <br>
 <div class="row">
-    <div class="col-md-6 classDiv">
+    <div class="table-responsive col-md-12">
         <table class="table">
             <thead class="thead-dark">
                 <tr>
@@ -102,10 +102,10 @@
             </tbody>
         </table>
     </div>
-    <div class="col-md-6">
-        <div style="width: 100%;">
-            <canvas baseChart [datasets]="lineChartData" height="115" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" [plugins]="lineChartPlugins" (chartHover)="chartHovered($event)"
-                (chartClick)="chartClicked($event)"></canvas>
-        </div>
+</div>
+<div class="row">
+    <div style="width: 100%; ">
+        <canvas baseChart [datasets]="lineChartData" height="70" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" [plugins]="lineChartPlugins" (chartHover)="chartHovered($event)"
+            (chartClick)="chartClicked($event)"></canvas>
     </div>
 </div>

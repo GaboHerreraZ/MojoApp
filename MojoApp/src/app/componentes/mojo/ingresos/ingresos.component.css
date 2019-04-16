@@ -1,5 +1,6 @@
 .card {
-    width: 70%;
+    width: 100% !important;
+    margin-bottom: 5% !important;
 }
 
 .span-total {
@@ -9,4 +10,20 @@
 
 .classDiv {
     margin-left: 0px;
+}
+
+@media screen and (max-width:575px) {
+    .container {
+        margin-left: 0px !important;
+        margin-right: 0px !important;
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+    }
+    table.button-style {
+        color: #edd920;
+        height: 50%;
+        width: 100%;
+        font-size: 20%;
+        line-height: 10px;
+    }
 }
