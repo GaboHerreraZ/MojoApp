@@ -1,15 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { IngresosComponent } from './componentes/mojo/ingresos/ingresos.component';
-import { AnaliticaComponent } from './componentes/mojo/analitica/analitica.component';
-import { YoutubeComponent } from './componentes/mojo/youtube/youtube.component';
 
 const routes: Routes = [
-{path:'ingresos',component:IngresosComponent},
-{path:'analitica',component:AnaliticaComponent},
-{path:'youtube',component:YoutubeComponent},
-{path:'',redirectTo:'/ingresos',pathMatch:'full'},
-{path:'**',redirectTo:'/ingresos',pathMatch:'full'}
+{path:'analitica',loadChildren:'./componentes/mojo/analitica/analitica-module/analitica.module#AnaliticaModule'},
+{path:'ingresos',loadChildren:'./componentes/mojo/ingresos/ingresos-module/ingresos.module#IngresosModule'},
+{path:'youtube',loadChildren:'./componentes/mojo/youtube/youtube-module/youtube.module#YoutubeModule'},
+{path:'',redirectTo:'/analitica',pathMatch:'full'},
+{path:'**',redirectTo:'/analitica',pathMatch:'full'}
 
 ];
 

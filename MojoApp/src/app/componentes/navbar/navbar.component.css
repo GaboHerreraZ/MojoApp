@@ -7,7 +7,8 @@
 }
 
 li a {
-    color: white !important;
+    color: white;
+    display: block;
     font-size: 16px;
     font-family: Arial, Helvetica, sans-serif;
     padding-right: 30px !important;
@@ -16,7 +17,7 @@ li a {
 
 li a:hover {
     color: gray !important;
-    font-size: 19px !important;
+    font-size: 17px !important;
 }
 
 .active {
