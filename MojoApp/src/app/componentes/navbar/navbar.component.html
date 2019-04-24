@@ -19,8 +19,14 @@
             <li class="nav-item">
                 <a class="nav-link" routerLink="/analitica" routerLinkActive="active"><strong>Analítica</strong></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" routerLink="/catalogo" routerLinkActive="active"><strong>Catalogos</strong></a>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Catalogos
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" routerLink="/catalogo">Catalogo</a>
+                    <a class="dropdown-item" routerLink="/artista">Artista</a>
+                  </div>
             </li>
             <li class="nav-item">
                 <a class="nav-link" routerLink="/youtube" routerLinkActive="active"><strong>YouTube</strong></a>

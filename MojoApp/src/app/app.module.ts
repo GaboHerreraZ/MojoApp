@@ -11,7 +11,7 @@ import { AuthComponent } from './componentes/auth/auth.component';
   declarations: [
     AppComponent,
     NavbarComponent,
-    AuthComponent
+    AuthComponent,
   ],
   imports: [
     BrowserModule,
