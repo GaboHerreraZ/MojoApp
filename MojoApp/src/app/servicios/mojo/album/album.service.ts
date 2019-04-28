@@ -14,8 +14,8 @@ export class AlbumService {
     let album: Album;
     for (let i = 0; i < 10; i++) {
       this.lastId = (i + 1);
-      album = new Album(this.lastId, "Album " + this.lastId, "Artista " + this.lastId,
-       "UPC " + this.lastId);
+      album = new Album(this.lastId, "Album " + this.lastId, "UPC " + this.lastId,
+       "Artista " + this.lastId);
       this.albunes.push(album);
     }
   }

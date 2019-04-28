@@ -28,6 +28,8 @@ export class CatalogosComponent implements OnInit, OnDestroy, AfterViewInit {
   albumSeleccionado: Album;
   nuevoAlbumForm: FormGroup;
   editarAlbumForm: FormGroup;
+  showEditModal = true;
+  showAddModal = true;
   
   constructor(private fb: FormBuilder, private servicios: ComunesService,
     private serviciosArtista: ArtistaService, private serviciosAlbum: AlbumService) {
@@ -43,6 +45,7 @@ export class CatalogosComponent implements OnInit, OnDestroy, AfterViewInit {
 
   public editarAlbum(album: Album) {
     this.albumSeleccionado = album;
+    this.initEditarAlbumForm();
     this.validarForm(this.editarAlbumForm);
     return;
   }
@@ -108,8 +111,10 @@ export class CatalogosComponent implements OnInit, OnDestroy, AfterViewInit {
         console.log("el resultado es un album");
         console.log(result);
         this.getAlbunes();
+        //this.showAddModal = false;
       } else {
         // TODO: mostrar error
+        console.log("Error al guardar");
       }
     });
   }
@@ -150,18 +155,27 @@ export class CatalogosComponent implements OnInit, OnDestroy, AfterViewInit {
     });
   }
 
+  public initEditarAlbumForm() {
+    this.editarAlbumForm = this.fb.group({
+      titulo2: [this.albumSeleccionado.titulo, Validators.required],
+      artista2: [this.albumSeleccionado.artista, Validators.required],
+      upc2: [this.albumSeleccionado.upc, Validators.required]
+    });
+  }
+
   ngOnInit() {
-    
+
     this.nuevoAlbumForm = this.fb.group({
       titulo: ["", Validators.required],
       artista: ["", Validators.required],
       upc: ["", Validators.required]
     });
-    this.editarAlbumForm = this.fb.group({
+    /*this.editarAlbumForm = this.fb.group({
       titulo2: ["", Validators.required],
       artista2: ["", Validators.required],
       upc2: ["", Validators.required]
-    });
+    });*/
+    this.initEditarAlbumForm();
     this.dtOptions = {
         pagingType: 'full_numbers',
         pageLength: 10
