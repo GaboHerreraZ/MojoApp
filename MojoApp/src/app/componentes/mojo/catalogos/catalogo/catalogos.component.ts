@@ -111,6 +111,7 @@ export class CatalogosComponent implements OnInit, OnDestroy, AfterViewInit {
         console.log("el resultado es un album");
         console.log(result);
         this.getAlbunes();
+        this.rerender();
         //this.showAddModal = false;
       } else {
         // TODO: mostrar error
@@ -151,7 +152,7 @@ export class CatalogosComponent implements OnInit, OnDestroy, AfterViewInit {
       console.log("getAlbunes");
       this.albunes = albunes;
       console.log(this.albunes);
-      this.rerender();
+      //this.rerender();
     });
   }
 
@@ -209,17 +210,72 @@ export class CatalogosComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.dtTrigger.next();
+    console.log("ngAfterViewInit");
+    /*this.datatableElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      dtInstance.columns().every(function () {
+        const that = this;
+        $('input', this.footer()).on('keyup change', function () {
+          if (that.search() !== this['value']) {
+            that
+              .search(this['value'])
+              .draw();
+          }
+        });
+      });
+    });*/
+    /*this.dtTrigger.next();
+    
+    const t = this;
+    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      dtInstance.columns().every(function () {
+        const that = this;
+        $('input', this.footer()).on('keyup change', function () {
+          if (that.search() !== this['value']) {
+            that
+              .search(this['value'])
+              .draw();
+              t.dtTrigger.next();
+              //t.rerender();
+              
+          }
+        });
+      });
+    });*/
+    this.rerender();
   }
 
   rerender(): void {
+    console.log("rerender");
+    this.dtTrigger.next();
     if(this.dtElement.dtInstance === undefined)
       return;
-    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+    /*this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
       // Destroy the table first
       dtInstance.destroy();
       // Call the dtTrigger to rerender again
       this.dtTrigger.next();
+    });*/
+    const t = this;
+    
+    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      dtInstance.destroy();
+      // Call the dtTrigger to rerender again
+      this.dtTrigger.next();
+      dtInstance.columns().every(function () {
+        const that = this;
+        $('input', this.footer()).on('keyup change', function () {
+          console.log("input:" + this['value']);
+          console.log("current Search: " + that.search());
+          if (that.search() !== this['value']) {
+            that
+              .search(this['value'])
+              .draw();
+              console.log("result of search:");
+              console.log(that
+                .search(this['value']).data().toArray());
+          }
+        });
+      });
     });
   }
 
