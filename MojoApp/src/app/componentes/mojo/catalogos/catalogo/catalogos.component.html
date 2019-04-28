@@ -1,3 +1,184 @@
-<p>
-  catalogos works!
-</p>
+<!--div class="row">
+    <div class="col-md-4 ">
+        <form [formGroup]="filterForm" (ngSubmit)="submitFilter()">
+            <div class="form-group" >
+                <input style="height: 30px;" type="text" class="form-control"
+                placeholder="Busqueda" (keyup)="submitFilter()" formControlName="searchText" >
+            </div>
+        </form>
+    </div>
+</div-->
+<div class="d-flex flex-row-reverse mb-2">
+    <span>
+        <button class="btn btn-dark button-primary btn-lg" data-toggle="modal"
+        data-target="#nuevoAlbum">Nuevo Album</button>
+    </span>
+</div>
+<div class="row">
+    <div class="table-responsive col-md-12">
+        <table class="table" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">UPC</th>
+                    <th scope="col">Artista</th>
+                    <th scope="col">Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let album of albunes">
+                    <td>{{album.titulo}}</td>
+                    <td>{{album.upc}}</td>
+                    <td>{{album.artista}}</td>
+                    <td>
+                        <button type="button" class="btn btn-primary button-style btn-xs"
+                        (click)="verDetalleAlbum(album)" data-toggle="modal"
+                        data-target="#detallesAlbum"><i class="fa fa-eye"></i></button>
+                        <button type="button" class="btn btn-secondary button-style btn-xs"
+                        (click)="editarAlbum(album)" data-toggle="modal"
+                        data-target="#editarAlbum"><i class="fa fa-edit"></i></button>
+                        <button type="button" class="btn btn-danger button-style btn-xs"
+                        (click)="showEliminarDialog(album)" data-toggle="modal"
+                        data-target="#alertDialog"
+                        ><i class="fa fa-trash"></i></button>   
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- dialogs -->
+<div class="modal" tabindex="-1" role="dialog" id="detallesAlbum">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Detalles de Album</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <p><strong>Titulo: </strong> {{albumSeleccionado.titulo}}</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <!--button type="button" class="btn btn-primary">Save changes</button-->
+        </div>
+        </div>
+    </div>
+</div>
+<div class="modal" tabindex="-1" role="dialog" id="nuevoAlbum">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <form [formGroup]="nuevoAlbumForm" (ngSubmit)="submitNuevoAlbum()">
+          <div class="modal-header">
+            <h5 class="modal-title">Nuevo Album</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="">Titulo:</label>
+              <input type="text" class="form-control" placeholder="Titulo del album"
+              id="titulo" formControlName="titulo" required >
+              <div *ngIf="titulo.invalid && (titulo.dirty || titulo.touched)"
+              class="is-invalid">                        
+                  <span *ngIf="titulo.errors.required">
+                      El titulo es requerido
+                  </span>
+              </div>
+          </div>
+          <div class="form-group">
+              <label for="">UPC:</label>
+              <input type="text" class="form-control" placeholder="UPC del album"
+              id="upc" formControlName="upc" required >
+              <div *ngIf="upc.invalid && (upc.dirty || upc.touched)"
+              class="is-invalid">                        
+                  <span *ngIf="upc.errors.required">
+                      El upc es requerido
+                  </span>
+              </div>
+          </div>
+          <div class="form-group">
+              <label for="">Artista:</label>
+              <select class="form-control" placeholder="Seleccione un artista" 
+              id="artista" formControlName="artista" required>
+                  <option *ngFor="let artista of artistas" [value]="artista.nombreCompleto()">
+                      {{artista.nombreCompleto()}}
+                  </option>
+              </select>
+              <div *ngIf="artista.invalid && (artista.dirty || artista.touched)"
+              class="is-invalid">                        
+                  <span *ngIf="artista.errors.required">
+                      El artista es requerido
+                  </span>
+              </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" >Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="modal" tabindex="-1" role="dialog" id="editarAlbum">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <form [formGroup]="editarAlbumForm" (ngSubmit)="submitEditarAlbum()">
+            <div class="modal-header">
+              <h5 class="modal-title">Editar Album</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+                <label for="">Titulo:</label>
+                <input type="text" class="form-control" placeholder="Titulo del album"
+                id="titulo2" formControlName="titulo2" required [value]="albumSeleccionado.titulo">
+                <div *ngIf="titulo2.invalid && (titulo2.dirty || titulo2.touched)"
+                class="is-invalid">                        
+                    <span *ngIf="titulo2.errors.required">
+                        El titulo es requerido
+                    </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="">UPC:</label>
+                <input type="text" class="form-control" placeholder="UPC del album"
+                id="upc2" formControlName="upc2" required [value]="albumSeleccionado.upc">
+                <div *ngIf="upc2.invalid && (upc2.dirty || upc2.touched)"
+                class="is-invalid">                        
+                    <span *ngIf="upc2.errors.required">
+                        El upc es requerido
+                    </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="">Artista:</label>
+                <select class="form-control" placeholder="Seleccione un artista" 
+                id="artista2" formControlName="artista2" required>
+                    <option *ngFor="let artista of artistas" [value]="artista.nombreCompleto()">
+                        {{artista.nombreCompleto()}}
+                    </option>
+                </select>
+                <div *ngIf="artista2.invalid && (artista2.dirty || artista2.touched)"
+                class="is-invalid">                        
+                    <span *ngIf="artista2.errors.required">
+                        El artista es requerido
+                    </span>
+                </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary" >Guardar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  

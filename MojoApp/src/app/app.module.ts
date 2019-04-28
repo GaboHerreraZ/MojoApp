@@ -5,12 +5,14 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './componentes/navbar/navbar.component';
 import { AuthComponent } from './componentes/auth/auth.component';
 import { ComunesService } from './servicios/mojo/comunes/comunes.service';
+import { AlertComponent } from './componentes/alert/alert.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    AuthComponent
+    AuthComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,
