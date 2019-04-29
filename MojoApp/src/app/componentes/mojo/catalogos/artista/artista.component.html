@@ -1,1 +1,153 @@
-artista works!!
+<!--div class="row">
+    <div class="col-md-4 ">
+        <form [formGroup]="filterForm" (ngSubmit)="submitFilter()">
+            <div class="form-group" >
+                <input style="height: 30px;" type="text" class="form-control"
+                placeholder="Busqueda" (keyup)="submitFilter()" formControlName="searchText" >
+            </div>
+        </form>
+    </div>
+</div-->
+<div class="d-flex flex-row-reverse mb-2">
+    <span>
+        <button class="btn btn-dark button-primary btn-lg" data-toggle="modal"
+        data-target="#nuevoArtista">Nuevo Artista</button>
+    </span>
+</div>
+<div class="row">
+    <div class="table-responsive col-md-12">
+        <table class="table" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Afiliado</th>
+                    <th scope="col">Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let artista of artistas">
+                    <td>{{artista.nombreCompleto()}}</td>
+                    <td>{{artista.afiliado}}</td>
+                    <td>
+                        <button type="button" class="btn btn-dark button-style"
+                         (click)="verDetalleArtista(artista)" data-toggle="modal"
+                          data-target="#detallesArtista"><strong>Ver detalle</strong></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- dialogs -->
+<div class="modal" tabindex="-1" role="dialog" id="detallesArtista">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Detalles de Artista</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <p><strong>Nombre Completo: </strong> {{artistaSeleccionado.nombreCompleto()}}</p>
+            <p><strong>Afiliado: </strong> {{artistaSeleccionado.afiliado}}</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <!--button type="button" class="btn btn-primary">Save changes</button-->
+        </div>
+        </div>
+    </div>
+</div>
+<div class="modal" tabindex="-1" role="dialog" id="nuevoArtista">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form [formGroup]="nuevoArtistaForm" (ngSubmit)="submitNuevoArtista()">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Nuevo Artista</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="">Pais:</label>
+                            <select class="form-control" placeholder="Seleccione su pais de residencia"
+                            id="pais" formControlName="pais" required>
+                                <option *ngFor="let pais of paises" [value]="pais.id">
+                                    {{pais.nombre}}
+                                </option>
+                            </select>
+                            <div *ngIf="pais.invalid && (pais.dirty || pais.touched)"
+                            class="is-invalid">                        
+                                <span *ngIf="pais.errors.required">
+                                    El pais es requerido
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Nombres:</label>
+                            <input type="text" class="form-control" placeholder="Nombres"
+                            id="nombres" formControlName="nombres" required >
+                            <div *ngIf="nombres.invalid && (nombres.dirty || nombres.touched)"
+                            class="is-invalid">                        
+                                <span *ngIf="nombres.errors.required">
+                                    Los nombres son requeridos
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Apellidos:</label>
+                            <input type="text" class="form-control" placeholder="Apellidos"
+                            id="apellidos" formControlName="apellidos" required>
+                            <div *ngIf="apellidos.invalid && (apellidos.dirty || apellidos.touched)"
+                            class="is-invalid">                        
+                                <span *ngIf="apellidos.errors.required">
+                                    Los apellidos son requeridos
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Genero:</label>
+                            <select class="form-control" placeholder="Seleccione un genero" 
+                            id="genero" formControlName="genero" required>
+                                <option *ngFor="let genero of generos" [value]="genero.id">
+                                    {{genero.nombre}}
+                                </option>
+                            </select>
+                            <div *ngIf="genero.invalid && (genero.dirty || genero.touched)"
+                            class="is-invalid">                        
+                                <span *ngIf="genero.errors.required">
+                                    El genero es requerido
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Spotify:</label>
+                            <input type="text" class="form-control" placeholder="Su username en Spotify"
+                            id="spotify" formControlName="spotify" >
+                        </div>
+                        <div class="form-group">
+                            <label for="">Facebook:</label>
+                            <input type="text" class="form-control" placeholder="Su username en Facebook"
+                            id="facebook" formControlName="facebook" >
+                        </div>
+                        <div class="form-group">
+                            <label for="">Spotify:</label>
+                            <input type="text" class="form-control" placeholder="Su username en Youtube"
+                            id="youtube" formControlName="youtube" >
+                        </div>
+                        <div class="form-group">
+                            <label for="">Instagram:</label>
+                            <input type="text" class="form-control" placeholder="Su username en Instagram"
+                            id="instagram" formControlName="instagram" >
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" >Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>    
