@@ -11,20 +11,21 @@
     width: 100% !important;
 }
 
-li{
-    display:inline; 
+li {
+    display: inline;
     margin-right: 7%;
 }
 
-li div{
+li div {
     display: inline;
 }
 
-.img-style{
+.img-style {
     width: 40px;
-    height:40px; 
-    margin-right:1%;
+    height: 40px;
+    margin-right: 1%;
 }
+
 .span-style {
     padding-left: 10px;
     color: black;
@@ -32,8 +33,8 @@ li div{
     font-family: Arial, Helvetica, sans-serif;
 }
 
-@media screen and (max-width:1000px){
-    li div{
+@media screen and (max-width:1000px) {
+    li div {
         display: inline-block;
     }
 }
