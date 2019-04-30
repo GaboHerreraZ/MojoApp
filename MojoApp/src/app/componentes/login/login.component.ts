@@ -63,7 +63,7 @@ export class LoginComponent implements OnInit {
                     this.newPassword = true;
                  }else{
                     this.show = false;
-                    this._router.navigate(['/analitica']);
+                    this._router.navigate(['/mojo/analitica']);
                  }
             },
             error => {
