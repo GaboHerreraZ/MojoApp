@@ -5,6 +5,7 @@ import { Observable,from , BehaviorSubject} from 'rxjs';
 import { Router } from '@angular/router';
 import { map, tap, catchError } from 'rxjs/operators';
 import { of } from 'zen-observable';
+import { AlertService } from '../alert/alert.service';
 
 
 
@@ -16,7 +17,8 @@ export class AuthService {
   public loggedIn: BehaviorSubject<boolean>;
 
 
-  constructor(private _router:Router) { 
+  constructor(private _router:Router,
+              private _alertMessage:AlertService) { 
     Amplify.configure(environment.amplify);
     this.loggedIn = new BehaviorSubject<boolean>(false);
   }
@@ -45,11 +47,11 @@ export class AuthService {
       .pipe(
         map(result => {
           this.loggedIn.next(true);
-          console.log("1");
           return true;
         }),
         catchError(error => {
           this.loggedIn.next(false);
+          this._alertMessage.error(error.message);
           return of(false);
         })
       );
@@ -63,7 +65,7 @@ export class AuthService {
           this._router.navigate(['/login']);
         },
         (error) => {
-          console.log(error)
+          this._alertMessage.error(error.message);
         }
       );
   }
@@ -77,11 +79,6 @@ export class AuthService {
   }
 
   public isLoggedIn():Observable<boolean>{
-    /*return from(this.loggedIn.asObservable()).pipe(
-      map((res:boolean)=>{
-        return res;
-      })
-    );*/
      return this.loggedIn.asObservable();
   }
 

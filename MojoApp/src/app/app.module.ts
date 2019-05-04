@@ -9,6 +9,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
 import { ComunesService } from './servicios/mojo/comunes/comunes.service';
 import { PaginasComponent } from './componentes/mojo/paginas.component';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+
 
 @NgModule({
   declarations: [
@@ -28,7 +30,8 @@ import { PaginasComponent } from './componentes/mojo/paginas.component';
       primaryColour: '#ffffff', 
       secondaryColour: '#ffffff', 
       tertiaryColour: '#ffffff'
-  })
+  }),
+  SweetAlert2Module
   ],
   providers: [AuthService,ComunesService],
   bootstrap: [AppComponent]
