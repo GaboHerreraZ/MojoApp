@@ -1,6 +1,7 @@
 import { AfterViewInit, ViewChild, Component, OnInit, OnDestroy } from '@angular/core';
 import { DataTableDirective } from 'angular-datatables';
 import { Artista } from '../../../../modelos/ArtistaModel';
+import { Track } from '../../../../modelos/TrackModel';
 import { Album } from '../../../../modelos/AlbumModel';
 import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
@@ -30,16 +31,22 @@ export class CatalogosComponent implements OnInit, OnDestroy, AfterViewInit {
   editarAlbumForm: FormGroup;
   showEditModal = true;
   showAddModal = true;
+  newTrack: Track;
+  newAlbumTracks: Track[];
+  trackTypes = ["Video", "Audio"];
   
   constructor(private fb: FormBuilder, private servicios: ComunesService,
     private serviciosArtista: ArtistaService, private serviciosAlbum: AlbumService) {
       this.artistas = new Array<Artista>();
       this.albunes = new Array<Album>();
       this.albumSeleccionado = new Album();
+      this.newTrack = new Track();
+      this.newAlbumTracks = new Array<Track>();
   }
 
   public verDetalleAlbum(album: Album) {
     this.albumSeleccionado = album;
+    console.log(this.albumSeleccionado);
     return;
   }
 
@@ -106,12 +113,12 @@ export class CatalogosComponent implements OnInit, OnDestroy, AfterViewInit {
 
     const formValues = this.nuevoAlbumForm.value;
 
-    this.serviciosAlbum.addAlbum(formValues).subscribe(result => {
+    this.serviciosAlbum.addAlbum(formValues, this.newAlbumTracks).subscribe(result => {
       if (result instanceof Album) {
         console.log("el resultado es un album");
         console.log(result);
         this.getAlbunes();
-        this.rerender();
+        
         //this.showAddModal = false;
       } else {
         // TODO: mostrar error
@@ -151,16 +158,55 @@ export class CatalogosComponent implements OnInit, OnDestroy, AfterViewInit {
     this.serviciosAlbum.getAlbunes().subscribe(albunes => {
       console.log("getAlbunes");
       this.albunes = albunes;
+      const t = this;
+      if(t.dtElement.dtInstance !== undefined){
+        t.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+          dtInstance.destroy();
+          t.dtTrigger.next();
+        });
+      }
+      
       console.log(this.albunes);
-      //this.rerender();
     });
+  }
+
+  public addToTrackList(){
+    this.newTrack.isrc = this.nuevoAlbumForm.get('trackisrc').value;
+    this.newTrack.nombre = this.nuevoAlbumForm.get('trackname').value;
+    this.newTrack.tipo = this.nuevoAlbumForm.get('tracktipo').value;
+    this.newTrack.id = this.newAlbumTracks.length + 1;
+    if(this.newTrack.isValid()){
+      this.newAlbumTracks.push(this.newTrack);
+      this.newTrack = new Track();
+    }
+  }
+
+  public deleteFromTrackList(id: number){
+    
+    const index = this.newAlbumTracks.findIndex(element => {
+      return element.id == id;
+    });
+    if(index !== -1)
+      this.newAlbumTracks.splice(index, 1);
+    
+  }
+
+  public deleteFromTrackList2(id: number){
+    const index = this.albumSeleccionado.tracks.findIndex(element => {
+      return element.id == id;
+    });
+    if(index !== -1)
+      this.albumSeleccionado.tracks.splice(index, 1);
   }
 
   public initEditarAlbumForm() {
     this.editarAlbumForm = this.fb.group({
       titulo2: [this.albumSeleccionado.titulo, Validators.required],
       artista2: [this.albumSeleccionado.artista, Validators.required],
-      upc2: [this.albumSeleccionado.upc, Validators.required]
+      upc2: [this.albumSeleccionado.upc, Validators.required],
+      trackname: [""],
+      tracktipo: [""],
+      trackisrc: [""],
     });
   }
 
@@ -169,7 +215,10 @@ export class CatalogosComponent implements OnInit, OnDestroy, AfterViewInit {
     this.nuevoAlbumForm = this.fb.group({
       titulo: ["", Validators.required],
       artista: ["", Validators.required],
-      upc: ["", Validators.required]
+      upc: ["", Validators.required],
+      trackname: [""],
+      tracktipo: [""],
+      trackisrc: [""],
     });
     /*this.editarAlbumForm = this.fb.group({
       titulo2: ["", Validators.required],
@@ -211,69 +260,16 @@ export class CatalogosComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngAfterViewInit(): void {
     console.log("ngAfterViewInit");
-    /*this.datatableElement.dtInstance.then((dtInstance: DataTables.Api) => {
-      dtInstance.columns().every(function () {
-        const that = this;
-        $('input', this.footer()).on('keyup change', function () {
-          if (that.search() !== this['value']) {
-            that
-              .search(this['value'])
-              .draw();
-          }
-        });
-      });
-    });*/
-    /*this.dtTrigger.next();
-    
-    const t = this;
-    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
-      dtInstance.columns().every(function () {
-        const that = this;
-        $('input', this.footer()).on('keyup change', function () {
-          if (that.search() !== this['value']) {
-            that
-              .search(this['value'])
-              .draw();
-              t.dtTrigger.next();
-              //t.rerender();
-              
-          }
-        });
-      });
-    });*/
-    this.rerender();
-  }
-
-  rerender(): void {
-    console.log("rerender");
     this.dtTrigger.next();
-    if(this.dtElement.dtInstance === undefined)
-      return;
-    /*this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
-      // Destroy the table first
-      dtInstance.destroy();
-      // Call the dtTrigger to rerender again
-      this.dtTrigger.next();
-    });*/
+
     const t = this;
-    
     this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
-      dtInstance.destroy();
-      // Call the dtTrigger to rerender again
-      this.dtTrigger.next();
       dtInstance.columns().every(function () {
         const that = this;
         $('input', this.footer()).on('keyup change', function () {
-          console.log("input:" + this['value']);
-          console.log("current Search: " + that.search());
-          if (that.search() !== this['value']) {
             that
               .search(this['value'])
               .draw();
-              console.log("result of search:");
-              console.log(that
-                .search(this['value']).data().toArray());
-          }
         });
       });
     });

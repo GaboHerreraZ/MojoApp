@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Artista } from '../../../modelos/ArtistaModel';
 import { Album } from '../../../modelos/AlbumModel';
+import { Track } from '../../../modelos/TrackModel';
 
 @Injectable({
   providedIn: 'root'
@@ -21,12 +22,12 @@ export class AlbumService {
   }
 
   public getAlbunes (): Observable<Album[]> {
-    console.log("getAlbunes");
+    console.log("albumService.getAlbunes");
     console.log(this.albunes);
     return of(this.albunes);
   }
 
-  public addAlbum (album: any): Observable<Album> {
+  public addAlbum (album: any, tracks: Track[]): Observable<Album> {
     console.log("addAlbum");
     console.log(album);
     const newAlbum = new Album();
@@ -39,6 +40,7 @@ export class AlbumService {
       newAlbum.upc = album.upc;
       newAlbum.tracks = album.tracks;
       newAlbum.afiliados = album.afiliados;
+      newAlbum.tracks = tracks;
       this.albunes.push(newAlbum);
     } catch (error) {
       console.log("Ocurrio una excepcion: " + error);

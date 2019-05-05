@@ -67,6 +67,25 @@
         </div>
         <div class="modal-body">
             <p><strong>Titulo: </strong> {{albumSeleccionado.titulo}}</p>
+            <p><strong>UPC: </strong> {{albumSeleccionado.upc}}</p>
+            <p><strong>Artista: </strong> {{albumSeleccionado.artista}}</p>
+            <h5>Tracks</h5>
+            <table class="table table-responsive responsive">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>ISRC</th>
+                        <th>Tipo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let track of albumSeleccionado.tracks">
+                        <td>{{track.nombre}}</td>
+                        <td>{{track.isrc}}</td>
+                        <td>{{track.tipo}}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -123,6 +142,52 @@
                   </span>
               </div>
           </div>
+          <div>
+                <h5>Tracks</h5>
+                <div class="form-group">
+                    <label for="">Nombre:</label>
+                    <input type="text" class="form-control" placeholder="Nombre de la pista"
+                    id="trackname" formControlName="trackname">
+                </div>
+                <div class="form-group">
+                    <label for="">ISRC:</label>
+                    <input type="text" class="form-control" placeholder="ISRC"
+                    id="trackisrc" formControlName="trackisrc">
+                </div>    
+                <div class="form-group">
+                    <label for="">Tipo:</label>
+                    <select class="form-control" placeholder="Seleccione un tipo" 
+                    id="tracktipo" formControlName="tracktipo" >
+                        <option *ngFor="let tipo of trackTypes" [value]="tipo">
+                            {{tipo}}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <a class="btn btn-primary" (click)="addToTrackList()">Agregar a la lista</a>
+                </div>
+            </div>
+            <div class="col-12">
+                <h5>Lista de tracks agregados</h5>
+                <table class="table table-responsive responsive">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>ISRC</th>
+                            <th>Tipo</th>
+                            <th>Opciones</th>
+                        </tr>                        
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let track of newAlbumTracks">
+                            <td>{{track.nombre}}</td>
+                            <td>{{track.isrc}}</td>
+                            <td>{{track.tipo}}</td>
+                            <td><a (click)="deleteFromTrackList(track.id)"><i class="fa fa-trash"></i></a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -179,6 +244,53 @@
                         El artista es requerido
                     </span>
                 </div>
+            </div>
+            <div>
+                <h5>Tracks</h5>
+                <div class="form-group">
+                    <label for="">Nombre:</label>
+                    <input type="text" class="form-control" placeholder="Nombre de la pista"
+                    id="trackname" formControlName="trackname"  >
+                </div>
+                <div class="form-group">
+                    <label for="">ISRC:</label>
+                    <input type="text" class="form-control" placeholder="ISRC"
+                    id="trackisrc" formControlName="trackisrc"  >
+                </div>    
+                <div class="form-group">
+                    <label for="">Tipo:</label>
+                    <select class="form-control" placeholder="Seleccione un tipo" 
+                    id="tracktipo" formControlName="tracktipo" >
+                        <option *ngFor="let tipo of trackTypes" [value]="tipo">
+                            {{tipo}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <h5>Lista de tracks agregados</h5>
+                <table class="table table-responsive responsive">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>ISRC</th>
+                            <th>Tipo</th>
+                            <th>Opciones</th>
+                        </tr>                        
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let track of albumSeleccionado.tracks">
+                            <td>{{track.nombre}}</td>
+                            <td>{{track.isrc}}</td>
+                            <td>{{track.tipo}}</td>
+                            <td>
+                                <a class="btn" (click)="deleteFromTrackList2(track.id)">
+                                <i class="fa fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
           </div>
           <div class="modal-footer">

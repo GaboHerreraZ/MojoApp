@@ -28,7 +28,7 @@ import { ComunesService } from './servicios/mojo/comunes/comunes.service';
       tertiaryColour: '#ffffff'
   })
   ],
-  providers: [AuthService,ComunesService],
+  providers: [/*AuthService,*/ComunesService],
   bootstrap: [AppComponent]
   //entryComponents: [ArtistaComponent]
 })
