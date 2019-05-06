@@ -3,6 +3,7 @@ import { DataTableDirective } from 'angular-datatables';
 import { Artista } from '../../../../modelos/ArtistaModel';
 import { Track } from '../../../../modelos/TrackModel';
 import { Album } from '../../../../modelos/AlbumModel';
+import { Afiliado } from '../../../../modelos/AfiliadoModel';
 import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { ComunesService } from '../../../../servicios/mojo/comunes/comunes.service';
@@ -32,16 +33,24 @@ export class CatalogosComponent implements OnInit, OnDestroy, AfterViewInit {
   showEditModal = true;
   showAddModal = true;
   newTrack: Track;
+  newAfiliado: Afiliado;
+  newAfiliado2: Afiliado;
+  newTrack2: Track;
   newAlbumTracks: Track[];
+  newAlbumAfiliados: Afiliado[];
   trackTypes = ["Video", "Audio"];
   
   constructor(private fb: FormBuilder, private servicios: ComunesService,
     private serviciosArtista: ArtistaService, private serviciosAlbum: AlbumService) {
       this.artistas = new Array<Artista>();
       this.albunes = new Array<Album>();
-      this.albumSeleccionado = new Album();
+      this.albumSeleccionado = new Album(null,"","",new Artista(null, "", ""), "", null);
       this.newTrack = new Track();
+      this.newAfiliado = new Afiliado();
+      this.newAfiliado2 = new Afiliado();
+      this.newTrack2 = new Track();
       this.newAlbumTracks = new Array<Track>();
+      this.newAlbumAfiliados = new Array<Afiliado>();
   }
 
   public verDetalleAlbum(album: Album) {
@@ -135,8 +144,15 @@ export class CatalogosComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     const formValues = this.editarAlbumForm.value;
-
-    this.serviciosAlbum.editAlbum(formValues).subscribe(result => {
+    console.log(formValues);
+    const newAlbum = new Album();
+    newAlbum.artista = formValues.artista2;
+    newAlbum.titulo = formValues.titulo2;
+    newAlbum.upc = formValues.upc2;
+    newAlbum.id = formValues.id;
+    newAlbum.tracks = this.albumSeleccionado.tracks;
+    newAlbum.afiliados = this.albumSeleccionado.afiliados;
+    this.serviciosAlbum.editAlbum(newAlbum).subscribe(result => {
       if (result instanceof Album) {
         console.log("el resultado es un album");
         console.log(result);
@@ -181,6 +197,35 @@ export class CatalogosComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
+  public addToAfiliadosList(){
+    this.newAfiliado.nombre = this.nuevoAlbumForm.get('afiliadonombre').value;
+    this.newAfiliado.id = this.newAlbumAfiliados.length + 1;
+    if(this.newAfiliado.isValid()){
+      this.newAlbumAfiliados.push(this.newAfiliado);
+      this.newAfiliado = new Afiliado();
+    }
+  }
+
+  public addToTrackList2(){
+    this.newTrack2.isrc = this.editarAlbumForm.get('trackisrc').value;
+    this.newTrack2.nombre = this.editarAlbumForm.get('trackname').value;
+    this.newTrack2.tipo = this.editarAlbumForm.get('tracktipo').value;
+    this.newTrack2.id = this.albumSeleccionado.tracks.length + 1;
+    if(this.newTrack2.isValid()){
+      this.albumSeleccionado.tracks.push(this.newTrack2);
+      this.newTrack2 = new Track();
+    }
+  }
+
+  public addToAfiliadosList2(){
+    this.newAfiliado2.nombre = this.editarAlbumForm.get('afiliadonombre').value;
+    this.newAfiliado2.id = this.albumSeleccionado.tracks.length + 1;
+    if(this.newAfiliado2.isValid()){
+      this.albumSeleccionado.afiliados.push(this.newAfiliado2);
+      this.newAfiliado2 = new Afiliado();
+    }
+  }
+
   public deleteFromTrackList(id: number){
     
     const index = this.newAlbumTracks.findIndex(element => {
@@ -188,6 +233,16 @@ export class CatalogosComponent implements OnInit, OnDestroy, AfterViewInit {
     });
     if(index !== -1)
       this.newAlbumTracks.splice(index, 1);
+    
+  }
+
+  public deleteFromAfiliadosList(id: number){
+    
+    const index = this.newAlbumAfiliados.findIndex(element => {
+      return element.id == id;
+    });
+    if(index !== -1)
+      this.newAlbumAfiliados.splice(index, 1);
     
   }
 
@@ -199,11 +254,21 @@ export class CatalogosComponent implements OnInit, OnDestroy, AfterViewInit {
       this.albumSeleccionado.tracks.splice(index, 1);
   }
 
+  public deleteFromAfiliadosList2(id: number){
+    const index = this.albumSeleccionado.afiliados.findIndex(element => {
+      return element.id == id;
+    });
+    if(index !== -1)
+      this.albumSeleccionado.afiliados.splice(index, 1);
+  }
+
   public initEditarAlbumForm() {
     this.editarAlbumForm = this.fb.group({
       titulo2: [this.albumSeleccionado.titulo, Validators.required],
       artista2: [this.albumSeleccionado.artista, Validators.required],
       upc2: [this.albumSeleccionado.upc, Validators.required],
+      id: [this.albumSeleccionado.id, Validators.required],
+      afiliadonombre: [""],
       trackname: [""],
       tracktipo: [""],
       trackisrc: [""],
@@ -216,6 +281,7 @@ export class CatalogosComponent implements OnInit, OnDestroy, AfterViewInit {
       titulo: ["", Validators.required],
       artista: ["", Validators.required],
       upc: ["", Validators.required],
+      afiliadonombre: [""],
       trackname: [""],
       tracktipo: [""],
       trackisrc: [""],

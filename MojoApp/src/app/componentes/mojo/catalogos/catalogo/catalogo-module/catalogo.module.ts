@@ -5,9 +5,9 @@ import { CatalogoRoutingModule } from './catalogo-routing.module';
 import { CatalogosComponent } from '../catalogos.component';
 import { ComunModule } from '../../../../../modulos/comun/comun.module';
 import { DataTablesModule } from 'angular-datatables';
-//import { AlertComponent } from '../../../../alert/alert.component';
+import { AlertComponent } from '../../../../alert/alert.component';
 @NgModule({
-  declarations: [CatalogosComponent/*, AlertComponent*/],
+  declarations: [CatalogosComponent, AlertComponent],
   imports: [
     CommonModule,
     CatalogoRoutingModule,

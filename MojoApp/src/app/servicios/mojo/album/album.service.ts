@@ -1,22 +1,27 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Artista } from '../../../modelos/ArtistaModel';
 import { Album } from '../../../modelos/AlbumModel';
 import { Track } from '../../../modelos/TrackModel';
+import { ArtistaService } from '../artista/artista.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AlbumService {
+export class AlbumService implements OnInit{
   albunes: Array<Album>;
+  artistas: Array<Artista>;
   lastId: number;
-  constructor() {
+  constructor(private serviciosArtista: ArtistaService) {
     this.albunes = new Array<Album>();
+    this.getArtistas();
+  }
+
+  public initAlbunes(){
     let album: Album;
     for (let i = 0; i < 10; i++) {
       this.lastId = (i + 1);
-      album = new Album(this.lastId, "Album " + this.lastId, "UPC " + this.lastId,
-       "Artista " + this.lastId);
+      album = new Album(this.lastId, "Album " + this.lastId, "UPC " + this.lastId, this.artistas[i]);
       this.albunes.push(album);
     }
   }
@@ -51,19 +56,18 @@ export class AlbumService {
   public editAlbum (album: Album): Observable<Album> {
     console.log("editAlbum");
     console.log(album);
-    let newAlbum = null;
     try {
       const index = this.buscarAlbum(album);
 
       if(index === -1)
         return null;
-
-      newAlbum = this.albunes[index];
-
+      
+      this.albunes[index] = album;
+      
     } catch (error) {
       console.log("Ocurrio una excepcion: " + error);
     }
-    return of(newAlbum);
+    return of(album);
   }
 
   public deleteAlbum (album: Album): Observable<boolean> {
@@ -88,5 +92,16 @@ export class AlbumService {
     return this.albunes.findIndex((element) => {
       return element.id == album.id;
     });
+  }
+
+  public getArtistas() {
+    this.serviciosArtista.getArtistas().subscribe(artistas => {
+      this.artistas = artistas;
+      this.initAlbunes();
+    });
+  }
+
+  ngOnInit(){
+    //this.getArtistas();
   }
 }
