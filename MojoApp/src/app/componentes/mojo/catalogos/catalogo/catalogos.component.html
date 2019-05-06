@@ -29,7 +29,7 @@
                 <tr *ngFor="let album of albunes">
                     <td>{{album.titulo}}</td>
                     <td>{{album.upc}}</td>
-                    <td>{{album.artista}}</td>
+                    <td>{{album.artista.nombreCompleto()}}</td>
                     <td>
                         <button type="button" class="btn btn-primary button-style btn-xs"
                         (click)="verDetalleAlbum(album)" data-toggle="modal"
@@ -55,7 +55,7 @@
         </table>
     </div>
 </div>
-<!-- dialogs -->
+<!-- dialogo detalle album -->
 <div class="modal" tabindex="-1" role="dialog" id="detallesAlbum">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -67,6 +67,38 @@
         </div>
         <div class="modal-body">
             <p><strong>Titulo: </strong> {{albumSeleccionado.titulo}}</p>
+            <p><strong>UPC: </strong> {{albumSeleccionado.upc}}</p>
+            <p><strong>Artista: </strong> {{albumSeleccionado.artista.nombreCompleto()}}</p>
+            <h5>Afiliados</h5>
+            <table class="table table-responsive responsive">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let afiliado of albumSeleccionado.afiliados">
+                        <td>{{afiliado.nombre}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <h5>Tracks</h5>
+            <table class="table table-responsive responsive">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>ISRC</th>
+                        <th>Tipo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let track of albumSeleccionado.tracks">
+                        <td>{{track.nombre}}</td>
+                        <td>{{track.isrc}}</td>
+                        <td>{{track.tipo}}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -75,53 +107,133 @@
         </div>
     </div>
 </div>
+<!-- fin dialogo detalle album -->
+
+<!-- dialogo nuevo album -->
 <div class="modal" tabindex="-1" role="dialog" id="nuevoAlbum">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
         <form [formGroup]="nuevoAlbumForm" (ngSubmit)="submitNuevoAlbum()">
-          <div class="modal-header">
-            <h5 class="modal-title">Nuevo Album</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
+            <div class="modal-header">
+                <h5 class="modal-title">Nuevo Album</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                <label for="">Titulo:</label>
+                <input type="text" class="form-control" placeholder="Titulo del album"
+                id="titulo" formControlName="titulo" required >
+                <div *ngIf="titulo.invalid && (titulo.dirty || titulo.touched)"
+                class="is-invalid">                        
+                    <span *ngIf="titulo.errors.required">
+                        El titulo es requerido
+                    </span>
+                </div>
+            </div>
             <div class="form-group">
-              <label for="">Titulo:</label>
-              <input type="text" class="form-control" placeholder="Titulo del album"
-              id="titulo" formControlName="titulo" required >
-              <div *ngIf="titulo.invalid && (titulo.dirty || titulo.touched)"
-              class="is-invalid">                        
-                  <span *ngIf="titulo.errors.required">
-                      El titulo es requerido
-                  </span>
-              </div>
+                <label for="">UPC:</label>
+                <input type="text" class="form-control" placeholder="UPC del album"
+                id="upc" formControlName="upc" required >
+                <div *ngIf="upc.invalid && (upc.dirty || upc.touched)"
+                class="is-invalid">                        
+                    <span *ngIf="upc.errors.required">
+                        El upc es requerido
+                    </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="">Artista:</label>
+                <select class="form-control" placeholder="Seleccione un artista" 
+                id="artista" formControlName="artista" required>
+                    <option *ngFor="let artista of artistas" [ngValue]="artista">
+                        {{artista.nombreCompleto()}}
+                    </option>
+                </select>
+                <div *ngIf="artista.invalid && (artista.dirty || artista.touched)"
+                class="is-invalid">                        
+                    <span *ngIf="artista.errors.required">
+                        El artista es requerido
+                    </span>
+                </div>
+            </div>
+            <!-- seccion de afiliados -->
+            <div>
+                <h5>Afiliados</h5>
+                <div class="form-group">
+                    <label for="">Nombre:</label>
+                    <input type="text" class="form-control" placeholder="Nombre del afiliado"
+                    id="afiliadonombre" formControlName="afiliadonombre">
+                </div>
+                <div class="form-group">
+                    <a class="btn btn-primary" (click)="addToAfiliadosList()">Agregar a la lista</a>
+                </div>
+            </div>
+            <div class="col-12">
+                <h5>Lista de afiliados agregados</h5>
+                <table class="table table-responsive responsive">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Opciones</th>
+                        </tr>                        
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let afiliado of newAlbumAfiliados">
+                            <td>{{afiliado.nombre}}</td>
+                            <td><a (click)="deleteFromAfiliadosList(afiliado.id)"><i class="fa fa-trash"></i></a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- fin seccion afiliados -->
+          
+            <div>
+            <h5>Tracks</h5>
+            <div class="form-group">
+                <label for="">Nombre:</label>
+                <input type="text" class="form-control" placeholder="Nombre de la pista"
+                id="trackname" formControlName="trackname">
+            </div>
+            <div class="form-group">
+                <label for="">ISRC:</label>
+                <input type="text" class="form-control" placeholder="ISRC"
+                id="trackisrc" formControlName="trackisrc">
+            </div>    
+            <div class="form-group">
+                <label for="">Tipo:</label>
+                <select class="form-control" placeholder="Seleccione un tipo" 
+                id="tracktipo" formControlName="tracktipo" >
+                    <option *ngFor="let tipo of trackTypes" [ngValue]="tipo">
+                        {{tipo}}
+                    </option>
+                </select>
+            </div>
+            <div class="form-group">
+                <a class="btn btn-primary" (click)="addToTrackList()">Agregar a la lista</a>
+            </div>
           </div>
-          <div class="form-group">
-              <label for="">UPC:</label>
-              <input type="text" class="form-control" placeholder="UPC del album"
-              id="upc" formControlName="upc" required >
-              <div *ngIf="upc.invalid && (upc.dirty || upc.touched)"
-              class="is-invalid">                        
-                  <span *ngIf="upc.errors.required">
-                      El upc es requerido
-                  </span>
-              </div>
-          </div>
-          <div class="form-group">
-              <label for="">Artista:</label>
-              <select class="form-control" placeholder="Seleccione un artista" 
-              id="artista" formControlName="artista" required>
-                  <option *ngFor="let artista of artistas" [value]="artista.nombreCompleto()">
-                      {{artista.nombreCompleto()}}
-                  </option>
-              </select>
-              <div *ngIf="artista.invalid && (artista.dirty || artista.touched)"
-              class="is-invalid">                        
-                  <span *ngIf="artista.errors.required">
-                      El artista es requerido
-                  </span>
-              </div>
+          <div class="col-12">
+            <h5>Lista de tracks agregados</h5>
+            <table class="table table-responsive responsive">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>ISRC</th>
+                        <th>Tipo</th>
+                        <th>Opciones</th>
+                    </tr>                        
+                </thead>
+                <tbody>
+                    <tr *ngFor="let track of newAlbumTracks">
+                        <td>{{track.nombre}}</td>
+                        <td>{{track.isrc}}</td>
+                        <td>{{track.tipo}}</td>
+                        <td><a (click)="deleteFromTrackList(track.id)"><i class="fa fa-trash"></i></a></td>
+                    </tr>
+                </tbody>
+            </table>
           </div>
         </div>
         <div class="modal-footer">
@@ -132,61 +244,148 @@
     </div>
   </div>
 </div>
+<!-- fin dialogo nuevo album -->
+
+<!-- dialogo dialogo editar album -->
 <div class="modal" tabindex="-1" role="dialog" id="editarAlbum">
     <div class="modal-dialog" role="document">
-      <div class="modal-content">
-          <form [formGroup]="editarAlbumForm" (ngSubmit)="submitEditarAlbum()">
-            <div class="modal-header">
-              <h5 class="modal-title">Editar Album</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <div class="form-group">
-                <label for="">Titulo:</label>
-                <input type="text" class="form-control" placeholder="Titulo del album"
-                id="titulo2" formControlName="titulo2" required [value]="albumSeleccionado.titulo">
-                <div *ngIf="titulo2.invalid && (titulo2.dirty || titulo2.touched)"
-                class="is-invalid">                        
-                    <span *ngIf="titulo2.errors.required">
-                        El titulo es requerido
-                    </span>
+        <div class="modal-content">
+            <form [formGroup]="editarAlbumForm" (ngSubmit)="submitEditarAlbum()">
+                <input type="hidden" formControlName="id" required [value]="albumSeleccionado.id">
+                <div class="modal-header">
+                <h5 class="modal-title">Editar Album</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                <div class="form-group">
+                    <label for="">Titulo:</label>
+                    <input type="text" class="form-control" placeholder="Titulo del album"
+                    id="titulo2" formControlName="titulo2" required [value]="albumSeleccionado.titulo">
+                    <div *ngIf="titulo2.invalid && (titulo2.dirty || titulo2.touched)"
+                    class="is-invalid">                        
+                        <span *ngIf="titulo2.errors.required">
+                            El titulo es requerido
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="">UPC:</label>
+                    <input type="text" class="form-control" placeholder="UPC del album"
+                    id="upc2" formControlName="upc2" required [value]="albumSeleccionado.upc">
+                    <div *ngIf="upc2.invalid && (upc2.dirty || upc2.touched)"
+                    class="is-invalid">                        
+                        <span *ngIf="upc2.errors.required">
+                            El upc es requerido
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="">Artista:</label>
+                    <select class="form-control" placeholder="Seleccione un artista" 
+                    id="artista2" formControlName="artista2" required>
+                        <option *ngFor="let artista of artistas" [ngValue]="artista">
+                            {{artista.nombreCompleto()}}
+                        </option>
+                    </select>
+                    <div *ngIf="artista2.invalid && (artista2.dirty || artista2.touched)"
+                    class="is-invalid">                        
+                        <span *ngIf="artista2.errors.required">
+                            El artista es requerido
+                        </span>
+                    </div>
+                </div>
+                <!-- seccion de afiliados -->
+                <div>
+                    <h5>Afiliados</h5>
+                    <div class="form-group">
+                        <label for="">Nombre:</label>
+                        <input type="text" class="form-control" placeholder="Nombre del afiliado"
+                        id="afiliadonombre" formControlName="afiliadonombre">
+                    </div>
+                    <div class="form-group">
+                        <a class="btn btn-primary" (click)="addToAfiliadosList2()">Agregar a la lista</a>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <h5>Lista de afiliados agregados</h5>
+                    <table class="table table-responsive responsive">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Opciones</th>
+                            </tr>                        
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let afiliado of albumSeleccionado.afiliados">
+                                <td>{{afiliado.nombre}}</td>
+                                <td><a (click)="deleteFromAfiliadosList2(afiliado.id)"><i class="fa fa-trash"></i></a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- fin seccion afiliados -->
+                <div>
+                    <h5>Tracks</h5>
+                    <div class="form-group">
+                        <label for="">Nombre:</label>
+                        <input type="text" class="form-control" placeholder="Nombre de la pista"
+                        id="trackname" formControlName="trackname"  >
+                    </div>
+                    <div class="form-group">
+                        <label for="">ISRC:</label>
+                        <input type="text" class="form-control" placeholder="ISRC"
+                        id="trackisrc" formControlName="trackisrc"  >
+                    </div>    
+                    <div class="form-group">
+                        <label for="">Tipo:</label>
+                        <select class="form-control" placeholder="Seleccione un tipo" 
+                        id="tracktipo" formControlName="tracktipo" >
+                            <option *ngFor="let tipo of trackTypes" [ngValue]="tipo">
+                                {{tipo}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <a class="btn btn-primary" (click)="addToTrackList2()">Agregar a la lista</a>
+                    </div>
+                </div>
+                <div>
+                    <h5>Lista de tracks agregados</h5>
+                    <table class="table table-responsive responsive">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>ISRC</th>
+                                <th>Tipo</th>
+                                <th>Opciones</th>
+                            </tr>                        
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let track of albumSeleccionado.tracks">
+                                <td>{{track.nombre}}</td>
+                                <td>{{track.isrc}}</td>
+                                <td>{{track.tipo}}</td>
+                                <td>
+                                    <a class="btn" (click)="deleteFromTrackList2(track.id)">
+                                    <i class="fa fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
-            <div class="form-group">
-                <label for="">UPC:</label>
-                <input type="text" class="form-control" placeholder="UPC del album"
-                id="upc2" formControlName="upc2" required [value]="albumSeleccionado.upc">
-                <div *ngIf="upc2.invalid && (upc2.dirty || upc2.touched)"
-                class="is-invalid">                        
-                    <span *ngIf="upc2.errors.required">
-                        El upc es requerido
-                    </span>
-                </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary" >Guardar</button>
             </div>
-            <div class="form-group">
-                <label for="">Artista:</label>
-                <select class="form-control" placeholder="Seleccione un artista" 
-                id="artista2" formControlName="artista2" required>
-                    <option *ngFor="let artista of artistas" [value]="artista.nombreCompleto()">
-                        {{artista.nombreCompleto()}}
-                    </option>
-                </select>
-                <div *ngIf="artista2.invalid && (artista2.dirty || artista2.touched)"
-                class="is-invalid">                        
-                    <span *ngIf="artista2.errors.required">
-                        El artista es requerido
-                    </span>
-                </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary" >Guardar</button>
-          </div>
-        </form>
-      </div>
+            </form>
+        </div>
     </div>
-  </div>
-  
+</div>
+<!-- fin dialogo editar album -->
+
+<!-- componente dialogo de alerta -->
+<app-alert></app-alert>

@@ -21,4 +21,6 @@ export class GuardService implements CanActivate  {
       this.isLoggedIn$ = this._authService.isLoggedIn();
       return this.isLoggedIn$;
   }
+
+  
 }
