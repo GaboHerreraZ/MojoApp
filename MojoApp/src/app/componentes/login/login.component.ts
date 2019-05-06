@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import {Observable} from 'rxjs';
+import { AlertService } from '../../servicios/alert/alert.service';
 
 
 @Component({
@@ -24,7 +25,8 @@ export class LoginComponent implements OnInit {
 
   constructor(private _authService:AuthService,
               private _formBuilder: FormBuilder,
-              private _router:Router
+              private _router:Router,
+              private _message:AlertService
                 ) { }
 
   ngOnInit() {
@@ -63,10 +65,13 @@ export class LoginComponent implements OnInit {
                     this.newPassword = true;
                  }else{
                     this.show = false;
-                    this._router.navigate(['/analitica']);
+                    this._router.navigate(['/mojo/analitica']);
+                    this._message.success('Se ingresa correctamente a la aplicación');
                  }
             },
             error => {
+                  this.loading = false;
+                  this._message.error(error.message);
             });
       }
 
@@ -81,6 +86,9 @@ export class LoginComponent implements OnInit {
             .subscribe(
               (user:any)=>{
                 this.user = user;
+              },error=>{
+                this.loading = false;
+                  this._message.error(error.message);
               }
             );
       }

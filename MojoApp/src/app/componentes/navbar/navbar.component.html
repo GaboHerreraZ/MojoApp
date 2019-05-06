@@ -1,4 +1,4 @@
-<!--nav *ngIf="isLoggedIn$ | async as isLoggedIn" class="navbar navbar-expand-lg "-->
+<nav *ngIf="isLoggedIn$ | async as isLoggedIn" class="navbar navbar-expand-lg ">
 <nav class="navbar navbar-expand-lg ">
     <a class="navbar-brand" href="#" id="logo">
         <img src="./assets/img/logo-web.png" width="110" height="40" class="d-inline-block align-top" alt="">
@@ -12,25 +12,25 @@
     <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
         <ul class="navbar-nav ml-auto ">
             <li class="nav-item active">
-                <a class="nav-link" routerLink="/ingesta" routerLinkActive="active"><strong>Ingesta</strong></a>
+                <a class="nav-link" routerLink="/mojo/ingesta" routerLinkActive="active"><strong>Ingesta</strong></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" routerLink="/ingresos" routerLinkActive="active"><strong>Ingresos</strong></a>
+                <a class="nav-link" routerLink="/mojo/ingresos" routerLinkActive="active"><strong>Ingresos</strong></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" routerLink="/analitica" routerLinkActive="active"><strong>Analítica</strong></a>
+                <a class="nav-link" routerLink="/mojo/analitica" routerLinkActive="active"><strong>Analítica</strong></a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Catalogos
                   </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" routerLink="/catalogo">Catalogo</a>
-                    <a class="dropdown-item" routerLink="/artista">Artista</a>
+                    <a class="dropdown-item" routerLink="/mojo/catalogo">Catalogo</a>
+                    <a class="dropdown-item" routerLink="/mojo/artista">Artista</a>
                 </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link" routerLink="/youtube" routerLinkActive="active"><strong>YouTube</strong></a>
+                <a class="nav-link" routerLink="/mojo/youtube" routerLinkActive="active"><strong>YouTube</strong></a>
             </li>
         </ul>
         <span class="class-icon">
@@ -42,5 +42,8 @@
         <span class="class-icon">
             <i class="fas fa-user"></i>
           </span>
+        <span class="logout">
+            <a (click)="logout()">Cerrar sesión</a>
+        </span>
     </div>
 </nav>

@@ -41,3 +41,11 @@ tr {
 ::-webkit-scrollbar-thumb {
     background-color: #161616;
 }
+
+.color-text {
+    color: #edd920 !important;
+}
+
+.swal2-success-ring {
+    border: .25em solid rgba(237, 217, 32, 0.8) !important;
+}

@@ -1,144 +1,142 @@
-<div class="container">
-    <div class="row">
-        <h5>Followers:</h5>
-    </div>
-    <br>
-    <div class="row">
-        <ul style="width:100%">
-            <li>
-                <div><img class="img-style" src="assets/iconos/spotify.png"><strong>34435</strong></div>
-            </li>
-            <li>
-                <div><img class="img-style" src="assets/iconos/youtube.png"><strong>34435</strong></div>
-            </li>
-            <li>
-                <div><img class="img-style" src="assets/iconos/facebook.png"><strong>34435</strong></div>
-            </li>
-            <li>
-                <div><img class="img-style" src="assets/iconos/shazam.png"><strong>34435</strong></div>
-            </li>
-            <li>
-                <div><img class="img-style" src="assets/iconos/itunes.png"><strong>34435</strong></div>
-            </li>
-            <li>
-                <div><img class="img-style" src="assets/iconos/twitter.png"><strong>34435</strong></div>
-            </li>
-        </ul>
-    </div>
-    <br>
-    <div class="row">
-        <h5>Reproducciones:</h5>
-    </div>
-    <br>
-    <div class="row">
-        <ul style="width:100%">
-            <li>
-                <div><img class="img-style" src="assets/iconos/spotify.png"><strong>34435</strong></div>
-            </li>
-            <li>
-                <div><img class="img-style" src="assets/iconos/youtube.png"><strong>34435</strong></div>
-            </li>
-            <li>
-                <div><img class="img-style" src="assets/iconos/facebook.png"><strong>34435</strong></div>
-            </li>
-            <li>
-                <div><img class="img-style" src="assets/iconos/shazam.png"><strong>34435</strong></div>
-            </li>
-            <li>
-                <div><img class="img-style" src="assets/iconos/itunes.png"><strong>34435</strong></div>
-            </li>
-            <li>
-                <div><img class="img-style" src="assets/iconos/twitter.png"><strong>34435</strong></div>
-            </li>
-        </ul>
-    </div>
-    <br>
-    <div class="row">
-        <h5>Filtros de consulta:</h5>
-    </div>
-    <br>
-    <div class="row">
-        <div class="col-md-4">
-            <div class="form-group">
-                <label for="exampleFormControlInput1">Canal:</label>
-                <input style="height: 30px;" class="form-control" id="exampleFormControlInput1" placeholder="Canal">
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="form-group">
-                <label for="exampleFormControlInput1">Artista:</label>
-                <input style="height: 30px;" type="email" class="form-control" id="exampleFormControlInput1" placeholder="Artista">
-            </div>
-        </div>
-        <div class="col-md-2" style="margin-top:31px;">
-            <button type="button" class="btn btn-dark button-style "><strong>Exportar</strong></button>
+<div class="row">
+    <h5>Followers:</h5>
+</div>
+<br>
+<div class="row">
+    <ul style="width:100%">
+        <li>
+            <div><img class="img-style" src="assets/iconos/spotify.png"><strong>34435</strong></div>
+        </li>
+        <li>
+            <div><img class="img-style" src="assets/iconos/youtube.png"><strong>34435</strong></div>
+        </li>
+        <li>
+            <div><img class="img-style" src="assets/iconos/facebook.png"><strong>34435</strong></div>
+        </li>
+        <li>
+            <div><img class="img-style" src="assets/iconos/shazam.png"><strong>34435</strong></div>
+        </li>
+        <li>
+            <div><img class="img-style" src="assets/iconos/itunes.png"><strong>34435</strong></div>
+        </li>
+        <li>
+            <div><img class="img-style" src="assets/iconos/twitter.png"><strong>34435</strong></div>
+        </li>
+    </ul>
+</div>
+<br>
+<div class="row">
+    <h5>Reproducciones:</h5>
+</div>
+<br>
+<div class="row">
+    <ul style="width:100%">
+        <li>
+            <div><img class="img-style" src="assets/iconos/spotify.png"><strong>34435</strong></div>
+        </li>
+        <li>
+            <div><img class="img-style" src="assets/iconos/youtube.png"><strong>34435</strong></div>
+        </li>
+        <li>
+            <div><img class="img-style" src="assets/iconos/facebook.png"><strong>34435</strong></div>
+        </li>
+        <li>
+            <div><img class="img-style" src="assets/iconos/shazam.png"><strong>34435</strong></div>
+        </li>
+        <li>
+            <div><img class="img-style" src="assets/iconos/itunes.png"><strong>34435</strong></div>
+        </li>
+        <li>
+            <div><img class="img-style" src="assets/iconos/twitter.png"><strong>34435</strong></div>
+        </li>
+    </ul>
+</div>
+<br>
+<div class="row">
+    <h5>Filtros de consulta:</h5>
+</div>
+<br>
+<div class="row">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Canal:</label>
+            <input style="height: 30px;" class="form-control" id="exampleFormControlInput1" placeholder="Canal">
         </div>
     </div>
-    <br>
-    <div class="row">
-        <div class="col-md-7">
-            <div style="width: 100%;">
-                <canvas baseChart [datasets]="lineChartData" height="115" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" [plugins]="lineChartPlugins" (chartHover)="chartHovered($event)"
-                    (chartClick)="chartClicked($event)"></canvas>
-            </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Artista:</label>
+            <input style="height: 30px;" type="email" class="form-control" id="exampleFormControlInput1" placeholder="Artista">
         </div>
-        <div class="col-md-5">
-            <table class="table">
-                <thead class="thead-dark">
-                    <tr>
-                        <th colspan="3">Ranking</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><img style="width: 40px;height:40px;" src="assets/iconos/twitter.png"></td>
-                        <td>Twitter</td>
-                        <td>1</td>
-                    </tr>
-                    <tr>
-                        <td><img style="width: 40px;height:40px;" src="assets/iconos/spotify.png"></td>
-                        <td>Spotify</td>
-                        <td>2</td>
+    </div>
+    <div class="col-md-2" style="margin-top:31px;">
+        <button type="button" class="btn btn-dark button-style "><strong>Exportar</strong></button>
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-md-7">
+        <div style="width: 100%;">
+            <canvas baseChart [datasets]="lineChartData" height="115" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" [plugins]="lineChartPlugins" (chartHover)="chartHovered($event)"
+                (chartClick)="chartClicked($event)"></canvas>
+        </div>
+    </div>
+    <div class="col-md-5">
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th colspan="3">Ranking</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><img style="width: 40px;height:40px;" src="assets/iconos/twitter.png"></td>
+                    <td>Twitter</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td><img style="width: 40px;height:40px;" src="assets/iconos/spotify.png"></td>
+                    <td>Spotify</td>
+                    <td>2</td>
 
-                    </tr>
-                    <tr>
-                        <td><img style="width: 40px;height:40px;" src="assets/iconos/youtube.png"></td>
-                        <td>YouTube</td>
-                        <td>3</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+                </tr>
+                <tr>
+                    <td><img style="width: 40px;height:40px;" src="assets/iconos/youtube.png"></td>
+                    <td>YouTube</td>
+                    <td>3</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
-    <br>
-    <div class="row">
-        <div class="col-md-12">
-            <table class="table">
-                <thead class="thead-dark">
-                    <tr>
-                        <th scope="col">Periodo</th>
-                        <th scope="col">Total</th>
-                        <th scope="col">Estado</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>2015</td>
-                        <td>50</td>
-                        <td>Pendiente</td>
-                    </tr>
-                    <tr>
-                        <td>2017</td>
-                        <td>60</td>
-                        <td>Pendiente</td>
-                    </tr>
-                    <tr>
-                        <td>2019</td>
-                        <td>50</td>
-                        <td>Pendiente</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-md-12">
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Periodo</th>
+                    <th scope="col">Total</th>
+                    <th scope="col">Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>2015</td>
+                    <td>50</td>
+                    <td>Pendiente</td>
+                </tr>
+                <tr>
+                    <td>2017</td>
+                    <td>60</td>
+                    <td>Pendiente</td>
+                </tr>
+                <tr>
+                    <td>2019</td>
+                    <td>50</td>
+                    <td>Pendiente</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>
