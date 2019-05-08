@@ -4,15 +4,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ArtistaRoutingModule } from './artista-routing.module';
 import { ArtistaComponent } from '../artista.component';
 import { DataTablesModule } from 'angular-datatables';
+import { AlertComponent } from '../../../../alert/alert.component';
 
 @NgModule({
-  declarations: [ArtistaComponent],
+  declarations: [ArtistaComponent, AlertComponent],
   imports: [
     CommonModule,
     ArtistaRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    DataTablesModule
+    DataTablesModule,
   ]
 })
 export class ArtistaModule { }

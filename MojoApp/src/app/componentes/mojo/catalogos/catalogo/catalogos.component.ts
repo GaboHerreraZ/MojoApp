@@ -286,11 +286,6 @@ export class CatalogosComponent implements OnInit, OnDestroy, AfterViewInit {
       tracktipo: [""],
       trackisrc: [""],
     });
-    /*this.editarAlbumForm = this.fb.group({
-      titulo2: ["", Validators.required],
-      artista2: ["", Validators.required],
-      upc2: ["", Validators.required]
-    });*/
     this.initEditarAlbumForm();
     this.dtOptions = {
         pagingType: 'full_numbers',

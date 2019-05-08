@@ -4,17 +4,22 @@ import { Artista } from '../../../modelos/ArtistaModel';
 @Injectable({
   providedIn: 'root'
 })
+
 export class ArtistaService {
   artistas: Array<Artista>;
   lastId: number;
+  paises = ["Argentina", "Colombia", "Venezuela","Uruguay", "Ecuador", "Paraguay",
+  "Brasil", "Peru", "Chile", "El Salvador", "Mexico", "Bolivia"];
+  generos = ["Masculino", "Femenino", "LGBT", "No importa"];
   constructor() {
     this.artistas = new Array<Artista>();
     let artista: Artista;
     for (let i = 0; i < 10; i++) {
       this.lastId = (i + 1);
-      artista = new Artista(this.lastId, "Juan Pablo " + this.lastId, "Raba Sarmiento " + this.lastId);
+      artista = new Artista(this.lastId, "Juan Pablo " + this.lastId, "Raba Sarmiento " + this.lastId, this.paises[i], this.generos[0]);
       this.artistas.push(artista);
     }
+    console.log(this.artistas);
   }
 
   public getArtistas (): Observable<Artista[]> {
@@ -45,5 +50,46 @@ export class ArtistaService {
       console.log("Ocurrio una excepcion: " + error);
     }
     return of(newArtista);
+  }
+
+  public editArtista (artista: Artista): Observable<Artista> {
+    console.log("editArtista");
+    console.log(artista);
+    try {
+      const index = this.buscarArtista(artista);
+
+      if(index === -1)
+        return null;
+
+      this.artistas[index] = artista;
+      
+    } catch (error) {
+      console.log("Ocurrio una excepcion: " + error);
+    }
+    return of(artista);
+  }
+
+  public buscarArtista(artista: any): number {
+    return this.artistas.findIndex((element) => {
+      return element.id == artista.id;
+    });
+  }
+
+  public deleteArtista (artista: Artista): Observable<boolean> {
+    console.log("deleteArtista");
+    console.log(artista);
+    let index = -1;
+    let response = false;
+    try {
+      // Ejecutar peticion post y en el response ejecutar:
+      index = this.buscarArtista(artista);
+      if (index > -1) {
+        this.artistas.splice(index, 1);
+        response = true;
+      }
+    } catch (error) {
+      console.log("Ocurrio una excepcion: " + error);
+    }
+    return of (response);
   }
 }

@@ -24,6 +24,7 @@ export class ArtistaComponent implements OnInit, OnDestroy, AfterViewInit {
   artistas: Array<Artista>;
   artistaSeleccionado: Artista;
   nuevoArtistaForm: FormGroup;
+  editarArtistaForm: FormGroup;
   paises: any[];
   generos: any[];
 
@@ -35,6 +36,38 @@ export class ArtistaComponent implements OnInit, OnDestroy, AfterViewInit {
 
   public verDetalleArtista(artista: Artista) {
     this.artistaSeleccionado = artista;
+    return;
+  }
+
+  public showEliminarDialog(artista: Artista) {
+    console.log("showEliminarDialog");
+    this.artistaSeleccionado = artista;
+    console.log(this.artistaSeleccionado);
+    const opts = {
+      type: "confirm",
+      titulo: "Confirmación",
+      mensaje: "Está seguro de eliminar este artista? Esta acción no podrá ser deshecha.",
+      showPositiveButton: true,
+      showNegativeButton: true,
+      negativeButtonText: "No, déjalo allí",
+      positiveButtonText: "Sí, quiero eliminarlo"
+    };
+    const that = this;
+    this.servicios.confirm(opts, function() {
+      //ACTION: Do this If user says YES 
+      console.log("eliminando");
+      that.serviciosArtista.deleteArtista(that.artistaSeleccionado).subscribe(result => {
+        if(result){
+          that.getArtistas();
+        }else{
+          console.log("Error al eliminar");
+        }
+      });
+     }, function() {
+      //ACTION: Do this if user says NO 
+      console.log("saliendo");
+     });
+
     return;
   }
 
@@ -59,6 +92,62 @@ export class ArtistaComponent implements OnInit, OnDestroy, AfterViewInit {
     });
   }
 
+  public editarArtista(artista: Artista) {
+    this.artistaSeleccionado = artista;
+    this.initEditarArtistaForm();
+    this.validarForm(this.editarArtistaForm);
+    return;
+  }
+
+  public submitEditarArtista() {
+    console.log("submitEditarArtista");
+    if(!this.validarForm(this.editarArtistaForm)) {
+      console.log("formulario invalido");
+      return;
+    }
+
+    const formValues = this.editarArtistaForm.value;
+    console.log(formValues);
+    const newArtista = new Artista();
+    newArtista.nombres = formValues.nombres;
+    newArtista.apellidos = formValues.apellidos;
+    newArtista.pais = formValues.pais;
+    newArtista.afiliado = this.artistaSeleccionado.afiliado;
+    newArtista.genero = formValues.genero;
+    newArtista.spotify = formValues.spotify;
+    newArtista.youtube = formValues.youtube;
+    newArtista.facebook = formValues.facebook;
+    newArtista.instagram = formValues.facebook;
+    newArtista.id = formValues.id;
+    this.serviciosArtista.editArtista(newArtista).subscribe(result => {
+      if (result instanceof Artista) {
+        console.log("el resultado es un artista");
+        console.log(result);
+        this.getArtistas();
+      } else {
+        // TODO: mostrar error
+        console.log("Error al editar");
+      }
+    });
+  }
+
+  public validarForm(form: FormGroup): boolean {
+    console.log("validarForm");
+    console.log(form.value);
+    let valid = false;
+    if(form.invalid) {
+      console.log("formulario invalido");
+    }else{
+      console.log("formulario valido");
+    }
+    for (const inner in form.controls) {
+        form.get(inner).markAsTouched();
+        form.get(inner).updateValueAndValidity();
+    }
+
+    return form.valid;
+  }
+
   public getPaises() {
     this.servicios.getPaises().subscribe(paises => {
       this.paises = paises;
@@ -78,6 +167,20 @@ export class ArtistaComponent implements OnInit, OnDestroy, AfterViewInit {
     });
   }
 
+  public initEditarArtistaForm(){
+    this.editarArtistaForm = this.fb.group({
+      pais: [this.artistaSeleccionado.pais, Validators.required],
+      nombres: [this.artistaSeleccionado.nombres, Validators.required],
+      apellidos: [this.artistaSeleccionado.apellidos, Validators.required],
+      genero: [this.artistaSeleccionado.genero, Validators.required],
+      facebook: [this.artistaSeleccionado.facebook],
+      spotify: [this.artistaSeleccionado.spotify],
+      instagram: [this.artistaSeleccionado.instagram],
+      youtube: [this.artistaSeleccionado.youtube],
+      id: [this.artistaSeleccionado.id]
+    });
+  }
+
   ngOnInit() {
     this.nuevoArtistaForm = this.fb.group({
       pais: ["", Validators.required],
@@ -89,6 +192,7 @@ export class ArtistaComponent implements OnInit, OnDestroy, AfterViewInit {
       instagram: [""],
       youtube: [""]
     });
+    this.initEditarArtistaForm();
     this.dtOptions = {
         pagingType: 'full_numbers',
         pageLength: 10
