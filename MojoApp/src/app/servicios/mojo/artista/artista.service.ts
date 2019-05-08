@@ -52,7 +52,7 @@ export class ArtistaService {
     return of(newArtista);
   }
 
-  public editArtista (artista: Artista): Observable<Artista> {
+  public editArtista (artista: any): Observable<boolean> {
     console.log("editArtista");
     console.log(artista);
     try {
@@ -61,12 +61,20 @@ export class ArtistaService {
       if(index === -1)
         return null;
 
-      this.artistas[index] = artista;
-      
+      this.artistas[index].nombres = artista.nombres;
+      this.artistas[index].apellidos = artista.apellidos;
+      this.artistas[index].pais = artista.pais;
+      this.artistas[index].genero = artista.genero;
+      this.artistas[index].spotify = artista.spotify;
+      this.artistas[index].youtube = artista.youtube;
+      this.artistas[index].facebook = artista.facebook;
+      this.artistas[index].instagram = artista.instagram;
+
     } catch (error) {
       console.log("Ocurrio una excepcion: " + error);
+      return of(false);
     }
-    return of(artista);
+    return of(true);
   }
 
   public buscarArtista(artista: any): number {

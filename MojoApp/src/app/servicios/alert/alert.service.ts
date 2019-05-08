@@ -45,8 +45,4 @@ export class AlertService {
       text:message
     })
   }
-
-
-
-
 }

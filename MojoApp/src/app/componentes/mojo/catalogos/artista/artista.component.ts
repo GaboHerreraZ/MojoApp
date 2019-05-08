@@ -3,7 +3,6 @@ import { DataTableDirective } from 'angular-datatables';
 import { Artista } from '../../../../modelos/ArtistaModel';
 import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
-import { NuevoArtistaDialogComponent } from './nuevo-artista-dialog/nuevo-artista-dialog.component';
 import { ComunesService } from '../../../../servicios/mojo/comunes/comunes.service';
 import { ArtistaService } from '../../../../servicios/mojo/artista/artista.service';
 import { Subject } from 'rxjs';
@@ -17,9 +16,7 @@ export class ArtistaComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild(DataTableDirective)
   dtElement: DataTableDirective;
   dtOptions: DataTables.Settings = {};
-  // We use this trigger because fetching the list can be quite long,
-  // thus we ensure the data is fetched before rendering
-  dtTrigger: Subject<any> = new Subject();
+  dtTrigger: Subject<any> = new Subject(); // necesario para el datatables
 
   artistas: Array<Artista>;
   artistaSeleccionado: Artista;
@@ -28,10 +25,12 @@ export class ArtistaComponent implements OnInit, OnDestroy, AfterViewInit {
   paises: any[];
   generos: any[];
 
-  constructor(private fb: FormBuilder, private servicios: ComunesService,
-     private serviciosArtista: ArtistaService) {
-    this.artistas = new Array<Artista>();
-    this.artistaSeleccionado = new Artista();
+  constructor(
+    private fb: FormBuilder,
+    private servicios: ComunesService,
+    private serviciosArtista: ArtistaService) {
+      this.artistas = new Array<Artista>();
+      this.artistaSeleccionado = new Artista();
   }
 
   public verDetalleArtista(artista: Artista) {
@@ -39,34 +38,16 @@ export class ArtistaComponent implements OnInit, OnDestroy, AfterViewInit {
     return;
   }
 
-  public showEliminarDialog(artista: Artista) {
-    console.log("showEliminarDialog");
-    this.artistaSeleccionado = artista;
-    console.log(this.artistaSeleccionado);
-    const opts = {
-      type: "confirm",
-      titulo: "Confirmación",
-      mensaje: "Está seguro de eliminar este artista? Esta acción no podrá ser deshecha.",
-      showPositiveButton: true,
-      showNegativeButton: true,
-      negativeButtonText: "No, déjalo allí",
-      positiveButtonText: "Sí, quiero eliminarlo"
-    };
-    const that = this;
-    this.servicios.confirm(opts, function() {
-      //ACTION: Do this If user says YES 
-      console.log("eliminando");
-      that.serviciosArtista.deleteArtista(that.artistaSeleccionado).subscribe(result => {
+  public eliminarArtista(artista: Artista) {
+    console.log("eliminarArtista");
+    console.log(artista);
+    this.serviciosArtista.deleteArtista(artista).subscribe(result => {
         if(result){
-          that.getArtistas();
+          this.getArtistas();
         }else{
           console.log("Error al eliminar");
         }
-      });
-     }, function() {
-      //ACTION: Do this if user says NO 
-      console.log("saliendo");
-     });
+    });
 
     return;
   }
@@ -108,19 +89,9 @@ export class ArtistaComponent implements OnInit, OnDestroy, AfterViewInit {
 
     const formValues = this.editarArtistaForm.value;
     console.log(formValues);
-    const newArtista = new Artista();
-    newArtista.nombres = formValues.nombres;
-    newArtista.apellidos = formValues.apellidos;
-    newArtista.pais = formValues.pais;
-    newArtista.afiliado = this.artistaSeleccionado.afiliado;
-    newArtista.genero = formValues.genero;
-    newArtista.spotify = formValues.spotify;
-    newArtista.youtube = formValues.youtube;
-    newArtista.facebook = formValues.facebook;
-    newArtista.instagram = formValues.facebook;
-    newArtista.id = formValues.id;
-    this.serviciosArtista.editArtista(newArtista).subscribe(result => {
-      if (result instanceof Artista) {
+    
+    this.serviciosArtista.editArtista(formValues).subscribe(result => {
+      if (result) {
         console.log("el resultado es un artista");
         console.log(result);
         this.getArtistas();

@@ -5,16 +5,18 @@ import { CatalogoRoutingModule } from './catalogo-routing.module';
 import { CatalogosComponent } from '../catalogos.component';
 import { ComunModule } from '../../../../../modulos/comun/comun.module';
 import { DataTablesModule } from 'angular-datatables';
-import { AlertComponent } from '../../../../alert/alert.component';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+
 @NgModule({
-  declarations: [CatalogosComponent, AlertComponent],
+  declarations: [CatalogosComponent],
   imports: [
     CommonModule,
     CatalogoRoutingModule,
     ComunModule,
     FormsModule,
     DataTablesModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SweetAlert2Module
   ]
 })
 export class CatalogoModule { }

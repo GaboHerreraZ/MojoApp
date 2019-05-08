@@ -35,10 +35,15 @@
                         <button type="button" class="btn btn-secondary button-style btn-xs"
                         (click)="editarArtista(artista)" data-toggle="modal"
                         data-target="#editarArtista"><i class="fa fa-edit"></i></button>
-                        <button type="button" class="btn btn-danger button-style btn-xs"
-                        (click)="showEliminarDialog(artista)" data-toggle="modal"
-                        data-target="#alertDialog"
-                        ><i class="fa fa-trash"></i></button>  
+                        <button class="btn btn-danger button-style btn-xs"
+                        [swal]='{ title:"Realmente desea eliminar este artista?",
+                        text:"Esto no puede ser deshecho",
+                        type:"question",
+                        showCancelButton:"true",
+                        focusCancel:"true"}'
+                        (confirm)="eliminarArtista(artista)">
+                        <i class="fa fa-trash"></i>
+                      </button>
                     </td>
                 </tr>
             </tbody>
@@ -259,6 +264,3 @@
     </div>
 </div>    
 <!-- fin dialogo nuevo artista -->
-
-<!-- componente dialogo de alerta -->
-<app-alert></app-alert>

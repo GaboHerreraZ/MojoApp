@@ -26,6 +26,4 @@ export class Artista {
     public nombreCompleto() {
         return this.nombres + " " + this.apellidos;
     }
-
-
 }

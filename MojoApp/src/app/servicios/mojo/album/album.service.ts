@@ -14,14 +14,25 @@ export class AlbumService implements OnInit{
   lastId: number;
   constructor(private serviciosArtista: ArtistaService) {
     this.albunes = new Array<Album>();
-    this.getArtistas();
   }
 
   public initAlbunes(){
     let album: Album;
+    let artista: Artista;
     for (let i = 0; i < 10; i++) {
       this.lastId = (i + 1);
-      album = new Album(this.lastId, "Album " + this.lastId, "UPC " + this.lastId, this.artistas[i]);
+      artista = new Artista();
+      artista.afiliado = this.artistas[i].afiliado;
+      artista.apellidos = this.artistas[i].apellidos;
+      artista.facebook = this.artistas[i].facebook;
+      artista.genero = this.artistas[i].genero;
+      artista.id = this.artistas[i].id;
+      artista.instagram = this.artistas[i].instagram;
+      artista.nombres = this.artistas[i].nombres;
+      artista.pais = this.artistas[i].pais;
+      artista.spotify = this.artistas[i].spotify;
+      artista.youtube = this.artistas[i].youtube;
+      album = new Album(this.lastId, "Album " + this.lastId, "UPC " + this.lastId, artista);
       this.albunes.push(album);
     }
   }
@@ -61,9 +72,13 @@ export class AlbumService implements OnInit{
 
       if(index === -1)
         return null;
-      
-      this.albunes[index] = album;
-      
+
+      this.albunes[index].artista = album.artista;
+      this.albunes[index].titulo = album.titulo;
+      this.albunes[index].upc = album.upc;
+      this.albunes[index].tracks = album.tracks;
+      this.albunes[index].afiliados = album.afiliados;
+
     } catch (error) {
       console.log("Ocurrio una excepcion: " + error);
     }
@@ -74,18 +89,16 @@ export class AlbumService implements OnInit{
     console.log("deleteAlbum");
     console.log(album);
     let index = -1;
-    let response = false;
     try {
-      // Ejecutar peticion post y en el response ejecutar:
       index = this.buscarAlbum(album);
-      if (index > -1) {
+      if (index > -1)
         this.albunes.splice(index, 1);
-        response = true;
-      }
+      
     } catch (error) {
       console.log("Ocurrio una excepcion: " + error);
+      return of (false);
     }
-    return of (response);
+    return of (true);
   }
 
   public buscarAlbum(album: any): number {
@@ -97,11 +110,11 @@ export class AlbumService implements OnInit{
   public getArtistas() {
     this.serviciosArtista.getArtistas().subscribe(artistas => {
       this.artistas = artistas;
-      this.initAlbunes();
     });
   }
 
   ngOnInit(){
-    //this.getArtistas();
+    this.getArtistas();
+    this.initAlbunes();
   }
 }

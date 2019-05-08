@@ -21,9 +21,7 @@ export class CatalogosComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild(DataTableDirective)
   dtElement: DataTableDirective;
   dtOptions: DataTables.Settings = {};
-  // We use this trigger because fetching the list can be quite long,
-  // thus we ensure the data is fetched before rendering
-  dtTrigger: Subject<any> = new Subject();
+  dtTrigger: Subject<any> = new Subject(); // Necesario para el datatables
 
   artistas: Array<Artista>;
   albunes: Array<Album>;
@@ -40,8 +38,11 @@ export class CatalogosComponent implements OnInit, OnDestroy, AfterViewInit {
   newAlbumAfiliados: Afiliado[];
   trackTypes = ["Video", "Audio"];
   
-  constructor(private fb: FormBuilder, private servicios: ComunesService,
-    private serviciosArtista: ArtistaService, private serviciosAlbum: AlbumService) {
+  constructor(
+    private fb: FormBuilder,
+    private servicios: ComunesService,
+    private serviciosArtista: ArtistaService,
+    private serviciosAlbum: AlbumService) {
       this.artistas = new Array<Artista>();
       this.albunes = new Array<Album>();
       this.albumSeleccionado = new Album(null,"","",new Artista(null, "", ""), "", null);
@@ -66,33 +67,15 @@ export class CatalogosComponent implements OnInit, OnDestroy, AfterViewInit {
     return;
   }
 
-  public showEliminarDialog(album: Album) {
-    console.log("showEliminarDialog");
-    this.albumSeleccionado = album;
-    const opts = {
-      type: "confirm",
-      titulo: "Confirmación",
-      mensaje: "Está seguro de eliminar este album? Esta acción no podrá ser deshecha.",
-      showPositiveButton: true,
-      showNegativeButton: true,
-      negativeButtonText: "No, déjalo allí",
-      positiveButtonText: "Sí, quiero eliminarlo"
-    };
-    const that = this;
-    this.servicios.confirm(opts, function() {
-      //ACTION: Do this If user says YES 
-      console.log("eliminando");
-      that.serviciosAlbum.deleteAlbum(that.albumSeleccionado).subscribe(result => {
+  public eliminarAlbum(album: Album) {
+
+    this.serviciosAlbum.deleteAlbum(album).subscribe(result => {
         if(result){
-          that.getAlbunes();
+          this.getAlbunes();
         }else{
           console.log("Error al eliminar");
         }
-      });
-     }, function() {
-      //ACTION: Do this if user says NO 
-      console.log("saliendo");
-     });
+    });
 
     return;
   }
@@ -128,7 +111,6 @@ export class CatalogosComponent implements OnInit, OnDestroy, AfterViewInit {
         console.log(result);
         this.getAlbunes();
         
-        //this.showAddModal = false;
       } else {
         // TODO: mostrar error
         console.log("Error al guardar");
@@ -145,14 +127,9 @@ export class CatalogosComponent implements OnInit, OnDestroy, AfterViewInit {
 
     const formValues = this.editarAlbumForm.value;
     console.log(formValues);
-    const newAlbum = new Album();
-    newAlbum.artista = formValues.artista2;
-    newAlbum.titulo = formValues.titulo2;
-    newAlbum.upc = formValues.upc2;
-    newAlbum.id = formValues.id;
-    newAlbum.tracks = this.albumSeleccionado.tracks;
-    newAlbum.afiliados = this.albumSeleccionado.afiliados;
-    this.serviciosAlbum.editAlbum(newAlbum).subscribe(result => {
+    formValues["tracks"] = this.albumSeleccionado.tracks;
+    formValues["afiliados"] = this.albumSeleccionado.afiliados;
+    this.serviciosAlbum.editAlbum(formValues).subscribe(result => {
       if (result instanceof Album) {
         console.log("el resultado es un album");
         console.log(result);

@@ -31,10 +31,10 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
       secondaryColour: '#ffffff', 
       tertiaryColour: '#ffffff'
   }),
-  SweetAlert2Module
+  SweetAlert2Module.forRoot()
   ],
-  providers: [/*AuthService,*/ComunesService],
+  providers: [AuthService, ComunesService],
   bootstrap: [AppComponent]
-  //entryComponents: [ArtistaComponent]
+  
 })
 export class AppModule { }
