@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ArtistaRoutingModule } from './artista-routing.module';
 import { ArtistaComponent } from '../artista.component';
 import { DataTablesModule } from 'angular-datatables';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 @NgModule({
   declarations: [ArtistaComponent],
@@ -12,7 +13,8 @@ import { DataTablesModule } from 'angular-datatables';
     ArtistaRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    DataTablesModule
+    DataTablesModule,
+    SweetAlert2Module
   ]
 })
 export class ArtistaModule { }

@@ -12,9 +12,23 @@ export class AlbumService implements OnInit{
   albunes: Array<Album>;
   artistas: Array<Artista>;
   lastId: number;
+  paises = ["Argentina", "Colombia", "Venezuela","Uruguay", "Ecuador", "Paraguay",
+  "Brasil", "Peru", "Chile", "El Salvador", "Mexico", "Bolivia"];
+  generos = ["Masculino", "Femenino", "LGBT", "No importa"];
   constructor(private serviciosArtista: ArtistaService) {
     this.albunes = new Array<Album>();
-    this.getArtistas();
+    this.createArtistas();
+    this.initAlbunes();
+  }
+
+  public createArtistas(){
+    this.artistas = new Array<Artista>();
+    let artista: Artista;
+    for (let i = 0; i < 10; i++) {
+      this.lastId = (i + 1);
+      artista = new Artista(this.lastId, "Juan Pablo " + this.lastId, "Raba Sarmiento " + this.lastId, this.paises[i], this.generos[0]);
+      this.artistas.push(artista);
+    }
   }
 
   public initAlbunes(){
@@ -61,9 +75,13 @@ export class AlbumService implements OnInit{
 
       if(index === -1)
         return null;
-      
-      this.albunes[index] = album;
-      
+
+      this.albunes[index].artista = album.artista;
+      this.albunes[index].titulo = album.titulo;
+      this.albunes[index].upc = album.upc;
+      this.albunes[index].tracks = album.tracks;
+      this.albunes[index].afiliados = album.afiliados;
+
     } catch (error) {
       console.log("Ocurrio una excepcion: " + error);
     }
@@ -74,18 +92,16 @@ export class AlbumService implements OnInit{
     console.log("deleteAlbum");
     console.log(album);
     let index = -1;
-    let response = false;
     try {
-      // Ejecutar peticion post y en el response ejecutar:
       index = this.buscarAlbum(album);
-      if (index > -1) {
+      if (index > -1)
         this.albunes.splice(index, 1);
-        response = true;
-      }
+      
     } catch (error) {
       console.log("Ocurrio una excepcion: " + error);
+      return of (false);
     }
-    return of (response);
+    return of (true);
   }
 
   public buscarAlbum(album: any): number {
@@ -96,12 +112,13 @@ export class AlbumService implements OnInit{
 
   public getArtistas() {
     this.serviciosArtista.getArtistas().subscribe(artistas => {
-      this.artistas = artistas;
+      //this.artistas = artistas;
       this.initAlbunes();
     });
   }
 
   ngOnInit(){
-    //this.getArtistas();
+    this.getArtistas();
+    //this.initAlbunes();
   }
 }

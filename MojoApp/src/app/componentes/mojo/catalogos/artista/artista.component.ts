@@ -1,85 +1,41 @@
-import { AfterViewInit, ViewChild, Component, OnInit, OnDestroy } from '@angular/core';
+import { ViewChild, Component, OnInit, OnDestroy } from '@angular/core';
 import { DataTableDirective } from 'angular-datatables';
 import { Artista } from '../../../../modelos/ArtistaModel';
-import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
-import { NuevoArtistaDialogComponent } from './nuevo-artista-dialog/nuevo-artista-dialog.component';
 import { ComunesService } from '../../../../servicios/mojo/comunes/comunes.service';
-import { ArtistaService } from '../../../../servicios/mojo/artista/artista.service';
 import { Subject } from 'rxjs';
+import { AccessArtistaService } from 'src/app/servicios/mojo/artista/access.artista.service';
 
 @Component({
   selector: 'app-artista',
   templateUrl: './artista.component.html',
   styleUrls: ['./artista.component.css']
 })
-export class ArtistaComponent implements OnInit, OnDestroy, AfterViewInit {
+export class ArtistaComponent implements OnInit {
+
   @ViewChild(DataTableDirective)
+
   dtElement: DataTableDirective;
   dtOptions: DataTables.Settings = {};
-  // We use this trigger because fetching the list can be quite long,
-  // thus we ensure the data is fetched before rendering
-  dtTrigger: Subject<any> = new Subject();
+  dtTrigger: Subject<any> = new Subject(); // necesario para el datatables
 
-  artistas: Array<Artista>;
+  artistas:any[];
   artistaSeleccionado: Artista;
   nuevoArtistaForm: FormGroup;
+  editarArtistaForm: FormGroup;
   paises: any[];
   generos: any[];
 
-  constructor(private fb: FormBuilder, private servicios: ComunesService,
-     private serviciosArtista: ArtistaService) {
-    this.artistas = new Array<Artista>();
-    this.artistaSeleccionado = new Artista();
-  }
+  constructor(  private _fb: FormBuilder, 
+                private _servicios: ComunesService,
+                private _serviciosArtista:AccessArtistaService ) {}
 
-  public verDetalleArtista(artista: Artista) {
-    this.artistaSeleccionado = artista;
-    return;
-  }
 
-  public submitNuevoArtista() {
-    if(this.nuevoArtistaForm.invalid) {
-      for (let inner in this.nuevoArtistaForm.controls) {
-          this.nuevoArtistaForm.get(inner).markAsTouched();
-          this.nuevoArtistaForm.get(inner).updateValueAndValidity();
-      }
-      return;
-    }
-
-    const formValues = this.nuevoArtistaForm.value;
-
-    this.serviciosArtista.addArtista(formValues).subscribe(result => {
-      if(result instanceof Artista) {
-        console.log(result);
-        this.getArtistas();
-      } else {
-        // TODO: mostrar error
-      }
-    });
-  }
-
-  public getPaises() {
-    this.servicios.getPaises().subscribe(paises => {
-      this.paises = paises;
-    });
-  }
-
-  public getGeneros() {
-    this.servicios.getGeneros().subscribe(generos => {
-      this.generos = generos;
-    });
-  }
-
-  public getArtistas() {
-    this.serviciosArtista.getArtistas().subscribe(artistas => {
-      this.artistas = artistas;
-      this.rerender();
-    });
-  }
 
   ngOnInit() {
-    this.nuevoArtistaForm = this.fb.group({
+
+    this.nuevoArtistaForm = this._fb.group({
       pais: ["", Validators.required],
       nombres: ["", Validators.required],
       apellidos: ["", Validators.required],
@@ -93,44 +49,90 @@ export class ArtistaComponent implements OnInit, OnDestroy, AfterViewInit {
         pagingType: 'full_numbers',
         pageLength: 10
     };
+
     this.getPaises();
     this.getGeneros();
     this.getArtistas();
+
+    this.artistas = [
+      {
+        artista:'Artista 1',
+        afiliado:'Afiliado 1'
+      },
+      {
+        artista:'Artista 1',
+        afiliado:'Afiliado 1'
+      },
+      {
+        artista:'Artista 1',
+        afiliado:'Afiliado 1'
+      },
+      {
+        artista:'Artista 1',
+        afiliado:'Afiliado 1'
+      },
+      {
+        artista:'Artista 1',
+        afiliado:'Afiliado 1'
+      },
+      {
+        artista:'Artista 1',
+        afiliado:'Afiliado 1'
+      },
+      {
+        artista:'Artista 1',
+        afiliado:'Afiliado 1'
+      }
+    ];
+
   }
 
-  get nombres() {
-    return this.nuevoArtistaForm.get('nombres');
+
+  public verDetalleArtista(artista: Artista) {
+    this.artistaSeleccionado = artista;
+    return;
   }
 
-  get apellidos() {
-    return this.nuevoArtistaForm.get('apellidos');
-  }
+  public getArtistas(){
+      this._serviciosArtista.getAccessArtistas();
+      this._serviciosArtista.getArtistas().subscribe((res:any)=>{
+        console.log("componente",res);
+      },(error)=>{
 
-  get pais() {
-    return this.nuevoArtistaForm.get('pais');
-  }
-
-  get genero() {
-    return this.nuevoArtistaForm.get('genero');
-  }
-
-  ngAfterViewInit(): void {
-    this.dtTrigger.next();
-  }
-
-  rerender(): void {
-    if (this.dtElement.dtInstance !== undefined){
-      this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
-        // Destroy the table first
-        dtInstance.destroy();
-        // Call the dtTrigger to rerender again
-        this.dtTrigger.next();
       });
-    }
   }
 
-  ngOnDestroy() {
-    // Do not forget to unsubscribe the event
-    this.dtTrigger.unsubscribe();
+  public getPaises() {
+    this._servicios.getPaises().subscribe(paises => {
+      this.paises = paises;
+    });
   }
+
+  public getGeneros() {
+    this._servicios.getGeneros().subscribe(generos => {
+      this.generos = generos;
+    });
+  }
+
+  public editarArtista(artista: Artista) {
+    this.artistaSeleccionado = artista;
+
+    this.editarArtistaForm = this._fb.group({
+      pais: [this.artistaSeleccionado.pais, Validators.required],
+      nombres: [this.artistaSeleccionado.nombres, Validators.required],
+      apellidos: [this.artistaSeleccionado.apellidos, Validators.required],
+      genero: [this.artistaSeleccionado.genero, Validators.required],
+      facebook: [this.artistaSeleccionado.facebook],
+      spotify: [this.artistaSeleccionado.spotify],
+      instagram: [this.artistaSeleccionado.instagram],
+      youtube: [this.artistaSeleccionado.youtube],
+      id: [this.artistaSeleccionado.id]
+    });
+
+    return;
+  }
+
+  
+
+  
 }

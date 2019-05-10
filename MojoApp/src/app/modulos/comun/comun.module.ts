@@ -8,9 +8,10 @@ import { ChartsModule } from 'ng2-charts';
   imports: [
     CommonModule,
     RouterModule,
-    ChartsModule,
+    ChartsModule
   ],
   exports:[RouterModule,
-           ChartsModule]
+           ChartsModule,
+          ]
 })
 export class ComunModule { }
