@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpClient,HttpResponse, HttpHeaders } from '@angular/common/http';
-import { Artista } from '../../../modelos/ArtistaModel';
 
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class ArtistaService {
 
   constructor(private _http:HttpClient) {

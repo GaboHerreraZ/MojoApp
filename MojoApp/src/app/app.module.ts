@@ -36,7 +36,7 @@ import { FooterComponent } from './componentes/footer/footer.component';
   SweetAlert2Module,
   HttpClientModule
   ],
-  providers: [/*AuthService,*/ComunesService],
+  providers: [ComunesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

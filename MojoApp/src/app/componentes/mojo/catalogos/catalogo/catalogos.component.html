@@ -31,16 +31,21 @@
                     <td>{{album.upc}}</td>
                     <td>{{album.artista.nombreCompleto()}}</td>
                     <td>
-                        <button type="button" class="btn btn-primary button-style btn-xs"
+                        <button type="button" class="btn btn-dark button-style btn-xs"
                         (click)="verDetalleAlbum(album)" data-toggle="modal"
                         data-target="#detallesAlbum"><i class="fa fa-eye"></i></button>
                         <button type="button" class="btn btn-secondary button-style btn-xs"
                         (click)="editarAlbum(album)" data-toggle="modal"
                         data-target="#editarAlbum"><i class="fa fa-edit"></i></button>
-                        <button type="button" class="btn btn-danger button-style btn-xs"
-                        (click)="showEliminarDialog(album)" data-toggle="modal"
-                        data-target="#alertDialog"
-                        ><i class="fa fa-trash"></i></button>   
+                        <button class="btn btn-danger button-style btn-xs"
+                            [swal]='{ title:"Realmente desea eliminar este album?",
+                            text:"Esto no puede ser deshecho",
+                            type:"question",
+                            showCancelButton:"true",
+                            focusCancel:"true"}'
+                            (confirm)="eliminarAlbum(album)">
+                            <i class="fa fa-trash"></i>
+                        </button>
                     </td>
                 </tr>
             </tbody>
@@ -386,6 +391,3 @@
     </div>
 </div>
 <!-- fin dialogo editar album -->
-
-<!-- componente dialogo de alerta -->
-<app-alert></app-alert>

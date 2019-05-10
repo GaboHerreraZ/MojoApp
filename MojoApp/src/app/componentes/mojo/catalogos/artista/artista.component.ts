@@ -12,25 +12,25 @@ import { AccessArtistaService } from 'src/app/servicios/mojo/artista/access.arti
   templateUrl: './artista.component.html',
   styleUrls: ['./artista.component.css']
 })
-export class ArtistaComponent implements OnInit, OnDestroy {
+export class ArtistaComponent implements OnInit {
 
   @ViewChild(DataTableDirective)
 
   dtElement: DataTableDirective;
   dtOptions: DataTables.Settings = {};
-  // We use this trigger because fetching the list can be quite long,
-  // thus we ensure the data is fetched before rendering
-  dtTrigger: Subject<any> = new Subject();
+  dtTrigger: Subject<any> = new Subject(); // necesario para el datatables
 
   artistas:any[];
   artistaSeleccionado: Artista;
   nuevoArtistaForm: FormGroup;
+  editarArtistaForm: FormGroup;
   paises: any[];
   generos: any[];
 
   constructor(  private _fb: FormBuilder, 
                 private _servicios: ComunesService,
                 private _serviciosArtista:AccessArtistaService ) {}
+
 
 
   ngOnInit() {
@@ -45,7 +45,6 @@ export class ArtistaComponent implements OnInit, OnDestroy {
       instagram: [""],
       youtube: [""]
     });
-
     this.dtOptions = {
         pagingType: 'full_numbers',
         pageLength: 10
@@ -108,10 +107,5 @@ export class ArtistaComponent implements OnInit, OnDestroy {
   
   */
 
-
-
-  ngOnDestroy() {
-    // Do not forget to unsubscribe the event
-    this.dtTrigger.unsubscribe();
-  }
+  
 }
