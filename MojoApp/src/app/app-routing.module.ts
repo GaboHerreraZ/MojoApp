@@ -3,13 +3,11 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './componentes/login/login.component';
 import { GuardService } from './servicios/auth/guard.service';
 import { PaginasComponent } from './componentes/mojo/paginas.component';
-import { NavbarComponent } from './componentes/navbar/navbar.component';
-import { AuthService } from './servicios/auth/auth.service';
 
 const routes: Routes = [
 { path:'mojo',
   component:PaginasComponent,
-  //canActivate:[GuardService],
+  canActivate:[GuardService],
   children:[
     {path:'analitica',loadChildren:'./componentes/mojo/analitica/analitica-module/analitica.module#AnaliticaModule',},
     {path:'ingresos',loadChildren:'./componentes/mojo/ingresos/ingresos-module/ingresos.module#IngresosModule'},
@@ -21,8 +19,8 @@ const routes: Routes = [
   ]
 },
 {path:'login',component:LoginComponent},
-{path:'',redirectTo:'/mojo/analitica',pathMatch:'full'},
-{path:'**',redirectTo:'/mojo/analitica',pathMatch:'full'},
+{path:'',redirectTo:'/login',pathMatch:'full'},
+{path:'**',redirectTo:'/login',pathMatch:'full'},
 
 
 
