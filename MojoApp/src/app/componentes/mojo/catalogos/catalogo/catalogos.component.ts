@@ -268,7 +268,7 @@ export class CatalogosComponent implements OnInit, OnDestroy, AfterViewInit {
         pagingType: 'full_numbers',
         pageLength: 10
     };
-    this.getArtistas();
+    //this.getArtistas();
     this.getAlbunes();
   }
 

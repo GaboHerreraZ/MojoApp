@@ -12,27 +12,30 @@ export class AlbumService implements OnInit{
   albunes: Array<Album>;
   artistas: Array<Artista>;
   lastId: number;
+  paises = ["Argentina", "Colombia", "Venezuela","Uruguay", "Ecuador", "Paraguay",
+  "Brasil", "Peru", "Chile", "El Salvador", "Mexico", "Bolivia"];
+  generos = ["Masculino", "Femenino", "LGBT", "No importa"];
   constructor(private serviciosArtista: ArtistaService) {
     this.albunes = new Array<Album>();
+    this.createArtistas();
+    this.initAlbunes();
+  }
+
+  public createArtistas(){
+    this.artistas = new Array<Artista>();
+    let artista: Artista;
+    for (let i = 0; i < 10; i++) {
+      this.lastId = (i + 1);
+      artista = new Artista(this.lastId, "Juan Pablo " + this.lastId, "Raba Sarmiento " + this.lastId, this.paises[i], this.generos[0]);
+      this.artistas.push(artista);
+    }
   }
 
   public initAlbunes(){
     let album: Album;
-    let artista: Artista;
     for (let i = 0; i < 10; i++) {
       this.lastId = (i + 1);
-      artista = new Artista();
-      artista.afiliado = this.artistas[i].afiliado;
-      artista.apellidos = this.artistas[i].apellidos;
-      artista.facebook = this.artistas[i].facebook;
-      artista.genero = this.artistas[i].genero;
-      artista.id = this.artistas[i].id;
-      artista.instagram = this.artistas[i].instagram;
-      artista.nombres = this.artistas[i].nombres;
-      artista.pais = this.artistas[i].pais;
-      artista.spotify = this.artistas[i].spotify;
-      artista.youtube = this.artistas[i].youtube;
-      album = new Album(this.lastId, "Album " + this.lastId, "UPC " + this.lastId, artista);
+      album = new Album(this.lastId, "Album " + this.lastId, "UPC " + this.lastId, this.artistas[i]);
       this.albunes.push(album);
     }
   }
@@ -115,6 +118,6 @@ export class AlbumService implements OnInit{
 
   ngOnInit(){
     this.getArtistas();
-    this.initAlbunes();
+    //this.initAlbunes();
   }
 }
