@@ -96,7 +96,7 @@ export class AlbumService implements OnInit{
 
   public getArtistas() {
     this.serviciosArtista.getArtistas().subscribe(artistas => {
-      this.artistas = artistas;
+      //this.artistas = artistas;
       this.initAlbunes();
     });
   }

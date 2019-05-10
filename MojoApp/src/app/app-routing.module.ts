@@ -9,7 +9,7 @@ import { AuthService } from './servicios/auth/auth.service';
 const routes: Routes = [
 { path:'mojo',
   component:PaginasComponent,
-  canActivate:[GuardService],
+  //canActivate:[GuardService],
   children:[
     {path:'analitica',loadChildren:'./componentes/mojo/analitica/analitica-module/analitica.module#AnaliticaModule',},
     {path:'ingresos',loadChildren:'./componentes/mojo/ingresos/ingresos-module/ingresos.module#IngresosModule'},
@@ -21,8 +21,8 @@ const routes: Routes = [
   ]
 },
 {path:'login',component:LoginComponent},
-{path:'',redirectTo:'/login',pathMatch:'full'},
-{path:'**',redirectTo:'/login',pathMatch:'full'},
+{path:'',redirectTo:'/mojo/analitica',pathMatch:'full'},
+{path:'**',redirectTo:'/mojo/analitica',pathMatch:'full'},
 
 
 

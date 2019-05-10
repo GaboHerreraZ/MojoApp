@@ -166,7 +166,7 @@ export class CatalogosComponent implements OnInit, OnDestroy, AfterViewInit {
 
   public getArtistas() {
     this.serviciosArtista.getArtistas().subscribe(artistas => {
-      this.artistas = artistas;
+     // this.artistas = artistas;
     });
   }
 

@@ -11,6 +11,7 @@ import { ChartsModule } from 'ng2-charts';
     ChartsModule,
   ],
   exports:[RouterModule,
-           ChartsModule]
+           ChartsModule,
+          ]
 })
 export class ComunModule { }

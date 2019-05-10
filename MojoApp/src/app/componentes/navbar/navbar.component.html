@@ -1,4 +1,6 @@
-<nav *ngIf="isLoggedIn$ | async as isLoggedIn" class="navbar navbar-expand-lg ">
+<!--<nav *ngIf="isLoggedIn$ | async as isLoggedIn" class="navbar navbar-expand-lg ">-->
+<nav class="navbar navbar-expand-lg ">
+
     <nav class="navbar navbar-expand-lg ">
         <a class="navbar-brand" href="#" id="logo">
             <img src="./assets/img/logo-web.png" width="110" height="40" class="d-inline-block align-top" alt="">
@@ -22,10 +24,10 @@
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Catalogos
+                    Catálogos
                   </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" routerLink="/mojo/catalogo">Catalogo</a>
+                        <a class="dropdown-item" routerLink="/mojo/catalogo">Catálogo</a>
                         <a class="dropdown-item" routerLink="/mojo/artista">Artista</a>
                     </div>
                 </li>
