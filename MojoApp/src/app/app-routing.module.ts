@@ -3,8 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './componentes/login/login.component';
 import { GuardService } from './servicios/auth/guard.service';
 import { PaginasComponent } from './componentes/mojo/paginas.component';
-import { NavbarComponent } from './componentes/navbar/navbar.component';
-import { AuthService } from './servicios/auth/auth.service';
 
 const routes: Routes = [
 { path:'mojo',

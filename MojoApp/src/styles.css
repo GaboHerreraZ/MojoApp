@@ -30,6 +30,8 @@ tr {
     margin-top: 5% !important;
 }
 
+
+/*
 ::-webkit-scrollbar {
     width: 2px;
 }
@@ -40,7 +42,7 @@ tr {
 
 ::-webkit-scrollbar-thumb {
     background-color: #161616;
-}
+}*/
 
 .color-text {
     color: #edd920 !important;

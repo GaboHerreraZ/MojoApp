@@ -63,7 +63,7 @@ li a:hover {
 
 @media screen and (max-width:1270px) {
     .navbar-collapse {
-        margin-left: calc(50%-10px) !important;
+        margin-left: calc(50%-15px) !important;
     }
 }
 

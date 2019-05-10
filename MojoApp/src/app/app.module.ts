@@ -4,12 +4,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './componentes/navbar/navbar.component';
 import { LoginComponent } from './componentes/login/login.component';
-import { AuthService } from './servicios/auth/auth.service';
+import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
 import { ComunesService } from './servicios/mojo/comunes/comunes.service';
 import { PaginasComponent } from './componentes/mojo/paginas.component';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { FooterComponent } from './componentes/footer/footer.component';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
     NavbarComponent,
     LoginComponent,
     PaginasComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
@@ -31,10 +33,10 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
       secondaryColour: '#ffffff', 
       tertiaryColour: '#ffffff'
   }),
-  SweetAlert2Module.forRoot()
+  SweetAlert2Module,
+  HttpClientModule
   ],
-  providers: [AuthService, ComunesService],
+  providers: [ComunesService],
   bootstrap: [AppComponent]
-  
 })
 export class AppModule { }

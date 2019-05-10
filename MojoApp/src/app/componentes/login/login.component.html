@@ -1,31 +1,35 @@
 <div class="body-login">
-    <div *ngIf="show">
-        <form [formGroup]="loginForm">
-            <div class="logo">
-                <img src="./assets/img/logo-web.png">
-            </div>
-            <div class="form-group">
-                <label for="username">Email</label>
-                <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
-                <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-                    <div *ngIf="f.email.errors.required">Email es requerido</div>
+    <div class="row"></div>
+    <div class="row">
+        <div class="row-login" *ngIf="show">
+            <form [formGroup]="loginForm">
+                <div class="logo">
+                    <img src="./assets/img/logo-web.png">
                 </div>
-            </div>
-            <div class="form-group">
-                <label *ngIf="!newPassword" for="password">Contraseña</label>
-                <label *ngIf="newPassword" for="password">Nueva contraseña</label>
-                <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                <div class="form-group">
+                    <label for="username">Email</label>
+                    <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                        <div *ngIf="f.email.errors.required">Email es requerido</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label *ngIf="!newPassword" for="password">Contraseña</label>
+                    <label *ngIf="newPassword" for="password">Nueva contraseña</label>
+                    <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
 
-                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                    <div *ngIf="f.password.errors.required">Contraseña es requerido</div>
+                    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                        <div *ngIf="f.password.errors.required">Contraseña es requerido</div>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <button *ngIf="!newPassword" (click)="login()" class="btn btn-dark button-style">Entrar</button>
-                <button *ngIf="newPassword" (click)="resetPassword()" class="btn btn-dark button-style">Cambiar</button>
-            </div>
-        </form>
+                <div class="form-group">
+                    <button *ngIf="!newPassword" (click)="login()" class="btn btn-dark button-style">Entrar</button>
+                    <button *ngIf="newPassword" (click)="resetPassword()" class="btn btn-dark button-style">Cambiar</button>
+                </div>
+            </form>
+        </div>
     </div>
+    <div class="row"></div>
 </div>
 <ngx-loading [show]="loading">
 </ngx-loading>

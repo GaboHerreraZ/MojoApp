@@ -1,8 +1,11 @@
-<nav *ngIf="isLoggedIn$ | async as isLoggedIn" class="navbar navbar-expand-lg">
-    <a class="navbar-brand" href="#" id="logo">
-        <img src="./assets/img/logo-web.png" width="110" height="40" class="d-inline-block align-top" alt="">
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+<nav *ngIf="isLoggedIn$ | async as isLoggedIn" class="navbar navbar-expand-lg ">
+    <!--<nav class="navbar navbar-expand-lg ">-->
+
+    <nav class="navbar navbar-expand-lg ">
+        <a class="navbar-brand" href="#" id="logo">
+            <img src="./assets/img/logo-web.png" width="110" height="40" class="d-inline-block align-top" alt="">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
         <span style="font-size: 1em; color:#edd920;">
             <i class="fas fa-bars"></i>
           </span>
@@ -21,10 +24,10 @@
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Catalogos
+                    Catálogos
                   </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" routerLink="/mojo/catalogo">Catalogo</a>
+                        <a class="dropdown-item" routerLink="/mojo/catalogo">Catálogo</a>
                         <a class="dropdown-item" routerLink="/mojo/artista">Artista</a>
                     </div>
                 </li>
