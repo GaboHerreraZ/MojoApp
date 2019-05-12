@@ -54,6 +54,37 @@ export class ArtistaComponent implements OnInit {
     this.getGeneros();
     this.getArtistas();
 
+    this.artistas = [
+      {
+        artista:'Artista 1',
+        afiliado:'Afiliado 1'
+      },
+      {
+        artista:'Artista 1',
+        afiliado:'Afiliado 1'
+      },
+      {
+        artista:'Artista 1',
+        afiliado:'Afiliado 1'
+      },
+      {
+        artista:'Artista 1',
+        afiliado:'Afiliado 1'
+      },
+      {
+        artista:'Artista 1',
+        afiliado:'Afiliado 1'
+      },
+      {
+        artista:'Artista 1',
+        afiliado:'Afiliado 1'
+      },
+      {
+        artista:'Artista 1',
+        afiliado:'Afiliado 1'
+      }
+    ];
+
   }
 
 
@@ -83,29 +114,25 @@ export class ArtistaComponent implements OnInit {
     });
   }
 
-  
+  public editarArtista(artista: Artista) {
+    this.artistaSeleccionado = artista;
 
-  
-  /*get nombres() {
-    return this.nuevoArtistaForm.get('nombres');
+    this.editarArtistaForm = this._fb.group({
+      pais: [this.artistaSeleccionado.pais, Validators.required],
+      nombres: [this.artistaSeleccionado.nombres, Validators.required],
+      apellidos: [this.artistaSeleccionado.apellidos, Validators.required],
+      genero: [this.artistaSeleccionado.genero, Validators.required],
+      facebook: [this.artistaSeleccionado.facebook],
+      spotify: [this.artistaSeleccionado.spotify],
+      instagram: [this.artistaSeleccionado.instagram],
+      youtube: [this.artistaSeleccionado.youtube],
+      id: [this.artistaSeleccionado.id]
+    });
+
+    return;
   }
 
-  get apellidos() {
-    return this.nuevoArtistaForm.get('apellidos');
-  }
-
-  get pais() {
-    return this.nuevoArtistaForm.get('pais');
-  }
-
-  get genero() {
-    return this.nuevoArtistaForm.get('genero');
-  }
   
-  las validaciones las hice directamente en el HTML, estos get son como listener, estan trabajando
-  a toda hora.
-  
-  */
 
   
 }
