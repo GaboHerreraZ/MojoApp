@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { HttpClient,HttpResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient,HttpResponse, } from '@angular/common/http';
+import { Operacion } from '../../../utilidades/operacion';
 
 
 @Injectable({
@@ -15,12 +16,9 @@ export class ArtistaService {
 
 
   public getArtistas (): Observable<HttpResponse<any>> {
-    const httpHeaders = new HttpHeaders ({
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*'
-    });
-    return this._http.get('https://nc9zg4qil3.execute-api.us-east-1.amazonaws.com/desa/artistas',
-    {observe:'response',headers:httpHeaders});
+    
+    return this._http.get(`${Operacion.URL}${Operacion.getArtistas}`,{observe:'response'});
+
   }
 
 }

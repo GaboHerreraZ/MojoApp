@@ -10,6 +10,8 @@ import { ComunesService } from '../../../../servicios/mojo/comunes/comunes.servi
 import { ArtistaService } from '../../../../servicios/mojo/artista/artista.service';
 import { AlbumService } from '../../../../servicios/mojo/album/album.service';
 import { Subject } from 'rxjs';
+import { Title } from '@angular/platform-browser';
+import { Constante } from '../../../../utilidades/constante';
 
 
 @Component({
@@ -39,10 +41,14 @@ export class CatalogosComponent implements OnInit, OnDestroy, AfterViewInit {
   trackTypes = ["Video", "Audio"];
   
   constructor(
+    private _title:Title,
     private fb: FormBuilder,
     private servicios: ComunesService,
     private serviciosArtista: ArtistaService,
     private serviciosAlbum: AlbumService) {
+
+      this._title.setTitle(Constante.tituloCatalogo);
+
       this.artistas = new Array<Artista>();
       this.albunes = new Array<Album>();
       this.albumSeleccionado = new Album(null,"","",new Artista(null, "", ""), "", null);
