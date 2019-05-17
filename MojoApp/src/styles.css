@@ -4,11 +4,20 @@
     color: #edd920;
     height: 30px;
     line-height: 10px;
+    background-color: #161616;
+}
+
+hr {
+    margin: 0 !important;
 }
 
 .form-control:focus {
     border-color: #edd920 !important;
     box-shadow: 0 0 0 0.1rem #edd920 !important;
+}
+
+.form-control {
+    height: 30px !important;
 }
 
 .table {
