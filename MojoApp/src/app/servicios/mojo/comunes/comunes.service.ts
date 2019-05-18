@@ -26,13 +26,11 @@ export class ComunesService {
   }
 
   public confirm(config: any, siFn: () => void, noFn: () => void) {
-    console.log("confirm");
     this.setConfirmation(config, siFn, noFn);
   }
 
 
   private setConfirmation(config: any, siFn: () => void, noFn: () => void) {
-    console.log("setConfirmation");
     const that = this;
     this.subject.next({
       type: config.type,
@@ -54,8 +52,6 @@ export class ComunesService {
    }
 
   public getMessage(): Observable<any> {
-    console.log("getMessage");
-    console.log(this.subject);
     return this.subject.asObservable();
   }
 }

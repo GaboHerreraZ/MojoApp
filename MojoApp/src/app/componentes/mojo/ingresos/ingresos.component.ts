@@ -2,6 +2,8 @@ import { Component, OnInit,ViewChild } from '@angular/core';
 import { ChartDataSets, ChartOptions } from 'chart.js';
 import { Color, BaseChartDirective, Label } from 'ng2-charts';
 import * as pluginAnnotations from 'chartjs-plugin-annotation';
+import { Title } from '@angular/platform-browser';
+import { Constante } from '../../../utilidades/constante';
 
 @Component({
   selector: 'app-ingresos',
@@ -10,8 +12,8 @@ import * as pluginAnnotations from 'chartjs-plugin-annotation';
 })
 export class IngresosComponent implements OnInit {
 
-  constructor(){
-
+  constructor(private _title:Title){
+        this._title.setTitle(Constante.tituloIngresos);
   }
   ngOnInit(){
     

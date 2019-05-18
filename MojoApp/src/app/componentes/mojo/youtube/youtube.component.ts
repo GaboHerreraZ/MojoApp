@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
+import { Constante } from '../../../utilidades/constante';
 
 @Component({
   selector: 'app-youtube',
@@ -7,7 +9,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class YoutubeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _title:Title) { 
+          this._title.setTitle(Constante.tituloYoutube);
+  }
 
   ngOnInit() {
   }

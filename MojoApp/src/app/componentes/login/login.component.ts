@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import { AlertService } from '../../servicios/alert/alert.service';
+import { Title } from '@angular/platform-browser';
+import { Constante } from '../../utilidades/constante';
 
 
 @Component({
@@ -26,8 +28,11 @@ export class LoginComponent implements OnInit {
   constructor(private _authService:AuthService,
               private _formBuilder: FormBuilder,
               private _router:Router,
-              private _message:AlertService
-                ) { }
+              private _message:AlertService,
+              private _title:Title) 
+              { 
+                this._title.setTitle(Constante.tituloLogin);
+              }
 
   ngOnInit() {
     this.loading = false;

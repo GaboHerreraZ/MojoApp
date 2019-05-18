@@ -6,6 +6,10 @@ import { Validators } from '@angular/forms';
 import { ComunesService } from '../../../../servicios/mojo/comunes/comunes.service';
 import { Subject } from 'rxjs';
 import { AccessArtistaService } from 'src/app/servicios/mojo/artista/access.artista.service';
+import { AlertService } from '../../../../servicios/alert/alert.service';
+import { Mensaje } from '../../../../utilidades/mensaje';
+import { Title } from '@angular/platform-browser';
+import { Constante } from '../../../../utilidades/constante';
 
 @Component({
   selector: 'app-artista',
@@ -29,7 +33,12 @@ export class ArtistaComponent implements OnInit {
 
   constructor(  private _fb: FormBuilder, 
                 private _servicios: ComunesService,
-                private _serviciosArtista:AccessArtistaService ) {}
+                private _serviciosArtista:AccessArtistaService,
+                private _message:AlertService,
+                private _title:Title ) {
+
+                  this._title.setTitle(Constante.tituloArtista);
+                }
 
 
 
@@ -98,7 +107,7 @@ export class ArtistaComponent implements OnInit {
       this._serviciosArtista.getArtistas().subscribe((res:any)=>{
         console.log("componente",res);
       },(error)=>{
-
+          this._message.error(Mensaje.noBackEnd);
       });
   }
 

@@ -104,19 +104,6 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="">Genero:</label>
-                        <select class="form-control" placeholder="Seleccione un genero" id="genero" formControlName="genero" required>
-                                <option *ngFor="let genero of generos" [value]="genero.id">
-                                    {{genero.nombre}}
-                                </option>
-                            </select>
-                        <div *ngIf="nuevoArtistaForm.get('genero').invalid && (nuevoArtistaForm.get('genero').dirty || nuevoArtistaForm.get('genero').touched)" class="is-invalid">
-                            <span *ngIf="nuevoArtistaForm.get('genero').errors.required">
-                                    El genero es requerido
-                                </span>
-                        </div>
-                    </div>
-                    <div class="form-group">
                         <label for="">Spotify:</label>
                         <input type="text" class="form-control" placeholder="Su username en Spotify" id="spotify" formControlName="spotify">
                     </div>
