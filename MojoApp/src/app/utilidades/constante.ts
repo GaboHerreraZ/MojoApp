@@ -1,6 +1,12 @@
 /*Clase para manejar constantes de toda la aplicación */
 export class Constante{
     
+
+        /*Codigos HTTP */
+        public static readonly ok:number = 200;
+        public static readonly noOk:number = 500;
+        
+        /*Titulos  componentes */
         public static readonly tituloCatalogo:string = 'Mojo-Catalogo';
         public static readonly tituloAnalitica:string = 'Mojo-Analitica';
         public static readonly tituloArtista:string = 'Mojo-Artista';

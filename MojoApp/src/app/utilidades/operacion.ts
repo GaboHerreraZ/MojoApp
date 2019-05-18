@@ -3,7 +3,7 @@ export class Operacion{
 
         /*URLS API */        
         public static readonly URL:string = 'https://nc9zg4qil3.execute-api.us-east-1.amazonaws.com/';
-        //public static readonly URL:string = 'https://l9ex86gdm6.execute-api.us-east-1.amazonaws.com/';
+        public static readonly URLGENERO:string = 'https://l9ex86gdm6.execute-api.us-east-1.amazonaws.com/';
 
         /*Métodos api */
         public static readonly getArtistas:string ='desa/artistas';

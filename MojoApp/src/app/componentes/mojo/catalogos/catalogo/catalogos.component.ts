@@ -23,7 +23,8 @@ export class CatalogosComponent implements OnInit, OnDestroy {
     this.albumForm = this._formBuilder.group({
       titulo:['',Validators.required],
       upc:['',Validators.required],
-      artista:['',Validators.required]
+      artista:['',Validators.required],
+      genero:['',Validators.required]
     });
   }
 

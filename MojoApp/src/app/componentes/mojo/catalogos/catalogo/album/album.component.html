@@ -11,14 +11,29 @@
             <input formControlName="upc" class="form-control" id="idUpc" placeholder="UPC del album">
         </div>
         <div class="col-md-4">
-            <label>Artista:</label>
-            <select formControlName="artista" class="form-control" id="idArtista">
-                      <option>1</option>
-                      <option>2</option>
-                      <option>3</option>
-                      <option>4</option>
-                      <option>5</option>
+            <div class="row">
+                <div class="col-md-8">
+                    <label>Artista:</label>
+                    <select formControlName="artista" class="form-control" id="idArtista">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
                     </select>
+                </div>
+                <div class="col-md-4">
+                    <button type="button" style="margin-top:31px;" class="btn btn-dark button-style" data-toggle="modal" data-target="#nuevoArtista"><strong><i class="fas fa-plus"></i>Artista</strong></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <label>Género:</label>
+            <select formControlName="genero" class="form-control" id="idArtista">
+                <option *ngFor ="let genero of generos" [value]="genero.id">{{genero.descripcion}}</option>
+            </select>
         </div>
     </div>
 </form>
@@ -63,3 +78,5 @@
     </div>
 </div>
 <br>
+<!--Popup artista-->
+<app-artista-popup></app-artista-popup>
