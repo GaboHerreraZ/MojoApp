@@ -1,4 +1,4 @@
-input {
+/*input {
     width: 40% !important;
 }
 
@@ -35,4 +35,61 @@ img {
         margin-bottom: 30% !important;
         height: 100%;
     }
+}*/
+
+input {}
+
+label {
+    color: #edd920;
+}
+
+img {}
+
+.body-login {
+    height: 100% !important;
+    max-height: 100%;
+    background-color: #161616;
+    max-width: 100%;
+}
+
+.row-login {
+    margin: auto;
+    width: 20%;
+    position: absolute;
+    top: 30%;
+    left: 40%;
+    padding: 40px;
+    background-color: #161616;
+    opacity: 0.6;
+    border-radius: 10px;
+    padding-top: 30px;
+    padding-bottom: 40px;
+}
+
+.row {
+    margin: 0px 0px 0px 0px !important;
+}
+
+@media screen and (max-width:1200px) {
+    .row-login {
+        width: 100%;
+        left: 0;
+        padding-top: 40px;
+        top: 15%;
+    }
+}
+
+.full-height {
+    height: 100%;
+}
+
+body {
+    overflow: hidden !important;
+}
+
+.nw {
+    width: 100%;
+    margin-top: 40px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }

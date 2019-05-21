@@ -1,3 +1,23 @@
+/*.ng-valid[required],
+.ng-valid.required {
+    border-left: 5px solid #42A948;
+}
+
+.ng-invalid:not(form) {
+    border-left: 5px solid #a94442;
+}
+
+.is-invalid {
+    color: red;
+}
+
+button {
+    margin-right: 10px !important;
+}*/
+
+
+/*Estilos pam*/
+
 .ng-valid[required],
 .ng-valid.required {
     border-left: 5px solid #42A948;
@@ -11,8 +31,4 @@
 
 .is-invalid {
     color: red;
-}
-
-button {
-    margin-right: 10px !important;
 }
