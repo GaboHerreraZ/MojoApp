@@ -7,8 +7,8 @@ export class SearchPipe implements PipeTransform {
 
   transform(item: any[], text:string ): any {
     
-    return item.filter(i=>{
-      return i.nombres.includes(text);
+    return item.filter((i:any)=>{
+      return i.nombres.toLowerCase().includes(text.toLowerCase());
     })
   }
 
