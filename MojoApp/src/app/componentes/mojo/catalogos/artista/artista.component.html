@@ -10,56 +10,25 @@
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">Artista</th>
-                    <th scope="col">Afiliado</th>
+                    <th scope="col">Afiliados</th>
                     <th scope="col">Acción</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor='let artista of artistas'>
-                    <td>{{artista.artista}}</td>
-                    <td>{{artista.afiliado}}</td>
+                <tr *ngFor='let artista of artistas.data'>
+                    <td style="line-height:10px"><label><strong>{{artista.nombres}}</strong></label></td>
                     <td>
-                        <!--<button type="button" class="btn btn-dark button-style" (click)="verDetalleArtista(artista)" data-toggle="modal" data-target="#detallesArtista">Ver detalle</button>-->
-                        <button type="button" class="btn btn-dark button-style" (click)="verDetalleArtista(artista)" data-toggle="modal" data-target="#detallesArtista"><i class="fa fa-eye"></i></button>
-                        <button type="button" class="btn btn-secondary button-style btn-xs" (click)="editarArtista(artista)" data-toggle="modal" data-target="#editarArtista"><i class="fa fa-edit"></i></button>
-                        <!--<button class="btn btn-danger button-style btn-xs" [swal]='{ title:"Realmente desea eliminar este artista?",
-                        text:"Esto no puede ser deshecho",
-                        type:"question",
-                        showCancelButton:"true",
-                        focusCancel:"true"}' (confirm)="eliminarArtista(artista)">
-                        <i class="fa fa-trash"></i>
-                        </button>-->
-
+                        <label style="display:block" *ngFor="let afiliado of artista.afiliados">{{afiliado.nombres}}</label>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-dark button-style btn-xs btn-yellow" (click)="verDetalleArtista(artista)" data-toggle="modal" data-target="#detallesArtista"><i class="fa fa-eye"></i></button>
+                        <button type="button" class="btn btn-secondary button-style btn-xs btn-yellow" (click)="editarArtista(artista)" data-toggle="modal" data-target="#editarArtista"><i class="fa fa-edit"></i></button>
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
 </div>
-<!-- dialogs -->
-<!-- dialogo detalle artista -->
-<div class="modal" tabindex="-1" role="dialog" id="detallesArtista">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Detalles de Artista</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-            </div>
-            <div class="modal-body">
-                <!--<p><strong>Nombre Completo: </strong> {{artistaSeleccionado.nombreCompleto()}}</p>-->
-                <!--<p><strong>Afiliado: </strong> {{artistaSeleccionado.afiliado}}</p>-->
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <!--button type="button" class="btn btn-primary">Save changes</button-->
-            </div>
-        </div>
-    </div>
-</div>
-<!-- fin dialogo detalle artista -->
-
 <!-- dialogo nuevo artista -->
 <div class="modal" tabindex="-1" role="dialog" id="nuevoArtista">
     <div class="modal-dialog" role="document">
@@ -128,87 +97,3 @@
         </div>
     </div>
 </div>
-
-<!-- dialogo editar artista -->
-<!--<div class="modal" tabindex="-1" role="dialog" id="editarArtista">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <form [formGroup]="editarArtistaForm" (ngSubmit)="submitEditarArtista()">
-                <input type="hidden" id="id" name="id" [value]="artistaSeleccionado.id" />
-                <div class="modal-header">
-                    <h5 class="modal-title">Editar Artista</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="">Pais:</label>
-                        <select class="form-control" placeholder="Seleccione su pais de residencia" id="pais2" formControlName="pais" required>
-                            <option *ngFor="let pais of paises" [ngValue]="pais">
-                                {{pais}}
-                            </option>
-                        </select>
-                        <div *ngIf="pais.invalid && (pais.dirty || pais.touched)" class="is-invalid">
-                            <span *ngIf="pais.errors.required">
-                                El pais es requerido
-                            </span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="">Nombres:</label>
-                        <input type="text" class="form-control" placeholder="Nombres" id="nombres2" formControlName="nombres" required [value]="artistaSeleccionado.nombres">
-                        <div *ngIf="nombres.invalid && (nombres.dirty || nombres.touched)" class="is-invalid">
-                            <span *ngIf="nombres.errors.required">
-                                Los nombres son requeridos
-                            </span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="">Apellidos:</label>
-                        <input type="text" class="form-control" placeholder="Apellidos" id="apellidos" formControlName="apellidos" required [value]="artistaSeleccionado.apellidos">
-                        <div *ngIf="apellidos.invalid && (apellidos.dirty || apellidos.touched)" class="is-invalid">
-                            <span *ngIf="apellidos.errors.required">
-                                Los apellidos son requeridos
-                            </span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="">Genero:</label>
-                        <select class="form-control" placeholder="Seleccione un genero" id="genero" formControlName="genero" required>
-                            <option *ngFor="let genero of generos" [ngValue]="genero">
-                                {{genero}}
-                            </option>
-                        </select>
-                        <div *ngIf="genero.invalid && (genero.dirty || genero.touched)" class="is-invalid">
-                            <span *ngIf="genero.errors.required">
-                                El genero es requerido
-                            </span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="">Spotify:</label>
-                        <input type="text" class="form-control" placeholder="Su username en Spotify" id="spotify" formControlName="spotify" [value]="artistaSeleccionado.spotify">
-                    </div>
-                    <div class="form-group">
-                        <label for="">Facebook:</label>
-                        <input type="text" class="form-control" placeholder="Su username en Facebook" id="facebook" formControlName="facebook" [value]="artistaSeleccionado.facebook">
-                    </div>
-                    <div class="form-group">
-                        <label for="">Spotify:</label>
-                        <input type="text" class="form-control" placeholder="Su username en Youtube" id="youtube" formControlName="youtube" [value]="artistaSeleccionado.youtube">
-                    </div>
-                    <div class="form-group">
-                        <label for="">Instagram:</label>
-                        <input type="text" class="form-control" placeholder="Su username en Instagram" id="instagram" formControlName="instagram" [value]="artistaSeleccionado.instagram">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Guardar</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>-->
-<!-- fin dialogo editar artista -->

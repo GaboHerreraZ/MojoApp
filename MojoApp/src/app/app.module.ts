@@ -12,7 +12,7 @@ import { PaginasComponent } from './componentes/mojo/paginas.component';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { FooterComponent } from './componentes/footer/footer.component';
 import { InterceptorService } from './servicios/interceptor/interceptor.service';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -35,7 +35,8 @@ import { InterceptorService } from './servicios/interceptor/interceptor.service'
       tertiaryColour: '#ffffff'
   }),
   SweetAlert2Module,
-  HttpClientModule
+  HttpClientModule,
+  BrowserAnimationsModule
   ],
   providers: [ComunesService,{
     provide: HTTP_INTERCEPTORS,

@@ -2,8 +2,7 @@
 
 .button-style {
     color: #edd920;
-   line-height: 15px;
-   
+    line-height: 15px;
 }
 
 .button-style i {
@@ -18,12 +17,13 @@
 .table {
     width: 100% !important;
     font-size: 13px;
-    margin-bottom:15px;
+    margin-bottom: 15px;
 }
 
-.table td, .table th {
+.table td,
+.table th {
     padding: .2rem !important;
-}    
+}
 
 .thead-dark th {
     background-color: #161616 !important;
@@ -62,7 +62,6 @@ tr {
     border: .25em solid rgba(237, 217, 32, 0.8) !important;
 }
 
-
 button[data-target="#nuevoAlbum"] {
     padding: .25rem .5rem;
     font-size: .875rem;
@@ -76,7 +75,7 @@ button[data-target="#nuevoAlbum"] {
     color: #343a40;
     height: 25px;
     width: 25px;
-    margin-right:5px;
+    margin-right: 5px;
     padding: 0px;
     line-height: 10px;
 }
@@ -87,7 +86,11 @@ button[data-target="#nuevoAlbum"] {
     color: #343a40;
 }
 
-html, body {
-  height: 100%;
-  margin:0;
+html,
+body {
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

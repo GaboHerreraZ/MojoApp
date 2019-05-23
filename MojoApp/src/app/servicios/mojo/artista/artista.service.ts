@@ -20,4 +20,8 @@ export class ArtistaService {
     return this._http.get(`${Operacion.URL}${Operacion.getArtistas}`,{observe:'response'});
   }
 
+  public getArtistasAfiliado(): Observable<HttpResponse<any>>{
+    return this._http.get(`${Operacion.URL}${Operacion.getArtistasAfiliados}`,{observe:'response'});
+  }
+
 }
