@@ -1,3 +1,4 @@
+
 .footer {
     position: absolute;
     left: 0;
@@ -5,7 +6,8 @@
     background-color: #161616;
     color: white;
     text-align: center;
-    padding-top: 20px
+    padding-top: 20px;
+    bottom: 0;
 }
 
 div span.span-style {
@@ -40,7 +42,5 @@ div span.span-style {
     .col-md-4 {
         margin-left: 20px;
     }
-    .footer {
-        height: 100% !important;
-    }
+    .footer {}
 }
