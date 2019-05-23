@@ -1,34 +1,44 @@
-<div class="d-flex flex-row-reverse mb-2">
-    <span>
-        <button class="btn btn-dark button-style" data-toggle="modal"
-        data-target="#nuevoArtista">Nuevo Artista</button>
-    </span>
-</div>
-<div class="row">
-    <div class="table-responsive col-md-12">
-        <table class="table" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col">Artista</th>
-                    <th scope="col">Afiliados</th>
-                    <th scope="col">Acción</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor='let artista of artistas.data'>
-                    <td style="line-height:10px"><label><strong>{{artista.nombres}}</strong></label></td>
-                    <td>
-                        <label style="display:block" *ngFor="let afiliado of artista.afiliados">{{afiliado.nombres}}</label>
-                    </td>
-                    <td>
-                        <button type="button" class="btn btn-dark button-style btn-xs btn-yellow" (click)="verDetalleArtista(artista)" data-toggle="modal" data-target="#detallesArtista"><i class="fa fa-eye"></i></button>
-                        <button type="button" class="btn btn-secondary button-style btn-xs btn-yellow" (click)="editarArtista(artista)" data-toggle="modal" data-target="#editarArtista"><i class="fa fa-edit"></i></button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+<div *ngIf="show" class="row">
+    <div class="col-md-4">
+            <label for="exampleFormControlInput1">Buscar artista:</label>
+            <input [(ngModel)]="text"  class="form-control" id="exampleFormControlInput1" placeholder="ingrese el nombre del artista">
+    </div>
+    <div class="col-md-4"></div>
+    <div class="col-md-4 text-right">
+            <button style="margin-top:31px;" class="btn btn-dark button-style" data-toggle="modal"
+            data-target="#nuevoArtista">Nuevo Artista</button>
     </div>
 </div>
+<br>
+<div *ngIf="show" class="row">
+    <div class="table-responsive col-md-12">
+        <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Artista</th>
+                        <th scope="col">Pais</th>
+                        <th scope="col">Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let artista of artistas|search:text">
+                        <td>{{artista.nombres}}</td>
+                        <td *ngIf="artista.pais != null">
+                            {{artista.pais.nombre}}
+                        </td>
+                        <td *ngIf="artista.pais == null">
+                                -----    
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-dark button-style btn-xs btn-yellow" (click)="verDetalleArtista(artista)" data-toggle="modal" data-target="#detallesArtista"><i class="fa fa-eye"></i></button>
+                            <button type="button" class="btn btn-secondary button-style btn-xs btn-yellow" (click)="editarArtista(artista)" data-toggle="modal" data-target="#editarArtista"><i class="fa fa-edit"></i></button>
+                        </td>
+                        </tr>
+                </tbody>
+            </table>
+    </div>
+</div>
+<br>
 <!-- dialogo nuevo artista -->
 <div class="modal" tabindex="-1" role="dialog" id="nuevoArtista">
     <div class="modal-dialog" role="document">
@@ -97,3 +107,6 @@
         </div>
     </div>
 </div>
+<!--Mascara de carga-->
+<ngx-loading [show]="loading">
+</ngx-loading>

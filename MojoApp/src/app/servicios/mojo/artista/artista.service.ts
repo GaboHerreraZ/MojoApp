@@ -16,7 +16,6 @@ export class ArtistaService {
 
 
   public getArtistas (): Observable<HttpResponse<any>> {
-    
     return this._http.get(`${Operacion.URL}${Operacion.getArtistas}`,{observe:'response'});
   }
 

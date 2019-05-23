@@ -11,7 +11,10 @@
 
 .form-control:focus {
     border-color: #edd920 !important;
-    box-shadow: 0 0 0 0.1rem #edd920 !important;
+    box-shadow: 0 0 0 0.05rem #edd920 !important;
+}
+.form-control{
+    height:30px !important;
 }
 
 .table {
@@ -40,19 +43,6 @@ tr {
     margin-top: 5% !important;
 }
 
-
-/*
-::-webkit-scrollbar {
-    width: 2px;
-}
-
-::-webkit-scrollbar-track {
-    background-color: white;
-}
-
-::-webkit-scrollbar-thumb {
-    background-color: #161616;
-}*/
 
 .color-text {
     color: #edd920 !important;

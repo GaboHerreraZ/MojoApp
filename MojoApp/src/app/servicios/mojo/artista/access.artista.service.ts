@@ -9,6 +9,8 @@ export class AccessArtistaService {
 
 artistas = new Subject();
 artistasAfiliado = new Subject();
+
+
 constructor(private _artistaService:ArtistaService) { }
 
  public getAccessArtistas(){
