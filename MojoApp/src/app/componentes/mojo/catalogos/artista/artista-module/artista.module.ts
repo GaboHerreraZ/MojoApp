@@ -3,12 +3,13 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ArtistaRoutingModule } from './artista-routing.module';
 import { ArtistaComponent } from '../artista.component';
+import { ArtistaFormComponent } from '../artista-form/artista-form.component';
 import { DataTablesModule } from 'angular-datatables';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { ComunModule } from 'src/app/modulos/comun/comun.module';
 
 @NgModule({
-  declarations: [ArtistaComponent],
+  declarations: [ArtistaComponent, ArtistaFormComponent],
   imports: [
     CommonModule,
     ArtistaRoutingModule,

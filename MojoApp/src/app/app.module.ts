@@ -28,17 +28,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ReactiveFormsModule,
     NgxLoadingModule.forRoot({
       animationType: ngxLoadingAnimationTypes.circleSwish,
-      backdropBackgroundColour: 'rgba(4,0,0,0.67)', 
+      backdropBackgroundColour: 'rgba(4,0,0,0.67)',
       backdropBorderRadius: '4px',
-      primaryColour: '#ffffff', 
-      secondaryColour: '#ffffff', 
+      primaryColour: '#ffffff',
+      secondaryColour: '#ffffff',
       tertiaryColour: '#ffffff'
-  }),
-  SweetAlert2Module,
-  HttpClientModule,
-  BrowserAnimationsModule
+    }),
+    SweetAlert2Module,
+    HttpClientModule,
+    BrowserAnimationsModule
   ],
-  providers: [ComunesService,{
+  providers: [ComunesService, {
     provide: HTTP_INTERCEPTORS,
     useClass: InterceptorService,
     multi: true

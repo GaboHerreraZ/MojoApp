@@ -9,7 +9,7 @@ import { AlertService } from '../../../../servicios/alert/alert.service';
 import { Mensaje } from '../../../../utilidades/mensaje';
 import { Title } from '@angular/platform-browser';
 import { Constante } from '../../../../utilidades/constante';
-import {animate, state, style, transition, trigger} from '@angular/animations';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 
 @Component({
@@ -18,8 +18,8 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
   styleUrls: ['./artista.component.css'],
   animations: [
     trigger('detailExpand', [
-      state('collapsed', style({height: '0px', minHeight: '0', display: 'none'})),
-      state('expanded', style({height: '*'})),
+      state('collapsed', style({ height: '0px', minHeight: '0', display: 'none' })),
+      state('expanded', style({ height: '*' })),
       transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
     ]),
   ],
@@ -32,71 +32,94 @@ export class ArtistaComponent implements OnInit {
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject(); // necesario para el datatables
 
-  artistas:any[]=[];
+  artistas: any[] = [];
   nuevoArtistaForm: FormGroup;
-  show:boolean = false;
-  loading:boolean = true;
-  text:string = "";
-  constructor(  private _fb: FormBuilder, 
-                private _serviciosArtista:AccessArtistaService,
-                private _message:AlertService,
-                private _title:Title ) {
+  show: boolean = false;
+  newartist: boolean = false; //Indica la visibilidad del componente nuevo-artista
+  loading: boolean = true;
+  text: string = "";
+  constructor(private _fb: FormBuilder,
+    private _serviciosArtista: AccessArtistaService,
+    private _message: AlertService,
+    private _title: Title) {
 
-                  this._title.setTitle(Constante.tituloArtista);
-                  this.setVariables();
-                }
-
-
+    this._title.setTitle(Constante.tituloArtista);
+    this.setVariables();
+  }
 
   ngOnInit() {
     this.getArtistas();
   }
 
-  public getArtistas(){
+
+  public getArtistas() {
     this._serviciosArtista.getAccessArtistas();
-    this._serviciosArtista.getArtistas().subscribe((res:any)=>{
-      if(res.status = Constante.ok){
+    this._serviciosArtista.getArtistas().subscribe((res: any) => {
+      if (res.status = Constante.ok) {
         this.artistas = res.body.data;
         this.show = true;
         this.loading = false;
-      }else{
+      } else {
         this._message.error(res);
       }
-    },error=>{
+    }, error => {
       this._message.error(Mensaje.noBackEnd);
     });
   }
 
 
-  public getArtistasAfiliado(){
+  public getArtistasAfiliado() {
     this._serviciosArtista.getAccessArtistasAfiliado();
-    this._serviciosArtista.getArtistasAfiliado().subscribe((res:any)=>{
-      console.log("Artistas afiliado",res)
-      if(res.status = Constante.ok){
-        console.log("Artistas afiliado",res.body)
-      }else{
+    this._serviciosArtista.getArtistasAfiliado().subscribe((res: any) => {
+      console.log("Artistas afiliado", res)
+      if (res.status = Constante.ok) {
+        console.log("Artistas afiliado", res.body)
+      } else {
         console.log("error");
         this._message.error(res);
       }
-    },error=>{
+    }, error => {
       this._message.error(Mensaje.noBackEnd);
     });
   }
-  
- 
-  setVariables(){
+
+
+  setVariables() {
     this.nuevoArtistaForm = this._fb.group({
       pais: ["", Validators.required],
       nombres: ["", Validators.required],
       apellidos: ["", Validators.required],
-      genero: ["", Validators.required],
+      genero: [""],
+      sello: [""],
       facebook: [""],
       spotify: [""],
       instagram: [""],
       youtube: [""]
     });
   }
-  
 
+  /**
+   * Method: nuevoArtista
+   * ----------------------------------------------------
+   * Actualiza la variable newartist para mostrar el 
+   * formulario que permita adicionar un nuevo artista.
+   * Además, oculta la información de artistas.
+   */
+  nuevoArtista() {
+    var me = this;
+    me.show = false;
+    me.newartist = true;
+  }
+
+  /**
+   * Method: guardarArtista
+   * ----------------------------------------------------
+   * Guarda el nuevo artista o los cambios del artista
+   */
+  guardarArtista() {
+    var me = this;
+    me.newartist = false;
+    me.show = true;
+  }
 
 }
