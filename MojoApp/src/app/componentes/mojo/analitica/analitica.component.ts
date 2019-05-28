@@ -4,6 +4,7 @@ import { Color, BaseChartDirective, Label } from 'ng2-charts';
 import * as pluginAnnotations from 'chartjs-plugin-annotation';
 import { Title }     from '@angular/platform-browser';
 import { Constante } from 'src/app/utilidades/constante';
+import { ComunesService } from '../../../servicios/mojo/comunes/comunes.service';
 @Component({
   selector: 'app-analitica',
   templateUrl: './analitica.component.html',
@@ -11,8 +12,10 @@ import { Constante } from 'src/app/utilidades/constante';
 })
 export class AnaliticaComponent implements OnInit {
 
-  constructor(private _tittleService:Title) { 
-    this._tittleService.setTitle(Constante.tituloAnalitica);
+  constructor(private _tittleService:Title,
+              ) { 
+
+                this._tittleService.setTitle(Constante.tituloAnalitica);
   }
 
   ngOnInit() {

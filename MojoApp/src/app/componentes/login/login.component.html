@@ -7,10 +7,10 @@
                     <img class="img-fluid" src="./assets/img/logo-web.png">
                 </div>
                 <br>
-                
+
                 <div class="input-container">
                     <i class="fa fa-user icon"></i>
-                    <input placeholder="Email" type="text" formControlName="email" class="input-field customs" [ngClass]="{ 'is-invalid': submitted && f.email.errors }"/>
+                    <input placeholder="Email" type="text" formControlName="email" class="input-field customs" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
                     <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
                         <div *ngIf="f.email.errors.required">Email es requerido</div>
                     </div>
@@ -32,5 +32,5 @@
     </div>
     <div class="row"></div>
     <ngx-loading [show]="loading">
-</ngx-loading>
+    </ngx-loading>
 </div>

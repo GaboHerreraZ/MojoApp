@@ -15,7 +15,7 @@ const routes: Routes = [
     {path:'catalogo',loadChildren:'./componentes/mojo/catalogos/catalogo/catalogo-module/catalogo.module#CatalogoModule'},
     {path:'artista',loadChildren:'./componentes/mojo/catalogos/artista/artista-module/artista.module#ArtistaModule'},
     {path:'',redirectTo:'/mojo/analitica',pathMatch:'full'},
-    {path:'**',redirectTo:'/login',pathMatch:'full'},
+    {path:'**',redirectTo:'/mojo/analitica',pathMatch:'full'},
 
   ]  
 },

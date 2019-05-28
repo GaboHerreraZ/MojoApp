@@ -72,11 +72,8 @@ export class ArtistaComponent implements OnInit {
   public getArtistasAfiliado() {
     this._serviciosArtista.getAccessArtistasAfiliado();
     this._serviciosArtista.getArtistasAfiliado().subscribe((res: any) => {
-      console.log("Artistas afiliado", res)
       if (res.status = Constante.ok) {
-        console.log("Artistas afiliado", res.body)
       } else {
-        console.log("error");
         this._message.error(res);
       }
     }, error => {
