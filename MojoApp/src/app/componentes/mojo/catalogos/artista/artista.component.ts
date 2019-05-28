@@ -92,7 +92,6 @@ export class ArtistaComponent implements OnInit {
     this.nuevoArtistaForm = this._fb.group({
       pais: ["", Validators.required],
       nombres: ["", Validators.required],
-      apellidos: ["", Validators.required],
       genero: [""],
       sello: [""],
       facebook: [""],
@@ -152,17 +151,11 @@ export class ArtistaComponent implements OnInit {
    *                             seleccionaado
    */
   editarArtista(obArtista: any) {
-    var me = this,
-      sbNombreArtista = obArtista.nombres.split(" ")[0],
-      nuLength = sbNombreArtista.length,
-      sbApellidos = obArtista.nombres.substr(nuLength + 1);
-
-    console.log(obArtista);
-
+    var me = this;
+    
     me.nuevoArtistaForm = me._fb.group({
-      pais: [obArtista.pais, Validators.required],
-      nombres: [sbNombreArtista, Validators.required],
-      apellidos: [sbApellidos, Validators.required],
+      pais: [obArtista.pais.id, Validators.required],
+      nombres: [obArtista.nombres, Validators.required],
       genero: [""],
       sello: [obArtista.label],
       facebook: [obArtista.facebook],
