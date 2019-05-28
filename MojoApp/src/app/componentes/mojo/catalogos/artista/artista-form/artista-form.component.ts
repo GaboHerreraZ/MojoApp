@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { AccessComunesService } from 'src/app/servicios/mojo/comunes/access.comunes.service';
 import { Constante } from '../../../../../utilidades/constante';
+import { Mensaje } from 'src/app/utilidades/mensaje';
+import { AlertService } from '../../../../../servicios/alert/alert.service';
 
 @Component({
   selector: 'app-artista-form',
@@ -15,13 +17,26 @@ export class ArtistaFormComponent implements OnInit {
   paises: any[] = [];
   //Indica si existe información cargándose
   loading: boolean = true;
+  //Titulo del formulario
+  titulo: string = "Nuevo artista";
 
-  constructor(private _serviciosComunes: AccessComunesService) { }
+  constructor(private _serviciosComunes: AccessComunesService,
+    private _message: AlertService) { }
 
   ngOnInit() {
-    this.getPaises();
+    var me = this;
+    //Carga la información de los países
+    me.getPaises();
+    //Verifica si es la edición o un nuevo artista
+    me.titulo = me.nuevoArtistaForm.value.nombres != "" ? "Editar artista" : "Nuevo artista";
   }
 
+  /**
+   * Method: getPaises
+   * ----------------------------------------------------
+   * Obtiene la información de los países para la lista de
+   * valores del formulario.
+   */
   public getPaises() {
     var me = this;
     me._serviciosComunes.getAccessPaises();
@@ -30,11 +45,13 @@ export class ArtistaFormComponent implements OnInit {
         me.paises = res.body.res;
         me.loading = false;
       } else {
-        //Error
+        me._message.error(res);
       }
     }, error => {
-      //Error
+      me._message.error(Mensaje.noBackEnd);
     });
   }
+
+
 
 }

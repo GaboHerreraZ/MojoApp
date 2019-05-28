@@ -35,7 +35,9 @@ export class ArtistaComponent implements OnInit {
   artistas: any[] = [];
   nuevoArtistaForm: FormGroup;
   show: boolean = false;
-  newartist: boolean = false; //Indica la visibilidad del componente nuevo-artista
+  newartist: boolean = false; //Indica la visibilidad del componente artista-form
+  seeartist: boolean = false; //Indica la visibilidad del componente artista-detail
+  artistaData: any; //Información del artista seleccionado
   loading: boolean = true;
   text: string = "";
   constructor(private _fb: FormBuilder,
@@ -44,7 +46,6 @@ export class ArtistaComponent implements OnInit {
     private _title: Title) {
 
     this._title.setTitle(Constante.tituloArtista);
-    this.setVariables();
   }
 
   ngOnInit() {
@@ -84,7 +85,13 @@ export class ArtistaComponent implements OnInit {
   }
 
 
-  setVariables() {
+  /**
+   * Method: setNuevoArtista
+   * ----------------------------------------------------
+   * Establece los valores vacíos para los campos del 
+   * formulario al adicionar un nuevo artista.   
+   */
+  setNuevoArtista() {
     this.nuevoArtistaForm = this._fb.group({
       pais: ["", Validators.required],
       nombres: ["", Validators.required],
@@ -107,8 +114,24 @@ export class ArtistaComponent implements OnInit {
    */
   nuevoArtista() {
     var me = this;
+    me.setNuevoArtista();
     me.show = false;
     me.newartist = true;
+  }
+
+  /**
+   * Method: regresar
+   * ----------------------------------------------------
+   * Actualiza la variable show para mostrar el 
+   * listado de artistas.
+   * Además, oculta el formulario o la visualización del
+   * detalle de un artista.
+   */
+  regresar() {
+    var me = this;
+    me.show = true;
+    me.newartist = false;
+    me.seeartist = false;
   }
 
   /**
@@ -120,6 +143,58 @@ export class ArtistaComponent implements OnInit {
     var me = this;
     me.newartist = false;
     me.show = true;
+  }
+
+  /**
+   * Method: editarArtista
+   * ----------------------------------------------------
+   * Asigna la información del artista a editar y muestra
+   * el formulario de edición.
+   * 
+   * @param  {Artista} obArtista Información del artista 
+   *                             seleccionaado
+   */
+  editarArtista(obArtista: any) {
+    var me = this,
+      sbNombreArtista = obArtista.nombres.split(" ")[0],
+      nuLength = sbNombreArtista.length,
+      sbApellidos = obArtista.nombres.substr(nuLength + 1);
+
+    console.log(obArtista);
+
+    me.nuevoArtistaForm = me._fb.group({
+      pais: [obArtista.pais, Validators.required],
+      nombres: [sbNombreArtista, Validators.required],
+      apellidos: [sbApellidos, Validators.required],
+      genero: [""],
+      sello: [obArtista.label],
+      facebook: [obArtista.facebook],
+      spotify: [obArtista.idSpotify],
+      instagram: [obArtista.instagram],
+      youtube: [obArtista.canalYoutube]
+    });
+
+    //Despliega el formulario
+    me.show = false;
+    me.newartist = true;
+  }
+
+  /**
+   * Method: verDetalleArtista
+   * ----------------------------------------------------
+   * Asigna la información del artista a mostrar y despliega
+   * la vista del detalle.
+   * 
+   * @param  {Artista} obArtista Información del artista 
+   *                             seleccionaado
+   */
+  verDetalleArtista(obArtista: any) {
+    var me = this;
+
+    this.artistaData = obArtista;
+    //Despliega la vista
+    me.show = false;
+    me.seeartist = true;
   }
 
 }

@@ -9,11 +9,13 @@
 	</div>
 </div>
 <app-artista-form *ngIf="newartist && !show" [nuevoArtistaForm]="nuevoArtistaForm"></app-artista-form>
+<app-artista-detail *ngIf="seeartist && !show" [artistaData]="artistaData"></app-artista-detail>
+<br>
 <div class="row">
-	<div class="col-md-2">
-		<button *ngIf="newartist && !show" (click)="show=true" type="button" class="btn btn-dark button-style "><strong>Cancelar</strong></button>
+	<div class="col-md-6 text-right">
+		<button *ngIf="(newartist || seeartist) && !show" (click)="regresar()" type="button" class="btn btn-dark button-style "><strong>Regresar</strong></button>
 	</div>
-	<div class="col-md-2">
+	<div class="col-md-6">
 		<button *ngIf="newartist && !show" (click)="guardarArtista()" type="button" class="btn btn-dark button-style "><strong>Guardar</strong></button>
 	</div>
 </div>

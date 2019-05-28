@@ -1,0 +1,15 @@
+.card_artist {
+	margin: 2rem;
+}
+
+.img-style {
+	width: 40px;
+	height: 40px;
+	margin-right: 6%;
+}
+
+.img-artist {
+	align-items: center;
+	display: flex;
+	justify-content: center;
+}
