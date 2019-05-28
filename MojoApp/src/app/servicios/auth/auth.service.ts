@@ -15,7 +15,7 @@ import { AlertService } from '../alert/alert.service';
 export class AuthService {
 
   public loggedIn: BehaviorSubject<boolean>;
-
+  public storage:any;
 
   constructor(private _router:Router,
               private _alertMessage:AlertService) { 
@@ -81,5 +81,11 @@ export class AuthService {
   public isLoggedIn():Observable<boolean>{
      return this.loggedIn.asObservable();
   }
+
+  public setConfig(){
+   let config = Auth.configure({storage:this.storage});
+   localStorage.setItem('config',JSON.stringify(config));
+  }
+
 
 }

@@ -4,10 +4,13 @@ import { RouterModule, Router } from '@angular/router';
 import { ChartsModule } from 'ng2-charts';
 import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
 import { SearchPipe } from '../../pipes/search.pipe';
+import { LoadingComponent } from '../../componentes/loading/loading.component';
 
 @NgModule({
   declarations: [
-    SearchPipe
+    SearchPipe,
+    LoadingComponent
+
   ],
   imports: [
     CommonModule,
@@ -22,11 +25,13 @@ import { SearchPipe } from '../../pipes/search.pipe';
       tertiaryColour: '#ffffff'
   }),
 
+
   ],
   exports:[RouterModule,
            ChartsModule,
            NgxLoadingModule,
-           SearchPipe
+           SearchPipe,
+           LoadingComponent
           ]
 })
 export class ComunModule { }
