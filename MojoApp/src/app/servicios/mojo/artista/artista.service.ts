@@ -32,8 +32,8 @@ export class ArtistaService {
    * @param  {Artista} obArtista Información del artista
    * @return {}   
    */
-  public updateArtista(obArtista: any): Observable<any> {
-    return this._http.put(`${Operacion.URL}${Operacion.getArtistas}`, obArtista, { observe: 'body' });
+  public updateArtista(obArtista: any): Observable<HttpResponse<any>> {
+    return this._http.put(`${Operacion.URL}${Operacion.getArtistas}`, obArtista, { observe: 'response' });
   }
 
   /**
@@ -44,8 +44,8 @@ export class ArtistaService {
    * @param  {Artista} obArtista Información del nuevo artista
    * @return {}         
    */
-  public insertArtista(obArtista: any): Observable<any> {
-    return this._http.post(`${Operacion.URL}${Operacion.getArtistas}`, obArtista, { observe: 'body' });
+  public insertArtista(obArtista: any): Observable<HttpResponse<any>> {
+    return this._http.post(`${Operacion.URL}${Operacion.getArtistas}`, obArtista, { observe: 'response' });
   }
 
 

@@ -23,17 +23,18 @@ export class AccessArtistaService {
 
   public updateAccessArtista(obArtista: any) {
     this._artistaService.updateArtista(obArtista).subscribe((res: any) => {
-
+      this.artistas.next(res);
     }, error => {
-
+      this.artistas.next(error);
     });
   }
 
   public insertAccessArtista(obArtista: any) {
     this._artistaService.insertArtista(obArtista).subscribe((res: any) => {
-
+      debugger
+      this.artistas.next(res);
     }, error => {
-
+      this.artistas.next(error);
     });
   }
 

@@ -10,6 +10,7 @@ import { Mensaje } from '../../../../utilidades/mensaje';
 import { Title } from '@angular/platform-browser';
 import { Constante } from '../../../../utilidades/constante';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { debug } from 'util';
 
 
 @Component({
@@ -137,13 +138,51 @@ export class ArtistaComponent implements OnInit {
   guardarArtista() {
     var me = this;
     console.log(me.nuevoArtistaForm.value);
+    //me.insertarNuevoArtista(me.nuevoArtistaForm.value);
     me.newartist = false;
     me.show = true;
   }
 
-  public insertArtist(obArtista: any) {
-
+  /**
+   * Method: insertarNuevoArtista
+   * ----------------------------------------------------
+   * Invoca el servicio para insertar un nuevo artista.
+   * 
+   * @param  {Artista} obArtista Información del nuevo artista        
+   */  
+  public insertarNuevoArtista(obArtista: any) {
+    var me = this;
+    me._serviciosArtista.insertAccessArtista(obArtista);
+    me._serviciosArtista.getArtistas().subscribe((res: any) => {
+      if (res.status = Constante.ok) {
+        
+      } else {
+        this._message.error(res);
+      }
+      console.log(res);
+    }, error => {
+      me._message.error(Mensaje.noBackEnd);
+    });
   }
+
+  /**
+   * Method: actualizarDatosArtista
+   * ----------------------------------------------------
+   * Invoca el servicio para editar la información de un
+   * artista.
+   * 
+   * @param  {Artista} obArtista Información del nuevo artista        
+   */  
+  public actualizarDatosArtista(obArtista: any) {
+    var me = this;
+    me._serviciosArtista.updateAccessArtista(obArtista);
+    me._serviciosArtista.getArtistas().subscribe((res: any) => {
+      debugger;
+      console.log(res);
+    }, error => {
+      me._message.error(Mensaje.noBackEnd);
+    });
+  }  
 
   /**
    * Method: editarArtista
