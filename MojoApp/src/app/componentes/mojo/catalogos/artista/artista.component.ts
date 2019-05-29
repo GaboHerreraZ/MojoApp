@@ -90,14 +90,13 @@ export class ArtistaComponent implements OnInit {
    */
   setNuevoArtista() {
     this.nuevoArtistaForm = this._fb.group({
-      pais: ["", Validators.required],
+      paisId: ["", Validators.required],
       nombres: ["", Validators.required],
-      genero: [""],
-      sello: [""],
+      label: [""],
       facebook: [""],
-      spotify: [""],
+      idSpotify: [""],
       instagram: [""],
-      youtube: [""]
+      canalYoutube: [""]
     });
   }
 
@@ -137,8 +136,13 @@ export class ArtistaComponent implements OnInit {
    */
   guardarArtista() {
     var me = this;
+    console.log(me.nuevoArtistaForm.value);
     me.newartist = false;
     me.show = true;
+  }
+
+  public insertArtist(obArtista: any) {
+
   }
 
   /**
@@ -152,16 +156,15 @@ export class ArtistaComponent implements OnInit {
    */
   editarArtista(obArtista: any) {
     var me = this;
-    
+
     me.nuevoArtistaForm = me._fb.group({
-      pais: [obArtista.pais.id, Validators.required],
+      paisId: [obArtista.pais.id, Validators.required],
       nombres: [obArtista.nombres, Validators.required],
-      genero: [""],
-      sello: [obArtista.label],
+      label: [obArtista.label],
       facebook: [obArtista.facebook],
-      spotify: [obArtista.idSpotify],
+      idSpotify: [obArtista.idSpotify],
       instagram: [obArtista.instagram],
-      youtube: [obArtista.canalYoutube]
+      canalYoutube: [obArtista.canalYoutube]
     });
 
     //Despliega el formulario
