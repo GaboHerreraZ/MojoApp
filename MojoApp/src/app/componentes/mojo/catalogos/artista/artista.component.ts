@@ -90,7 +90,7 @@ export class ArtistaComponent implements OnInit {
    */
   setNuevoArtista() {
     this.nuevoArtistaForm = this._fb.group({
-      paisId: ["", Validators.required],
+      pais: [this._fb.group({}),Validators.required],
       nombres: ["", Validators.required],
       label: [""],
       facebook: [""],
@@ -158,7 +158,7 @@ export class ArtistaComponent implements OnInit {
     var me = this;
 
     me.nuevoArtistaForm = me._fb.group({
-      paisId: [obArtista.pais.id, Validators.required],
+      pais: [obArtista.pais, Validators.required],
       nombres: [obArtista.nombres, Validators.required],
       label: [obArtista.label],
       facebook: [obArtista.facebook],
@@ -170,6 +170,7 @@ export class ArtistaComponent implements OnInit {
     //Despliega el formulario
     me.show = false;
     me.newartist = true;
+    
   }
 
   /**

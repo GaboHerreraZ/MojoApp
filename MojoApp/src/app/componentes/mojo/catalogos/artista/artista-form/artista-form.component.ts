@@ -19,6 +19,8 @@ export class ArtistaFormComponent implements OnInit {
   loading: boolean = true;
   //Titulo del formulario
   titulo: string = "Nuevo artista";
+  //Mostra formulario
+  show: boolean = false;
 
   constructor(private _serviciosComunes: AccessComunesService,
     private _message: AlertService) { }
@@ -44,6 +46,7 @@ export class ArtistaFormComponent implements OnInit {
       if (res.status = Constante.ok) {
         me.paises = res.body.res;
         me.loading = false;
+        me.show = true;
       } else {
         me._message.error(res);
       }

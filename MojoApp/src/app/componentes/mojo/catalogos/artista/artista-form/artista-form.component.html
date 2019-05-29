@@ -1,65 +1,63 @@
-<label><strong>{{titulo}}</strong></label>
-<hr>
-<form [formGroup]="nuevoArtistaForm">
-	<div class="row">
-		<div class="col-md-3">
-			<div class="form-group">
-				<label for="">Pais:</label>
-				<select class="form-control" placeholder="Seleccione su pais de residencia" id="paisId" formControlName="paisId" required>
-					<option *ngFor="let pais of paises" [value]="pais.Id">
-						{{pais.nombre}}
-					</option>
-				</select>
-				<div *ngIf="nuevoArtistaForm.get('paisId').invalid && (nuevoArtistaForm.get('paisId').dirty || nuevoArtistaForm.get('paisId').touched)" class="is-invalid">
-					<span *ngIf="nuevoArtistaForm.get('paisId').errors.required">
-						El país es requerido
-					</span>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-3">
-			<div class="form-group">
-				<label for="">Nombres:</label>
-				<input type="text" class="form-control" placeholder="Nombres" id="nombres" formControlName="nombres" required>
-				<div *ngIf="nuevoArtistaForm.get('nombres').invalid && (nuevoArtistaForm.get('nombres').dirty || nuevoArtistaForm.get('nombres').touched)" class="is-invalid">
-					<span *ngIf="nuevoArtistaForm.get('nombres').errors.required">
-						Los nombres son requeridos
-					</span>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-3">
-			<div class="form-group">
-				<label for="">Sello:</label>
-				<input type="text" class="form-control" placeholder="Sello" id="label" formControlName="label">
-			</div>
-		</div>
-		<div class="col-md-3">
-			<div class="form-group">
-				<label for="">Spotify:</label>
-				<input type="text" class="form-control" placeholder="Su username en Spotify" id="idSpotify" formControlName="idSpotify">
-			</div>
-		</div>
-	</div>
-	<br>
-	<div class="row">
-		<div class="col-md-3">
-			<div class="form-group">
-				<label for="">Facebook:</label>
-				<input type="text" class="form-control" placeholder="Su username en Facebook" id="facebook" formControlName="facebook">
-			</div>
-		</div>
-		<div class="col-md-3">
-			<div class="form-group">
-				<label for="">Youtube:</label>
-				<input type="text" class="form-control" placeholder="Su username en Youtube" id="canalYoutube" formControlName="canalYoutube">
-			</div>
-		</div>
-		<div class="col-md-3">
-			<div class="form-group">
-				<label for="">Instagram:</label>
-				<input type="text" class="form-control" placeholder="Su username en Instagram" id="instagram" formControlName="instagram">
-			</div>
-		</div>
-	</div>
-</form>
+<div *ngIf="show">
+    <label><strong>{{titulo}}</strong></label>
+    <hr>
+    <form [formGroup]="nuevoArtistaForm">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="">Pais:</label>
+                    <app-autocomplete [paises]="paises" [form]="nuevoArtistaForm"></app-autocomplete>
+                    <div *ngIf="nuevoArtistaForm.get('pais').invalid && (nuevoArtistaForm.get('pais').dirty || nuevoArtistaForm.get('pais').touched)" class="is-invalid">
+                        <span *ngIf="nuevoArtistaForm.get('pais').errors.required">
+                            El país es requerido
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="">Nombres:</label>
+                    <input type="text" class="form-control" placeholder="Nombres" id="nombres" formControlName="nombres" required>
+                    <div *ngIf="nuevoArtistaForm.get('nombres').invalid && (nuevoArtistaForm.get('nombres').dirty || nuevoArtistaForm.get('nombres').touched)" class="is-invalid">
+                        <span *ngIf="nuevoArtistaForm.get('nombres').errors.required">
+                            Los nombres son requeridos
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="">Sello:</label>
+                    <input type="text" class="form-control" placeholder="Sello" id="label" formControlName="label">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="">Spotify:</label>
+                    <input type="text" class="form-control" placeholder="Su username en Spotify" id="idSpotify" formControlName="idSpotify">
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="">Facebook:</label>
+                    <input type="text" class="form-control" placeholder="Su username en Facebook" id="facebook" formControlName="facebook">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="">Youtube:</label>
+                    <input type="text" class="form-control" placeholder="Su username en Youtube" id="canalYoutube" formControlName="canalYoutube">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="">Instagram:</label>
+                    <input type="text" class="form-control" placeholder="Su username en Instagram" id="instagram" formControlName="instagram">
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

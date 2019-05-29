@@ -1,0 +1,6 @@
+<ng-template #rt let-r="result" let-t="term">
+    <ngb-highlight [result]="r.nombre" [term]="t"></ngb-highlight>
+</ng-template>
+<form [formGroup]="form">
+    <input formControlName="pais" id="typeahead-template" type="text" class="form-control" [ngbTypeahead]="search" [resultTemplate]="rt" [inputFormatter]="formatter" />
+</form>

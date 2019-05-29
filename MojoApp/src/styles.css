@@ -1,5 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 
+.ngx-pagination .current {
+    background-color: #edd920 !important;
+    color: #161616 !important;
+    font-weight: bold !important;
+}
 
 .button-style {
     color: #edd920;
@@ -14,7 +19,8 @@
     border-color: #edd920 !important;
     box-shadow: 0 0 0 0.1rem #edd920 !important;
 }
-.form-control{
+
+.form-control {
     height: 30px;
 }
 
@@ -94,10 +100,23 @@ html,
 body {
     height: 100%;
     margin: 0;
-    
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-section { padding-bottom: 150px; }
-#container-total { position: relative; min-height: 100vh; }
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+section {
+    padding-bottom: 150px;
+}
+
+#container-total {
+    position: relative;
+    min-height: 100vh;
+}
