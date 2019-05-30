@@ -140,7 +140,6 @@ export class ArtistaComponent implements OnInit {
    */
   guardarArtista() {
     var me = this;
-    console.log(me.nuevoArtistaForm.value);
     if (me.update) {
       me.actualizarDatosArtista(me.nuevoArtistaForm.value);
     } else {
@@ -157,13 +156,15 @@ export class ArtistaComponent implements OnInit {
    */
   public insertarNuevoArtista(obArtista: any) {
     var me = this;
+    this.loading = true;
     me._serviciosArtista.insertAccessArtista(obArtista);
     me._serviciosArtista.getNuevoArtista().subscribe((res: any) => {
-      console.log(res);
       if (res.status = Constante.ok) {
         me.newartist = false;
         me.show = true;
-        me.loading = false;
+        this.loading = false;
+        this._message.success(Mensaje.setArtista);
+        this.getArtistas();
       } else {
         this._message.error(res);
       }
@@ -181,14 +182,16 @@ export class ArtistaComponent implements OnInit {
    * @param  {Artista} obArtista Información del nuevo artista        
    */
   public actualizarDatosArtista(obArtista: any) {
+    this.loading = true;
     var me = this;
     me._serviciosArtista.updateAccessArtista(obArtista);
     me._serviciosArtista.getEdicionArtista().subscribe((res: any) => {
-      console.log(res);
       if (res.status = Constante.ok) {
         me.newartist = false;
         me.show = true;
         me.loading = false;
+        this._message.success('Se actualiza correctamente el artista');
+        this.getArtistas();
       } else {
         this._message.error(res);
       }

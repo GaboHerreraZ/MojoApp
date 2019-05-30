@@ -34,8 +34,7 @@ export class ArtistaService {
    * @return {}   
    */
   public updateArtista(obArtista: any): Observable<HttpResponse<any>> {
-
-    return this._http.put(`${Operacion.URL}${Operacion.getArtistas}`, obArtista, { observe: 'response' });
+    return this._http.put(`${Operacion.URL}${Operacion.getArtistas}/${obArtista.id}`, obArtista, { observe: 'response' });
   }
 
   /**
