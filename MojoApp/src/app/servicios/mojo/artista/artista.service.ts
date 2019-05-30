@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { HttpClient, HttpResponse, } from '@angular/common/http';
+import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
 import { Operacion } from '../../../utilidades/operacion';
+import { Constante } from 'src/app/utilidades/constante';
 
 
 @Injectable({
@@ -33,7 +34,13 @@ export class ArtistaService {
    * @return {}   
    */
   public updateArtista(obArtista: any): Observable<HttpResponse<any>> {
-    return this._http.put(`${Operacion.URL}${Operacion.getArtistas}`, obArtista, { observe: 'response' });
+    let token = localStorage.getItem(Constante.keyToken),
+      headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': token
+      });
+
+    return this._http.put(`${Operacion.URL}${Operacion.getArtistas}`, obArtista, { headers: headers, observe: 'response' });
   }
 
   /**
@@ -45,7 +52,12 @@ export class ArtistaService {
    * @return {}         
    */
   public insertArtista(obArtista: any): Observable<HttpResponse<any>> {
-    return this._http.post(`${Operacion.URL}${Operacion.getArtistas}`, obArtista, { observe: 'response' });
+    let token = localStorage.getItem(Constante.keyToken),
+      headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': token
+      });
+    return this._http.post(`${Operacion.URL}${Operacion.getArtistas}`, obArtista, { headers: headers, observe: 'response' });
   }
 
 

@@ -40,6 +40,7 @@ export class ArtistaComponent implements OnInit {
   seeartist: boolean = false; //Indica la visibilidad del componente artista-detail
   artistaData: any; //Información del artista seleccionado
   loading: boolean = true;
+  update: boolean = false; //Indica si el formulario está en modo edición
   text: string = "";
   constructor(private _fb: FormBuilder,
     private _serviciosArtista: AccessArtistaService,
@@ -91,7 +92,7 @@ export class ArtistaComponent implements OnInit {
    */
   setNuevoArtista() {
     this.nuevoArtistaForm = this._fb.group({
-      pais: [this._fb.group({}),Validators.required],
+      paisId: [this._fb.group({}), Validators.required],
       nombres: ["", Validators.required],
       label: [""],
       facebook: [""],
@@ -113,6 +114,7 @@ export class ArtistaComponent implements OnInit {
     me.setNuevoArtista();
     me.show = false;
     me.newartist = true;
+    me.update = false;
   }
 
   /**
@@ -128,6 +130,7 @@ export class ArtistaComponent implements OnInit {
     me.show = true;
     me.newartist = false;
     me.seeartist = false;
+    me.update = false;
   }
 
   /**
@@ -138,9 +141,11 @@ export class ArtistaComponent implements OnInit {
   guardarArtista() {
     var me = this;
     console.log(me.nuevoArtistaForm.value);
-    //me.insertarNuevoArtista(me.nuevoArtistaForm.value);
-    me.newartist = false;
-    me.show = true;
+    if (me.update) {
+      me.actualizarDatosArtista(me.nuevoArtistaForm.value);
+    } else {
+      me.insertarNuevoArtista(me.nuevoArtistaForm.value);
+    }
   }
 
   /**
@@ -149,17 +154,19 @@ export class ArtistaComponent implements OnInit {
    * Invoca el servicio para insertar un nuevo artista.
    * 
    * @param  {Artista} obArtista Información del nuevo artista        
-   */  
+   */
   public insertarNuevoArtista(obArtista: any) {
     var me = this;
     me._serviciosArtista.insertAccessArtista(obArtista);
-    me._serviciosArtista.getArtistas().subscribe((res: any) => {
+    me._serviciosArtista.getNuevoArtista().subscribe((res: any) => {
+      console.log(res);
       if (res.status = Constante.ok) {
-        
+        me.newartist = false;
+        me.show = true;
+        me.loading = false;
       } else {
         this._message.error(res);
       }
-      console.log(res);
     }, error => {
       me._message.error(Mensaje.noBackEnd);
     });
@@ -172,17 +179,23 @@ export class ArtistaComponent implements OnInit {
    * artista.
    * 
    * @param  {Artista} obArtista Información del nuevo artista        
-   */  
+   */
   public actualizarDatosArtista(obArtista: any) {
     var me = this;
     me._serviciosArtista.updateAccessArtista(obArtista);
-    me._serviciosArtista.getArtistas().subscribe((res: any) => {
-      debugger;
+    me._serviciosArtista.getEdicionArtista().subscribe((res: any) => {
       console.log(res);
+      if (res.status = Constante.ok) {
+        me.newartist = false;
+        me.show = true;
+        me.loading = false;
+      } else {
+        this._message.error(res);
+      }
     }, error => {
       me._message.error(Mensaje.noBackEnd);
     });
-  }  
+  }
 
   /**
    * Method: editarArtista
@@ -195,9 +208,9 @@ export class ArtistaComponent implements OnInit {
    */
   editarArtista(obArtista: any) {
     var me = this;
-
     me.nuevoArtistaForm = me._fb.group({
-      pais: [obArtista.pais, Validators.required],
+      id: [obArtista.id, Validators.required],
+      paisId: [obArtista.pais, Validators.required],
       nombres: [obArtista.nombres, Validators.required],
       label: [obArtista.label],
       facebook: [obArtista.facebook],
@@ -209,7 +222,7 @@ export class ArtistaComponent implements OnInit {
     //Despliega el formulario
     me.show = false;
     me.newartist = true;
-    
+    me.update = true;
   }
 
   /**
