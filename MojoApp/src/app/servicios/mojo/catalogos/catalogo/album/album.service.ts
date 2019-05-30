@@ -18,8 +18,5 @@ export class AlbumService implements OnInit{
     }
 
 
-    getGeneros():Observable<HttpResponse<any>>{
-      return this._http.get(`${Operacion.URLGENERO}${Operacion.getGeneros}`,{observe:'response'});
-    }
-
+  
 }

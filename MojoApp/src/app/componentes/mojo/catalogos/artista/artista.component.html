@@ -16,7 +16,7 @@
         <button *ngIf="(newartist || seeartist) && !show" (click)="regresar()" type="button" class="btn btn-dark button-style "><strong>Regresar</strong></button>
     </div>
     <div class="col-md-6">
-        <button *ngIf="newartist && !show" (click)="guardarArtista()" type="button" class="btn btn-dark button-style "><strong>Guardar</strong></button>
+        <button [disabled]="nuevoArtistaForm.invalid" *ngIf="newartist && !show" (click)="guardarArtista()" type="button" class="btn btn-dark button-style "><strong>Guardar</strong></button>
     </div>
 </div>
 <br>
@@ -32,7 +32,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let artista of artistas|search:text|paginate: { itemsPerPage: 5, currentPage: p }">
+                <tr *ngFor="let artista of artistas|search:text:'filtroArtista' |paginate: { itemsPerPage: 5, currentPage: p }">
                     <td>{{artista.nombres}}</td>
                     <td *ngIf="artista.pais != null">
                         {{artista.pais.nombre}}
@@ -47,14 +47,11 @@
                         -----
                     </td>
                     <td>
-                        <button type="button" class="btn btn-dark button-style btn-xs btn-yellow" (click)="verDetalleArtista(artista)" data-toggle="modal" data-target="#detallesArtista"><i class="fa fa-eye"></i></button>
-                        <button type="button" class="btn btn-secondary button-style btn-xs btn-yellow" (click)="editarArtista(artista)" data-toggle="modal" data-target="#editarArtista"><i class="fa fa-edit"></i></button>
+                        <button title="Ver detalle" type="button" class="btn btn-dark button-style btn-xs btn-yellow" (click)="verDetalleArtista(artista)" data-toggle="modal" data-target="#detallesArtista"><i class="fa fa-eye"></i></button>
+                        <button title="Editar" type="button" class="btn btn-secondary button-style btn-xs btn-yellow" (click)="editarArtista(artista)" data-toggle="modal" data-target="#editarArtista"><i class="fa fa-edit"></i></button>
                     </td>
                 </tr>
             </tbody>
-            <div class="row" style="margin-left: 80%">
-
-            </div>
         </table>
     </div>
 </div>

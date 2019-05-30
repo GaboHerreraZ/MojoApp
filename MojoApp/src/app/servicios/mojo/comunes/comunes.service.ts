@@ -19,6 +19,10 @@ export class ComunesService {
     return this._http.get(`${Operacion.URLPAIS}${Operacion.getPaises}`, { observe: 'response' });
   }
   
+  getGeneros():Observable<HttpResponse<any>>{
+    return this._http.get(`${Operacion.URLGENERO}${Operacion.getGeneros}`,{observe:'response'});
+  }
+
 
 
 

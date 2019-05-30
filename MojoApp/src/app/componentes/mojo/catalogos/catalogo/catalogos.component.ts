@@ -1,5 +1,6 @@
 import {Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Artista } from '../../../../modelos/ArtistaModel';
 
 
 
@@ -12,7 +13,10 @@ export class CatalogosComponent implements OnInit, OnDestroy {
   
   show:boolean = true;
   step:boolean = false;
+  text:string="";
   albumForm:FormGroup;
+  albumes = albumes;
+  loading:boolean = false;
   constructor(private _formBuilder:FormBuilder){
   }
 
@@ -34,3 +38,27 @@ export class CatalogosComponent implements OnInit, OnDestroy {
     this.step = true;
   }
 }
+
+
+const albumes:any[]=[
+  { 
+    nombre:"Black album",
+    upc:"Upc1",
+    artista: "Metallica"
+  },
+  { 
+    nombre:"Appetite for destruction",
+    upc:"Upc1",
+    artista: "Guns and roses"
+  },
+  { 
+    nombre:"Use your illusion I",
+    upc:"Upc1",
+    artista: "Guns and roses"
+  },
+  { 
+    nombre:"Use your illusion II",
+    upc:"Upc1",
+    artista: "Guns and roses"
+  }
+]

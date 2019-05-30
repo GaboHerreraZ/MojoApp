@@ -1,8 +1,11 @@
-<div class="row">
-    <div class="col-md-4"></div>
+<div *ngIf="show" class="row">
+    <div class="col-md-4">
+        <label for="BuscarAlbum">Buscar album:</label>
+        <input [(ngModel)]="text" class="form-control" id="idBuscarAlbum" placeholder="ingrese el album">
+    </div>
     <div class="col-md-4"></div>
     <div class="col-md-4 text-right">
-        <button *ngIf="show" (click)=nuevoAlbum() type="button" class="btn btn-dark button-style "><strong>Nuevo Album</strong></button>
+        <button style="margin-top:31px;" (click)=nuevoAlbum() type="button" class="btn btn-dark button-style "><strong>Nuevo Album</strong></button>
     </div>
 </div>
 <app-album *ngIf="step && !show" [albumForm]="albumForm"></app-album>
@@ -18,7 +21,6 @@
 
 <div *ngIf="show" class="row">
     <div class="col-md-12">
-        <label><strong>Albumes</strong></label>
         <table class="table">
             <thead class="thead-dark">
                 <tr>
@@ -29,83 +31,29 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Nombre 1</td>
-                    <td>Upc 1</td>
-                    <td>Artista 1</td>
+                <tr *ngFor="let album of albumes|search:text:'filtroAlbum'|paginate: { itemsPerPage: 5, currentPage: p }">
+                    <td>{{album.nombre}}</td>
+                    <td>{{album.upc}}</td>
+                    <td>{{album.artista}}</td>
                     <td>
-                        <button type="button" class="btn btn-dark button-style btn-xs btn-yellow" (click)="verDetalleAlbum(album)" data-toggle="modal" data-target="#detallesAlbum"><i class="fa fa-eye"></i></button>
-                        <button type="button" class="btn btn-secondary button-style btn-xs btn-yellow" (click)="editarAlbum(album)" data-toggle="modal" data-target="#editarAlbum"><i class="fa fa-edit"></i></button>
-                        <button class="btn btn-danger button-style btn-xs btn-yellow" [swal]='{ title:"Realmente desea eliminar este album?",
-                            text:"Esto no puede ser deshecho",
-                            type:"question",
-                            showCancelButton:"true",
-                            focusCancel:"true"}' (confirm)="eliminarAlbum(album)">
+                        <button title="Ver detalle" type="button" class="btn btn-dark button-style btn-xs btn-yellow" (click)="verDetalleAlbum(album)" data-toggle="modal" data-target="#detallesAlbum"><i class="fa fa-eye"></i></button>
+                        <button title="Editar" type="button" class="btn btn-secondary button-style btn-xs btn-yellow" (click)="editarAlbum(album)" data-toggle="modal" data-target="#editarAlbum"><i class="fa fa-edit"></i></button>
+                        <button title="Eliminar" class="btn btn-danger button-style btn-xs btn-yellow">
                             <i class="fa fa-trash"></i>
                         </button>
                     </td>
                 </tr>
-                <tr>
-                    <td>Nombre 1</td>
-                    <td>Upc 1</td>
-                    <td>Artista 1</td>
-                    <td>
-                        <button type="button" class="btn btn-dark button-style btn-xs btn-yellow" (click)="verDetalleAlbum(album)" data-toggle="modal" data-target="#detallesAlbum"><i class="fa fa-eye"></i></button>
-                        <button type="button" class="btn btn-secondary button-style btn-xs btn-yellow" (click)="editarAlbum(album)" data-toggle="modal" data-target="#editarAlbum"><i class="fa fa-edit"></i></button>
-                        <button class="btn btn-danger button-style btn-xs btn-yellow" [swal]='{ title:"Realmente desea eliminar este album?",
-                            text:"Esto no puede ser deshecho",
-                            type:"question",
-                            showCancelButton:"true",
-                            focusCancel:"true"}' (confirm)="eliminarAlbum(album)">
-                            <i class="fa fa-trash"></i>
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Nombre 1</td>
-                    <td>Upc 1</td>
-                    <td>Artista 1</td>
-                    <td>
-                        <button type="button" class="btn btn-dark button-style btn-xs btn-yellow" (click)="verDetalleAlbum(album)" data-toggle="modal" data-target="#detallesAlbum"><i class="fa fa-eye"></i></button>
-                        <button type="button" class="btn btn-secondary button-style btn-xs btn-yellow" (click)="editarAlbum(album)" data-toggle="modal" data-target="#editarAlbum"><i class="fa fa-edit"></i></button>
-                        <button class="btn btn-danger button-style btn-xs btn-yellow" [swal]='{ title:"Realmente desea eliminar este album?",
-                            text:"Esto no puede ser deshecho",
-                            type:"question",
-                            showCancelButton:"true",
-                            focusCancel:"true"}' (confirm)="eliminarAlbum(album)">
-                            <i class="fa fa-trash"></i>
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Nombre 1</td>
-                    <td>Upc 1</td>
-                    <td>Artista 1</td>
-                    <td>
-                        <button type="button" class="btn btn-dark button-style btn-xs btn-yellow" (click)="verDetalleAlbum(album)" data-toggle="modal" data-target="#detallesAlbum"><i class="fa fa-eye"></i></button>
-                        <button type="button" class="btn btn-secondary button-style btn-xs btn-yellow" (click)="editarAlbum(album)" data-toggle="modal" data-target="#editarAlbum"><i class="fa fa-edit"></i></button>
-                        <button class="btn btn-danger button-style btn-xs btn-yellow" [swal]='{ title:"Realmente desea eliminar este album?",
-                            text:"Esto no puede ser deshecho",
-                            type:"question",
-                            showCancelButton:"true",
-                            focusCancel:"true"}' (confirm)="eliminarAlbum(album)">
-                            <i class="fa fa-trash"></i>
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Nombre 1</td>
-                    <td>Upc 1</td>
-                    <td>Artista 1</td>
-                    <td>
-                        <button type="button" class="btn btn-dark button-style btn-xs btn-yellow" (click)="verDetalleAlbum(album)" data-toggle="modal" data-target="#detallesAlbum"><i class="fa fa-eye"></i></button>
-                        <button type="button" class="btn btn-secondary button-style btn-xs btn-yellow" (click)="editarAlbum(album)" data-toggle="modal" data-target="#editarAlbum"><i class="fa fa-edit"></i></button>
-                        <button class="btn btn-danger button-style btn-xs btn-yellow" (confirm)="eliminarAlbum(album)"><i class="fa fa-trash"></i></button>
-                    </td>
-                </tr>
-
             </tbody>
         </table>
 
     </div>
 </div>
+<div *ngIf="show" class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <pagination-controls (pageChange)="p = $event" previousLabel="Regresar" nextLabel="Siguiente">
+        </pagination-controls>
+    </div>
+</div>
+<app-loading [loading]="loading"></app-loading>

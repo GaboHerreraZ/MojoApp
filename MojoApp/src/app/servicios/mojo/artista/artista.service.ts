@@ -34,13 +34,8 @@ export class ArtistaService {
    * @return {}   
    */
   public updateArtista(obArtista: any): Observable<HttpResponse<any>> {
-    let token = localStorage.getItem(Constante.keyToken),
-      headers = new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': token
-      });
 
-    return this._http.put(`${Operacion.URL}${Operacion.getArtistas}`, obArtista, { headers: headers, observe: 'response' });
+    return this._http.put(`${Operacion.URL}${Operacion.getArtistas}`, obArtista, { observe: 'response' });
   }
 
   /**
@@ -52,12 +47,7 @@ export class ArtistaService {
    * @return {}         
    */
   public insertArtista(obArtista: any): Observable<HttpResponse<any>> {
-    let token = localStorage.getItem(Constante.keyToken),
-      headers = new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': token
-      });
-    return this._http.post(`${Operacion.URL}${Operacion.getArtistas}`, obArtista, { headers: headers, observe: 'response' });
+    return this._http.post(`${Operacion.URL}${Operacion.getArtistas}`, obArtista, { observe: 'response' });
   }
 
 
