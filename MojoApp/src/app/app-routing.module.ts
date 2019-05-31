@@ -5,7 +5,7 @@ import { GuardService } from './servicios/auth/guard.service';
 import { PaginasComponent } from './componentes/mojo/paginas.component';
 
 const routes: Routes = [
-{ path:'mojo',
+{ path:'mojo',  
   component:PaginasComponent,
   canActivate:[GuardService],
   children:[
@@ -15,9 +15,9 @@ const routes: Routes = [
     {path:'catalogo',loadChildren:'./componentes/mojo/catalogos/catalogo/catalogo-module/catalogo.module#CatalogoModule'},
     {path:'artista',loadChildren:'./componentes/mojo/catalogos/artista/artista-module/artista.module#ArtistaModule'},
     {path:'',redirectTo:'/mojo/analitica',pathMatch:'full'},
-    {path:'**',redirectTo:'/login',pathMatch:'full'},
+    {path:'**',redirectTo:'/mojo/analitica',pathMatch:'full'},
 
-  ]
+  ]  
 },
 {path:'login',component:LoginComponent},
 {path:'',redirectTo:'/login',pathMatch:'full'},

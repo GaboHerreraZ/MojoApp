@@ -4,6 +4,7 @@ import { AccessAlbumService } from '../../../../../servicios/mojo/catalogos/cata
 import { Mensaje } from 'src/app/utilidades/mensaje';
 import { AlertService } from '../../../../../servicios/alert/alert.service';
 import { Constante } from '../../../../../utilidades/constante';
+import { AccessComunesService } from '../../../../../servicios/mojo/comunes/access.comunes.service';
 
 @Component({
   selector: 'app-album',
@@ -14,7 +15,8 @@ export class AlbumComponent implements OnInit {
 
   @Input() albumForm:FormGroup;
   generos:any[];
-  constructor(private _accessAlbum:AccessAlbumService,
+  loading:boolean = true;
+  constructor(private _accessComun:AccessComunesService,
               private _message:AlertService) { }
 
   ngOnInit() {
@@ -23,14 +25,17 @@ export class AlbumComponent implements OnInit {
 
 
   getGenero(){
-    this._accessAlbum.getGeneros();
-    this._accessAlbum.getAccessGeneros().subscribe((res:any)=>{
+    this._accessComun.getGeneros();
+    this._accessComun.getAccessGeneros().subscribe((res:any)=>{
       if(res.status== Constante.ok){
         this.generos = res.body.res;
+        
       }else{
-        this._message.error(res);
+        this._message.error(res.message);
       }
+      this.loading = false;
     },(error)=>{
+      this.loading = false;
       this._message.error(Mensaje.noBackEnd);
     });
   }

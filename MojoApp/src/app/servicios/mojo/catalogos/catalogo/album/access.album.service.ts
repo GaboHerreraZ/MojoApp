@@ -9,16 +9,5 @@ export class AccessAlbumService {
 
   constructor(private _albumService:AlbumService) { }
 
-  generos$ = new Subject();
-
-  getGeneros(){
-    this._albumService.getGeneros().subscribe((res:any)=>{
-      this.generos$.next(res);
-    })
-  }
-
-  getAccessGeneros(){
-    return this.generos$.asObservable();
-  }
 
 }

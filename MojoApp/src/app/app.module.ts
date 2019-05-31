@@ -12,7 +12,7 @@ import { PaginasComponent } from './componentes/mojo/paginas.component';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { FooterComponent } from './componentes/footer/footer.component';
 import { InterceptorService } from './servicios/interceptor/interceptor.service';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -28,16 +28,17 @@ import { InterceptorService } from './servicios/interceptor/interceptor.service'
     ReactiveFormsModule,
     NgxLoadingModule.forRoot({
       animationType: ngxLoadingAnimationTypes.circleSwish,
-      backdropBackgroundColour: 'rgba(4,0,0,0.67)', 
+      backdropBackgroundColour: 'rgba(4,0,0,0.67)',
       backdropBorderRadius: '4px',
-      primaryColour: '#ffffff', 
-      secondaryColour: '#ffffff', 
+      primaryColour: '#ffffff',
+      secondaryColour: '#ffffff',
       tertiaryColour: '#ffffff'
-  }),
-  SweetAlert2Module,
-  HttpClientModule
+    }),
+    SweetAlert2Module,
+    HttpClientModule,
+    BrowserAnimationsModule
   ],
-  providers: [ComunesService,{
+  providers: [ComunesService, {
     provide: HTTP_INTERCEPTORS,
     useClass: InterceptorService,
     multi: true

@@ -8,14 +8,19 @@ import { ComunesService } from './servicios/mojo/comunes/comunes.service';
 })
 export class AppComponent implements OnInit{
   title = 'MojoApp';
-  constructor(private servicios: ComunesService){
-
+  constructor(private _comunService:ComunesService){
+      
   }
 
   ngOnInit(){
-    
+    //this.metodoPrueba();
   }
 
+  metodoPrueba(){
+    this._comunService.metodoPruebas().subscribe((res:any)=>{
+      console.log("Prueba del servicios",res);
+    });
+  }
   
   
 }
