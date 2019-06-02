@@ -1,6 +1,5 @@
 import {Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Artista } from '../../../../modelos/ArtistaModel';
 
 
 

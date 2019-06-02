@@ -1,6 +1,5 @@
 import { ViewChild, Component, OnInit, OnDestroy } from '@angular/core';
 import { DataTableDirective } from 'angular-datatables';
-import { Artista } from '../../../../modelos/ArtistaModel';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
@@ -10,7 +9,7 @@ import { Mensaje } from '../../../../utilidades/mensaje';
 import { Title } from '@angular/platform-browser';
 import { Constante } from '../../../../utilidades/constante';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { debug } from 'util';
+import { Pais } from '../../../../modelos/pais';
 
 
 @Component({
@@ -59,7 +58,7 @@ export class ArtistaComponent implements OnInit {
     this._serviciosArtista.getAccessArtistas();
     this._serviciosArtista.getArtistas().subscribe((res: any) => {
       if (res.status = Constante.ok) {
-        this.artistas = res.body.data;
+        this.artistas = res.body.result.data;
         this.show = true;
         this.loading = false;
       } else {
@@ -155,6 +154,10 @@ export class ArtistaComponent implements OnInit {
    * @param  {Artista} obArtista Información del nuevo artista        
    */
   public insertarNuevoArtista(obArtista: any) {
+    if((obArtista.paisId instanceof  Pais)=== false){
+      this._message.info(Mensaje.noPais);        
+      return;
+    }
     var me = this;
     this.loading = true;
     me._serviciosArtista.insertAccessArtista(obArtista);
@@ -163,7 +166,7 @@ export class ArtistaComponent implements OnInit {
         me.newartist = false;
         me.show = true;
         this.loading = false;
-        this._message.success(Mensaje.setArtista);
+        this._message.success(res.body.mensaje);
         this.getArtistas();
       } else {
         this._message.error(res);
@@ -182,6 +185,10 @@ export class ArtistaComponent implements OnInit {
    * @param  {Artista} obArtista Información del nuevo artista        
    */
   public actualizarDatosArtista(obArtista: any) {
+    if((obArtista.paisId instanceof  Pais)=== false){
+      this._message.info(Mensaje.noPais);        
+      return;
+    }
     this.loading = true;
     var me = this;
     me._serviciosArtista.updateAccessArtista(obArtista);

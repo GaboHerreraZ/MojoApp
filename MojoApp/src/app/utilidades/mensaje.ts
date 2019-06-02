@@ -5,5 +5,5 @@ export class Mensaje{
 
     /*Mensajes artistas */
     public static readonly setArtista:string = 'Se guarda correctamente el artista';
-
+    public static readonly noPais:string = 'Seleccione un país de la lista';
 }
