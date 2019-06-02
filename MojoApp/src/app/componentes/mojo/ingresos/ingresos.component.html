@@ -43,54 +43,56 @@
     </div>
 </div>
 <br>
-<div class="row">
-    <div class="col-md-4">
-        <div class="row">
-            <div class="col-md-6">
-                <label for="fechaInicio">Fecha inicio:</label>
-                <div class="form-group">
-                    <div class="input-group">
-                        <input class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #d="ngbDatepicker">
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary far fa-calendar-alt" (click)="d.toggle()" type="button"></button>
+<form [formGroup]="consultaForm">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="fechaInicio">Fecha inicio:</label>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #d="ngbDatepicker">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary far fa-calendar-alt" (click)="d.toggle()" type="button"></button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-6">
-                <label for="fechaInicio">Fecha final:</label>
-                <div class="form-group">
-                    <div class="input-group">
-                        <input class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #p="ngbDatepicker">
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary far fa-calendar-alt" (click)="p.toggle()" type="button"></button>
+                <div class="col-md-6">
+                    <label for="fechaInicio">Fecha final:</label>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #p="ngbDatepicker">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary far fa-calendar-alt" (click)="p.toggle()" type="button"></button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="col-md-4">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="exampleFormControlInput1">Canal:</label>
-                    <input style="height: 30px;" class="form-control" id="exampleFormControlInput1" placeholder="Canal">
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Canal:</label>
+                        <app-autocomplete [data]="canales" [form]="consultaForm" [control]="'canal'"></app-autocomplete>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="exampleFormControlInput1">Artista:</label>
-                    <input style="height: 30px;" type="email" class="form-control" id="exampleFormControlInput1" placeholder="Artista">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Artista:</label>
+                        <app-autocomplete [data]="artistas" [form]="consultaForm" [control]="'artista'"></app-autocomplete>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="col-md-4" style="margin-top:31px;">
-        <button type="button" class="btn btn-dark button-style "><strong>Consultar</strong></button>
-    </div>
+        <div class="col-md-4" style="margin-top:31px;">
+            <button type="button" class="btn btn-dark button-style "><strong>Consultar</strong></button>
+        </div>
 
-</div>
+    </div>
+</form>
 <br>
 <div class="row">
     <app-pie-chart [configChart]="configChartPais"></app-pie-chart>
@@ -149,3 +151,4 @@
         </div>
     </div>
 </div>
+<app-loading [loading]="loading"></app-loading>

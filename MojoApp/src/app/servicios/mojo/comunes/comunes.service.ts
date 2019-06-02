@@ -23,6 +23,9 @@ export class ComunesService {
     return this._http.get(`${Operacion.URLGENERO}${Operacion.getGeneros}`,{observe:'response'});
   }
 
+  getCanales():Observable<HttpResponse<any>>{
+    return this._http.get(`${Operacion.URLCANAL}${Operacion.getCanales}`,{observe:'response'});
+  }
 
 
 

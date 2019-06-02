@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Constante } from '../../../utilidades/constante';
 import { Chart } from '../../../modelos/chart';
+import { AccessComunesService } from '../../../servicios/mojo/comunes/access.comunes.service';
+import { AlertService } from '../../../servicios/alert/alert.service';
+import { Mensaje } from '../../../utilidades/mensaje';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { AccessArtistaService } from '../../../servicios/mojo/artista/access.artista.service';
 
 @Component({
   selector: 'app-ingresos',
@@ -10,16 +15,28 @@ import { Chart } from '../../../modelos/chart';
 })
 export class IngresosComponent implements OnInit {
 
-  constructor(private _title:Title){
-        this._title.setTitle(Constante.tituloIngresos);
+  constructor(private _title:Title,
+              private _comunService:AccessComunesService,
+              private _message:AlertService,
+              private _formBuilder:FormBuilder,
+              private _serviciosArtista:AccessArtistaService)
+              {
+        
+                this._title.setTitle(Constante.tituloIngresos);
   }
   datos = datos;
   tops = tops;
+  loading:boolean;
+  canales:any[];
+  artistas:any[];
+  consultaForm:FormGroup;
+  /*--Graficas--*/
   configChartPais:Chart;
   configChartCanal:Chart;
   configChartMes:Chart;
 
   ngOnInit(){
+    this.setVariables();
     this.configChartPais = new Chart(
       "Ganancia por pais",
       [
@@ -62,6 +79,49 @@ export class IngresosComponent implements OnInit {
     );
 
   }
+
+  setVariables(){
+    this.consultaForm = this._formBuilder.group({
+      fechaInicio:[''],
+      fechaFinal:[''],
+      canal:[''],
+      artista:['']
+    });
+    this.getCanales();
+    this.getArtistas();
+
+  }
+
+  public getCanales() {
+    this.loading= true;
+    var me = this;
+    me._comunService.getCanales();
+    me._comunService.getAccesCanales().subscribe((res: any) => {
+      if (res.status = Constante.ok) {
+        me.canales = res.body.canales;
+        me.loading = false;
+      } else {
+        me._message.error(res);
+      }
+    }, error => {
+      me._message.error(Mensaje.noBackEnd);
+    });
+  }
+
+  public getArtistas() {
+    this._serviciosArtista.getAccessArtistas();
+    this._serviciosArtista.getArtistas().subscribe((res: any) => {
+      if (res.status = Constante.ok) {
+        this.artistas = res.body.result.data;
+        this.loading = false;
+      } else {
+        this._message.error(res);
+      }
+    }, error => {
+      this._message.error(Mensaje.noBackEnd);
+    });
+  }
+
 
 }
 
