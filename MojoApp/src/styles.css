@@ -1,5 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
 
+
+/*---Estilos de calendario---*/
+
+.btn-outline-secondary:hover {
+    color: #fff;
+    background-color: #edd920;
+    border-color: #edd920;
+}
+
+
+/*---------------------*/
+
 .ngx-pagination .current {
     background-color: #edd920 !important;
     color: #161616 !important;
