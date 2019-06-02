@@ -1,9 +1,12 @@
-import { Component, OnInit,ViewChild } from '@angular/core';
-import { ChartDataSets, ChartOptions } from 'chart.js';
-import { Color, BaseChartDirective, Label } from 'ng2-charts';
-import * as pluginAnnotations from 'chartjs-plugin-annotation';
+import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Constante } from '../../../utilidades/constante';
+import { Chart } from '../../../modelos/chart';
+import { AccessComunesService } from '../../../servicios/mojo/comunes/access.comunes.service';
+import { AlertService } from '../../../servicios/alert/alert.service';
+import { Mensaje } from '../../../utilidades/mensaje';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { AccessArtistaService } from '../../../servicios/mojo/artista/access.artista.service';
 
 @Component({
   selector: 'app-ingresos',
@@ -12,71 +15,220 @@ import { Constante } from '../../../utilidades/constante';
 })
 export class IngresosComponent implements OnInit {
 
-  constructor(private _title:Title){
-        this._title.setTitle(Constante.tituloIngresos);
+  constructor(private _title:Title,
+              private _comunService:AccessComunesService,
+              private _message:AlertService,
+              private _formBuilder:FormBuilder,
+              private _serviciosArtista:AccessArtistaService)
+              {
+        
+                this._title.setTitle(Constante.tituloIngresos);
   }
+  datos = datos;
+  tops = tops;
+  loading:boolean;
+  canales:any[];
+  artistas:any[];
+  consultaForm:FormGroup;
+  /*--Graficas--*/
+  configChartPais:Chart;
+  configChartCanal:Chart;
+  configChartMes:Chart;
+
   ngOnInit(){
-    
-  }
-
-  public lineChartData: ChartDataSets[] = [
-    { data: [65, 59, 80], label: 'Primero' }
-  ]; 
-  public lineChartLabels: Label[] = ['2015', '2016', '2017'];
-  public lineChartOptions: (ChartOptions & { annotation: any }) = {
-    responsive: true,
-    scales: {
-      // We use this empty structure as a placeholder for dynamic theming.
-      xAxes: [{}],
-      yAxes: [
-        {
-          id: 'y-axis-0',
-          position: 'left',
-        },
-        {
-          id: 'y-axis-1',
-          position: 'right',
-          gridLines: {
-            color: 'white',
-          },
-          ticks: {
-            fontColor: 'white'
-            
-          }
-        }
-      ]
-    },
-    annotation: {
-      annotations: [
-      
+    this.setVariables();
+    this.configChartPais = new Chart(
+      "Ganancia por pais",
+      [
+        ["Colombia", 1123],
+        ["Argentina", 2623],
+        ["Peru", 2556],
+        ["Brasil", 233]
       ],
-    },
-  };
+      ["País","Ingresos"]
+    );
+    
+    this.configChartCanal = new Chart(
+      "Ganancia por canal",
+      [
+        ["Spotify", 2623],
+        ["Deezer", 2623],
+        ["Itunes", 2556],
+        ["Shazam", 233]
+      ],
+      ["Canal","Ingresos"]
+    );
 
-  public lineChartColors: Color[] = [
-    { // grey
-      backgroundColor: 'rgba(148,159,177,0.2)',
-      borderColor: '#edd920',
-      pointBackgroundColor: 'rgba(148,159,177,1)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
-    }
-  ];
-  public lineChartLegend = true;
-  public lineChartType = 'line';
-  public lineChartPlugins = [pluginAnnotations];
+    this.configChartMes = new Chart(
+      "Ganancia por mes",
+      [
+        ["Enero", 2423],
+        ["Febrero", 2623],
+        ["Marzo", 2556],
+        ["Abril", 233],
+        ["Mayo", 933],
+        ["Junio", 833],
+        ["Julio", 633],
+        ["Agosto", 533],
+        ["Septiembre", 443],
+        ["Octubre", 235],
+        ["Noviembre", 233],
+        ["Diciembre", 2234]
+      ],
+      ["Mes","Ingresos"]
+    );
 
-
-   // events
-   public chartClicked({ event, active }: { event: MouseEvent, active: {}[] }): void {
-    console.log(event, active);
   }
 
-  public chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): void {
-    console.log(event, active);
+  setVariables(){
+    this.consultaForm = this._formBuilder.group({
+      fechaInicio:[''],
+      fechaFinal:[''],
+      canal:[''],
+      artista:['']
+    });
+    this.getCanales();
+    this.getArtistas();
+
   }
 
+  public getCanales() {
+    this.loading= true;
+    var me = this;
+    me._comunService.getCanales();
+    me._comunService.getAccesCanales().subscribe((res: any) => {
+      if (res.status = Constante.ok) {
+        me.canales = res.body.canales;
+        me.loading = false;
+      } else {
+        me._message.error(res);
+      }
+    }, error => {
+      me._message.error(Mensaje.noBackEnd);
+    });
+  }
+
+  public getArtistas() {
+    this._serviciosArtista.getAccessArtistas();
+    this._serviciosArtista.getArtistas().subscribe((res: any) => {
+      if (res.status = Constante.ok) {
+        this.artistas = res.body.result.data;
+        this.loading = false;
+      } else {
+        this._message.error(res);
+      }
+    }, error => {
+      this._message.error(Mensaje.noBackEnd);
+    });
+  }
 
 
 }
+
+const datos:any[]=[
+  {
+    periodo:"20152015",
+    total:"342343423",
+    estado:"Pendiente"
+  },
+  {
+    periodo:"2015",
+    total:"34234",
+    estado:"Pendiente"
+  },
+  {
+    periodo:"2015",
+    total:"34234",
+    estado:"Pendiente"
+  },
+  {
+    periodo:"2015",
+    total:"34234",
+    estado:"Pendiente"
+  },
+  {
+    periodo:"2015",
+    total:"34234",
+    estado:"Pendiente"
+  },
+  {
+    periodo:"2015",
+    total:"34234",
+    estado:"Pendiente"
+  },
+  {
+    periodo:"2015",
+    total:"34234",
+    estado:"Pendiente"
+  },
+  {
+    periodo:"2015",
+    total:"34234",
+    estado:"Pendiente"
+  },
+  {
+    periodo:"2015",
+    total:"34234",
+    estado:"Pendiente"
+  },
+  {
+    periodo:"2015",
+    total:"34234",
+    estado:"Pendiente"
+  }
+
+]
+
+const tops:any[]=[
+  {
+    top:1,
+    cancion:"Cancion 1",
+    ingresos:"234234"
+  },
+  {
+    top:2,
+    cancion:"Cancion 1",
+    ingresos:"234234"
+  },
+  {
+    top:3,
+    cancion:"Cancion 1",
+    ingresos:"234234"
+  },
+  {
+    top:4,
+    cancion:"Cancion 1",
+    ingresos:"234234"
+  },
+  {
+    top:5,
+    cancion:"Cancion 1",
+    ingresos:"234234"
+  },
+  {
+    top:6,
+    cancion:"Cancion 1",
+    ingresos:"234234"
+  },
+  {
+    top:7,
+    cancion:"Cancion 1",
+    ingresos:"234234"
+  },
+  {
+    top:8,
+    cancion:"Cancion 1",
+    ingresos:"234234"
+  },
+  {
+    top:9,
+    cancion:"Cancion 1",
+    ingresos:"234234"
+  },
+  {
+    top:10,
+    cancion:"Cancion 1",
+    ingresos:"234234"
+  }
+  
+];

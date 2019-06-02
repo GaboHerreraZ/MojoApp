@@ -43,69 +43,112 @@
     </div>
 </div>
 <br>
-<div class="row">
-    <div class="col-md-4">
-        <div class="form-group">
-            <label for="exampleFormControlInput1">Canal:</label>
-            <input style="height: 30px;" class="form-control" id="exampleFormControlInput1" placeholder="Canal">
+<form [formGroup]="consultaForm">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="fechaInicio">Fecha inicio:</label>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #d="ngbDatepicker">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary far fa-calendar-alt" (click)="d.toggle()" type="button"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label for="fechaInicio">Fecha final:</label>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #p="ngbDatepicker">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary far fa-calendar-alt" (click)="p.toggle()" type="button"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="col-md-4 ">
-        <div class="form-group">
-            <label for="exampleFormControlInput1">Artista:</label>
-            <input style="height: 30px;" type="email" class="form-control" id="exampleFormControlInput1" placeholder="Artista">
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Canal:</label>
+                        <app-autocomplete [data]="canales" [form]="consultaForm" [control]="'canal'"></app-autocomplete>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Artista:</label>
+                        <app-autocomplete [data]="artistas" [form]="consultaForm" [control]="'artista'"></app-autocomplete>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="col-md-2" style="margin-top:31px;">
-        <button type="button" class="btn btn-dark button-style "><strong>Exportar</strong></button>
-    </div>
+        <div class="col-md-4" style="margin-top:31px;">
+            <button type="button" class="btn btn-dark button-style "><strong>Consultar</strong></button>
+        </div>
 
-</div>
+    </div>
+</form>
 <br>
 <div class="row">
-    <div class="table-responsive col-md-12">
-        <table class="table">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col">Periodo</th>
-                    <th scope="col">Total</th>
-                    <th scope="col">Estado</th>
-                    <th scope="col">Acción</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>2015</td>
-                    <td>50</td>
-                    <td>Pendiente</td>
-                    <td>
-                        <button type="button" class="btn btn-dark button-style "><strong>Ver detalle</strong></button>
-                    </td>
+    <app-pie-chart [configChart]="configChartPais"></app-pie-chart>
+    <app-pie-chart [configChart]="configChartCanal"></app-pie-chart>
+    <app-pie-chart [configChart]="configChartMes"></app-pie-chart>
 
-                </tr>
-                <tr>
-                    <td>2017</td>
-                    <td>60</td>
-                    <td>Pendiente</td>
-                    <td>
-                        <button type="button" class="btn btn-dark button-style "><strong>Ver detalle</strong></button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>2019</td>
-                    <td>50</td>
-                    <td>Pendiente</td>
-                    <td>
-                        <button type="button" class="btn btn-dark button-style "><strong>Ver detalle</strong></button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+</div>
+<div class="row">
+    <div class="col-md-3">
+        <label>Top 10 Canciones</label>
     </div>
 </div>
 <div class="row">
-    <div style="width: 100%; ">
-        <canvas baseChart [datasets]="lineChartData" height="70" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" [plugins]="lineChartPlugins" (chartHover)="chartHovered($event)"
-            (chartClick)="chartClicked($event)"></canvas>
+    <div class="col-md-3">
+        <div class="table-responsive col-md-12">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Top</th>
+                        <th scope="col">Canción</th>
+                        <th scope="col">Ingresos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let top of tops">
+                        <td>{{top.top}}</td>
+                        <td>{{top.cancion}}</td>
+                        <td>{{top.ingresos|currency:'USD'}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <div class="table-responsive col-md-12">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Periodo</th>
+                        <th scope="col">Total</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col">Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let dato of datos">
+                        <td>{{dato.periodo}}</td>
+                        <td>{{dato.total}}</td>
+                        <td>{{dato.estado}}</td>
+                        <td>
+                            <button type="button" class="btn btn-dark button-style "><strong>Ver</strong></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
+<app-loading [loading]="loading"></app-loading>

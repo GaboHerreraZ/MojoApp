@@ -1,0 +1,40 @@
+.border-div {
+    border-left: 8px solid #edd920;
+    height: 40px;
+    width: 100% !important;
+    color: #edd920;
+}
+
+.border-div-se {
+    border-left: 8px solid #161616;
+    height: 40px;
+    width: 100% !important;
+}
+
+li {
+    display: inline;
+    margin-right: 7%;
+}
+
+li div {
+    display: inline;
+}
+
+.img-style {
+    width: 40px;
+    height: 40px;
+    margin-right: 1%;
+}
+
+.span-style {
+    padding-left: 10px;
+    color: black;
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+@media screen and (max-width:1000px) {
+    li div {
+        display: inline-block;
+    }
+}

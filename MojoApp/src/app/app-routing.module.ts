@@ -9,7 +9,8 @@ const routes: Routes = [
   component:PaginasComponent,
   canActivate:[GuardService],
   children:[
-    {path:'analitica',loadChildren:'./componentes/mojo/analitica/analitica-module/analitica.module#AnaliticaModule',},
+    {path:'analitica',loadChildren:'./componentes/mojo/analitica/analitica/analitica-module/analitica.module#AnaliticaModule',},
+    {path:'artista-analitica',loadChildren:'./componentes/mojo/analitica/artista-analitica/artista-analitica-module/artista-analitica.module#ArtistaAnaliticaModule',},
     {path:'ingresos',loadChildren:'./componentes/mojo/ingresos/ingresos-module/ingresos.module#IngresosModule'},
     {path:'youtube',loadChildren:'./componentes/mojo/youtube/youtube-module/youtube.module#YoutubeModule'},
     {path:'catalogo',loadChildren:'./componentes/mojo/catalogos/catalogo/catalogo-module/catalogo.module#CatalogoModule'},

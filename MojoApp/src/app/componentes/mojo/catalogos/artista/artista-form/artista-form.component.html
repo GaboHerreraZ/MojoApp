@@ -6,7 +6,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="">Pais:</label>
-                    <app-autocomplete [paises]="paises" [form]="nuevoArtistaForm"></app-autocomplete>
+                    <app-autocomplete [data]="paises" [form]="nuevoArtistaForm" [control]="'pais'"></app-autocomplete>
                     <div *ngIf="nuevoArtistaForm.get('paisId').invalid && (nuevoArtistaForm.get('paisId').dirty || nuevoArtistaForm.get('paisId').touched)" class="is-invalid">
                         <span *ngIf="nuevoArtistaForm.get('paisId').errors.required">
 							<small>*El país es requerido</small>

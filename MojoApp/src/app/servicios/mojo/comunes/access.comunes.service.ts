@@ -9,6 +9,7 @@ export class AccessComunesService {
 
   paises = new Subject();
   generos$ = new Subject();
+  canales$ = new Subject();
 
   constructor(private _comunesService: ComunesService) { }
 
@@ -36,4 +37,17 @@ export class AccessComunesService {
   getAccessGeneros(){
     return this.generos$.asObservable();
   }
+
+  getCanales(){
+    this._comunesService.getCanales().subscribe((res:any)=>{
+      this.canales$.next(res);
+    },error =>{
+      this.canales$.next(error);
+    })
+  }
+
+  getAccesCanales(){
+    return this.canales$.asObservable();
+  }
+
 }
