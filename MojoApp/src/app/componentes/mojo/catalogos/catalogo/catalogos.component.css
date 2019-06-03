@@ -12,3 +12,20 @@
 .is-invalid {
     color: red;
 }
+
+#nuevo-album-desktop {
+    display: block;
+}
+
+#nuevo-album-mobile {
+    display: none;
+}
+
+@media(max-width:767px) {
+    #nuevo-album-desktop {
+        display: none;
+    }
+    #nuevo-album-mobile {
+        display: block;
+    }
+}

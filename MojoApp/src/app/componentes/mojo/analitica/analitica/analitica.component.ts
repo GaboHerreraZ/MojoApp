@@ -20,8 +20,9 @@ export class AnaliticaComponent implements OnInit {
 
   consultaForm:FormGroup;
   configChartPais:Chart;
+  configCanalLine:Chart;
   tops = tops;
-
+ 
   loading:boolean;
   canales:any[];
   artistas:any[];
@@ -36,6 +37,19 @@ export class AnaliticaComponent implements OnInit {
 
   ngOnInit() {
     this.setVariables();
+  }
+  
+
+
+  
+  setVariables(){
+    this.consultaForm = this._formBuilder.group({
+      fechaInicio:[''],
+      fechaFinal:[''],
+      canal:['']
+    });
+    this.getCanales();
+    //this.getArtistas();
 
     this.configChartPais = new Chart(
       "",
@@ -47,19 +61,26 @@ export class AnaliticaComponent implements OnInit {
       ],
       ["País","Ingresos"]
     );
-  }
 
 
-  
-  setVariables(){
-    this.consultaForm = this._formBuilder.group({
-      fechaInicio:[''],
-      fechaFinal:[''],
-      canal:[''],
-      artista:['']
-    });
-    this.getCanales();
-    this.getArtistas();
+    this.configCanalLine = new Chart(
+      "Reproducciones por canal",
+      [
+        ["Ene",  7.0, -0.2],
+        ["Feb",  6.9, 0.8],
+        ["Mar",  9.5,  5.7],
+        ["Abr",  14.5, 11.3],
+        ["May",  18.2, 17.0],
+        ["Jun",  21.5, 22.0],
+        ["Jul",  25.2, 24.8],
+        ["Ago",  26.5, 24.1],
+        ["Sep",  23.3, 20.1],
+        ["Oct",  18.3, 14.1],
+        ["Nov",  13.9,  8.6],
+        ["Dic",  9.6,  2.5]
+     ],
+     ["Meses", "Spotify", "Itunes"]
+    );
 
   }
 
@@ -80,6 +101,7 @@ export class AnaliticaComponent implements OnInit {
     });
   }
 
+  /*
   public getArtistas() {
     this._serviciosArtista.getAccessArtistas();
     this._serviciosArtista.getArtistas().subscribe((res: any) => {
@@ -92,7 +114,7 @@ export class AnaliticaComponent implements OnInit {
     }, error => {
       this._message.error(Mensaje.noBackEnd);
     });
-  }
+  }*/
 
 
 
@@ -103,52 +125,52 @@ export class AnaliticaComponent implements OnInit {
 const tops:any[]=[
   {
     top:1,
-    cancion:"Cancion 1",
+    cancion:"Artista 1",
     ingresos:"234234"
   },
   {
     top:2,
-    cancion:"Cancion 1",
+    cancion:"Artista 1",
     ingresos:"234234"
   },
   {
     top:3,
-    cancion:"Cancion 1",
+    cancion:"Artista 1",
     ingresos:"234234"
   },
   {
     top:4,
-    cancion:"Cancion 1",
+    cancion:"Artista 1",
     ingresos:"234234"
   },
   {
     top:5,
-    cancion:"Cancion 1",
+    cancion:"Artista 1",
     ingresos:"234234"
   },
   {
     top:6,
-    cancion:"Cancion 1",
+    cancion:"Artista 1",
     ingresos:"234234"
   },
   {
     top:7,
-    cancion:"Cancion 1",
+    cancion:"Artista 1",
     ingresos:"234234"
   },
   {
     top:8,
-    cancion:"Cancion 1",
+    cancion:"Artista 1",
     ingresos:"234234"
   },
   {
     top:9,
-    cancion:"Cancion 1",
+    cancion:"Artista 1",
     ingresos:"234234"
   },
   {
     top:10,
-    cancion:"Cancion 1",
+    cancion:"Artista 1",
     ingresos:"234234"
   }
   

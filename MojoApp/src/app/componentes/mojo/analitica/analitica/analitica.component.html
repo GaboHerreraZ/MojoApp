@@ -40,22 +40,15 @@
                         <app-autocomplete [data]="canales" [form]="consultaForm" [control]="'canal'"></app-autocomplete>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="exampleFormControlInput1">Artista:</label>
-                        <app-autocomplete [data]="artistas" [form]="consultaForm" [control]="'artista'"></app-autocomplete>
-                    </div>
+                <div class="col-md-4" style="margin-top:31px;">
+                    <button type="button" class="btn btn-dark button-style "><strong>Consultar</strong></button>
                 </div>
             </div>
         </div>
-        <div class="col-md-4" style="margin-top:31px;">
-            <button type="button" class="btn btn-dark button-style "><strong>Consultar</strong></button>
-        </div>
-
     </div>
 </form>
 <div class="row">
-    <app-line-chart></app-line-chart>
+    <app-line-chart [configLine]="configCanalLine"></app-line-chart>
 </div>
 <app-loading [loading]="loading"></app-loading>
 <br>

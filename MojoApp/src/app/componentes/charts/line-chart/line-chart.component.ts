@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Chart } from '../../../modelos/chart';
 
 @Component({
   selector: 'app-line-chart',
@@ -9,12 +10,14 @@ export class LineChartComponent implements OnInit {
 
   constructor() { }
 
+  @Input() configLine:Chart;   
+
   ngOnInit() {
   }
 
-  title = 'Reproducciones por canal';
+  //title = 'Reproducciones por canal';
    type = 'LineChart';
-   data = [
+   /*data = [
       ["Ene",  7.0, -0.2],
       ["Feb",  6.9, 0.8],
       ["Mar",  9.5,  5.7],
@@ -27,8 +30,8 @@ export class LineChartComponent implements OnInit {
       ["Oct",  18.3, 14.1],
       ["Nov",  13.9,  8.6],
       ["Dic",  9.6,  2.5]
-   ];
-   columnNames = ["Meses", "Spotify", "Itunes"];
+   ];*/
+   //columnNames = ["Meses", "Spotify", "Itunes"];
    options = {   
       hAxis: {
          title: 'Meses'
