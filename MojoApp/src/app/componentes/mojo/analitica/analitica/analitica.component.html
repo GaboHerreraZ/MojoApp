@@ -1,146 +1,88 @@
 <div class="row">
-    <div class="col-12">
-        <h5>Followers:</h5>
+    <div class="col-md-4 classDiv">
+        <h5>Seleccione los filtros de consulta:</h5>
     </div>
 </div>
 <br>
-<div class="row">
-    <div class="col-12">
-        <ul style="width:100%">
-            <li>
-                <div><img class="img-style" src="assets/iconos/spotify.png"><strong>34435</strong></div>
-            </li>
-            <li>
-                <div><img class="img-style" src="assets/iconos/youtube.png"><strong>34435</strong></div>
-            </li>
-            <li>
-                <div><img class="img-style" src="assets/iconos/facebook.png"><strong>34435</strong></div>
-            </li>
-            <li>
-                <div><img class="img-style" src="assets/iconos/shazam.png"><strong>34435</strong></div>
-            </li>
-            <li>
-                <div><img class="img-style" src="assets/iconos/itunes.png"><strong>34435</strong></div>
-            </li>
-            <li>
-                <div><img class="img-style" src="assets/iconos/twitter.png"><strong>34435</strong></div>
-            </li>
-        </ul>
-    </div>
-</div>
-<br>
-<div class="row">
-    <div class="col-12">
-        <h5>Reproducciones:</h5>
-    </div>
-</div>
-<br>
-<div class="row">
-    <div class="col-12">
-        <ul style="width:100%">
-            <li>
-                <div><img class="img-style" src="assets/iconos/spotify.png"><strong>34435</strong></div>
-            </li>
-            <li>
-                <div><img class="img-style" src="assets/iconos/youtube.png"><strong>34435</strong></div>
-            </li>
-            <li>
-                <div><img class="img-style" src="assets/iconos/facebook.png"><strong>34435</strong></div>
-            </li>
-            <li>
-                <div><img class="img-style" src="assets/iconos/shazam.png"><strong>34435</strong></div>
-            </li>
-            <li>
-                <div><img class="img-style" src="assets/iconos/itunes.png"><strong>34435</strong></div>
-            </li>
-            <li>
-                <div><img class="img-style" src="assets/iconos/twitter.png"><strong>34435</strong></div>
-            </li>
-        </ul>
-    </div>
-</div>
-<br>
-<div class="row">
-    <div class="col-12">
-        <h5>Filtros de consulta:</h5>
-    </div>
-</div>
-<br>
-<div class="row">
-    <div class="col-md-4">
-        <div class="form-group">
-            <label for="exampleFormControlInput1">Canal:</label>
-            <input style="height: 30px;" class="form-control" id="exampleFormControlInput1" placeholder="Canal">
+<form [formGroup]="consultaForm">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="fechaInicio">Fecha inicio:</label>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #d="ngbDatepicker">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary far fa-calendar-alt" (click)="d.toggle()" type="button"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label for="fechaInicio">Fecha final:</label>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #p="ngbDatepicker">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary far fa-calendar-alt" (click)="p.toggle()" type="button"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="col-md-4">
-        <div class="form-group">
-            <label for="exampleFormControlInput1">Artista:</label>
-            <input style="height: 30px;" type="email" class="form-control" id="exampleFormControlInput1" placeholder="Artista">
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Canal:</label>
+                        <app-autocomplete [data]="canales" [form]="consultaForm" [control]="'canal'"></app-autocomplete>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Artista:</label>
+                        <app-autocomplete [data]="artistas" [form]="consultaForm" [control]="'artista'"></app-autocomplete>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="col-md-2" style="margin-top:31px;">
-        <button type="button" class="btn btn-dark button-style "><strong>Exportar</strong></button>
-    </div>
-</div>
-<br>
-<div class="row">
-    <div class="col-md-5">
-        <table class="table">
-            <thead class="thead-dark">
-                <tr>
-                    <th colspan="3">Ranking</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><img style="width: 40px;height:40px;" src="assets/iconos/twitter.png"></td>
-                    <td>Twitter</td>
-                    <td>1</td>
-                </tr>
-                <tr>
-                    <td><img style="width: 40px;height:40px;" src="assets/iconos/spotify.png"></td>
-                    <td>Spotify</td>
-                    <td>2</td>
+        <div class="col-md-4" style="margin-top:31px;">
+            <button type="button" class="btn btn-dark button-style "><strong>Consultar</strong></button>
+        </div>
 
-                </tr>
-                <tr>
-                    <td><img style="width: 40px;height:40px;" src="assets/iconos/youtube.png"></td>
-                    <td>YouTube</td>
-                    <td>3</td>
-                </tr>
-            </tbody>
-        </table>
     </div>
+</form>
+<div class="row">
+    <app-line-chart></app-line-chart>
 </div>
+<app-loading [loading]="loading"></app-loading>
 <br>
 <div class="row">
-    <div class="col-md-12">
-        <table class="table">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col">Periodo</th>
-                    <th scope="col">Total</th>
-                    <th scope="col">Estado</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>2015</td>
-                    <td>50</td>
-                    <td>Pendiente</td>
-                </tr>
-                <tr>
-                    <td>2017</td>
-                    <td>60</td>
-                    <td>Pendiente</td>
-                </tr>
-                <tr>
-                    <td>2019</td>
-                    <td>50</td>
-                    <td>Pendiente</td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="col-md-6">
+        <label>Top 10 reproducciones</label>
+        <div class="table-responsive col-md-12">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Top</th>
+                        <th scope="col">Canción</th>
+                        <th scope="col">Reproducciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let top of tops">
+                        <td>{{top.top}}</td>
+                        <td>{{top.cancion}}</td>
+                        <td>{{top.ingresos}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <label>Reproducciones por país</label>
+        <app-pie-chart [configChart]="configChartPais"></app-pie-chart>
     </div>
 </div>

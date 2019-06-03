@@ -11,6 +11,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import { GoogleChartsModule } from 'angular-google-charts';
 import { PieChartComponent } from 'src/app/componentes/charts/pie-chart/pie-chart.component';
 import { TableChartComponent } from 'src/app/componentes/charts/table-chart/table-chart.component';
+import { LineChartComponent } from '../../componentes/charts/line-chart/line-chart.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { TableChartComponent } from 'src/app/componentes/charts/table-chart/tabl
     LoadingComponent,
     AutocompleteComponent,
     PieChartComponent,
-    TableChartComponent
+    TableChartComponent,
+    LineChartComponent
 
   ],
   imports: [
@@ -49,8 +51,8 @@ import { TableChartComponent } from 'src/app/componentes/charts/table-chart/tabl
            LoadingComponent,
            AutocompleteComponent,
            PieChartComponent,
-           TableChartComponent
-
+           TableChartComponent,
+           LineChartComponent
           ]
 })
 export class ComunModule { }
