@@ -9,7 +9,6 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { AccessArtistaService } from '../../../servicios/mojo/artista/access.artista.service';
 import { double } from 'aws-sdk/clients/lightsail';
 import { AccessIngresosService } from 'src/app/servicios/mojo/ingresos/access.ingresos.service';
-import { METHODS } from 'http';
 import { debug } from 'util';
 import { ConsoleLogger } from '@aws-amplify/core';
 
@@ -45,16 +44,18 @@ export class IngresosComponent implements OnInit {
   totalSaldo:double;
   gananciaPeriodo:double;
 
-
   ngOnInit(){
     this.setVariables();
     this.configChartPais = new Chart(
       "Ganancia por pais",
       [
-        ["Colombia", 1123],
-        ["Argentina", 2623],
-        ["Peru", 2556],
-        ["Brasil", 233]
+        ["Chile", 193.252],
+        ["Estados Unidos", 6.231],
+        ["Argentina", 2.739],
+        ["España", 1.902],
+        ["Perú",	1.441],
+        ["Australia", 1.249],       
+        ["Otros", 7.81]
       ],
       ["País","Ingresos"]
     );
@@ -62,10 +63,8 @@ export class IngresosComponent implements OnInit {
     this.configChartCanal = new Chart(
       "Ganancia por canal",
       [
-        ["Spotify", 2623],
-        ["Deezer", 2623],
-        ["Itunes", 2556],
-        ["Shazam", 233]
+        ["Youtube", 215.84],
+        ["Deezer", 2]
       ],
       ["Canal","Ingresos"]
     );
@@ -73,18 +72,9 @@ export class IngresosComponent implements OnInit {
     this.configChartMes = new Chart(
       "Ganancia por mes",
       [
-        ["Enero", 2423],
-        ["Febrero", 2623],
-        ["Marzo", 2556],
-        ["Abril", 233],
-        ["Mayo", 933],
-        ["Junio", 833],
-        ["Julio", 633],
-        ["Agosto", 533],
-        ["Septiembre", 443],
-        ["Octubre", 235],
-        ["Noviembre", 233],
-        ["Diciembre", 2234]
+        ["Enero", 0],
+        ["Febrero", 0],
+        ["Marzo", 215.84]
       ],
       ["Mes","Ingresos"]
     );
@@ -134,7 +124,7 @@ export class IngresosComponent implements OnInit {
       this._message.error(Mensaje.noBackEnd);
     });
   }
-
+  
   public getEstadoCuenta() {
     var me = this,
       objEstadoCuenta = {
@@ -143,11 +133,9 @@ export class IngresosComponent implements OnInit {
         "SaldoACuenta": null,
         "IngresosPeriodo": null
       };
-
     me._serviciosIngresos.getAccessEstadoCuenta();
     me._serviciosIngresos.getEstadoCuenta().subscribe((res: any) => {
-      if (res.status = Constante.ok) {
-        debugger;
+      if (res.status = Constante.ok) {    
         objEstadoCuenta = JSON.parse(res.body.result)[0]; 
         me.totalIngresos = objEstadoCuenta.IngresosTotal.toFixed(2);
         me.totalEgresos = objEstadoCuenta.EsgresosTotal.toFixed(2);
@@ -165,12 +153,10 @@ export class IngresosComponent implements OnInit {
 
   public getIngresosPorPeriodo() {
     var me = this;
-
     me._serviciosIngresos.getAccessIngresosPeriodo();
     me._serviciosIngresos.getIngresosPeriodo().subscribe((res: any) => {
       if (res.status = Constante.ok) {
-        me.datos = JSON.parse(res.body.result); 
-        debugger
+        me.datos = JSON.parse(res.body.result);         
         me.loading = false;
       } else {
         me._message.error(res);
@@ -248,56 +234,57 @@ export class IngresosComponent implements OnInit {
 
 ]*/
 
+
 const tops:any[]=[
   {
     top:1,
-    cancion:"Cancion 1",
-    ingresos:"234234"
+    cancion:"Damelo",
+    ingresos:"136.29"
   },
   {
     top:2,
-    cancion:"Cancion 1",
-    ingresos:"234234"
+    cancion:"Esto No Es una Canción de Amor",
+    ingresos:"21.755"
   },
   {
     top:3,
-    cancion:"Cancion 1",
-    ingresos:"234234"
+    cancion:"Amor Platonico",
+    ingresos:"8.893"
   },
   {
     top:4,
-    cancion:"Cancion 1",
-    ingresos:"234234"
+    cancion:"Andrómeda",
+    ingresos:"5.964"
   },
   {
     top:5,
-    cancion:"Cancion 1",
-    ingresos:"234234"
+    cancion:"Eres Tan Distinta",
+    ingresos:"5.838"
   },
   {
     top:6,
-    cancion:"Cancion 1",
-    ingresos:"234234"
+    cancion:"Vibe",
+    ingresos:"2.875"
   },
   {
     top:7,
-    cancion:"Cancion 1",
-    ingresos:"234234"
+    cancion:"Plop", 
+    ingresos:"2.042"
   },
   {
     top:8,
-    cancion:"Cancion 1",
-    ingresos:"234234"
+    cancion:"Luces Rojas",
+    ingresos:"1.455"
   },
   {
     top:9,
-    cancion:"Cancion 1",
-    ingresos:"234234"
+    cancion:"Calma",
+    ingresos:"1.339"
   },
   {
     top:10,
-    cancion:"Cancion 1",
-    ingresos:"234234"
+    cancion:"Cuál es el secreto - El Búho Remix",
+    ingresos:" 1.185"
   }
-  
+
 ];
