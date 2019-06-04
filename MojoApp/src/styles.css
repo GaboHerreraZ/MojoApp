@@ -21,6 +21,7 @@
 .button-style {
     color: #edd920;
     line-height: 15px;
+    border-radius: 0px;
 }
 
 .button-style i {
@@ -100,6 +101,7 @@ button[data-target="#nuevoAlbum"] {
     margin-right: 5px;
     padding: 0px;
     line-height: 10px;
+    border-radius: 0;
 }
 
 .btn-yellow:hover {
@@ -131,4 +133,10 @@ section {
 #container-total {
     position: relative;
     min-height: 100vh;
+}
+
+@media screen and (max-width:1200px) {
+    section {
+        padding-bottom: 250px;
+    }
 }

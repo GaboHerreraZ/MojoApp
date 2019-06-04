@@ -1,14 +1,17 @@
-<ng-template *ngIf="control !== 'artista'" #rt let-r="result" let-t="term">
-    <ngb-highlight [result]="r.nombre" [term]="t"></ngb-highlight>
-</ng-template>
 <!--Control pais-->
 <div *ngIf="control === 'pais'">
+    <ng-template #rt let-r="result" let-t="term">
+        <ngb-highlight [result]="r.nombre" [term]="t"></ngb-highlight>
+    </ng-template>
     <form [formGroup]="form">
         <input [placeholder]="control" formControlName="paisId" id="typeahead-template" type="text" class="form-control" [ngbTypeahead]="search" [resultTemplate]="rt" [inputFormatter]="formatter" />
     </form>
 </div>
 <!--Control canal-->
 <div *ngIf="control === 'canal'">
+    <ng-template #rt let-r="result" let-t="term">
+        <ngb-highlight [result]="r.nombre" [term]="t"></ngb-highlight>
+    </ng-template>
     <form [formGroup]="form">
         <input [placeholder]="control" formControlName="canal" id="typeahead-template" type="text" class="form-control" [ngbTypeahead]="search" [resultTemplate]="rt" [inputFormatter]="formatter" />
     </form>
