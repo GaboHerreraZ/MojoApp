@@ -8,6 +8,10 @@ export class Operacion {
         public static readonly URLPAIS: string = 'https://gpqgrg848i.execute-api.us-east-1.amazonaws.com/';
         
         public static readonly URLCANAL:string = 'https://5yka9z5me2.execute-api.us-east-1.amazonaws.com/';
+        public static readonly URLACCOUNTING:string = 'https://tsyxcs4qll.execute-api.us-east-1.amazonaws.com/';
+      
+      
+      
         /*Métodos api */
         public static readonly getArtistas: string = 'desa/artistas';
         public static readonly getGeneros: string = 'dev/generos';
@@ -15,5 +19,9 @@ export class Operacion {
         public static readonly getPaises: string = 'dev/paises?pais=ar';
         public static readonly getCanales: string = 'dev/canales';
         
+        public static readonly estadoCuenta: string = 'dev/estadoCuenta';
+        public static readonly ingresosPorPeriodo: string = 'dev/ingresosAfiliado';
+        public static readonly detalleIngresoEnPeriodo: string = 'dev/detalleIngresosAfiliado';
+
         
 }

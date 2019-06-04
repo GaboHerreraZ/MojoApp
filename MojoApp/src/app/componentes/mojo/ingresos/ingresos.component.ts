@@ -7,6 +7,7 @@ import { AlertService } from '../../../servicios/alert/alert.service';
 import { Mensaje } from '../../../utilidades/mensaje';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AccessArtistaService } from '../../../servicios/mojo/artista/access.artista.service';
+import { double } from 'aws-sdk/clients/lightsail';
 
 @Component({
   selector: 'app-ingresos',
@@ -34,8 +35,15 @@ export class IngresosComponent implements OnInit {
   configChartPais:Chart;
   configChartCanal:Chart;
   configChartMes:Chart;
+  totalIngresos:double=100;
+  totalEgresos:double;
+  totalSaldo:double;
+  gananciaPeriodo:double;
+
 
   ngOnInit(){
+
+    this.totalIngresos=100;
     this.setVariables();
     this.configChartPais = new Chart(
       "Ganancia por pais",
@@ -108,6 +116,7 @@ export class IngresosComponent implements OnInit {
     });
   }
 
+
   public getArtistas() {
     this._serviciosArtista.getAccessArtistas();
     this._serviciosArtista.getArtistas().subscribe((res: any) => {
@@ -125,6 +134,22 @@ export class IngresosComponent implements OnInit {
 
 }
 
+
+public EstadoCuenta(){
+  this.loading= true;
+  var me = this;
+  me._comunService.getEstadoCuenta();
+  me._comunService.getAccesCanales().subscribe((res: any) => {
+    if (res.status = Constante.ok) {
+      me.canales = res.body.canales;
+      me.loading = false;
+    } else {
+      me._message.error(res);
+    }
+  }, error => {
+    me._message.error(Mensaje.noBackEnd);
+  });
+}
 const datos:any[]=[
   {
     periodo:"20152015",
