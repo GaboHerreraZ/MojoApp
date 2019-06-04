@@ -13,6 +13,6 @@ export class IngresosService {
   }
 
   public getEstadoCuenta(): Observable<HttpResponse<any>> {
-    return this._http.get(`${Operacion.URLACCOUNTING}${Operacion.getEstadoCuenta}`, { observe: 'response' });
+    return this._http.get(`${Operacion.URLACCOUNTING}${Operacion.estadoCuenta}`, { observe: 'response' });
   }
 }

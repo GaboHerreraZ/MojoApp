@@ -8,6 +8,9 @@ import { Mensaje } from '../../../utilidades/mensaje';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AccessArtistaService } from '../../../servicios/mojo/artista/access.artista.service';
 import { double } from 'aws-sdk/clients/lightsail';
+import { AccessIngresosService } from '../../../servicios/mojo/ingresos/access.ingresos.service';
+
+
 
 @Component({
   selector: 'app-ingresos',
@@ -20,7 +23,9 @@ export class IngresosComponent implements OnInit {
               private _comunService:AccessComunesService,
               private _message:AlertService,
               private _formBuilder:FormBuilder,
-              private _serviciosArtista:AccessArtistaService)
+              private _serviciosArtista:AccessArtistaService,
+              private _serviciosAccounting:AccessIngresosService,
+              )
               {
         
                 this._title.setTitle(Constante.tituloIngresos);
@@ -97,7 +102,7 @@ export class IngresosComponent implements OnInit {
     });
     this.getCanales();
     this.getArtistas();
-
+    this.estadoCuenta();
   }
 
   public getCanales() {
@@ -130,26 +135,33 @@ export class IngresosComponent implements OnInit {
       this._message.error(Mensaje.noBackEnd);
     });
   }
+  
+  
+  public estadoCuenta(){
+    this.loading= true;
+    var me = this;
 
+    console.log( me._serviciosAccounting.getEstadoCuenta());
+    me._serviciosAccounting.getEstadoCuenta();
+   /* me._comunService.getAccesCanales().subscribe((res: any) => {
+      if (res.status = Constante.ok) {
+        me.canales = res.body.canales;
+        me.loading = false;
+      } else {
+        me._message.error(res);
+      }
+    }, error => {
+      me._message.error(Mensaje.noBackEnd);
+    });*/
+  }
 
 }
 
 
-public EstadoCuenta(){
-  this.loading= true;
-  var me = this;
-  me._comunService.getEstadoCuenta();
-  me._comunService.getAccesCanales().subscribe((res: any) => {
-    if (res.status = Constante.ok) {
-      me.canales = res.body.canales;
-      me.loading = false;
-    } else {
-      me._message.error(res);
-    }
-  }, error => {
-    me._message.error(Mensaje.noBackEnd);
-  });
-}
+
+
+
+
 const datos:any[]=[
   {
     periodo:"20152015",
