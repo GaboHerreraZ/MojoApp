@@ -8,6 +8,10 @@ import { Mensaje } from '../../../utilidades/mensaje';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AccessArtistaService } from '../../../servicios/mojo/artista/access.artista.service';
 import { double } from 'aws-sdk/clients/lightsail';
+import { AccessIngresosService } from 'src/app/servicios/mojo/ingresos/access.ingresos.service';
+import { METHODS } from 'http';
+import { debug } from 'util';
+import { ConsoleLogger } from '@aws-amplify/core';
 
 @Component({
   selector: 'app-ingresos',
@@ -20,12 +24,13 @@ export class IngresosComponent implements OnInit {
               private _comunService:AccessComunesService,
               private _message:AlertService,
               private _formBuilder:FormBuilder,
-              private _serviciosArtista:AccessArtistaService)
+              private _serviciosArtista:AccessArtistaService,
+              private _serviciosIngresos:AccessIngresosService)
               {
         
                 this._title.setTitle(Constante.tituloIngresos);
   }
-  datos = datos;
+  datos:any[];
   tops = tops;
   loading:boolean;
   canales:any[];
@@ -35,15 +40,13 @@ export class IngresosComponent implements OnInit {
   configChartPais:Chart;
   configChartCanal:Chart;
   configChartMes:Chart;
-  totalIngresos:double=100;
+  totalIngresos:double;
   totalEgresos:double;
   totalSaldo:double;
   gananciaPeriodo:double;
 
 
   ngOnInit(){
-
-    this.totalIngresos=100;
     this.setVariables();
     this.configChartPais = new Chart(
       "Ganancia por pais",
@@ -97,7 +100,8 @@ export class IngresosComponent implements OnInit {
     });
     this.getCanales();
     this.getArtistas();
-
+    this.getEstadoCuenta();
+    this.getIngresosPorPeriodo();
   }
 
   public getCanales() {
@@ -131,26 +135,66 @@ export class IngresosComponent implements OnInit {
     });
   }
 
+  public getEstadoCuenta() {
+    var me = this,
+      objEstadoCuenta = {
+        "IngresosTotal": null,
+        "EsgresosTotal": null,
+        "SaldoACuenta": null,
+        "IngresosPeriodo": null
+      };
+
+    me._serviciosIngresos.getAccessEstadoCuenta();
+    me._serviciosIngresos.getEstadoCuenta().subscribe((res: any) => {
+      if (res.status = Constante.ok) {
+        debugger;
+        objEstadoCuenta = JSON.parse(res.body.result)[0]; 
+        me.totalIngresos = objEstadoCuenta.IngresosTotal.toFixed(2);
+        me.totalEgresos = objEstadoCuenta.EsgresosTotal.toFixed(2);
+        me.totalSaldo = objEstadoCuenta.SaldoACuenta.toFixed(2);
+        me.gananciaPeriodo = objEstadoCuenta.IngresosPeriodo == null ? 0.00: objEstadoCuenta.IngresosPeriodo.toFixed(2);
+        me.loading = false;
+
+      } else {
+        me._message.error(res);
+      }
+    }, error => {
+      me._message.error(Mensaje.noBackEnd);
+    });
+  }
+
+  public getIngresosPorPeriodo() {
+    var me = this;
+
+    me._serviciosIngresos.getAccessIngresosPeriodo();
+    me._serviciosIngresos.getIngresosPeriodo().subscribe((res: any) => {
+      if (res.status = Constante.ok) {
+        me.datos = JSON.parse(res.body.result); 
+        debugger
+        me.loading = false;
+      } else {
+        me._message.error(res);
+      }
+    }, error => {
+      me._message.error(Mensaje.noBackEnd);
+    });
+  }  
+
+    /**
+   * Method: verDetallePeriodo
+   * ----------------------------------------------------
+   * Asigna la información del ingreso por periodo a mostrar y despliega
+   * la vista del detalle.
+   * 
+   * @param  {} obIngreso Información del ingreso por periodo seleccionado
+   */
+  verDetallePeriodo(obIngreso: any) {
+    var me = this;
+    console.log(obIngreso);
+  }
 
 }
-
-
-public EstadoCuenta(){
-  this.loading= true;
-  var me = this;
-  me._comunService.getEstadoCuenta();
-  me._comunService.getAccesCanales().subscribe((res: any) => {
-    if (res.status = Constante.ok) {
-      me.canales = res.body.canales;
-      me.loading = false;
-    } else {
-      me._message.error(res);
-    }
-  }, error => {
-    me._message.error(Mensaje.noBackEnd);
-  });
-}
-const datos:any[]=[
+/*const datos:any[]=[
   {
     periodo:"20152015",
     total:"342343423",
@@ -202,7 +246,7 @@ const datos:any[]=[
     estado:"Pendiente"
   }
 
-]
+]*/
 
 const tops:any[]=[
   {

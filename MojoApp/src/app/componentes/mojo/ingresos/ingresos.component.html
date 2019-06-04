@@ -17,7 +17,19 @@
                 <h5 class="card-title text-center">Total gastos</h5>
                 <div class="card-text text-center">
                     <span class="span-total">
-                        <i class="fas fa-dollar-sign"><span style="color:black; margin-left: 10px;">50.000</span></i>
+                        <i class="fas fa-dollar-sign"><span style="color:black; margin-left: 10px;">{{totalEgresos}}</span></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title text-center">Total saldo</h5>
+                <div class="card-text text-center">
+                    <span class="span-total">
+                        <i class="fas fa-dollar-sign"><span style="color:black; margin-left: 10px;">{{totalSaldo}}</span></i>
                     </span>
                 </div>
             </div>
@@ -29,19 +41,7 @@
                 <h5 class="card-title text-center">Ingresos periodo</h5>
                 <div class="card-text text-center">
                     <span class="span-total">
-                        <i class="fas fa-dollar-sign"><span style="color:black; margin-left: 10px;">70.000</span></i>
-                    </span>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title text-center">Ingresos periodo</h5>
-                <div class="card-text text-center">
-                    <span class="span-total">
-                        <i class="fas fa-dollar-sign"><span style="color:black; margin-left: 10px;">70.000</span></i>
+                        <i class="fas fa-dollar-sign"><span style="color:black; margin-left: 10px;">{{gananciaPeriodo}}</span></i>
                     </span>
                 </div>
             </div>
@@ -151,11 +151,16 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let dato of datos">
-                        <td>{{dato.periodo}}</td>
-                        <td>{{dato.total}}</td>
-                        <td>{{dato.estado}}</td>
+                        <td>{{dato.perido}}</td>
+                        <td>{{dato.monto}}</td>
+                        <td *ngIf="dato.estado != null">
+                        {{dato.estado}}
+                        </td>
+                        <td *ngIf="dato.estado == null">
+                        -----
+                        </td>
                         <td>
-                            <button type="button" class="btn btn-dark button-style "><strong>Ver</strong></button>
+                            <button type="button" class="btn btn-dark button-style" (click)="verDetallePeriodo(dato)"><strong>Ver</strong></button>                            
                         </td>
                     </tr>
                 </tbody>
