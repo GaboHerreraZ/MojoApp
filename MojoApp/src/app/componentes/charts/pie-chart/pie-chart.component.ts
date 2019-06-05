@@ -19,6 +19,6 @@ export class PieChartComponent implements OnInit {
   options = {
     pieStartAngle: 100
   };
-  width = "100%";
-  height = "100%";
+  width = window.innerWidth <= 767 ? "100%" : 380;
+  height = window.innerWidth <= 767 ? "100%" : 350;
 }
