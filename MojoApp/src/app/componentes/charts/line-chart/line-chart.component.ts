@@ -42,7 +42,7 @@ export class LineChartComponent implements OnInit {
     curveType: 'function',
     legend: { position: 'bottom' }
   };
-  width = 1140;
-  height = 400;
+  width = "100%";
+  height = "100%";
 
 }

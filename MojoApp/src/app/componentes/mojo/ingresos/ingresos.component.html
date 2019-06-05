@@ -1,9 +1,10 @@
-<app-ingreso-detail *ngIf="showDetail" [ingresoPeriodoData]="ingresoPeriodoData"></app-ingreso-detail>
 <div class="row">
-	<div class="col-md-6 text-right">
+	<div class="col-md-6 text-left">
 		<button *ngIf="showDetail" (click)="regresar()" type="button" class="btn btn-dark button-style "><strong>Regresar</strong></button>
 	</div>
 </div>
+<br />
+<app-ingreso-detail *ngIf="showDetail" [ingresoPeriodoData]="ingresoPeriodoData"></app-ingreso-detail>
 
 <div class="row" *ngIf="!showDetail">
 	<div class="col-md-3">

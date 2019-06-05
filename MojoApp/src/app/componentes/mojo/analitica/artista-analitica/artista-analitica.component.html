@@ -1,19 +1,21 @@
-<div *ngIf="showSelect" class="row dashedborder">
-	<div class="col-2 text-center">
-		<img style="width: 120px;height:120px;" src="assets/iconos/microfono.png" class="card-img" alt="microfono">
-	</div>
-	<div class="col-5" style="margin-top:1rem">
-		<div class="form-group">
-			<label for="exampleFormControlInput1">Artista:</label>
-			<select (change)="onChangeArtista($event)" formControlName="artista" class="form-control" id="artistaSelect">
-				<option>Mala Fama</option>
-				<option>Los Rebeldes</option>
-				<option>Rocio Quiroz</option>
-			</select>
+<div *ngIf="showSelect" class="redes row container-fluid">
+	<div class="row dashedborder w-100">
+		<div class="col-md-4 text-center">
+			<img style="width: 120px;height:120px;" src="assets/iconos/microfono.png" class="card-img" alt="microfono">
 		</div>
-	</div>
-	<div class="col-5" style="margin-top:3rem">
-		<button (click)="verAnaliticaArtista()" type="button" class="btn btn-dark button-style "><strong>Consultar</strong></button>
+		<div class="col-md-4" style="margin-top:1rem">
+			<div class="form-group">
+				<label for="exampleFormControlInput1">Artista:</label>
+				<select (change)="onChangeArtista($event)" formControlName="artista" class="form-control" id="artistaSelect">
+					<option>Mala Fama</option>
+					<option>Los Rebeldes</option>
+					<option>Rocio Quiroz</option>
+				</select>
+			</div>
+		</div>
+		<div class="col-md-4" style="margin-top:3rem">
+			<button (click)="verAnaliticaArtista()" type="button" class="btn btn-dark button-style "><strong>Consultar</strong></button>
+		</div>
 	</div>
 </div>
 
@@ -196,7 +198,9 @@
 		</form>
 		<br>
 		<div class="row">
-			<app-line-chart [configLine]="config"></app-line-chart>
+			<div class="chart">
+				<app-line-chart [configLine]="config"></app-line-chart>
+			</div>
 		</div>
 		<br>
 		<div class="row">
@@ -223,7 +227,9 @@
 			</div>
 			<div class="col-md-6">
 				<label>Reproducciones por país</label>
-				<app-pie-chart [configChart]="configChartPais"></app-pie-chart>
+				<div class="chart">
+					<app-pie-chart [configChart]="configChartPais"></app-pie-chart>
+				</div>
 			</div>
 		</div>
 		<div *ngIf="showInfo" class="row">

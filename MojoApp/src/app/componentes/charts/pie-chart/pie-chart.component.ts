@@ -13,12 +13,12 @@ export class PieChartComponent implements OnInit {
   ngOnInit() {
   }
 
-  @Input() configChart:Chart;
+  @Input() configChart: Chart;
 
   type = 'PieChart';
-  options = {        
-    pieStartAngle: 100  
+  options = {
+    pieStartAngle: 100
   };
-  width = 380;
-  height = 350;
+  width = "100%";
+  height = "100%";
 }
