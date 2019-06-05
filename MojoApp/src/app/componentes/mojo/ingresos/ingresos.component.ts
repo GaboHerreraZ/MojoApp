@@ -5,7 +5,7 @@ import { Chart } from '../../../modelos/chart';
 import { AccessComunesService } from '../../../servicios/mojo/comunes/access.comunes.service';
 import { AlertService } from '../../../servicios/alert/alert.service';
 import { Mensaje } from '../../../utilidades/mensaje';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AccessArtistaService } from '../../../servicios/mojo/artista/access.artista.service';
 import { double } from 'aws-sdk/clients/lightsail';
 import { AccessIngresosService } from 'src/app/servicios/mojo/ingresos/access.ingresos.service';
@@ -30,7 +30,7 @@ export class IngresosComponent implements OnInit {
                 this._title.setTitle(Constante.tituloIngresos);
   }
   datos:any[];
-  tops = tops;
+  tops = tops1;
   loading:boolean;
   canales:any[];
   artistas:any[];
@@ -83,10 +83,10 @@ export class IngresosComponent implements OnInit {
 
   setVariables(){
     this.consultaForm = this._formBuilder.group({
-      fechaInicio:[''],
-      fechaFinal:[''],
-      canal:[''],
-      artista:['']
+      fechaInicio:['',Validators.required],
+      fechaFinal:['',Validators.required],
+      canal:['',Validators.required],
+      artista:['',Validators.required]
     });
     this.getCanales();
     this.getArtistas();
@@ -179,63 +179,89 @@ export class IngresosComponent implements OnInit {
     console.log(obIngreso);
   }
 
-}
-/*const datos:any[]=[
-  {
-    periodo:"20152015",
-    total:"342343423",
-    estado:"Pendiente"
-  },
-  {
-    periodo:"2015",
-    total:"34234",
-    estado:"Pendiente"
-  },
-  {
-    periodo:"2015",
-    total:"34234",
-    estado:"Pendiente"
-  },
-  {
-    periodo:"2015",
-    total:"34234",
-    estado:"Pendiente"
-  },
-  {
-    periodo:"2015",
-    total:"34234",
-    estado:"Pendiente"
-  },
-  {
-    periodo:"2015",
-    total:"34234",
-    estado:"Pendiente"
-  },
-  {
-    periodo:"2015",
-    total:"34234",
-    estado:"Pendiente"
-  },
-  {
-    periodo:"2015",
-    total:"34234",
-    estado:"Pendiente"
-  },
-  {
-    periodo:"2015",
-    total:"34234",
-    estado:"Pendiente"
-  },
-  {
-    periodo:"2015",
-    total:"34234",
-    estado:"Pendiente"
+  consultar(){
+    switch(this.tops){
+      case tops1: { 
+        this.tops = tops2;
+        this.configChartPais = new Chart(
+          "Ganancia por pais",
+          [
+            ["Chile", 193.252],
+            ["Estados Unidos", 6.231],
+            ["Argentina", 2.739],
+            ["España", 1.902],
+            ["Perú",	1.441],
+            ["Australia", 1.249],       
+            ["Otros", 7.81]
+          ],
+          ["País","Ingresos"]
+        );
+        
+        this.configChartCanal = new Chart(
+          "Ganancia por canal",
+          [
+            ["Youtube", 215.84],
+            ["Deezer", 2]
+          ],
+          ["Canal","Ingresos"]
+        );
+    
+        this.configChartMes = new Chart(
+          "Ganancia por mes",
+          [
+            ["Enero", 0],
+            ["Febrero", 0],
+            ["Marzo", 215.84]
+          ],
+          ["Mes","Ingresos"]
+        );
+
+        break; 
+     } 
+     case tops2: { 
+      this.tops = tops1;
+      this.configChartPais = new Chart(
+        "Ganancia por pais",
+        [
+          ["Chile", 12.252],
+          ["Estados Unidos", 45.231],
+          ["Argentina", 25.739],
+          ["España", 18.902],
+          ["Perú",	23.441],
+          ["Australia", 17.249],       
+          ["Otros", 19.81]
+        ],
+        ["País","Ingresos"]
+      );
+      
+      this.configChartCanal = new Chart(
+        "Ganancia por canal",
+        [
+          ["Youtube", 128.84],
+          ["Deezer", 282.73]
+        ],
+        ["Canal","Ingresos"]
+      );
+  
+      this.configChartMes = new Chart(
+        "Ganancia por mes",
+        [
+          ["Enero", 123],
+          ["Febrero", 341],
+          ["Marzo", 215.84]
+        ],
+        ["Mes","Ingresos"]
+      );
+      break; 
+     } 
+
   }
 
-]*/
+}
+}
 
 
-const tops:any[]=[
+const tops1:any[]=[
   {
     top:1,
     cancion:"Damelo",
@@ -288,3 +314,59 @@ const tops:any[]=[
   }
 
 ];
+
+const tops2:any[]=[
+  {
+    top:1,
+    cancion:"Damelo",
+    ingresos:"136.29"
+  },
+  {
+    top:2,
+    cancion:"Amor Platonico",
+    ingresos:"8.893"
+  },
+  {
+    top:3,
+    cancion:"Esto No Es una Canción de Amor",
+    ingresos:"21.755"
+  },
+  {
+    top:4,
+    cancion:"Andrómeda",
+    ingresos:"5.964"
+  },
+  {
+    top:5,
+    cancion:"Vibe",
+    ingresos:"2.875"
+    
+  },
+  {
+    top:6,
+    cancion:"Eres Tan Distinta",
+    ingresos:"5.838"
+  },
+  {
+    top:7,
+    cancion:"Luces Rojas",
+    ingresos:"1.455"
+  },
+  {
+    top:8,
+    cancion:"Plop", 
+    ingresos:"2.042"
+  },
+  {
+    top:9,
+    cancion:"Cuál es el secreto - El Búho Remix",
+    ingresos:" 1.185"
+  },
+  {
+    top:10,
+    cancion:"Calma",
+    ingresos:"1.339"
+  }
+
+];
+
