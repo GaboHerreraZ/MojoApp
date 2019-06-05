@@ -9,6 +9,7 @@ export class IngresoDetailComponent implements OnInit {
 
   @Input() ingresoPeriodoData: any;
   titulo: String;
+  p: any;
 
   constructor() { }
 
