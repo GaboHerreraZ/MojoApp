@@ -19,32 +19,36 @@ import { ConsoleLogger } from '@aws-amplify/core';
 })
 export class IngresosComponent implements OnInit {
 
-  constructor(private _title:Title,
-              private _comunService:AccessComunesService,
-              private _message:AlertService,
-              private _formBuilder:FormBuilder,
-              private _serviciosArtista:AccessArtistaService,
-              private _serviciosIngresos:AccessIngresosService)
-              {
-        
-                this._title.setTitle(Constante.tituloIngresos);
-  }
-  datos:any[];
-  tops = tops1;
-  loading:boolean;
-  canales:any[];
-  artistas:any[];
-  consultaForm:FormGroup;
-  /*--Graficas--*/
-  configChartPais:Chart;
-  configChartCanal:Chart;
-  configChartMes:Chart;
-  totalIngresos:double;
-  totalEgresos:double;
-  totalSaldo:double;
-  gananciaPeriodo:double;
+  constructor(private _title: Title,
+    private _comunService: AccessComunesService,
+    private _message: AlertService,
+    private _formBuilder: FormBuilder,
+    private _serviciosArtista: AccessArtistaService,
+    private _serviciosIngresos: AccessIngresosService) {
 
-  ngOnInit(){
+    this._title.setTitle(Constante.tituloIngresos);
+  }
+  datos: any[];
+  tops = tops1;
+  loading: boolean;
+  canales: any[];
+  artistas: any[];
+  consultaForm: FormGroup;
+  /*--Graficas--*/
+  configChartPais: Chart;
+  configChartCanal: Chart;
+  configChartMes: Chart;
+  totalIngresos: double;
+  totalEgresos: double;
+  totalSaldo: double;
+  gananciaPeriodo: double;
+
+  //Ver detalle de ingresos
+  showDetail: boolean;
+  ingresoPeriodoData: any[];
+
+  ngOnInit() {
+    this.showDetail = false;
     this.setVariables();
     this.configChartPais = new Chart(
       "Ganancia por pais",
@@ -53,20 +57,20 @@ export class IngresosComponent implements OnInit {
         ["Estados Unidos", 6.231],
         ["Argentina", 2.739],
         ["España", 1.902],
-        ["Perú",	1.441],
-        ["Australia", 1.249],       
+        ["Perú", 1.441],
+        ["Australia", 1.249],
         ["Otros", 7.81]
       ],
-      ["País","Ingresos"]
+      ["País", "Ingresos"]
     );
-    
+
     this.configChartCanal = new Chart(
       "Ganancia por canal",
       [
         ["Youtube", 215.84],
         ["Deezer", 2]
       ],
-      ["Canal","Ingresos"]
+      ["Canal", "Ingresos"]
     );
 
     this.configChartMes = new Chart(
@@ -76,17 +80,17 @@ export class IngresosComponent implements OnInit {
         ["Febrero", 0],
         ["Marzo", 215.84]
       ],
-      ["Mes","Ingresos"]
+      ["Mes", "Ingresos"]
     );
 
   }
 
-  setVariables(){
+  setVariables() {
     this.consultaForm = this._formBuilder.group({
-      fechaInicio:['',Validators.required],
-      fechaFinal:['',Validators.required],
-      canal:['',Validators.required],
-      artista:['',Validators.required]
+      fechaInicio: ['', Validators.required],
+      fechaFinal: ['', Validators.required],
+      canal: ['', Validators.required],
+      artista: ['', Validators.required]
     });
     this.getCanales();
     this.getArtistas();
@@ -95,7 +99,7 @@ export class IngresosComponent implements OnInit {
   }
 
   public getCanales() {
-    this.loading= true;
+    this.loading = true;
     var me = this;
     me._comunService.getCanales();
     me._comunService.getAccesCanales().subscribe((res: any) => {
@@ -124,7 +128,7 @@ export class IngresosComponent implements OnInit {
       this._message.error(Mensaje.noBackEnd);
     });
   }
-  
+
   public getEstadoCuenta() {
     var me = this,
       objEstadoCuenta = {
@@ -135,12 +139,12 @@ export class IngresosComponent implements OnInit {
       };
     me._serviciosIngresos.getAccessEstadoCuenta();
     me._serviciosIngresos.getEstadoCuenta().subscribe((res: any) => {
-      if (res.status = Constante.ok) {    
-        objEstadoCuenta = JSON.parse(res.body.result)[0]; 
+      if (res.status = Constante.ok) {
+        objEstadoCuenta = JSON.parse(res.body.result)[0];
         me.totalIngresos = objEstadoCuenta.IngresosTotal.toFixed(2);
         me.totalEgresos = objEstadoCuenta.EsgresosTotal.toFixed(2);
         me.totalSaldo = objEstadoCuenta.SaldoACuenta.toFixed(2);
-        me.gananciaPeriodo = objEstadoCuenta.IngresosPeriodo == null ? 0.00: objEstadoCuenta.IngresosPeriodo.toFixed(2);
+        me.gananciaPeriodo = objEstadoCuenta.IngresosPeriodo == null ? 0.00 : objEstadoCuenta.IngresosPeriodo.toFixed(2);
         me.loading = false;
 
       } else {
@@ -156,7 +160,7 @@ export class IngresosComponent implements OnInit {
     me._serviciosIngresos.getAccessIngresosPeriodo();
     me._serviciosIngresos.getIngresosPeriodo().subscribe((res: any) => {
       if (res.status = Constante.ok) {
-        me.datos = JSON.parse(res.body.result);         
+        me.datos = JSON.parse(res.body.result);
         me.loading = false;
       } else {
         me._message.error(res);
@@ -164,24 +168,40 @@ export class IngresosComponent implements OnInit {
     }, error => {
       me._message.error(Mensaje.noBackEnd);
     });
-  }  
+  }
 
-    /**
-   * Method: verDetallePeriodo
-   * ----------------------------------------------------
-   * Asigna la información del ingreso por periodo a mostrar y despliega
-   * la vista del detalle.
-   * 
-   * @param  {} obIngreso Información del ingreso por periodo seleccionado
-   */
+  /**
+ * Method: verDetallePeriodo
+ * ----------------------------------------------------
+ * Asigna la información del ingreso por periodo a mostrar y despliega
+ * la vista del detalle.
+ * 
+ * @param  {} obIngreso Información del ingreso por periodo seleccionado
+ */
   verDetallePeriodo(obIngreso: any) {
     var me = this;
     console.log(obIngreso);
+    me._serviciosIngresos.getAccessDetalleIngresos(obIngreso);
+    me._serviciosIngresos.getDetalleIngresosPeriodo().subscribe((res: any) => {
+      if (res.status = Constante.ok) {
+        this.ingresoPeriodoData = JSON.parse(res.body.result);
+        me.loading = false;
+        me.showDetail = true;
+      } else {
+        me._message.error(res);
+      }
+    }, error => {
+      me._message.error(Mensaje.noBackEnd);
+    });
   }
 
-  consultar(){
-    switch(this.tops){
-      case tops1: { 
+  regresar() {
+    this.showDetail = false;
+  }
+
+  consultar() {
+    switch (this.tops) {
+      case tops1: {
         this.tops = tops2;
         this.configChartPais = new Chart(
           "Ganancia por pais",
@@ -190,22 +210,22 @@ export class IngresosComponent implements OnInit {
             ["Estados Unidos", 6.231],
             ["Argentina", 2.739],
             ["España", 1.902],
-            ["Perú",	1.441],
-            ["Australia", 1.249],       
+            ["Perú", 1.441],
+            ["Australia", 1.249],
             ["Otros", 7.81]
           ],
-          ["País","Ingresos"]
+          ["País", "Ingresos"]
         );
-        
+
         this.configChartCanal = new Chart(
           "Ganancia por canal",
           [
             ["Youtube", 215.84],
             ["Deezer", 2]
           ],
-          ["Canal","Ingresos"]
+          ["Canal", "Ingresos"]
         );
-    
+
         this.configChartMes = new Chart(
           "Ganancia por mes",
           [
@@ -213,159 +233,159 @@ export class IngresosComponent implements OnInit {
             ["Febrero", 0],
             ["Marzo", 215.84]
           ],
-          ["Mes","Ingresos"]
+          ["Mes", "Ingresos"]
         );
 
-        break; 
-     } 
-     case tops2: { 
-      this.tops = tops1;
-      this.configChartPais = new Chart(
-        "Ganancia por pais",
-        [
-          ["Chile", 12.252],
-          ["Estados Unidos", 45.231],
-          ["Argentina", 25.739],
-          ["España", 18.902],
-          ["Perú",	23.441],
-          ["Australia", 17.249],       
-          ["Otros", 19.81]
-        ],
-        ["País","Ingresos"]
-      );
-      
-      this.configChartCanal = new Chart(
-        "Ganancia por canal",
-        [
-          ["Youtube", 128.84],
-          ["Deezer", 282.73]
-        ],
-        ["Canal","Ingresos"]
-      );
-  
-      this.configChartMes = new Chart(
-        "Ganancia por mes",
-        [
-          ["Enero", 123],
-          ["Febrero", 341],
-          ["Marzo", 215.84]
-        ],
-        ["Mes","Ingresos"]
-      );
-      break; 
-     } 
+        break;
+      }
+      case tops2: {
+        this.tops = tops1;
+        this.configChartPais = new Chart(
+          "Ganancia por pais",
+          [
+            ["Chile", 12.252],
+            ["Estados Unidos", 45.231],
+            ["Argentina", 25.739],
+            ["España", 18.902],
+            ["Perú", 23.441],
+            ["Australia", 17.249],
+            ["Otros", 19.81]
+          ],
+          ["País", "Ingresos"]
+        );
+
+        this.configChartCanal = new Chart(
+          "Ganancia por canal",
+          [
+            ["Youtube", 128.84],
+            ["Deezer", 282.73]
+          ],
+          ["Canal", "Ingresos"]
+        );
+
+        this.configChartMes = new Chart(
+          "Ganancia por mes",
+          [
+            ["Enero", 123],
+            ["Febrero", 341],
+            ["Marzo", 215.84]
+          ],
+          ["Mes", "Ingresos"]
+        );
+        break;
+      }
+
+    }
 
   }
-
-}
 }
 
 
-const tops1:any[]=[
+const tops1: any[] = [
   {
-    top:1,
-    cancion:"Damelo",
-    ingresos:"136.29"
+    top: 1,
+    cancion: "Damelo",
+    ingresos: "136.29"
   },
   {
-    top:2,
-    cancion:"Esto No Es una Canción de Amor",
-    ingresos:"21.755"
+    top: 2,
+    cancion: "Esto No Es una Canción de Amor",
+    ingresos: "21.755"
   },
   {
-    top:3,
-    cancion:"Amor Platonico",
-    ingresos:"8.893"
+    top: 3,
+    cancion: "Amor Platonico",
+    ingresos: "8.893"
   },
   {
-    top:4,
-    cancion:"Andrómeda",
-    ingresos:"5.964"
+    top: 4,
+    cancion: "Andrómeda",
+    ingresos: "5.964"
   },
   {
-    top:5,
-    cancion:"Eres Tan Distinta",
-    ingresos:"5.838"
+    top: 5,
+    cancion: "Eres Tan Distinta",
+    ingresos: "5.838"
   },
   {
-    top:6,
-    cancion:"Vibe",
-    ingresos:"2.875"
+    top: 6,
+    cancion: "Vibe",
+    ingresos: "2.875"
   },
   {
-    top:7,
-    cancion:"Plop", 
-    ingresos:"2.042"
+    top: 7,
+    cancion: "Plop",
+    ingresos: "2.042"
   },
   {
-    top:8,
-    cancion:"Luces Rojas",
-    ingresos:"1.455"
+    top: 8,
+    cancion: "Luces Rojas",
+    ingresos: "1.455"
   },
   {
-    top:9,
-    cancion:"Calma",
-    ingresos:"1.339"
+    top: 9,
+    cancion: "Calma",
+    ingresos: "1.339"
   },
   {
-    top:10,
-    cancion:"Cuál es el secreto - El Búho Remix",
-    ingresos:" 1.185"
+    top: 10,
+    cancion: "Cuál es el secreto - El Búho Remix",
+    ingresos: " 1.185"
   }
 
 ];
 
-const tops2:any[]=[
+const tops2: any[] = [
   {
-    top:1,
-    cancion:"Damelo",
-    ingresos:"136.29"
+    top: 1,
+    cancion: "Damelo",
+    ingresos: "136.29"
   },
   {
-    top:2,
-    cancion:"Amor Platonico",
-    ingresos:"8.893"
+    top: 2,
+    cancion: "Amor Platonico",
+    ingresos: "8.893"
   },
   {
-    top:3,
-    cancion:"Esto No Es una Canción de Amor",
-    ingresos:"21.755"
+    top: 3,
+    cancion: "Esto No Es una Canción de Amor",
+    ingresos: "21.755"
   },
   {
-    top:4,
-    cancion:"Andrómeda",
-    ingresos:"5.964"
+    top: 4,
+    cancion: "Andrómeda",
+    ingresos: "5.964"
   },
   {
-    top:5,
-    cancion:"Vibe",
-    ingresos:"2.875"
-    
+    top: 5,
+    cancion: "Vibe",
+    ingresos: "2.875"
+
   },
   {
-    top:6,
-    cancion:"Eres Tan Distinta",
-    ingresos:"5.838"
+    top: 6,
+    cancion: "Eres Tan Distinta",
+    ingresos: "5.838"
   },
   {
-    top:7,
-    cancion:"Luces Rojas",
-    ingresos:"1.455"
+    top: 7,
+    cancion: "Luces Rojas",
+    ingresos: "1.455"
   },
   {
-    top:8,
-    cancion:"Plop", 
-    ingresos:"2.042"
+    top: 8,
+    cancion: "Plop",
+    ingresos: "2.042"
   },
   {
-    top:9,
-    cancion:"Cuál es el secreto - El Búho Remix",
-    ingresos:" 1.185"
+    top: 9,
+    cancion: "Cuál es el secreto - El Búho Remix",
+    ingresos: " 1.185"
   },
   {
-    top:10,
-    cancion:"Calma",
-    ingresos:"1.339"
+    top: 10,
+    cancion: "Calma",
+    ingresos: "1.339"
   }
 
 ];

@@ -16,16 +16,17 @@ export class IngresosService {
     return this._http.get(`${Operacion.URLACCOUNTING}${Operacion.estadoCuenta}`, { observe: 'response' });
   }
 
-  public getIngresosPeriodo():Observable<HttpResponse<any>> {
-    var obParams= {
+  public getIngresosPeriodo(): Observable<HttpResponse<any>> {
+    var obParams = {
       "periodoInicial": '2019-03-01',
-      "periodoFinal": '2019-06-01' 
+      "periodoFinal": '2019-06-01'
     }
-    return this._http.get(`${Operacion.URLACCOUNTING}${Operacion.ingresosPorPeriodo}`, { observe: 'response'});
+    return this._http.get(`${Operacion.URLACCOUNTING}${Operacion.ingresosPorPeriodo}`, { observe: 'response' });
   }
 
-  public getDetalleIngresos():Observable<HttpResponse<any>> {
-    return this._http.get(`${Operacion.URLACCOUNTING}${Operacion.detalleIngresoEnPeriodo}`, { observe: 'response' });
+  public getDetalleIngresos(obIngresoPeriodo: any): Observable<HttpResponse<any>> {
+    var periodo = obIngresoPeriodo.perido + '-01';
+    return this._http.get(`${Operacion.URLACCOUNTING}${Operacion.detalleIngresoEnPeriodo}?periodo=${periodo}&idAfiliado=91`, { observe: 'response' });
   }
 
 }

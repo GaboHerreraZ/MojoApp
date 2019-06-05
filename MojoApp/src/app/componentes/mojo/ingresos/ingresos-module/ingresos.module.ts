@@ -4,9 +4,10 @@ import { CommonModule } from '@angular/common';
 import { IngresosRoutingModule } from './ingresos.routing.module';
 import { IngresosComponent } from '../ingresos.component';
 import { ComunModule } from '../../../../modulos/comun/comun.module';
+import { IngresoDetailComponent } from '../ingreso-detail/ingreso-detail.component';
 
 @NgModule({
-  declarations: [IngresosComponent],
+  declarations: [IngresosComponent, IngresoDetailComponent],
   imports: [
     CommonModule,
     ComunModule,

@@ -10,7 +10,7 @@ export class AccessIngresosService {
   ingresosPeriodo = new Subject();
   detalleIngresos = new Subject();;
 
-  constructor(private _ingresosService:IngresosService) { }
+  constructor(private _ingresosService: IngresosService) { }
 
   public getEstadoCuenta() {
     return this.estadoCuenta.asObservable();
@@ -38,10 +38,10 @@ export class AccessIngresosService {
     }, error => {
       this.ingresosPeriodo.next(error);
     });
-  }  
+  }
 
-  public getAccessDetalleIngresos() {
-    this._ingresosService.getDetalleIngresos().subscribe((res: any) => {
+  public getAccessDetalleIngresos(obIngresoPeriodo: any) {
+    this._ingresosService.getDetalleIngresos(obIngresoPeriodo).subscribe((res: any) => {
       this.detalleIngresos.next(res);
     }, error => {
       this.detalleIngresos.next(error);
