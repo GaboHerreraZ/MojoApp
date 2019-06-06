@@ -19,6 +19,12 @@
 	</div>
 </div>
 
+<div *ngIf="showInfo" class="row">
+	<div class="col-md-6">
+		<button (click)="regresar()" type="button" class="btn btn-dark button-style "><strong>Regresar</strong></button>
+	</div>
+</div>
+<br /><br />
 <div *ngIf="showInfo" class="redes row container-fluid">
 	<div class="col-12">
 		<div class="row">
@@ -226,11 +232,6 @@
 				<div class="chart">
 					<app-pie-chart [configChart]="configChartPais"></app-pie-chart>
 				</div>
-			</div>
-		</div>
-		<div *ngIf="showInfo" class="row">
-			<div class="col-md-6">
-				<button (click)="regresar()" type="button" class="btn btn-dark button-style "><strong>Regresar</strong></button>
 			</div>
 		</div>
 	</div>
