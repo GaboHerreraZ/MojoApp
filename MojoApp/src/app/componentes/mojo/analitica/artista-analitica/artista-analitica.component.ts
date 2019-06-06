@@ -2,6 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Chart } from '../../../../modelos/chart';
 import { Integer } from 'aws-sdk/clients/apigateway';
+import { Constante } from '../../../../utilidades/constante';
+import { Mensaje } from '../../../../utilidades/mensaje';
+import { AccessComunesService } from '../../../../servicios/mojo/comunes/access.comunes.service';
+import { AlertService } from '../../../../servicios/alert/alert.service';
+import { AccessArtistaAnaliticaService } from '../../../../servicios/mojo/analitica/artista-analitica/access.artista-analitica.service';
+import { debug } from 'util';
 
 @Component({
   selector: 'app-artista',
@@ -10,35 +16,56 @@ import { Integer } from 'aws-sdk/clients/apigateway';
 })
 export class ArtistaAnaliticaComponent implements OnInit {
 
-  constructor(private _formBuilder: FormBuilder) { }
+  constructor(private _formBuilder: FormBuilder,
+    private _comunService: AccessComunesService,
+    private _message: AlertService,
+    private _serviciosArtistasAnalitycs: AccessArtistaAnaliticaService) { }
 
   consultaForm: FormGroup;
+  loading: boolean;
   configChartPais: Chart;
   configLineYouTube: Chart;
   configLineSpotify: Chart;
   config: Chart;
   tops: any[];
-  showSelect: Boolean;
-  showInfo: Boolean;
-  artistaSelected: String;
-  arConfigChartPais: any[];
-  arConfigLineYouTube: any[];
-  arConfigLineSpotify: any[];
   arFollowers: any[];
+
+  //Temporales por simulacion
   arStreams: any[];
   obStreams: any[];
-  obFollowers: any[];
+  arFollowersTemp: any[];
+  arConfigLineYouTube: any[];
+  arConfigLineSpotify: any[];
+  showSelect: Boolean;
+  showInfo: Boolean;
+  artistaSelected: String = "El Pepo";
+  arConfigChartPais: any[];
   arTops: any[];
 
   ngOnInit() {
+    var me = this;
+    me.inicializarVariables();
+
+    //Carga Info temporal para simulación
     this.setInfo();
-    //Vista
+
+    //Carga la información inicial del artista
+    me.CargarInformacion();
+  }
+
+  inicializarVariables() {
+    this.consultaForm = this._formBuilder.group({
+      canal: ['7'],
+      fechaInicio: [''],
+      fechaFinal: ['']
+    });
+
+    //Control de la vista
     this.showSelect = true;
     this.showInfo = false;
   }
 
   setInfo() {
-
     this.arConfigChartPais = [
       [
         ["Colombia", 1123],
@@ -50,11 +77,6 @@ export class ArtistaAnaliticaComponent implements OnInit {
         ["Argentina", 2222],
         ["Peru", 253],
         ["Brasil", 2123]
-      ], [
-        ["Colombia", 124],
-        ["Argentina", 2122],
-        ["Peru", 300],
-        ["Brasil", 899]
       ]
     ];
 
@@ -85,19 +107,6 @@ export class ArtistaAnaliticaComponent implements OnInit {
       ["Oct", 456],
       ["Nov", 233],
       ["Dic", 100]
-    ], [
-      ["Ene", 333],
-      ["Feb", 34],
-      ["Mar", 80],
-      ["Abr", 230],
-      ["May", 405],
-      ["Jun", 215],
-      ["Jul", 569],
-      ["Ago", 435],
-      ["Sep", 233],
-      ["Oct", 231],
-      ["Nov", 139],
-      ["Dic", 112]
     ]
     ];
 
@@ -129,33 +138,19 @@ export class ArtistaAnaliticaComponent implements OnInit {
         ["Oct", 283],
         ["Nov", 122],
         ["Dic", 98]
-      ], [
-        ["Ene", 324],
-        ["Feb", 566],
-        ["Mar", 263],
-        ["Abr", 678],
-        ["May", 123],
-        ["Jun", 768],
-        ["Jul", 45],
-        ["Ago", 321],
-        ["Sep", 133],
-        ["Oct", 766],
-        ["Nov", 564],
-        ["Dic", 23]
       ]
     ];
 
     //Followers
-    this.arFollowers = [
-      [3233, 81929, 4552, 23828, 999, 20190, 54545],
-      [12990, 1212, 3344, 7820, 989, 3232, 7499],
-      [232323, 5636, 86890, 2121, 102929, 878, 2121]
+    this.arFollowersTemp = [
+      [{ "followers": 3233 }, { "followers": 81929 }, { "followers": 4552 }, { "followers": 23828 }, { "followers": 999 }, { "followers": 20190 }, { "followers": 54545 }],
+      [{ "followers": 12990 }, { "followers": 1212 }, { "followers": 3344 }, { "followers": 7820 }, { "followers": 989 }, { "followers": 3232 }, { "followers": 7499 }]
     ]
 
     //Sreams
     this.arStreams = [
       [2323, 81929, 4552, 23828, 999, 102929, 54545],
-      [12990, 9788, 3344, 7820, 989, 3232, 7499],
+      [1213, 81929, 4552, 23828, 999, 102929, 54545],
       [232323, 411, 86890, 7820, 3223, 878, 2121]
     ]
 
@@ -231,48 +226,92 @@ export class ArtistaAnaliticaComponent implements OnInit {
         top: 4,
         cancion: "Tracks 4",
         ingresos: "87788"
+      },
+      {
+        top: 5,
+        cancion: "Tracks 5",
+        ingresos: "2222"
+      },
+      {
+        top: 6,
+        cancion: "Tracks 6",
+        ingresos: "4111"
+      },
+      {
+        top: 7,
+        cancion: "Tracks 7",
+        ingresos: "4554"
+      },
+      {
+        top: 8,
+        cancion: "Tracks 8",
+        ingresos: "90999"
+      },
+      {
+        top: 9,
+        cancion: "Tracks 9",
+        ingresos: "78999"
+      },
+      {
+        top: 10,
+        cancion: "Tracks 10",
+        ingresos: "65420"
       }
     ], [
       {
         top: 1,
         cancion: "Tracks 1",
-        ingresos: "2222"
+        ingresos: "52323"
       },
       {
         top: 2,
         cancion: "Tracks 2",
-        ingresos: "4111"
+        ingresos: "9877"
       },
       {
         top: 3,
         cancion: "Tracks 3",
-        ingresos: "4554"
+        ingresos: "4335"
       },
       {
         top: 4,
         cancion: "Tracks 4",
-        ingresos: "90999"
+        ingresos: "87788"
       },
       {
         top: 5,
         cancion: "Tracks 5",
-        ingresos: "78999"
+        ingresos: "2222"
       },
       {
         top: 6,
         cancion: "Tracks 6",
+        ingresos: "4111"
+      },
+      {
+        top: 7,
+        cancion: "Tracks 7",
+        ingresos: "4554"
+      },
+      {
+        top: 8,
+        cancion: "Tracks 8",
+        ingresos: "90999"
+      },
+      {
+        top: 9,
+        cancion: "Tracks 9",
+        ingresos: "78999"
+      },
+      {
+        top: 10,
+        cancion: "Tracks 10",
         ingresos: "65420"
       }
     ]];
   }
 
   setVariables(nuIndex: Integer) {
-    this.consultaForm = this._formBuilder.group({
-      canal: [''],
-      fechaInicio: [''],
-      fechaFinal: ['']
-    });
-
     this.configChartPais = new Chart(
       "",
       this.arConfigChartPais[nuIndex],
@@ -292,35 +331,31 @@ export class ArtistaAnaliticaComponent implements OnInit {
     );
 
     this.obStreams = this.arStreams[nuIndex];
-    this.obFollowers = this.arFollowers[nuIndex];
+    this.arFollowers = this.arFollowersTemp[nuIndex];
     this.tops = this.arTops[nuIndex];
     this.config = this.configLineYouTube;
-
   }
 
-  onChange(event: any) {
-    this.config = (event.target.value == "Spotify") ? this.configLineSpotify : this.configLineYouTube;
-  }
-
+  //Método temporal para simulación de datos
   onChangeArtista(event: any) {
     this.artistaSelected = event.target.value;
   }
 
+  //Método temporal para simulación de datos
   verAnaliticaArtista() {
     var me = this;
-
     switch (me.artistaSelected) {
-      case "Mala Fama":
-        me.setVariables(0);
-        break;
-      case "Los Rebeldes":
-        me.setVariables(1);
-        break;
-      case "Rocio Quiroz":
+      case "El Pepo":
         me.setVariables(2);
         break;
-      default:
+      case "Los Rebeldes":
         me.setVariables(0);
+        break;
+      case "Rocio Quiroz":
+        me.setVariables(1);
+        break;
+      default:
+        me.setVariables(2);
         break;
 
     }
@@ -328,9 +363,196 @@ export class ArtistaAnaliticaComponent implements OnInit {
     me.showInfo = true;
   }
 
-  regresar() {
-    this.showSelect = true;
-    this.showInfo = false;
+  /**
+   * Method: CargarInformacion
+   * ----------------------------------------------------
+   * Método que obtiene toda la información inicial de 
+   * analitycs por artista: seguidores, reproducciones, oyentes.
+   */
+  CargarInformacion() {
+    var me = this;
+    me.loading = true;
+
+    //Obtiene seguidores
+    me.getSeguidores();
+
+    //Obtiene oyentes por canal (Por defecto Youtube)
+    me.getOyentesCanal(Constante.Youtube);
+
+    //Obtiene oyentes por país y canal (Por defecto Youtube)
+    me.getOyentesPaisCanal(Constante.Youtube);
   }
 
+  /**
+   * Method: getSeguidores
+   * ----------------------------------------------------
+   * Obtiene la información de seguidores por canal
+   */
+  getSeguidores() {
+    var me = this,
+      obParams = {
+        "fecha": "2019-05-30",
+        "artistaId": 13
+      };
+    me._serviciosArtistasAnalitycs.getAccessSeguidores(obParams);
+    me._serviciosArtistasAnalitycs.getSeguidores().subscribe((res: any) => {
+      if (res.status = Constante.ok) {
+        me.arFollowersTemp[2] = res.body.res[0];
+        //me.arFollowers = res.body.res[0];
+        me.loading = false;
+      } else {
+        me._message.error(res);
+      }
+    }, error => {
+      me._message.error(Mensaje.noBackEnd);
+    });
+  }
+
+  /**
+   * Method: getOyentesCanal
+   * ----------------------------------------------------
+   * Obtiene la información de oyentes por canal
+   * 
+   * @param  {Integer}  nuCanal Identificador del canal
+   */
+  getOyentesCanal(nuCanal: Integer) {
+    var me = this,
+      obParams = {
+        "periodoInicial=": "2019-04-04",
+        "periodoFinal": "2019-04-09",
+        "canalId": nuCanal,
+        "artistaId": 13
+      };
+    me._serviciosArtistasAnalitycs.getAccessOyentes(obParams);
+    me._serviciosArtistasAnalitycs.getOyentes().subscribe((res: any) => {
+      if (res.status = Constante.ok) {
+        me.configLineChart(res.body.res[0], nuCanal);
+        me.loading = false;
+      } else {
+        me._message.error(res);
+      }
+    }, error => {
+      me._message.error(Mensaje.noBackEnd);
+    });
+  }
+
+  /**
+   * Method: getOyentesPaisCanal
+   * ----------------------------------------------------
+   * Obtiene la información de oyentes por países de un
+   * canal.
+   * @param  {Integer}  nuCanal Identificador del canal
+   */
+  getOyentesPaisCanal(nuCanal: Integer) {
+    var me = this,
+      obParams = {
+        "fecha": "2019-05-30",
+        "canalId": nuCanal,
+        "artistaId": 13
+      };
+    me._serviciosArtistasAnalitycs.getAccessOyentesPais(obParams);
+    me._serviciosArtistasAnalitycs.getOyentesPais().subscribe((res: any) => {
+      if (res.status = Constante.ok) {
+        me.configPieChart(res.body.res[0], nuCanal);
+        me.loading = false;
+      } else {
+        me._message.error(res);
+      }
+    }, error => {
+      me._message.error(Mensaje.noBackEnd);
+    });
+  }
+
+  /**
+   * Method: configLineChart
+   * ----------------------------------------------------
+   * Organiza la data de acuerdo a los parámetros de
+   * la gráfica tipo Lineal.
+   * 
+   * @param  {any}      arOyentesData Información de oyentes
+   * @param  {Integer}  nuCanal Identificador del canal
+   */
+  configLineChart(arOyentesData: any[], nuCanal: Integer) {
+    var me = this,
+      arData = [],
+      nuLength = arOyentesData.length,
+      nuIndex = 0,
+      obOyentesData = null;
+
+    for (nuIndex; nuIndex < nuLength; nuIndex++) {
+      obOyentesData = arOyentesData[nuIndex];
+      arData[nuIndex] = [obOyentesData.fecha.substr(0, 10), obOyentesData.cantOyentes];
+    }
+
+    if (nuCanal == Constante.Spotify) {
+      me.arConfigLineSpotify[2] = arData;
+      me.config = new Chart(
+        "Vistas en Spotify",
+        me.arConfigLineSpotify[2],
+        ["Meses", "Spotify"]
+      );
+    } else {
+      me.arConfigLineYouTube[2] = arData;
+      me.config = new Chart(
+        "Vistas en YouTube",
+        me.arConfigLineYouTube[2],
+        ["Meses", "YouTube"]
+      );
+    }
+
+  }
+
+  /**
+   * Method: configPieChart
+   * ----------------------------------------------------
+   * Organiza la data de acuerdo a los parámetros de
+   * la gráfica tipo torta.
+   * 
+   * @param  {any}      arOyentesData Información de oyentes
+   * @param  {Integer}  nuCanal Identificador del canal   
+   */
+  configPieChart(arOyentesData: any[], nuCanal: Integer) {
+    var me = this,
+      arData = [],
+      nuLength = arOyentesData.length,
+      nuIndex = 0,
+      obOyentesData = null;
+
+    for (nuIndex; nuIndex < nuLength; nuIndex++) {
+      obOyentesData = arOyentesData[nuIndex];
+      arData[nuIndex] = [obOyentesData.pais, obOyentesData.oyentes];
+    }
+
+    me.arConfigChartPais[2] = arData;
+    me.configChartPais = new Chart(
+      "",
+      me.arConfigChartPais[2],
+      ["País", "Ingresos"]
+    );
+  }
+
+  /**
+   * Method: consultarInformacion
+   * ----------------------------------------------------
+   * Consulta información del artista a partir de los 
+   * filtros seleccionados.
+   * 
+   */
+  consultarInformacion() {
+    var me = this,
+      obParamsQuery = me.consultaForm.value;
+
+    if (me.artistaSelected == "El Pepo") {
+      me.getOyentesCanal(obParamsQuery.canal);
+      me.getOyentesPaisCanal(obParamsQuery.canal);
+    } else {
+      me.config = (obParamsQuery.canal == Constante.Spotify) ? me.configLineSpotify : me.configLineYouTube;
+    }
+  }
+
+  regresar() {
+    var me = this;
+    me.inicializarVariables();
+    me.artistaSelected = "El Pepo";
+  }
 }

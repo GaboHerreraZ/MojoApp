@@ -9,8 +9,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AccessArtistaService } from '../../../servicios/mojo/artista/access.artista.service';
 import { double } from 'aws-sdk/clients/lightsail';
 import { AccessIngresosService } from 'src/app/servicios/mojo/ingresos/access.ingresos.service';
-import { debug } from 'util';
-import { ConsoleLogger } from '@aws-amplify/core';
 
 @Component({
   selector: 'app-ingresos',

@@ -17,10 +17,6 @@ export class IngresosService {
   }
 
   public getIngresosPeriodo(): Observable<HttpResponse<any>> {
-    var obParams = {
-      "periodoInicial": '2019-03-01',
-      "periodoFinal": '2019-06-01'
-    }
     return this._http.get(`${Operacion.URLACCOUNTING}${Operacion.ingresosPorPeriodo}`, { observe: 'response' });
   }
 

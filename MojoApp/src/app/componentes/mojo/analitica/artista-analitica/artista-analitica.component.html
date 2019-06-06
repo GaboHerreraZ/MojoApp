@@ -5,9 +5,9 @@
 		</div>
 		<div class="col-md-4" style="margin-top:1rem">
 			<div class="form-group">
-				<label for="exampleFormControlInput1">Artista:</label>
-				<select (change)="onChangeArtista($event)" formControlName="artista" class="form-control" id="artistaSelect">
-					<option>Mala Fama</option>
+				<label>Artista:</label>
+				<select (change)="onChangeArtista($event)" class="form-control" id="artistaSelect">
+					<option>El Pepo</option>
 					<option>Los Rebeldes</option>
 					<option>Rocio Quiroz</option>
 				</select>
@@ -29,64 +29,60 @@
 		<div class="row dashedborder">
 			<div class="col-12" style="padding:0;">
 				<ul class="text-center" width="100%" style="margin-bottom:0; padding: 0;">
+					<li title="facebook" class="text-center">
+						<div>
+							<img class="img-style" src="assets/iconos/facebook.png">
+							<strong class="cantidad">{{arFollowers[0].followers}}</strong>
+							<p class="followers">Followers</p>
+						</div>
+					</li>
 					<li title="Spotify" class="text-center">
 						<div>
 							<img class="img-style" src="assets/iconos/spotify.png">
-							<strong class="cantidad">{{obFollowers[0]}}</strong>
+							<strong class="cantidad">{{arFollowers[1].followers}}</strong>
 							<p class="followers">Followers</p>
 						</div>
 					</li>
 					<li title="Youtube" class="text-center">
 						<div>
 							<img class="img-style" src="assets/iconos/youtube.png">
-							<strong class="cantidad">{{obFollowers[1]}}</strong>
-							<p class="followers">Followers</p>
-						</div>
-					</li>
-					<li title="facebook" class="text-center">
-						<div>
-							<img class="img-style" src="assets/iconos/facebook.png">
-							<strong class="cantidad">{{obFollowers[2]}}</strong>
-							<p class="followers">Followers</p>
-						</div>
-					</li>
-					<li title="Deezer" class="text-center">
-						<div>
-							<img class="img-style" src="assets/iconos/deezer.png">
-							<strong class="cantidad">{{obFollowers[3]}}</strong>
-							<p class="followers">Followers</p>
-						</div>
-					</li>
-					<li title="iTunes" class="text-center">
-						<div>
-							<img class="img-style" src="assets/iconos/itunes.png">
-							<strong class="cantidad">{{obFollowers[4]}}</strong>
-							<p class="followers">Followers</p>
-						</div>
-					</li>
-					<li title="Twitter" class="text-center">
-						<div>
-							<img class="img-style" src="assets/iconos/twitter.png">
-							<strong class="cantidad">{{obFollowers[5]}}</strong>
+							<strong class="cantidad">{{arFollowers[2].followers}}</strong>
 							<p class="followers">Followers</p>
 						</div>
 					</li>
 					<li title="Instagram" class="text-center">
 						<div>
 							<img class="img-style" src="assets/iconos/Instagram.png">
-							<strong class="cantidad">{{obFollowers[6]}}</strong>
+							<strong class="cantidad">{{arFollowers[3].followers}}</strong>
+							<p class="followers">Followers</p>
+						</div>
+					</li>
+					<li title="iTunes" class="text-center">
+						<div>
+							<img class="img-style" src="assets/iconos/itunes.png">
+							<strong class="cantidad">{{arFollowers[4].followers}}</strong>
+							<p class="followers">Followers</p>
+						</div>
+					</li>
+					<li title="Deezer" class="text-center">
+						<div>
+							<img class="img-style" src="assets/iconos/deezer.png">
+							<strong class="cantidad">{{arFollowers[5].followers}}</strong>
+							<p class="followers">Followers</p>
+						</div>
+					</li>
+					<li title="Twitter" class="text-center">
+						<div>
+							<img class="img-style" src="assets/iconos/twitter.png">
+							<strong class="cantidad">{{arFollowers[6].followers}}</strong>
 							<p class="followers">Followers</p>
 						</div>
 					</li>
 				</ul>
-
-
 			</div>
 		</div>
-
 	</div>
 </div>
-
 <br>
 <div *ngIf="showInfo" class="redes row container-fluid">
 	<div class="col-12">
@@ -185,14 +181,14 @@
 				<div class="col-md-3">
 					<div class="form-group">
 						<label for="canalSelect">Canal</label>
-						<select (change)="onChange($event)" formControlName="canal" class="form-control" id="canalSelect">
-							<option>YouTube</option>
-							<option>Spotify</option>
+						<select formControlName="canal" class="form-control" id="canalSelect">
+							<option value="7">YouTube</option>
+							<option value="4">Spotify</option>
 						</select>
 					</div>
 				</div>
 				<div class="col-md-3" style="margin-top:31px;">
-					<button type="button" class="btn btn-dark button-style "><strong>Consultar</strong></button>
+					<button (click)="consultarInformacion()" type="button" class="btn btn-dark button-style "><strong>Consultar</strong></button>
 				</div>
 			</div>
 		</form>
@@ -237,3 +233,6 @@
 				<button (click)="regresar()" type="button" class="btn btn-dark button-style "><strong>Regresar</strong></button>
 			</div>
 		</div>
+	</div>
+</div>
+<app-loading [loading]="loading"></app-loading>
