@@ -59,7 +59,8 @@ export class AnaliticaComponent implements OnInit {
         ["Peru", 2556],
         ["Brasil", 233]
       ],
-      ["País","Ingresos"]
+      ["País","Ingresos"],
+      null
     );
 
 
@@ -79,7 +80,8 @@ export class AnaliticaComponent implements OnInit {
         ["Nov",  13.9,  8.6],
         ["Dic",  9.6,  2.5]
      ],
-     ["Meses", "Spotify", "Itunes"]
+     ["Meses", "Spotify", "Itunes"],
+     null
     );
 
   }
@@ -133,7 +135,8 @@ export class AnaliticaComponent implements OnInit {
             ["Peru", 4556],
             ["Brasil", 133]
           ],
-          ["País","Ingresos"]
+          ["País","Ingresos"],
+          null
         );
     
     
@@ -153,7 +156,8 @@ export class AnaliticaComponent implements OnInit {
             ["Nov",  12.9,  5.6],
             ["Dic",  10.6,  3.5]
          ],
-         ["Meses", "Spotify", "Itunes"]
+         ["Meses", "Spotify", "Itunes"],
+         null
         );
         break;
       case tops2 :
@@ -166,7 +170,8 @@ export class AnaliticaComponent implements OnInit {
             ["Peru", 2556],
             ["Brasil", 233]
           ],
-          ["País","Ingresos"]
+          ["País","Ingresos"],
+          null
         );
     
     
@@ -186,7 +191,8 @@ export class AnaliticaComponent implements OnInit {
             ["Nov",  13.9,  8.6],
             ["Dic",  9.6,  2.5]
          ],
-         ["Meses", "Spotify", "Itunes"]
+         ["Meses", "Spotify", "Itunes"],
+         null
         );
         break;  
     }

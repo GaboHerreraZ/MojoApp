@@ -59,7 +59,8 @@ export class IngresosComponent implements OnInit {
         ["Australia", 1.249],
         ["Otros", 7.81]
       ],
-      ["País", "Ingresos"]
+      ["País", "Ingresos"],
+      null
     );
 
     this.configChartCanal = new Chart(
@@ -68,7 +69,8 @@ export class IngresosComponent implements OnInit {
         ["Youtube", 215.84],
         ["Deezer", 2]
       ],
-      ["Canal", "Ingresos"]
+      ["Canal", "Ingresos"],
+      null
     );
 
     this.configChartMes = new Chart(
@@ -78,7 +80,8 @@ export class IngresosComponent implements OnInit {
         ["Febrero", 0],
         ["Marzo", 215.84]
       ],
-      ["Mes", "Ingresos"]
+      ["Mes", "Ingresos"],
+      null
     );
 
   }
@@ -212,7 +215,8 @@ export class IngresosComponent implements OnInit {
             ["Australia", 1.249],
             ["Otros", 7.81]
           ],
-          ["País", "Ingresos"]
+          ["País", "Ingresos"],
+          null
         );
 
         this.configChartCanal = new Chart(
@@ -221,7 +225,8 @@ export class IngresosComponent implements OnInit {
             ["Youtube", 215.84],
             ["Deezer", 2]
           ],
-          ["Canal", "Ingresos"]
+          ["Canal", "Ingresos"],
+          null
         );
 
         this.configChartMes = new Chart(
@@ -231,7 +236,8 @@ export class IngresosComponent implements OnInit {
             ["Febrero", 0],
             ["Marzo", 215.84]
           ],
-          ["Mes", "Ingresos"]
+          ["Mes", "Ingresos"],
+          null
         );
 
         break;
@@ -249,7 +255,8 @@ export class IngresosComponent implements OnInit {
             ["Australia", 17.249],
             ["Otros", 19.81]
           ],
-          ["País", "Ingresos"]
+          ["País", "Ingresos"],
+          null
         );
 
         this.configChartCanal = new Chart(
@@ -258,17 +265,19 @@ export class IngresosComponent implements OnInit {
             ["Youtube", 128.84],
             ["Deezer", 282.73]
           ],
-          ["Canal", "Ingresos"]
+          ["Canal", "Ingresos"],
+          null
         );
 
         this.configChartMes = new Chart(
           "Ganancia por mes",
           [
-            ["Enero", 123],
+            ["Enero", 123], 
             ["Febrero", 341],
             ["Marzo", 215.84]
           ],
-          ["Mes", "Ingresos"]
+          ["Mes", "Ingresos"],
+          null
         );
         break;
       }

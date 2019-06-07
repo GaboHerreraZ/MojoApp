@@ -1,5 +1,5 @@
-<div *ngIf="showSelect" class="redes row container-fluid">
-    <div class="row dashedborder w-100">
+<div id="container-gral" class="container-fluid">
+    <div *ngIf="showSelect" class="redes row dashedborder w-100">
         <div class="col-md-4 text-center">
             <img style="width: 120px;height:120px;" src="assets/iconos/microfono.png" class="card-img" alt="microfono">
         </div>
@@ -17,17 +17,15 @@
             <button (click)="verAnaliticaArtista()" type="button" class="btn btn-dark button-style "><strong>Consultar</strong></button>
         </div>
     </div>
-</div>
-
-<div *ngIf="showInfo" class="row">
-    <div class="col-md-6">
-        <button (click)="regresar()" type="button" class="btn btn-dark button-style "><strong>Regresar</strong></button>
-    </div>
-</div>
-<br /><br />
-<div *ngIf="showInfo" class="redes row container-fluid">
-    <div class="col-12">
-        <div class="row">
+    <div *ngIf="showInfo">
+        <div  class="row">
+            <div class="col-md-6">
+                <button (click)="regresar()" type="button" class="btn btn-dark button-style "><strong>Regresar</strong></button>
+            </div>
+        </div>
+        <br>
+        <br>
+        <div *ngIf="showInfo" class="redes row">
             <div class="col-12">
                 <h5>Followers:</h5>
             </div>
@@ -87,12 +85,8 @@
                 </ul>
             </div>
         </div>
-    </div>
-</div>
-<br>
-<div *ngIf="showInfo" class="redes row container-fluid">
-    <div class="col-12">
-        <div class="row">
+        <br>
+        <div *ngIf="showInfo" class="redes row">
             <div class="col-12">
                 <h5>Reproducciones:</h5>
             </div>
@@ -129,11 +123,7 @@
                         </div>
                     </li>
                 </ul>
-
             </div>
-        </div>
-        <div class="row">
-            <app-combo-chart></app-combo-chart>
         </div>
         <br>
         <div class="row">
@@ -170,9 +160,9 @@
                     <div class="form-group">
                         <label for="canalSelect">Canal</label>
                         <select formControlName="canal" class="form-control" id="canalSelect">
-							<option value="7">YouTube</option>
-							<option value="4">Spotify</option>
-						</select>
+                                    <option value="7">YouTube</option>
+                                    <option value="4">Spotify</option>
+                                </select>
                     </div>
                 </div>
                 <div class="col-md-3" style="margin-top:31px;">
@@ -181,9 +171,11 @@
             </div>
         </form>
         <br>
-        <div class="row">
-            <div class="chart">
-                <app-line-chart [configLine]="config"></app-line-chart>
+        <div class="row text-center">
+            <div class="col-10">
+                <div class="chart text-center">
+                    <app-line-chart [configLine]="config"></app-line-chart>
+                </div>
             </div>
         </div>
         <br>
@@ -211,11 +203,12 @@
             </div>
             <div class="col-md-6">
                 <label>Reproducciones por país</label>
-                <div class="chart">
+                <div class="chart text-center">
                     <app-pie-chart [configChart]="configChartPais"></app-pie-chart>
                 </div>
             </div>
         </div>
     </div>
+    
 </div>
 <app-loading [loading]="loading"></app-loading>

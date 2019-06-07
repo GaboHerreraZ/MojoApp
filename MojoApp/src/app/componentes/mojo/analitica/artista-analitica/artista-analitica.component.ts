@@ -297,19 +297,22 @@ export class ArtistaAnaliticaComponent implements OnInit {
     this.configChartPais = new Chart(
       "",
       this.arConfigChartPais[nuIndex],
-      ["País", "Ingresos"]
+      ["País", "Ingresos"],
+      null
     );
 
     this.configLineYouTube = new Chart(
       "Vistas en YouTube",
       this.arConfigLineYouTube[nuIndex],
-      ["Meses", "YouTube"]
+      ["Meses", "YouTube"],
+      null
     );
 
     this.configLineSpotify = new Chart(
       "Vistas en Spotify",
       this.arConfigLineSpotify[nuIndex],
-      ["Meses", "Spotify"]
+      ["Meses", "Spotify"],
+      null
     );
 
     this.obStreams = this.arStreams[nuIndex];
@@ -471,14 +474,16 @@ export class ArtistaAnaliticaComponent implements OnInit {
       me.config = new Chart(
         "Vistas en Spotify",
         me.arConfigLineSpotify[2],
-        ["Meses", "Spotify"]
+        ["Meses", "Spotify"],
+        null
       );
     } else {
       me.arConfigLineYouTube[2] = arData;
       me.config = new Chart(
         "Vistas en YouTube",
         me.arConfigLineYouTube[2],
-        ["Meses", "YouTube"]
+        ["Meses", "YouTube"],
+        null
       );
     }
 
@@ -509,7 +514,8 @@ export class ArtistaAnaliticaComponent implements OnInit {
     me.configChartPais = new Chart(
       "",
       me.arConfigChartPais[2],
-      ["País", "Ingresos"]
+      ["País", "Ingresos"],
+      null
     );
   }
 
