@@ -17,12 +17,12 @@ export class Operacion {
         public static readonly getPaises: string = 'dev/paises?pais=ar';
         public static readonly getCanales: string = 'dev/canales';
 
-        //Ingresos
+        /*Ingresos*/
         public static readonly estadoCuenta: string = 'dev/estadoCuenta';
         public static readonly ingresosPorPeriodo: string = 'dev/ingresosAfiliado';
         public static readonly detalleIngresoEnPeriodo: string = 'dev/detalleIngresosAfiliado';
 
-        //Artista-analítica
+        /*Artista-analítica*/
         public static readonly getOyentes: string = 'dev/oyentes';
         public static readonly getOyentesPais: string = 'dev/followersPais';
         public static readonly getSeguidores: string = 'dev/followers';
