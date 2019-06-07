@@ -6,12 +6,13 @@ import { SearchPipe } from '../../pipes/search.pipe';
 import { LoadingComponent } from '../../componentes/loading/loading.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { AutocompleteComponent } from '../../elementos/autocomplete/autocomplete.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { GoogleChartsModule } from 'angular-google-charts';
 import { PieChartComponent } from 'src/app/componentes/charts/pie-chart/pie-chart.component';
 import { TableChartComponent } from 'src/app/componentes/charts/table-chart/table-chart.component';
 import { LineChartComponent } from '../../componentes/charts/line-chart/line-chart.component';
+import { ComboChartComponent } from '../../componentes/charts/combo-chart/combo-chart.component';
 
 @NgModule({
   declarations: [
@@ -20,12 +21,14 @@ import { LineChartComponent } from '../../componentes/charts/line-chart/line-cha
     AutocompleteComponent,
     PieChartComponent,
     TableChartComponent,
-    LineChartComponent
+    LineChartComponent,
+    ComboChartComponent
 
   ],
   imports: [
     CommonModule,
     RouterModule,
+    FormsModule,
     ReactiveFormsModule,
     NgbModule,
     NgxPaginationModule,
@@ -43,6 +46,7 @@ import { LineChartComponent } from '../../componentes/charts/line-chart/line-cha
   ],
   exports:[RouterModule,
            NgxLoadingModule,
+           FormsModule,
            ReactiveFormsModule,
            NgxPaginationModule,
            NgbModule,
@@ -52,7 +56,8 @@ import { LineChartComponent } from '../../componentes/charts/line-chart/line-cha
            AutocompleteComponent,
            PieChartComponent,
            TableChartComponent,
-           LineChartComponent
+           LineChartComponent,
+           ComboChartComponent
           ]
 })
 export class ComunModule { }

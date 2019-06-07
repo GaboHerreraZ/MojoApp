@@ -20,7 +20,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     NavbarComponent,
     LoginComponent,
     PaginasComponent,
-    FooterComponent
+    FooterComponent,
   ],
   imports: [
     BrowserModule,

@@ -40,10 +40,12 @@ export class LineChartComponent implements OnInit {
       title: 'Oyentes'
     },
     curveType: 'function',
-    legend: { position: 'bottom' }
+    legend: { position: 'bottom' },
+    colors:["#fd365e","#feb50d"]
   };
 
-  width = window.innerWidth <= 767 ? "100%" : 1140;
-  height = window.innerWidth <= 767 ? "100%" : 400;
+  width = window.innerWidth <= 767 ? 500 : 1140;
+  height = window.innerWidth <= 767 ? 500 : 400;
+
 
 }

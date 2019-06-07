@@ -116,6 +116,11 @@ export class AnaliticaComponent implements OnInit {
     });
   }*/
 
+  get hola(){
+    console.log("aaaa");
+    return;
+  }
+
   consultar(){
     switch (this.tops){
       case tops1 :
