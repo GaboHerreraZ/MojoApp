@@ -12,6 +12,14 @@
 
 /*---------------------*/
 
+.ngx-pagination {
+    font-size: .8em;
+}
+
+.ngx-pagination li:last-child {
+    padding-right: 0;
+}
+
 .ngx-pagination .current {
     background-color: #edd920 !important;
     color: #161616 !important;
