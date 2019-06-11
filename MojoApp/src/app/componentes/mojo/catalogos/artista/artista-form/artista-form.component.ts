@@ -23,7 +23,7 @@ export class ArtistaFormComponent implements OnInit {
   show: boolean = false;
 
   constructor(private _serviciosComunes: AccessComunesService,
-    private _message: AlertService) { }
+              private _message: AlertService) { }
 
   ngOnInit() {
     var me = this;

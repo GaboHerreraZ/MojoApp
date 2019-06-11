@@ -1,66 +1,66 @@
 <div class="row">
-	<div class="col-md-6 text-left">
-		<button *ngIf="showDetail" (click)="regresar()" type="button" class="btn btn-dark button-style "><strong>Regresar</strong></button>
-	</div>
+    <div class="col-md-6 text-left">
+        <button *ngIf="showDetail" (click)="regresar()" type="button" class="btn btn-dark button-style "><strong>Regresar</strong></button>
+    </div>
 </div>
 <br />
 <app-ingreso-detail *ngIf="showDetail" [ingresoPeriodoData]="ingresoPeriodoData"></app-ingreso-detail>
 
 <div class="row" *ngIf="!showDetail">
-	<div class="col-md-3">
-		<div class="card">
-			<div class="card-body">
-				<h5 class="card-title text-center">Total ingresos</h5>
-				<div class="card-text text-center">
-					<span class="span-total">
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title text-center">Total ingresos</h5>
+                <div class="card-text text-center">
+                    <span class="span-total">
 						<i class="fas fa-dollar-sign"><span style="color:black; margin-left: 10px;">{{totalIngresos}}</span></i>
-					</span>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="col-md-3">
-		<div class="card">
-			<div class="card-body">
-				<h5 class="card-title text-center">Total gastos</h5>
-				<div class="card-text text-center">
-					<span class="span-total">
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title text-center">Total gastos</h5>
+                <div class="card-text text-center">
+                    <span class="span-total">
 						<i class="fas fa-dollar-sign"><span style="color:black; margin-left: 10px;">{{totalEgresos}}</span></i>
-					</span>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="col-md-3">
-		<div class="card">
-			<div class="card-body">
-				<h5 class="card-title text-center">Total saldo</h5>
-				<div class="card-text text-center">
-					<span class="span-total">
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title text-center">Total saldo</h5>
+                <div class="card-text text-center">
+                    <span class="span-total">
 						<i class="fas fa-dollar-sign"><span style="color:black; margin-left: 10px;">{{totalSaldo}}</span></i>
-					</span>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="col-md-3">
-		<div class="card">
-			<div class="card-body">
-				<h5 class="card-title text-center">Ingresos periodo</h5>
-				<div class="card-text text-center">
-					<span class="span-total">
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title text-center">Ingresos periodo</h5>
+                <div class="card-text text-center">
+                    <span class="span-total">
 						<i class="fas fa-dollar-sign"><span style="color:black; margin-left: 10px;">{{gananciaPeriodo}}</span></i>
-					</span>
-				</div>
-			</div>
-		</div>
-	</div>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <br>
 <div class="row" *ngIf="!showDetail">
-	<div class="col-md-4 classDiv">
-		<h5>Seleccione los filtros de consulta:</h5>
-	</div>
+    <div class="col-md-4 classDiv">
+        <h5>Seleccione los filtros de consulta:</h5>
+    </div>
 </div>
 <br>
 
@@ -116,65 +116,65 @@
 </form-->
 <br>
 <div class="row" *ngIf="!showDetail">
-	<app-pie-chart [configChart]="configChartPais"></app-pie-chart>
-	<app-pie-chart [configChart]="configChartCanal"></app-pie-chart>
-	<app-pie-chart [configChart]="configChartMes"></app-pie-chart>
+    <app-pie-chart [configChart]="configChartPais"></app-pie-chart>
+    <app-pie-chart [configChart]="configChartCanal"></app-pie-chart>
+    <app-pie-chart [configChart]="configChartMes"></app-pie-chart>
 
 </div>
 <div class="row" *ngIf="!showDetail">
-	<div class="col-md-3">
-		<label>Top 10 Ingresos</label>
-	</div>
+    <div class="col-md-3">
+        <label>Top 10 Ingresos</label>
+    </div>
 </div>
 <div class="row" *ngIf="!showDetail">
-	<div class="col-md-3">
-		<div class="table-responsive col-md-12">
-			<table class="table">
-				<thead class="thead-dark">
-					<tr>
-						<th scope="col">Top</th>
-						<th scope="col">Canción</th>
-						<th scope="col">Ingresos</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr *ngFor="let top of tops">
-						<td>{{top.top}}</td>
-						<td>{{top.cancion}}</td>
-						<td>{{top.ingresos|currency:'USD'}}</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-	</div>
-	<div class="col-md-9">
-		<div class="table-responsive col-md-12">
-			<table class="table">
-				<thead class="thead-dark">
-					<tr>
-						<th scope="col">Periodo</th>
-						<th scope="col">Total</th>
-						<!--th scope="col">Estado</th-->
-						<th scope="col">Acción</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr *ngFor="let dato of datos">
-						<td>{{dato.perido}}</td>
-						<td>{{dato.monto}}</td>
-						<!--td *ngIf="dato.estado != null">
+    <div class="col-md-3">
+        <div class="table-responsive col-md-12">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Top</th>
+                        <th scope="col">Canción</th>
+                        <th scope="col">Ingresos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let top of tops">
+                        <td>{{top.top}}</td>
+                        <td>{{top.cancion}}</td>
+                        <td>{{top.ingresos|currency:'USD'}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <div class="table-responsive col-md-12">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Periodo</th>
+                        <th scope="col">Total</th>
+                        <!--th scope="col">Estado</th-->
+                        <th scope="col">Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let dato of datos">
+                        <td>{{dato.perido}}</td>
+                        <td>{{dato.monto}}</td>
+                        <!--td *ngIf="dato.estado != null">
                             {{dato.estado}}
                         </td>
                         <td *ngIf="dato.estado == null">
                             -----
                         </td-->
-						<td>
-							<button type="button" class="btn btn-dark button-style" (click)="verDetallePeriodo(dato)"><strong>Ver</strong></button>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-	</div>
+                        <td>
+                            <button type="button" class="btn btn-dark button-style" (click)="verDetallePeriodo(dato)"><strong>Ver</strong></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 <app-loading [loading]="loading"></app-loading>
