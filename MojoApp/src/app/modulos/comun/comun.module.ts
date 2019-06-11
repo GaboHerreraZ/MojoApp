@@ -13,6 +13,7 @@ import { PieChartComponent } from 'src/app/componentes/charts/pie-chart/pie-char
 import { TableChartComponent } from 'src/app/componentes/charts/table-chart/table-chart.component';
 import { LineChartComponent } from '../../componentes/charts/line-chart/line-chart.component';
 import { ComboChartComponent } from '../../componentes/charts/combo-chart/combo-chart.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { ComboChartComponent } from '../../componentes/charts/combo-chart/combo-
   imports: [
     CommonModule,
     RouterModule,
+    NgSelectModule,
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
@@ -46,6 +48,7 @@ import { ComboChartComponent } from '../../componentes/charts/combo-chart/combo-
   ],
   exports:[RouterModule,
            NgxLoadingModule,
+           NgSelectModule,
            FormsModule,
            ReactiveFormsModule,
            NgxPaginationModule,

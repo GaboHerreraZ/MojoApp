@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { BsDatepickerConfig, BsDatepickerViewMode } from 'ngx-bootstrap/datepicker';
+
 import { Title } from '@angular/platform-browser';
 import { Constante } from '../../../utilidades/constante';
 import { Chart } from '../../../modelos/chart';
@@ -17,6 +19,67 @@ import { AccessIngresosService } from 'src/app/servicios/mojo/ingresos/access.in
 })
 export class IngresosComponent implements OnInit {
 
+  minMode: BsDatepickerViewMode = 'month';
+  bsConfig: Partial<BsDatepickerConfig>;
+  paises = null;
+  show = false;
+  removable = true;
+  filters =[
+    {id:1,filter:"Artista:el pepo"},
+    {id:2,filter:"Artista:el pepudo"},
+    {id:3,filter:"Artista:el pepito"}
+
+  ];
+  cities = [
+    {id: 1, name: 'Sur america'},
+    {id: 2, name: 'Europa'},
+];
+
+  constructor(){
+
+  }
+
+  onChange(event:any){
+    this.show = true;
+    if(event == undefined){
+      return;
+    }
+
+    if(event.name == "Sur america"){
+      this.paises  = [
+        {id: 1, name: 'Colombia'},
+        {id: 2, name: 'Peru'},
+        {id: 3, name: 'Argentina'},
+        {id: 4, name: 'Brasil'},
+        {id: 5, name: 'Bolivia'}
+      ]
+    }else{
+      this.paises = [
+        {id: 1, name: 'España'},
+        {id: 2, name: 'Italia'},
+        {id: 3, name: 'Alemania'}
+      ]
+
+    }
+  }
+
+  remove(filter){
+    const index = this.filters.indexOf(filter);
+    if (index >= 0) {
+      this.filters.splice(index, 1);
+    }
+  }
+
+  ngOnInit(){
+    this.bsConfig = Object.assign({}, {
+      minMode : this.minMode,
+      dateInputFormat: 'MM/YYYY'
+    });
+  }
+
+
+
+  /*
   constructor(private _title: Title,
     private _comunService: AccessComunesService,
     private _message: AlertService,
@@ -26,13 +89,13 @@ export class IngresosComponent implements OnInit {
 
     this._title.setTitle(Constante.tituloIngresos);
   }
+  
   datos: any[];
   tops = tops1;
   loading: boolean;
   canales: any[];
   artistas: any[];
   consultaForm: FormGroup;
-  /*--Graficas--*/
   configChartPais: Chart;
   configChartCanal: Chart;
   configChartMes: Chart;
@@ -171,14 +234,13 @@ export class IngresosComponent implements OnInit {
     });
   }
 
-  /**
  * Method: verDetallePeriodo
  * ----------------------------------------------------
  * Asigna la información del ingreso por periodo a mostrar y despliega
  * la vista del detalle.
  * 
  * @param  {} obIngreso Información del ingreso por periodo seleccionado
- */
+ 
   verDetallePeriodo(obIngreso: any) {
     var me = this;
     console.log(obIngreso);
@@ -283,10 +345,11 @@ export class IngresosComponent implements OnInit {
       }
 
     }
-
   }
+ */
 }
 
+/* 
 
 const tops1: any[] = [
   {
@@ -397,3 +460,4 @@ const tops2: any[] = [
 
 ];
 
+*/
