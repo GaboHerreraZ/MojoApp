@@ -1,5 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
+@import "~@ng-select/ng-select/themes/default.theme.css";
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 /*---Estilos de calendario---*/
 
@@ -30,6 +32,7 @@
     color: #edd920;
     line-height: 15px;
     border-radius: 0px;
+    margin-top: 31px;
 }
 
 .button-style i {
@@ -147,4 +150,9 @@ section {
     section {
         padding-bottom: 250px;
     }
+}
+
+.dashedborder {
+    border: 1px dashed #c4d1d9;
+    padding: 10px;
 }

@@ -23,7 +23,7 @@
                     <label for="fechaInicio">Fecha final:</label>
                     <div class="form-group">
                         <div class="input-group">
-                            <input formControlName="fechaFinal" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #p="ngbDatepicker">
+                            <input formControlName="fechaFinal" outsideDays="collapsed" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #p="ngbDatepicker">
                             <div class="input-group-append">
                                 <button class="btn btn-outline-secondary far fa-calendar-alt" (click)="p.toggle()" type="button"></button>
                             </div>
