@@ -27,8 +27,10 @@ export class IngresosComponent implements OnInit {
   filters =[
     {id:1,filter:"Artista:el pepo"},
     {id:2,filter:"Artista:el pepudo"},
+    {id:3,filter:"Artista:el pepito"},
+    {id:3,filter:"Artista:el pepito"},
+    {id:3,filter:"Artista:el pepito"},
     {id:3,filter:"Artista:el pepito"}
-
   ];
   cities = [
     {id: 1, name: 'Sur america'},
