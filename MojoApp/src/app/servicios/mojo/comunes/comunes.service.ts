@@ -33,6 +33,8 @@ export class ComunesService {
     return this.subject.asObservable();
   }
 
+  
+
 
   //* Metodo para probar los servicios que se van creado */
   public metodoPruebas():Observable<HttpResponse<any>>{

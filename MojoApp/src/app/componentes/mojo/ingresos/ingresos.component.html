@@ -1,125 +1,3 @@
-<!--<div class="row">
-    <div class="col-md-6 text-left">
-        <button *ngIf="showDetail" (click)="regresar()" type="button" class="btn btn-dark button-style "><strong>Regresar</strong></button>
-    </div>
-</div>
-<br />
-<app-ingreso-detail *ngIf="showDetail" [ingresoPeriodoData]="ingresoPeriodoData"></app-ingreso-detail>
-
-<div class="row" *ngIf="!showDetail">
-    <div class="col-md-3">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title text-center">Total ingresos</h5>
-                <div class="card-text text-center">
-                    <span class="span-total">
-						<i class="fas fa-dollar-sign"><span style="color:black; margin-left: 10px;">{{totalIngresos}}</span></i>
-                    </span>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title text-center">Total gastos</h5>
-                <div class="card-text text-center">
-                    <span class="span-total">
-						<i class="fas fa-dollar-sign"><span style="color:black; margin-left: 10px;">{{totalEgresos}}</span></i>
-                    </span>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title text-center">Total saldo</h5>
-                <div class="card-text text-center">
-                    <span class="span-total">
-						<i class="fas fa-dollar-sign"><span style="color:black; margin-left: 10px;">{{totalSaldo}}</span></i>
-                    </span>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title text-center">Ingresos periodo</h5>
-                <div class="card-text text-center">
-                    <span class="span-total">
-						<i class="fas fa-dollar-sign"><span style="color:black; margin-left: 10px;">{{gananciaPeriodo}}</span></i>
-                    </span>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<br>
-<div class="row" *ngIf="!showDetail">
-    <div class="col-md-4 classDiv">
-        <h5>Seleccione los filtros de consulta:</h5>
-    </div>
-</div>
-<br>
-<br>
-<div class="row" *ngIf="!showDetail">
-    <app-pie-chart [configChart]="configChartPais"></app-pie-chart>
-    <app-pie-chart [configChart]="configChartCanal"></app-pie-chart>
-    <app-pie-chart [configChart]="configChartMes"></app-pie-chart>
-
-</div>
-<div class="row" *ngIf="!showDetail">
-    <div class="col-md-3">
-        <label>Top 10 Ingresos</label>
-    </div>
-</div>
-<div class="row" *ngIf="!showDetail">
-    <div class="col-md-3">
-        <div class="table-responsive col-md-12">
-            <table class="table">
-                <thead class="thead-dark">
-                    <tr>
-                        <th scope="col">Top</th>
-                        <th scope="col">Canción</th>
-                        <th scope="col">Ingresos</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let top of tops">
-                        <td>{{top.top}}</td>
-                        <td>{{top.cancion}}</td>
-                        <td>{{top.ingresos|currency:'USD'}}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <div class="col-md-9">
-        <div class="table-responsive col-md-12">
-            <table class="table">
-                <thead class="thead-dark">
-                    <tr>
-                        <th scope="col">Periodo</th>
-                        <th scope="col">Total</th>
-                        <th scope="col">Acción</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let dato of datos">
-                        <td>{{dato.perido}}</td>
-                        <td>{{dato.monto}}</td>
-                        <td>
-                            <button type="button" class="btn btn-dark button-style" (click)="verDetallePeriodo(dato)"><strong>Ver</strong></button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>-->
-
 <div class="row">
     <div class="col-md-2">
         <label>Fecha inicial:</label>
@@ -140,12 +18,12 @@
             <div class="row">
                 <div class="col-md-6">
                     <label>Filtrar:</label>
-                    <ng-select (change)="onChange($event)" [items]="cities" bindLabel="name" placeholder="Seleccione filtro">
+                    <ng-select (change)="onChange($event)" [items]="filtro" bindLabel="nombre" placeholder="Seleccione filtro">
                     </ng-select>
                 </div>
                 <div *ngIf="show" class="col-md-6">
                     <label>Por:</label>
-                    <ng-select [items]="paises" bindLabel="name" placeholder="Seleccione filtro">
+                    <ng-select (change)="onChangePor($event)" [items]="objeto" [bindLabel]="label" placeholder="Seleccione filtro">
                     </ng-select>
                 </div>
             </div>
@@ -153,7 +31,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <mat-chip-list>
-                        <mat-chip *ngFor="let filter of filters" [removable]="removable" (removed)="remove(filter)">{{filter.filter}}
+                        <mat-chip *ngFor="let filter of filters" [removable]="removable" (removed)="remove(filter)">{{filter.tipo}}:{{filter.valor}}
                             <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
                         </mat-chip>
                     </mat-chip-list>
@@ -217,6 +95,14 @@
         </div>
     </div>
 </div>
+<br>
+<!--
+<div class="row">
+    <div class="col-md-12">
+        <div id="chartContainer" style="height: 370px; width: 100%; margin-left:auto;margin-right:auto;"></div>
+    </div>
+</div>
+-->
 <br>
 <div class="row">
     <div class="col-md-12">
