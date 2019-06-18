@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { BsDatepickerConfig, BsDatepickerViewMode } from 'ngx-bootstrap/datepicker';
 import * as CanvasJS from '../../../../assets/js/analytics.js';
 import { AccessComunesService } from '../../../servicios/mojo/comunes/access.comunes.service';
@@ -6,6 +6,7 @@ import { Constante } from '../../../utilidades/constante';
 import { AlertService } from '../../../servicios/alert/alert.service';
 import { Mensaje } from '../../../utilidades/mensaje';
 import { AccessArtistaService } from '../../../servicios/mojo/artista/access.artista.service';
+import { DatatableComponent } from '../../../elementos/datatable/datatable.component';
 
 
 @Component({
@@ -14,6 +15,8 @@ import { AccessArtistaService } from '../../../servicios/mojo/artista/access.art
   styleUrls: ['./ingresos.component.css']
 })
 export class IngresosComponent implements OnInit {
+
+  @ViewChild(DatatableComponent)dataTable:DatatableComponent;
 
   minMode: BsDatepickerViewMode = 'month';
   bsConfig: Partial<BsDatepickerConfig>;
@@ -166,6 +169,11 @@ export class IngresosComponent implements OnInit {
       
     chart.render();*/
 
+  }
+
+  regresar(){
+    this.dataTable.showData();
+    console.log(localStorage.getItem('register'));
   }
 
 }

@@ -1,0 +1,37 @@
+<div *ngIf="show" class="table-responsive col-md-12">
+    <div *ngIf="config.filter">
+        <label for="exampleFormControlInput1">Filtrar:</label>
+        <input [(ngModel)]="searchText" class="form-control filter" id="exampleFormControlInput1" placeholder="Filtrar por">
+    </div>
+    <br>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col" *ngFor="let item of config.column">{{item}}</th>
+                <th *ngIf="config.buttons.length > 0">Acción</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of config.data |filter:searchText  |paginate: { itemsPerPage: 5, currentPage: p } ">
+                <td *ngFor="let dataColumn of data;let i=index">
+                    <span *ngIf="config.columnType[i]=='text'">
+                        {{dataColumn}}
+                    </span>
+                    <span *ngIf="config.columnType[i]=='currency'">
+                        {{dataColumn|currency:'USD'}}
+                    </span>
+                </td>
+                <td *ngIf="config.buttons.length > 0">
+                    <button *ngFor="let button of config.buttons" (click)="save(data)" [title]="button.title" type="button" class="btn btn-dark button-style btn-xs btn-yellow" data-toggle="modal" data-target="#detallesAlbum"><i [ngClass]="button.icon"></i></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="row">
+        <div class="col-md-12 text-right">
+            <pagination-controls (pageChange)="p = $event" previousLabel="Regresar" nextLabel="Siguiente">
+            </pagination-controls>
+        </div>
+    </div>
+</div>

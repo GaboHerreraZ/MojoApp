@@ -32,7 +32,6 @@
     color: #edd920;
     line-height: 15px;
     border-radius: 0px;
-    margin-top: 31px;
 }
 
 .button-style i {
@@ -48,6 +47,8 @@
     height: 30px;
 }
 
+
+/*
 .table {
     width: 100% !important;
     font-size: 13px;
@@ -69,6 +70,7 @@
 tr {
     text-align: center !important;
 }
+*/
 
 .container {
     margin-top: 5% !important;

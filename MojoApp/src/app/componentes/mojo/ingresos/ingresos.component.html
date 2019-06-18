@@ -8,7 +8,7 @@
         <input class="form-control" type="text" placeholder="fecha" class="form-control" [bsConfig]="bsConfig" #dp="bsDatepicker" bsDatepicker>
     </div>
     <div class="col-md-2">
-        <button class="btn btn-dark button-style">Consultar</button>
+        <button style="margin-top:31px" class="btn btn-dark button-style">Consultar</button>
     </div>
 </div>
 <br>
@@ -135,38 +135,7 @@
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="Imprint" role="tabpanel" aria-labelledby="home-tab">
                 <br>
-                <div class="table-responsive col-md-12">
-                    <table class="table">
-                        <thead class="thead-dark">
-                            <tr>
-                                <th scope="col">Artista</th>
-                                <th scope="col">Ingresos</th>
-                                <th scope="col">Publicación</th>
-                                <th scope="col">Total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>El pepo</td>
-                                <td>$12.3453,21</td>
-                                <td>$12.3453,21</td>
-                                <td>$12.3453,21</td>
-                            </tr>
-                            <tr>
-                                <td>El pepo</td>
-                                <td>$12.3453,21</td>
-                                <td>$12.3453,21</td>
-                                <td>$12.3453,21</td>
-                            </tr>
-                            <tr>
-                                <td>El pepo</td>
-                                <td>$12.3453,21</td>
-                                <td>$12.3453,21</td>
-                                <td>$12.3453,21</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                <app-datatable></app-datatable>
             </div>
             <div class="tab-pane fade" id="Artist" role="tabpanel" aria-labelledby="profile-tab">Artist</div>
             <div class="tab-pane fade" id="Product" role="tabpanel" aria-labelledby="contact-tab">Product</div>
