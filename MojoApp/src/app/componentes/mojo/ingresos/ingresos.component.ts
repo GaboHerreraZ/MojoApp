@@ -7,7 +7,7 @@ import { AlertService } from '../../../servicios/alert/alert.service';
 import { Mensaje } from '../../../utilidades/mensaje';
 import { AccessArtistaService } from '../../../servicios/mojo/artista/access.artista.service';
 import { DatatableComponent } from '../../../elementos/datatable/datatable.component';
-import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { debounceTime, tap, switchMap, finalize } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 
@@ -43,11 +43,14 @@ export class IngresosComponent implements OnInit {
     { id: 'periodo', nombre: 'Periodo' }
   ];
 
-  //Variables Autocomplete server ejemplo
-  buscarPaisesCtrl = new FormControl();
+  //Variables Autocomplete server ejemplo  
   seleccionPais: FormGroup;
   paisesFiltrados: any[] = [];
   isLoading = false;
+
+  seleccionPais2:FormGroup;
+  paisesFiltrados2: any[] = [];  
+  isLoading2 = false;
 
   constructor(private _comunService: AccessComunesService,
     private _artistaService: AccessArtistaService,
@@ -157,7 +160,12 @@ export class IngresosComponent implements OnInit {
       paisId: [""]
     });
 
+    this.seleccionPais2 = this._fb.group({
+      paisId: [""]
+    });    
+
     this.loadingPaises();
+    this.loadingPaises2();
 
     /*let chart = new CanvasJS.Chart("chartContainer", {
       theme: "light2",
@@ -214,7 +222,33 @@ export class IngresosComponent implements OnInit {
         } else {
           this.paisesFiltrados = data['res'];
         }
-        console.log(this.paisesFiltrados);
+        console.log("Países autocomplete app:",this.paisesFiltrados);
+      });
+  }
+
+  loadingPaises2() {
+    this.seleccionPais2.valueChanges
+      .pipe(
+        debounceTime(500),
+        tap(() => {
+          this.paisesFiltrados2 = [];
+          this.isLoading2 = true;
+        }),
+        switchMap(value => this._http.get("https://gpqgrg848i.execute-api.us-east-1.amazonaws.com/dev/paises?pais=" + value.paisId)
+          .pipe(
+            finalize(() => {
+              this.isLoading2 = false
+            }),
+          )
+        )
+      )
+      .subscribe(data => {
+        if (data['res'] == undefined) {
+          this.paisesFiltrados2 = [];
+        } else {
+          this.paisesFiltrados2 = data['res'];
+        }
+        console.log("Países autocomplete angular material:",this.paisesFiltrados2);
       });
   }
 

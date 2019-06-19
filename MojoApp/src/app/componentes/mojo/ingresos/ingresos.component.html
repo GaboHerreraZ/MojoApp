@@ -26,23 +26,25 @@
 					<ng-select *ngIf="primerFiltro.id != 'pais'" (change)="onChangePor($event)" [items]="objeto" [bindLabel]="label" placeholder="Seleccione filtro">
 					</ng-select>
 					<div *ngIf="primerFiltro.id == 'pais'">
-
+						<label>Autocomplete app:</label>
 						<form [formGroup]="seleccionPais">
 							<!--Opción 1: Autocompletado app -->
-							<!--app-autocomplete [data]="paisesFiltrados" [form]="seleccionPais" [control]="'pais'"></app-autocomplete-->
-
+							<app-autocomplete [data]="paisesFiltrados" [form]="seleccionPais" [control]="'pais'"></app-autocomplete>
+						</form>		
+						<br/>
+						<label>Autocomplete angular material:</label>
+						<form [formGroup]="seleccionPais2">				
 							<!--Opción 2: Angular material -->
 							<input class="form-control" placeholder="País" [matAutocomplete]="auto" formControlName="paisId">
 							<mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-								<mat-option *ngIf="isLoading" class="is-loading">Cargando...</mat-option>
-								<ng-container *ngIf="!isLoading">
-									<mat-option *ngFor="let pais of paisesFiltrados" [value]="pais.nombre">
+								<mat-option *ngIf="isLoading2" class="is-loading">Cargando...</mat-option>
+								<ng-container *ngIf="!isLoading2">
+									<mat-option *ngFor="let pais of paisesFiltrados2" [value]="pais.nombre">
 										<span>{{pais.nombre}}</span>
 									</mat-option>
 								</ng-container>
 							</mat-autocomplete>
-						</form>
-
+						</form>	
 					</div>
 				</div>
 			</div>
