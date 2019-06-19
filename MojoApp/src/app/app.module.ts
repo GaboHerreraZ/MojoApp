@@ -13,13 +13,14 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { FooterComponent } from './componentes/footer/footer.component';
 import { InterceptorService } from './servicios/interceptor/interceptor.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     LoginComponent,
     PaginasComponent,
-    FooterComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

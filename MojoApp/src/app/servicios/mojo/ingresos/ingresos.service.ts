@@ -25,4 +25,7 @@ export class IngresosService {
     return this._http.get(`${Operacion.URLACCOUNTING}${Operacion.detalleIngresoEnPeriodo}?periodo=${periodo}&idAfiliado=91`, { observe: 'response' });
   }
 
+  /*public getIngresos(filtro:any):Observable<HttpResponse<any>>{
+  }*/
+
 }

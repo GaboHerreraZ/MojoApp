@@ -1,162 +1,170 @@
-<!--<div class="row">
-    <div class="col-md-6 text-left">
-        <button *ngIf="showDetail" (click)="regresar()" type="button" class="btn btn-dark button-style "><strong>Regresar</strong></button>
-    </div>
-</div>
-<br />
-<app-ingreso-detail *ngIf="showDetail" [ingresoPeriodoData]="ingresoPeriodoData"></app-ingreso-detail>
-
-<div class="row" *ngIf="!showDetail">
-    <div class="col-md-3">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title text-center">Total ingresos</h5>
-                <div class="card-text text-center">
-                    <span class="span-total">
-						<i class="fas fa-dollar-sign"><span style="color:black; margin-left: 10px;">{{totalIngresos}}</span></i>
-                    </span>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title text-center">Total gastos</h5>
-                <div class="card-text text-center">
-                    <span class="span-total">
-						<i class="fas fa-dollar-sign"><span style="color:black; margin-left: 10px;">{{totalEgresos}}</span></i>
-                    </span>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title text-center">Total saldo</h5>
-                <div class="card-text text-center">
-                    <span class="span-total">
-						<i class="fas fa-dollar-sign"><span style="color:black; margin-left: 10px;">{{totalSaldo}}</span></i>
-                    </span>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title text-center">Ingresos periodo</h5>
-                <div class="card-text text-center">
-                    <span class="span-total">
-						<i class="fas fa-dollar-sign"><span style="color:black; margin-left: 10px;">{{gananciaPeriodo}}</span></i>
-                    </span>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<br>
-<div class="row" *ngIf="!showDetail">
-    <div class="col-md-4 classDiv">
-        <h5>Seleccione los filtros de consulta:</h5>
-    </div>
-</div>
-<br>
-<br>
-<div class="row" *ngIf="!showDetail">
-    <app-pie-chart [configChart]="configChartPais"></app-pie-chart>
-    <app-pie-chart [configChart]="configChartCanal"></app-pie-chart>
-    <app-pie-chart [configChart]="configChartMes"></app-pie-chart>
-
-</div>
-<div class="row" *ngIf="!showDetail">
-    <div class="col-md-3">
-        <label>Top 10 Ingresos</label>
-    </div>
-</div>
-<div class="row" *ngIf="!showDetail">
-    <div class="col-md-3">
-        <div class="table-responsive col-md-12">
-            <table class="table">
-                <thead class="thead-dark">
-                    <tr>
-                        <th scope="col">Top</th>
-                        <th scope="col">Canción</th>
-                        <th scope="col">Ingresos</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let top of tops">
-                        <td>{{top.top}}</td>
-                        <td>{{top.cancion}}</td>
-                        <td>{{top.ingresos|currency:'USD'}}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <div class="col-md-9">
-        <div class="table-responsive col-md-12">
-            <table class="table">
-                <thead class="thead-dark">
-                    <tr>
-                        <th scope="col">Periodo</th>
-                        <th scope="col">Total</th>
-                        <th scope="col">Acción</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let dato of datos">
-                        <td>{{dato.perido}}</td>
-                        <td>{{dato.monto}}</td>
-                        <td>
-                            <button type="button" class="btn btn-dark button-style" (click)="verDetallePeriodo(dato)"><strong>Ver</strong></button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>-->
-
 <div class="row">
-    <div class="col-md-2">
-        <label>Fecha inicial:</label>
-        <input class="form-control" type="text" placeholder="fecha" class="form-control" [bsConfig]="bsConfig" #dp="bsDatepicker" bsDatepicker>
-    </div>
-    <div class="col-md-2">
-        <label>Fecha final:</label>
-        <input class="form-control" type="text" placeholder="fecha" class="form-control" [bsConfig]="bsConfig" #dp="bsDatepicker" bsDatepicker>
-    </div>
-    <div class="col-md-2">
-        <button class="btn btn-dark button-style">Consultar</button>
-    </div>
+	<div class="col-md-2">
+		<label>Fecha inicial:</label>
+		<input class="form-control" type="text" placeholder="fecha" class="form-control" [bsConfig]="bsConfig" #dp="bsDatepicker" bsDatepicker>
+	</div>
+	<div class="col-md-2">
+		<label>Fecha final:</label>
+		<input class="form-control" type="text" placeholder="fecha" class="form-control" [bsConfig]="bsConfig" #dp="bsDatepicker" bsDatepicker>
+	</div>
+	<div class="col-md-2">
+		<button style="margin-top:31px" class="btn btn-dark button-style">Consultar</button>
+	</div>
 </div>
 <br>
 <div class="dashedborder">
-    <div class="row">
-        <div class="col-md-2">
-            <label>Filtrar:</label>
-            <ng-select (change)="onChange($event)" [items]="cities" bindLabel="name" placeholder="Seleccione filtro">
-            </ng-select>
-        </div>
-        <div *ngIf="show" class="col-md-2">
-            <label>Por:</label>
-            <ng-select [items]="paises" bindLabel="name" placeholder="Seleccione filtro">
-            </ng-select>
-        </div>
+	<div class="row">
+		<div class="col-md-6">
+			<div class="row">
+				<div class="col-md-6">
+					<label>Filtrar:</label>
+					<ng-select (change)="onChange($event)" [items]="filtro" bindLabel="nombre" placeholder="Seleccione filtro">
+					</ng-select>
+				</div>
+				<div *ngIf="show" class="col-md-6">
+					<label>Por:</label>
+					<ng-select *ngIf="primerFiltro.id != 'pais'" (change)="onChangePor($event)" [items]="objeto" [bindLabel]="label" placeholder="Seleccione filtro">
+					</ng-select>
+					<div *ngIf="primerFiltro.id == 'pais'">
+
+						<form [formGroup]="seleccionPais">
+							<!--Opción 1: Autocompletado app -->
+							<!--app-autocomplete [data]="paisesFiltrados" [form]="seleccionPais" [control]="'pais'"></app-autocomplete-->
+
+							<!--Opción 2: Angular material -->
+							<input class="form-control" placeholder="País" [matAutocomplete]="auto" formControlName="paisId">
+							<mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+								<mat-option *ngIf="isLoading" class="is-loading">Cargando...</mat-option>
+								<ng-container *ngIf="!isLoading">
+									<mat-option *ngFor="let pais of paisesFiltrados" [value]="pais.nombre">
+										<span>{{pais.nombre}}</span>
+									</mat-option>
+								</ng-container>
+							</mat-autocomplete>
+						</form>
+
+					</div>
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-md-12">
+					<mat-chip-list>
+						<mat-chip *ngFor="let filter of filters" [removable]="removable" (removed)="remove(filter)">{{filter.tipo}}:{{filter.valor}}
+							<mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+						</mat-chip>
+					</mat-chip-list>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="row">
+				<div class="col-md-6">
+					<strong>Estado de cuenta</strong>
+				</div>
+				<div class="col-md-6 text-right">
+					$23,233.2
+				</div>
+			</div>
+			<hr>
+			<div class="row">
+				<div class="col-md-6">
+					<strong>Ingresos</strong>
+				</div>
+				<div class="col-md-6 text-right">
+					$23,233.2
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-8">
+					<label style="padding-left: 10px">
+						Detalle
+					</label>
+				</div>
+				<div class="col-md-4 text-right">
+					$23,233.2
+				</div>
+			</div>
+			<hr>
+			<div class="row">
+				<div class="col-md-6">
+					<strong>Pago</strong>
+				</div>
+				<div class="col-md-6 text-right">
+					$23,233.2
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-8">
+					<label style="padding-left: 10px">
+						Full tracks
+					</label>
+				</div>
+				<div class="col-md-4 text-right">
+					$23,233.2
+				</div>
+			</div>
+			<hr>
+			<div class="row">
+				<div class="col-md-12">
+					<h6><strong>Descripción</strong></h6>
+					<p>Detalle de pago ............</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<br>
+<!--
+<div class="row">
+    <div class="col-md-12">
+        <div id="chartContainer" style="height: 370px; width: 100%; margin-left:auto;margin-right:auto;"></div>
     </div>
-    <br>
-    <div class="row">
-        <div class="col-md-12">
-            <mat-chip-list>
-                <mat-chip *ngFor="let filter of filters" [removable]="removable" (removed)="remove(filter)">{{filter.filter}}
-                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-                </mat-chip>
-            </mat-chip-list>
-        </div>
-    </div>
+</div>
+-->
+<br>
+<div class="row">
+	<div class="col-md-12">
+		<ul class="nav nav-tabs" id="myTab" role="tablist">
+			<li class="nav-item">
+				<a class="nav-link active" id="home-tab" data-toggle="tab" href="#Imprint" role="tab" aria-controls="Imprint" aria-selected="true">Imprint</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" id="profile-tab" data-toggle="tab" href="#Artist" role="tab" aria-controls="Artist" aria-selected="false">Artist</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" id="contact-tab" data-toggle="tab" href="#Product" role="tab" aria-controls="Product" aria-selected="false">Product</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" id="contact-tab" data-toggle="tab" href="#Track" role="tab" aria-controls="Track" aria-selected="false">Track</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" id="contact-tab" data-toggle="tab" href="#Source" role="tab" aria-controls="Source" aria-selected="false">Source</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" id="contact-tab" data-toggle="tab" href="#Country" role="tab" aria-controls="Country" aria-selected="false">Country</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" id="contact-tab" data-toggle="tab" href="#Channel" role="tab" aria-controls="Channel" aria-selected="false">Channel</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" id="contact-tab" data-toggle="tab" href="#Period" role="tab" aria-controls="Period" aria-selected="false">Activity period</a>
+			</li>
+		</ul>
+		<div class="tab-content" id="myTabContent">
+			<div class="tab-pane fade show active" id="Imprint" role="tabpanel" aria-labelledby="home-tab">
+				<br>
+				<app-datatable></app-datatable>
+			</div>
+			<div class="tab-pane fade" id="Artist" role="tabpanel" aria-labelledby="profile-tab">Artist</div>
+			<div class="tab-pane fade" id="Product" role="tabpanel" aria-labelledby="contact-tab">Product</div>
+			<div class="tab-pane fade" id="Track" role="tabpanel" aria-labelledby="contact-tab">Track</div>
+			<div class="tab-pane fade" id="Source" role="tabpanel" aria-labelledby="contact-tab">Source</div>
+			<div class="tab-pane fade" id="Country" role="tabpanel" aria-labelledby="contact-tab">Country</div>
+			<div class="tab-pane fade" id="Channel" role="tabpanel" aria-labelledby="contact-tab">Channel</div>
+			<div class="tab-pane fade" id="Period" role="tabpanel" aria-labelledby="contact-tab">Period</div>
+		</div>
+	</div>
 </div>
 
 <app-loading [loading]="loading"></app-loading>

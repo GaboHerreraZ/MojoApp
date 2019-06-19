@@ -14,12 +14,16 @@ import { TableChartComponent } from 'src/app/componentes/charts/table-chart/tabl
 import { LineChartComponent } from '../../componentes/charts/line-chart/line-chart.component';
 import { ComboChartComponent } from '../../componentes/charts/combo-chart/combo-chart.component';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { DatatableComponent } from '../../elementos/datatable/datatable.component';
+import { FilterPipe } from '../../pipes/filter.pipe';
 
 @NgModule({
   declarations: [
     SearchPipe,
+    FilterPipe,
     LoadingComponent,
     AutocompleteComponent,
+    DatatableComponent,
     PieChartComponent,
     TableChartComponent,
     LineChartComponent,
@@ -55,8 +59,10 @@ import { NgSelectModule } from '@ng-select/ng-select';
            NgbModule,
            GoogleChartsModule,
            SearchPipe,
+           FilterPipe,
            LoadingComponent,
            AutocompleteComponent,
+           DatatableComponent,
            PieChartComponent,
            TableChartComponent,
            LineChartComponent,
