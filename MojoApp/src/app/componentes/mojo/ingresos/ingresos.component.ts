@@ -7,6 +7,9 @@ import { AlertService } from '../../../servicios/alert/alert.service';
 import { Mensaje } from '../../../utilidades/mensaje';
 import { AccessArtistaService } from '../../../servicios/mojo/artista/access.artista.service';
 import { DatatableComponent } from '../../../elementos/datatable/datatable.component';
+import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
+import { debounceTime, tap, switchMap, finalize } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -16,47 +19,55 @@ import { DatatableComponent } from '../../../elementos/datatable/datatable.compo
 })
 export class IngresosComponent implements OnInit {
 
-  @ViewChild(DatatableComponent)dataTable:DatatableComponent;
+  @ViewChild(DatatableComponent) dataTable: DatatableComponent;
 
   minMode: BsDatepickerViewMode = 'month';
   bsConfig: Partial<BsDatepickerConfig>;
   show = false;
-  primerFiltro:any;
-  segundoFiltro:any;
-  label:string;
+  primerFiltro: any;
+  segundoFiltro: any;
+  label: string;
   removable = true;
-  objeto:any;
-  loading:boolean;
+  objeto: any;
+  loading: boolean;
 
-  filters:any[] =[];
+  filters: any[] = [];
 
   filtro = [
-    {id: 'sello', nombre: 'Sello'},
-    {id: 'album', nombre: 'Album'},
-    {id: 'artista', nombre: 'Artista'},
-    {id: 'track', nombre: 'Track'},
-    {id: 'servicio', nombre: 'Servicio'},
-    {id: 'pais', nombre: 'País'},
-    {id: 'periodo', nombre: 'Periodo'}
+    { id: 'sello', nombre: 'Sello' },
+    { id: 'album', nombre: 'Album' },
+    { id: 'artista', nombre: 'Artista' },
+    { id: 'track', nombre: 'Track' },
+    { id: 'servicio', nombre: 'Servicio' },
+    { id: 'pais', nombre: 'País' },
+    { id: 'periodo', nombre: 'Periodo' }
+  ];
 
-];
+  //Variables Autocomplete server ejemplo
+  buscarPaisesCtrl = new FormControl();
+  seleccionPais: FormGroup;
+  paisesFiltrados: any[] = [];
+  isLoading = false;
 
-  constructor(private _comunService:AccessComunesService,
-              private _artistaService:AccessArtistaService,
-              private _message:AlertService){
+  constructor(private _comunService: AccessComunesService,
+    private _artistaService: AccessArtistaService,
+    private _message: AlertService,
+    private _http: HttpClient,
+    private _fb: FormBuilder) {
 
   }
 
-  onChange(event:any){
+  onChange(event: any) {
     this.show = false;
     this.primerFiltro = event;
-    if(event == undefined){
+    if (event == undefined) {
       return;
     }
-    if(event.nombre == "País"){
+    if (event.nombre == "País") {
       this.label = "nombre";
-      this._comunService.getAccessPaises();
-      this._comunService.getPaises().subscribe((res:any)=>{
+      this.show = true;
+     /* this._comunService.getAccessPaises();
+      this._comunService.getPaises().subscribe((res: any) => {
         if (res.status = Constante.ok) {
           this.objeto = res.body.res;
           this.loading = false;
@@ -64,16 +75,15 @@ export class IngresosComponent implements OnInit {
         } else {
           this._message.error(res);
         }
-      },error =>{
+      }, error => {
         this._message.error(Mensaje.noBackEnd);
       });
+    }*/}
 
-    }
-
-    if(event.nombre == "Servicio"){
+    if (event.nombre == "Servicio") {
       this.label = "nombre";
       this._comunService.getCanales();
-      this._comunService.getAccesCanales().subscribe((res:any)=>{
+      this._comunService.getAccesCanales().subscribe((res: any) => {
         if (res.status = Constante.ok) {
           this.objeto = res.body.canales;
           this.loading = false;
@@ -81,15 +91,15 @@ export class IngresosComponent implements OnInit {
         } else {
           this._message.error(res);
         }
-      },error =>{
+      }, error => {
         this._message.error(Mensaje.noBackEnd);
       });
     }
 
-    if(event.nombre == "Artista"){
+    if (event.nombre == "Artista") {
       this.label = "nombres";
       this._artistaService.getAccessArtistas();
-      this._artistaService.getArtistas().subscribe((res:any)=>{
+      this._artistaService.getArtistas().subscribe((res: any) => {
         if (res.status = Constante.ok) {
           this.objeto = res.body.result.data;
           this.loading = false;
@@ -97,35 +107,35 @@ export class IngresosComponent implements OnInit {
         } else {
           this._message.error(res);
         }
-      },error =>{
+      }, error => {
         this._message.error(Mensaje.noBackEnd);
       });
     }
   }
 
 
-  onChangePor(event:any){
+  onChangePor(event: any) {
     this.segundoFiltro = event;
-    let filtro:any;
-    if(this.primerFiltro.id == "pais" || this.primerFiltro.id == "servicio" ) {
-       filtro = {
-        tipo:this.primerFiltro.id,
-        valor:this.segundoFiltro.nombre
-       }
+    let filtro: any;
+    if (this.primerFiltro.id == "pais" || this.primerFiltro.id == "servicio") {
+      filtro = {
+        tipo: this.primerFiltro.id,
+        valor: this.segundoFiltro.nombre
+      }
     }
 
-    if(this.primerFiltro.id == "artista"){
+    if (this.primerFiltro.id == "artista") {
       filtro = {
-        tipo:this.primerFiltro.id,
-        valor:this.segundoFiltro.nombres
-       }
+        tipo: this.primerFiltro.id,
+        valor: this.segundoFiltro.nombres
+      }
     }
     this.filters.push(filtro);
-      /*Llamar servicio */
+    /*Llamar servicio */
 
   }
 
-  remove(filter){
+  remove(filter) {
     const index = this.filters.indexOf(filter);
     if (index >= 0) {
       this.filters.splice(index, 1);
@@ -135,13 +145,19 @@ export class IngresosComponent implements OnInit {
 
   }
 
-  
+
 
   ngOnInit() {
     this.bsConfig = Object.assign({}, {
-      minMode : this.minMode,
+      minMode: this.minMode,
       dateInputFormat: 'MM/YYYY'
     });
+
+    this.seleccionPais = this._fb.group({
+      paisId: [""]
+    });
+
+    this.loadingPaises();
 
     /*let chart = new CanvasJS.Chart("chartContainer", {
       theme: "light2",
@@ -171,9 +187,35 @@ export class IngresosComponent implements OnInit {
 
   }
 
-  regresar(){
+  regresar() {
     this.dataTable.showData();
     console.log(localStorage.getItem('register'));
+  }
+
+  loadingPaises() {
+    this.seleccionPais.valueChanges
+      .pipe(
+        debounceTime(500),
+        tap(() => {
+          this.paisesFiltrados = [];
+          this.isLoading = true;
+        }),
+        switchMap(value => this._http.get("https://gpqgrg848i.execute-api.us-east-1.amazonaws.com/dev/paises?pais=" + value.paisId)
+          .pipe(
+            finalize(() => {
+              this.isLoading = false
+            }),
+          )
+        )
+      )
+      .subscribe(data => {
+        if (data['res'] == undefined) {
+          this.paisesFiltrados = [];
+        } else {
+          this.paisesFiltrados = data['res'];
+        }
+        console.log(this.paisesFiltrados);
+      });
   }
 
 }

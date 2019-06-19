@@ -7,6 +7,11 @@ import { ComunModule } from '../../../../modulos/comun/comun.module';
 import { IngresoDetailComponent } from '../ingreso-detail/ingreso-detail.component';
 import { NgxBootstrapModule } from '../../../../modulos/ngx-bootstrap/ngx-bootstrap.module';
 import { AngularMaterialModule } from '../../../../modulos/angular-material/angular-material.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+//temporal
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [IngresosComponent, IngresoDetailComponent],
@@ -15,7 +20,11 @@ import { AngularMaterialModule } from '../../../../modulos/angular-material/angu
     ComunModule,
     NgxBootstrapModule,
     IngresosRoutingModule,
-    AngularMaterialModule
+    AngularMaterialModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatAutocompleteModule,
+    MatInputModule
   ]
 })
 export class IngresosModule { }
