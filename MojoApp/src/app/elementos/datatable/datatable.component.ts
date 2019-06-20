@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { config } from 'aws-sdk/global';
 
 @Component({
   selector: 'app-datatable',
@@ -11,10 +12,12 @@ export class DatatableComponent implements OnInit {
   show:boolean = true;
   searchText:string="";
 
+  @Input() config;any;
+
   ngOnInit() {
   }
 
-  config: any ={
+  /*config: any ={
     column:["Artista","Ingresos","Publicación","Total"],
     columnType:["text","text","text","currency"],
     data:[
@@ -23,14 +26,14 @@ export class DatatableComponent implements OnInit {
       ["El pepo3","123464","123464","123464"]
     ],
     buttons:[
-      /*{
+      {
         title:"Ver detalle",
         type:"icon",
         icon:"fa fa-eye",
-      }*/
+      }
     ],
     filter: true
-  }
+}*/
 
   public showData(){
     this.show = true;

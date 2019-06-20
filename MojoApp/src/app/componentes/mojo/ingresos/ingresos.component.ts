@@ -52,6 +52,15 @@ export class IngresosComponent implements OnInit {
   paisesFiltrados2: any[] = [];  
   isLoading2 = false;
 
+  /*Config data tables */
+  configLabes:any;
+  configArtista:any;
+  configAlbum:any;
+  configTrack:any;
+  configTienda:any;
+  configPais:any;
+  configPeriodo:any;
+
   constructor(private _comunService: AccessComunesService,
     private _artistaService: AccessArtistaService,
     private _message: AlertService,
@@ -160,38 +169,8 @@ export class IngresosComponent implements OnInit {
       paisId: [""]
     });
 
-    this.seleccionPais2 = this._fb.group({
-      paisId: [""]
-    });    
-
     this.loadingPaises();
-    this.loadingPaises2();
-
-    /*let chart = new CanvasJS.Chart("chartContainer", {
-      theme: "light2",
-      animationEnabled: true,
-      exportEnabled: true,
-      title:{
-        text: "Monthly Expense"
-      },
-      data: [{
-        type: "pie",
-        showInLegend: true,
-        toolTipContent: "<b>{name}</b>: ${y} (#percent%)",
-        indexLabel: "{name} - #percent%",
-        dataPoints: [
-          { y: 450, name: "Food" },
-          { y: 120, name: "Insurance" },
-          { y: 300, name: "Traveling" },
-          { y: 800, name: "Housing" },
-          { y: 150, name: "Education" },
-          { y: 150, name: "Shopping"},
-          { y: 250, name: "Others" }
-        ]
-      }]
-    });
-      
-    chart.render();*/
+    this.configDataTable();
 
   }
 
@@ -200,34 +179,8 @@ export class IngresosComponent implements OnInit {
     console.log(localStorage.getItem('register'));
   }
 
-  loadingPaises() {
+    loadingPaises() {
     this.seleccionPais.valueChanges
-      .pipe(
-        debounceTime(500),
-        tap(() => {
-          this.paisesFiltrados = [];
-          this.isLoading = true;
-        }),
-        switchMap(value => this._http.get("https://gpqgrg848i.execute-api.us-east-1.amazonaws.com/dev/paises?pais=" + value.paisId)
-          .pipe(
-            finalize(() => {
-              this.isLoading = false
-            }),
-          )
-        )
-      )
-      .subscribe(data => {
-        if (data['res'] == undefined) {
-          this.paisesFiltrados = [];
-        } else {
-          this.paisesFiltrados = data['res'];
-        }
-        console.log("Países autocomplete app:",this.paisesFiltrados);
-      });
-  }
-
-  loadingPaises2() {
-    this.seleccionPais2.valueChanges
       .pipe(
         debounceTime(500),
         tap(() => {
@@ -251,5 +204,71 @@ export class IngresosComponent implements OnInit {
         console.log("Países autocomplete angular material:",this.paisesFiltrados2);
       });
   }
+
+  configDataTable(){
+    
+    this.configLabes ={
+      column:["Sello","Ingresos","Total"],
+      columnType:["text","text","currency"],
+      data:[],
+      buttons:[],
+      filter: true
+    };
+
+    this.configArtista ={
+      column:["Artista","Ingresos","Total"],
+      columnType:["text","text","currency"],
+      data:[],
+      buttons:[],
+      filter: true
+    };
+
+    this.configAlbum ={
+      column:["Albums","Artista","UPC","Ingresos","Total"],
+      columnType:["text","text","text","currency","currency"],
+      data:[],
+      buttons:[],
+      filter: true
+    };
+
+    this.configTrack ={
+      column:["Track","Artista","UPC","Ingresos","Total"],
+      columnType:["text","text","text","currency","Currency"],
+      data:[],
+      buttons:[],
+      filter: true
+    };
+
+    this.configTienda ={
+      column:["Tienda","Total"],
+      columnType:["text","currency"],
+      data:[],
+      buttons:[],
+      filter: true
+    };
+
+    
+    this.configPais ={
+      column:["País","Total"],
+      columnType:["text","currency"],
+      data:[],
+      buttons:[],
+      filter: true
+    };
+
+    this.configPeriodo ={
+      column:["Periodo","Total"],
+      columnType:["text","currency"],
+      data:[],
+      buttons:[],
+      filter: true
+    };
+
+
+  }
+
+
+
+
 
 }
