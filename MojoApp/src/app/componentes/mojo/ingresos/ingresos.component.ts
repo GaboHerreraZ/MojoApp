@@ -176,7 +176,6 @@ export class IngresosComponent implements OnInit {
 
   regresar() {
     this.dataTable.showData();
-    console.log(localStorage.getItem('register'));
   }
 
     loadingPaises() {
@@ -201,7 +200,7 @@ export class IngresosComponent implements OnInit {
         } else {
           this.paisesFiltrados2 = data['res'];
         }
-        console.log("Países autocomplete angular material:",this.paisesFiltrados2);
+        //console.log("Países autocomplete angular material:",this.paisesFiltrados2);
       });
   }
 
