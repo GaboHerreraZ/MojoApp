@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { BsDatepickerConfig, BsDatepickerViewMode } from 'ngx-bootstrap/datepicker';
-import * as CanvasJS from '../../../../assets/js/analytics.js';
 import { AccessComunesService } from '../../../servicios/mojo/comunes/access.comunes.service';
 import { Constante } from '../../../utilidades/constante';
 import { AlertService } from '../../../servicios/alert/alert.service';
@@ -44,12 +43,12 @@ export class IngresosComponent implements OnInit {
   ];
 
   //Variables Autocomplete server ejemplo  
-  seleccionPais: FormGroup;
+  objectSelect: FormGroup;
   paisesFiltrados: any[] = [];
   isLoading = false;
 
-  seleccionPais2:FormGroup;
-  paisesFiltrados2: any[] = [];  
+  objectFiltrados: any[] = [];  
+  objectFiltrados2:any[]=[];
   isLoading2 = false;
 
   /*Config data tables */
@@ -94,7 +93,8 @@ export class IngresosComponent implements OnInit {
 
     if (event.nombre == "Servicio") {
       this.label = "nombre";
-      this._comunService.getCanales();
+      this.show = true;
+      /*this._comunService.getCanales();
       this._comunService.getAccesCanales().subscribe((res: any) => {
         if (res.status = Constante.ok) {
           this.objeto = res.body.canales;
@@ -105,12 +105,13 @@ export class IngresosComponent implements OnInit {
         }
       }, error => {
         this._message.error(Mensaje.noBackEnd);
-      });
+      });*/
     }
 
     if (event.nombre == "Artista") {
       this.label = "nombres";
-      this._artistaService.getAccessArtistas();
+      this.show = true;
+      /*this._artistaService.getAccessArtistas();
       this._artistaService.getArtistas().subscribe((res: any) => {
         if (res.status = Constante.ok) {
           this.objeto = res.body.result.data;
@@ -121,7 +122,7 @@ export class IngresosComponent implements OnInit {
         }
       }, error => {
         this._message.error(Mensaje.noBackEnd);
-      });
+      });*/
     }
   }
 
@@ -165,8 +166,8 @@ export class IngresosComponent implements OnInit {
       dateInputFormat: 'MM/YYYY'
     });
 
-    this.seleccionPais = this._fb.group({
-      paisId: [""]
+    this.objectSelect = this._fb.group({
+      object: [""]
     });
 
     this.loadingPaises();
@@ -176,18 +177,18 @@ export class IngresosComponent implements OnInit {
 
   regresar() {
     this.dataTable.showData();
-    console.log(localStorage.getItem('register'));
   }
 
     loadingPaises() {
-    this.seleccionPais.valueChanges
+      console.log("entre");
+    this.objectSelect.valueChanges
       .pipe(
         debounceTime(500),
         tap(() => {
-          this.paisesFiltrados2 = [];
+          this.objectFiltrados = [];
           this.isLoading2 = true;
-        }),
-        switchMap(value => this._http.get("https://gpqgrg848i.execute-api.us-east-1.amazonaws.com/dev/paises?pais=" + value.paisId)
+        }), 
+        switchMap(value => this._http.get(`https://tsyxcs4qll.execute-api.us-east-1.amazonaws.com/dev/comboFilter?search=${value.object}C&comboValue=${this.primerFiltro.id}`)
           .pipe(
             finalize(() => {
               this.isLoading2 = false
@@ -197,11 +198,12 @@ export class IngresosComponent implements OnInit {
       )
       .subscribe(data => {
         if (data['res'] == undefined) {
-          this.paisesFiltrados2 = [];
+          this.objectFiltrados = [];
         } else {
-          this.paisesFiltrados2 = data['res'];
+          this.objectFiltrados = data['res'];
         }
-        console.log("Países autocomplete angular material:",this.paisesFiltrados2);
+      },error =>{
+        this.objectFiltrados = [];
       });
   }
 

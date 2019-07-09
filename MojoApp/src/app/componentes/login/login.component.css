@@ -81,7 +81,7 @@ button {
 .input-container {
     display: flex;
     width: 100%;
-    margin-bottom: 15px;
+    margin-bottom: 0px;
 }
 
 .icon {
@@ -96,4 +96,10 @@ button {
     width: 100%;
     padding: 10px;
     outline: none;
+}
+
+.info-error {
+    border: 1px solid #edd920;
+    color: red;
+    text-align: center;
 }

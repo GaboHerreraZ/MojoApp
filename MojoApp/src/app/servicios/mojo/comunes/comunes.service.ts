@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Subject } from 'rxjs';
-import { Router, NavigationStart } from '@angular/router';
+import { debounceTime, tap, switchMap, finalize } from 'rxjs/operators';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Operacion } from 'src/app/utilidades/operacion';
 
@@ -26,7 +26,6 @@ export class ComunesService {
   getCanales():Observable<HttpResponse<any>>{
     return this._http.get(`${Operacion.URLCANAL}${Operacion.getCanales}`,{observe:'response'});
   }
-
 
 
   public getMessage(): Observable<any> {
