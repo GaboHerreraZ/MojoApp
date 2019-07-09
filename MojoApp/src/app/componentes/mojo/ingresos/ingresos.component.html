@@ -22,20 +22,18 @@
                     </ng-select>
                 </div>
                 <div *ngIf="show" class="col-md-6">
-                    <div *ngIf="primerFiltro.id == 'pais'">
-                        <label>Por:</label>
-                        <form [formGroup]="seleccionPais">
-                            <input class="form-control" placeholder="País" [matAutocomplete]="auto" formControlName="paisId">
-                            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-                                <mat-option *ngIf="isLoading2" class="is-loading">Cargando...</mat-option>
-                                <ng-container *ngIf="!isLoading2">
-                                    <mat-option *ngFor="let pais of paisesFiltrados2" [value]="pais.nombre">
-                                        <span>{{pais.nombre}}</span>
-                                    </mat-option>
-                                </ng-container>
-                            </mat-autocomplete>
-                        </form>
-                    </div>
+                    <label>Por:</label>
+                    <form [formGroup]="objectSelect">
+                        <input class="form-control" [placeholder]="primerFiltro.nombre" [matAutocomplete]="auto" formControlName="object">
+                        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                            <mat-option *ngIf="isLoading2" class="is-loading">Cargando...</mat-option>
+                            <ng-container *ngIf="!isLoading2">
+                                <mat-option *ngFor="let object of objectFiltrados" [value]="object.nombre">
+                                    <span>{{pais.nombre}}</span>
+                                </mat-option>
+                            </ng-container>
+                        </mat-autocomplete>
+                    </form>
                 </div>
             </div>
             <br>

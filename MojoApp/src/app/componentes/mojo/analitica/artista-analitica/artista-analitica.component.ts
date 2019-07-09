@@ -356,7 +356,8 @@ export class ArtistaAnaliticaComponent implements OnInit {
    */
   CargarInformacion() {
     var me = this;
-    me.loading = true;
+    //Cambiar por true cuando se arreglen los servicios y validar los demás loading
+    me.loading = false;
 
     //Obtiene seguidores
     me.getSeguidores();
@@ -386,9 +387,11 @@ export class ArtistaAnaliticaComponent implements OnInit {
         //me.arFollowers = res.body.res[0];
         me.loading = false;
       } else {
+        me.loading = false;
         me._message.error(res);
       }
     }, error => {
+      me.loading = false;
       me._message.error(Mensaje.noBackEnd);
     });
   }
@@ -414,9 +417,11 @@ export class ArtistaAnaliticaComponent implements OnInit {
         me.configLineChart(res.body.res[0], nuCanal);
         me.loading = false;
       } else {
+        me.loading = false;
         me._message.error(res);
       }
     }, error => {
+      me.loading = false;
       me._message.error(Mensaje.noBackEnd);
     });
   }
@@ -441,9 +446,11 @@ export class ArtistaAnaliticaComponent implements OnInit {
         me.configPieChart(res.body.res[0], nuCanal);
         me.loading = false;
       } else {
+        me.loading = false;
         me._message.error(res);
       }
     }, error => {
+      me.loading = false;
       me._message.error(Mensaje.noBackEnd);
     });
   }
@@ -458,6 +465,8 @@ export class ArtistaAnaliticaComponent implements OnInit {
    * @param  {Integer}  nuCanal Identificador del canal
    */
   configLineChart(arOyentesData: any[], nuCanal: Integer) {
+    //pendiente de borrar loading
+    this.loading = false;
     var me = this,
       arData = [],
       nuLength = arOyentesData.length,

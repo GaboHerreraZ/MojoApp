@@ -96,9 +96,11 @@ export class AnaliticaComponent implements OnInit {
         me.canales = res.body.canales;
         me.loading = false;
       } else {
+        me.loading = false;
         me._message.error(res);
       }
     }, error => {
+      me.loading = false;
       me._message.error(Mensaje.noBackEnd);
     });
   }

@@ -169,9 +169,11 @@ export class ArtistaComponent implements OnInit {
         this._message.success(res.body.mensaje);
         this.getArtistas();
       } else {
+        this.loading = false;
         this._message.error(res);
       }
     }, error => {
+      this.loading = false;
       me._message.error(Mensaje.noBackEnd);
     });
   }
