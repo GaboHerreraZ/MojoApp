@@ -1,11 +1,11 @@
 <div *ngIf="show" class="row">
     <div class="col-md-4">
-        <label for="exampleFormControlInput1">Buscar artista:</label>
-        <input [(ngModel)]="text" class="form-control" id="exampleFormControlInput1" placeholder="ingrese el nombre del artista">
+        <label for="exampleFormControlInput1" class="findArtist">Buscar artista:</label>
+        <input [(ngModel)]="text" class="form-control inputArtist" id="exampleFormControlInput1" placeholder="ingrese el nombre del artista">
     </div>
     <div class="col-md-4"></div>
     <div class="col-md-4 text-right">
-        <button *ngIf="show" style="margin-top:31px;" (click)=nuevoArtista() type="button" class="btn btn-dark button-style ">Nuevo Artista</button>
+        <button *ngIf="show" style="margin-top:31px;" (click)=nuevoArtista() type="button" class="btnNewArtistB">Nuevo Artista</button>
     </div>
 </div>
 <app-artista-form *ngIf="newartist && !show" [nuevoArtistaForm]="nuevoArtistaForm"></app-artista-form>
@@ -23,7 +23,7 @@
 <div *ngIf="show" class="row">
     <div class="table-responsive col-md-12">
         <table class="table">
-            <thead class="thead-dark">
+            <thead class="tableHead">
                 <tr>
                     <th scope="col">Artista</th>
                     <th scope="col">Pais</th>
@@ -33,8 +33,8 @@
             </thead>
             <tbody>
                 <tr *ngFor="let artista of artistas|search:text:'filtroArtista' |paginate: { itemsPerPage: 5, currentPage: p }">
-                    <td>{{artista.nombres}}</td>
-                    <td *ngIf="artista.pais != null">
+                    <td data-titulo="Nombre:">{{artista.nombres}}</td>
+                    <td data-titulo="País" *ngIf="artista.pais != null">
                         {{artista.pais.nombre}}
                     </td>
                     <td *ngIf="artista.pais == null">
@@ -43,10 +43,10 @@
                     <td *ngIf="artista.label != null">
                         {{artista.label}}
                     </td>
-                    <td *ngIf="artista.label == null">
+                    <td data-titulo="Sello" *ngIf="artista.label == null">
                         -----
                     </td>
-                    <td>
+                    <td data-titulo="Acción">
                         <button title="Ver detalle" type="button" class="btn btn-dark button-style btn-xs btn-yellow" (click)="verDetalleArtista(artista)" data-toggle="modal" data-target="#detallesArtista"><i class="fa fa-eye"></i></button>
                         <button title="Editar" type="button" class="btn btn-secondary button-style btn-xs btn-yellow" (click)="editarArtista(artista)" data-toggle="modal" data-target="#editarArtista"><i class="fa fa-edit"></i></button>
                     </td>
@@ -56,6 +56,7 @@
     </div>
 </div>
 <br>
+<button *ngIf="show" (click)=nuevoArtista() type="button" class="btnNewArtistA" style="visibility:hidden">+</button>
 <div *ngIf="show" class="row">
     <div class="col-md-12 text-right">
         <pagination-controls (pageChange)="p = $event" previousLabel="Regresar" nextLabel="Siguiente">
