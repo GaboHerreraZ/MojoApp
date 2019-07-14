@@ -26,13 +26,13 @@
 }
 
 .nav-link {
-    background-color: #343a40 !important;
+    background-color: black!important;
     color: #edd920 !important;
 }
 
 .nav-link.active {
-    background-color: white !important;
-    color: #343a40 !important;
+    background-color: #edd920 !important;
+    color: black !important;
 }
 
 @media screen and (max-width:575px) {
