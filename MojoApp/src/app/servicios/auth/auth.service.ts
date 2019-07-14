@@ -16,6 +16,8 @@ export class AuthService {
 
   public loggedIn: BehaviorSubject<boolean>;
   public storage: any;
+  public user:any;
+  public sesion:any;
 
   constructor(private _router: Router,
     private _alertMessage: AlertService) {
@@ -41,6 +43,12 @@ export class AuthService {
   }
 
 
+  public getConfigure(){
+    let cosa:any;
+    let storages = Auth.configure({
+        storage:cosa
+    });
+  }
 
   public isAuthenticated(): Observable<boolean> {
     return from(Auth.currentAuthenticatedUser())
@@ -62,6 +70,7 @@ export class AuthService {
       .subscribe(
         (result: any) => {
           this.loggedIn.next(false);
+          this.sesion = undefined;
           this._router.navigate(['/login']);
         },
         (error) => {
@@ -78,6 +87,18 @@ export class AuthService {
     ));
   }
 
+  public getCurrentSesion(){
+      return from(Auth.currentSession()).pipe(tap());
+  }
+
+  public setSesion(sesion:any){
+    this.sesion = sesion;
+  }
+
+  public getSesion(){
+    return this.sesion;
+  }
+
   public isLoggedIn(): Observable<boolean> {
     return this.loggedIn.asObservable();
   }
@@ -85,6 +106,24 @@ export class AuthService {
   public setConfig() {
     let config = Auth.configure({ storage: this.storage });
     localStorage.setItem('config', JSON.stringify(config));
+  }
+
+  public  validateSesion():boolean{
+    let currentTime = new Date().getTime();
+    let nextTime = `${this.sesion.idToken.payload.exp}000`;
+    
+    let token = this.sesion.idToken.jwtToken;
+
+      if(token === undefined){
+        this._router.navigate(['/login']);
+        return false;
+      }
+      if(currentTime > Number(nextTime)){
+          this._router.navigate(['/login']);
+          return false;
+      }
+
+      return true;
   }
 
 

@@ -73,14 +73,12 @@ export class LoginComponent implements OnInit {
                     this.newPassword = true;
                  }else{
                     this.show = false;
-                    this._router.navigate(['/mojo/analitica']);
+                    this.getCurrentSesion();
                  }
             },
             error => {
                   this.loading = false;
-                  //console.log("error",error.message);
                   this.mensajeError = error.message;
-                  //this._message.error(error.message);
             });
       }
 
@@ -101,6 +99,15 @@ export class LoginComponent implements OnInit {
               }
             );
       }
+
+    private getCurrentSesion(){
+      this._authService.getCurrentSesion().subscribe(
+        (sesion:any)=>{
+            this._authService.setSesion(sesion);
+            this._router.navigate(['/mojo/analitica']);
+          }
+      );
+    }
 
    
     }
