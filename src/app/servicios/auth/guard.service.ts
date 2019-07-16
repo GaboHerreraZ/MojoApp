@@ -1,9 +1,10 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Pipe } from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, ActivatedRoute } from '@angular/router';
 import { Observable, pipe } from 'rxjs';
 import { tap, map } from 'rxjs/operators';
 import { AuthService } from './auth.service';
 import { Constante } from '../../utilidades/constante';
+import { getLocaleDateTimeFormat } from '@angular/common';
 
 
 @Injectable({
@@ -11,6 +12,7 @@ import { Constante } from '../../utilidades/constante';
 })
 export class GuardService implements CanActivate {
 
+  private sesion:any;
 
   constructor(private _authService: AuthService,
     private _router: Router,
@@ -18,15 +20,18 @@ export class GuardService implements CanActivate {
 
   canActivate(
     next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): boolean {
+    state: RouterStateSnapshot): Observable<boolean> | boolean {
     let token: string = localStorage.getItem(Constante.keyToken);
-    let login: boolean = true;
-    if (!token) {
-      login = false;
-      this._router.navigate['/login'];
+    this.sesion = this._authService.getSesion();
+    if(this.sesion === undefined){
+          return false;
+    }else{
+          return this._authService.validateSesion();
     }
-    return login;
+
   }
+
+  
 
 
 }

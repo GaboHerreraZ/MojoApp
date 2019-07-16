@@ -8,8 +8,9 @@ import {NgSelectModule, NgOption} from '@ng-select/ng-select';
 })
 export class AppComponent implements OnInit{
   title = 'MojoApp';
+
   constructor(private _comunService:ComunesService){
-      
+              
   }
 
   ngOnInit(){
