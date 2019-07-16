@@ -15,8 +15,13 @@
         <!--<li class="nav-item">
             <a class="nav-link" routerLink="/mojo/ingesta" routerLinkActive="active"><strong>Ingesta</strong></a>
         </li>-->
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/mojo/ingresos" routerLinkActive="active">Ingresos</a>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Ingresos
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" routerLink="/mojo/egresos">Egresos</a>
+          </div>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -50,7 +55,7 @@
                 <i class="fas fa-user"></i>
             </span>-->
       <span class="logout" (click)="logout()">
-        <label><strong> Cerrar sesión </strong></label>
+        <label>Cerrar sesión</label>
       </span>
     </div>
   </nav>

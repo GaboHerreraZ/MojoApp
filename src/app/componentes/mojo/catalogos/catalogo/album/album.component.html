@@ -1,83 +1,81 @@
-<label><strong>Nuevo album</strong></label>
-<hr>
-<form [formGroup]="albumForm">
-    <div class="row">
-        <div class="col-md-4">
-            <label>Titulo:</label>
-            <input formControlName="titulo" class="form-control" id="idTitulo" placeholder="Titulo">
+<h2 class="text-center">Agregar nuevo album</h2>
+<div class="container">
+  <div class="row rowCentrado my-3">
+    <div class="col-xs-12 col-md-12 col-lg-5 backgroundGral p-4">
+      <form [formGroup]="albumForm">
+        <div class="my-3">
+          <label>Titulo:</label>
+          <input formControlName="titulo" class="form-control" id="idTitulo" placeholder="Titulo">
         </div>
-        <div class="col-md-4">
-            <label>UPC:</label>
-            <input formControlName="upc" class="form-control" id="idUpc" placeholder="UPC del album">
+        <div class="my-3">
+          <label>UPC:</label>
+          <input formControlName="upc" class="form-control" id="idUpc" placeholder="UPC del album">
         </div>
-        <div class="col-md-4">
-            <div class="row">
-                <div class="col-md-8">
-                    <label>Artista:</label>
-                    <select formControlName="artista" class="form-control" id="idArtista">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                    </select>
-                </div>
-                <div class="col-md-4">
-                    <button type="button" style="margin-top:31px;" class="btn btn-dark button-style" data-toggle="modal" data-target="#nuevoArtista"><strong><i class="fas fa-plus"></i>Artista</strong></button>
-                </div>
-            </div>
+        <div class="my-3">
+          <label>Artista:</label>
+          <select formControlName="artista" class="form-control" id="idArtista">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
         </div>
+
+        <button type="button" style="margin-left:0!important" class="background-btn my-3" data-toggle="modal" data-target="#nuevoArtista"><strong><i class="fas fa-plus"></i>Artista</strong></button>
+
+      </form>
     </div>
-    <div class="row">
-        <div class="col-md-4">
-            <label>Género:</label>
-            <select formControlName="genero" class="form-control" id="idArtista">
-                <option *ngFor ="let genero of generos" [value]="genero.id">{{genero.descripcion}}</option>
-            </select>
-        </div>
-    </div>
-</form>
-<br>
-<label><strong>Afiliado</strong></label>
-<hr>
-<div class="row">
-    <div class="col-md-4">
+
+    <div class="offset-lg-2" style="margin-left:2%!important"></div>
+
+    <div class="col-xs-12 col-md-12 col-lg-5 backgroundGral p-4 marginTop">
+      <div class="my-3">
+        <label>Género:</label>
+        <select formControlName="genero" class="form-control" id="idArtista">
+          <option *ngFor="let genero of generos" [value]="genero.id">{{genero.descripcion}}</option>
+        </select>
+      </div>
+      <div class="my-3">
         <label>Nombre afiliado:</label>
         <input class="form-control" id="idAfiliado" placeholder="Nombre afiliado">
+      </div>
+      <button type="button" class="background-btn my-3" style="margin-left:0!important"><strong>Agregar afiliado</strong></button>
     </div>
-    <div class="col-md-4" style="margin-top:31px;">
-        <button type="button" class="btn btn-dark button-style "><strong>Agregar afiliado</strong></button>
-    </div>
+  </div>
 </div>
-<br>
-<div class="row">
-    <div class="col-md-12">
-        <label><strong>Lista de afiliados agregados</strong></label>
-        <table class="table">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Opciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Nombre 1</td>
-                    <td>opciones 1</td>
-                </tr>
-                <tr>
-                    <td>Nombre 1</td>
-                    <td>opciones 1</td>
-                </tr>
-                <tr>
-                    <td>Nombre 1</td>
-                    <td>opciones 1</td>
-                </tr>
-            </tbody>
-        </table>
+
+
+<div class="container">
+  <div class="row my-3">
+    <div class="col-xs-12 col-md-12 col-lg-12">
+      <h2 class="text-center my-3">Lista de afiliados agregados</h2>
+      <table class="table my-5">
+        <thead>
+          <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Opciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-titulo="Nombre ">Nombre 1</td>
+            <td data-titulo="Opción ">opciones 1</td>
+          </tr>
+          <tr>
+            <td data-titulo="Nombre ">Nombre 1</td>
+            <td data-titulo="Opción ">opciones 1</td>
+          </tr>
+          <tr>
+            <td data-titulo="Nombre ">Nombre 1</td>
+            <td data-titulo="Opción ">opciones 1</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
+  </div>
 </div>
-<br>
+
 <!--Popup artista-->
 <app-artista-popup></app-artista-popup>
 <!--<app-loading [loading]="loading"></app-loading>-->

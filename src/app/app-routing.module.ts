@@ -5,7 +5,7 @@ import { GuardService } from './servicios/auth/guard.service';
 import { PaginasComponent } from './componentes/mojo/paginas.component';
 
 const routes: Routes = [
-{ path:'mojo',  
+{ path:'mojo',
   component:PaginasComponent,
   canActivate:[GuardService],
   children:[
@@ -18,7 +18,7 @@ const routes: Routes = [
     {path:'',redirectTo:'/mojo/analitica',pathMatch:'full'},
     {path:'**',redirectTo:'/mojo/analitica',pathMatch:'full'},
 
-  ]  
+  ]
 },
 {path:'login',component:LoginComponent},
 {path:'',redirectTo:'/login',pathMatch:'full'},
@@ -34,4 +34,3 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
- 

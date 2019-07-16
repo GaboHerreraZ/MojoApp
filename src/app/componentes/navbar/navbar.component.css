@@ -106,7 +106,7 @@ li a {
     color: white;
     display: block;
     font-size: 16px;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Raleway';
     padding-right: 30px !important;
     transition: color 1s;
 }
@@ -125,7 +125,7 @@ label {
 }
 
 li a:hover {
-    color: gray !important;
+    color: #edd920 !important;
 }
 
 .active {

@@ -1,3 +1,6 @@
+*{
+  font-family: 'Raleway';
+}
 .border-div {
     border-left: 8px solid #edd920;
     height: 40px;
