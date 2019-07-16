@@ -1,0 +1,83 @@
+<label><strong>Nuevo album</strong></label>
+<hr>
+<form [formGroup]="albumForm">
+    <div class="row">
+        <div class="col-md-4">
+            <label>Titulo:</label>
+            <input formControlName="titulo" class="form-control" id="idTitulo" placeholder="Titulo">
+        </div>
+        <div class="col-md-4">
+            <label>UPC:</label>
+            <input formControlName="upc" class="form-control" id="idUpc" placeholder="UPC del album">
+        </div>
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-8">
+                    <label>Artista:</label>
+                    <select formControlName="artista" class="form-control" id="idArtista">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <button type="button" style="margin-top:31px;" class="btn btn-dark button-style" data-toggle="modal" data-target="#nuevoArtista"><strong><i class="fas fa-plus"></i>Artista</strong></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <label>Género:</label>
+            <select formControlName="genero" class="form-control" id="idArtista">
+                <option *ngFor ="let genero of generos" [value]="genero.id">{{genero.descripcion}}</option>
+            </select>
+        </div>
+    </div>
+</form>
+<br>
+<label><strong>Afiliado</strong></label>
+<hr>
+<div class="row">
+    <div class="col-md-4">
+        <label>Nombre afiliado:</label>
+        <input class="form-control" id="idAfiliado" placeholder="Nombre afiliado">
+    </div>
+    <div class="col-md-4" style="margin-top:31px;">
+        <button type="button" class="btn btn-dark button-style "><strong>Agregar afiliado</strong></button>
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-md-12">
+        <label><strong>Lista de afiliados agregados</strong></label>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Nombre 1</td>
+                    <td>opciones 1</td>
+                </tr>
+                <tr>
+                    <td>Nombre 1</td>
+                    <td>opciones 1</td>
+                </tr>
+                <tr>
+                    <td>Nombre 1</td>
+                    <td>opciones 1</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<br>
+<!--Popup artista-->
+<app-artista-popup></app-artista-popup>
+<!--<app-loading [loading]="loading"></app-loading>-->

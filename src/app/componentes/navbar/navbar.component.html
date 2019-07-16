@@ -1,0 +1,56 @@
+<nav class="navbar navbar-expand-lg ">
+  <!--<nav class="navbar navbar-expand-lg ">-->
+  <nav class="navbar navbar-expand-lg ">
+    <a class="navbar-brand" id="logo">
+      <img src="./assets/img/logo-web.png" width="110" height="40" class="d-inline-block align-top" alt="">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+      <span style="font-size: 1em; color:#edd920;">
+        <i class="fas fa-bars"></i>
+      </span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+      <ul class="navbar-nav ml-auto ">
+        <!--<li class="nav-item">
+            <a class="nav-link" routerLink="/mojo/ingesta" routerLinkActive="active"><strong>Ingesta</strong></a>
+        </li>-->
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/mojo/ingresos" routerLinkActive="active">Ingresos</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Analitycs
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" routerLink="/mojo/analitica">Analitycs</a>
+            <a class="dropdown-item" routerLink="/mojo/artista-analitica">Artista</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Catálogos
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" routerLink="/mojo/catalogo">Catálogo</a>
+            <a class="dropdown-item" routerLink="/mojo/artista">Artista</a>
+          </div>
+        </li>
+        <li style="margin-right: 10px;" class="nav-item">
+          <a class="nav-link" routerLink="/mojo/youtube" routerLinkActive="active">YouTube</a>
+        </li>
+      </ul>
+      <!--<span class="class-icon">
+                <i class="fas fa-bell"></i>
+            </span>
+            <span class="class-icon">
+                <i class="fas fa-envelope"></i>
+            </span>
+            <span class="class-icon">
+                <i class="fas fa-user"></i>
+            </span>-->
+      <span class="logout" (click)="logout()">
+        <label><strong> Cerrar sesión </strong></label>
+      </span>
+    </div>
+  </nav>

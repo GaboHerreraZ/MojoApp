@@ -1,0 +1,160 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "~@ng-select/ng-select/themes/default.theme.css";
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+/*---Estilos de calendario---*/
+
+.btn-outline-secondary:hover {
+    color: #fff;
+    background-color: #edd920;
+    border-color: #edd920;
+}
+
+
+/*---------------------*/
+
+.ngx-pagination {
+    font-size: .8em;
+}
+
+.ngx-pagination li:last-child {
+    padding-right: 0;
+}
+
+.ngx-pagination .current {
+    background-color: #edd920 !important;
+    color: #161616 !important;
+    font-weight: bold !important;
+}
+
+.button-style {
+    color: #edd920;
+    line-height: 15px;
+    border-radius: 0px;
+}
+
+.button-style i {
+    font-size: 14px;
+}
+
+.form-control:focus {
+    border-color: #edd920 !important;
+    box-shadow: 0 0 0 0.1rem #edd920 !important;
+}
+
+.form-control {
+    height: 36px;
+}
+
+
+/*
+.table {
+    width: 100% !important;
+    font-size: 13px;
+    margin-bottom: 15px;
+}
+
+.table td,
+.table th {
+    padding: .2rem !important;
+}
+
+.thead-dark th {
+    background-color: #161616 !important;
+    color: #edd920 !important;
+    padding: 0.25rem;
+    text-align: center;
+}
+
+tr {
+    text-align: center !important;
+}
+*/
+
+.container {
+    margin-top: 5% !important;
+}
+
+
+/*
+::-webkit-scrollbar {
+    width: 2px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: white;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #161616;
+}*/
+
+.color-text {
+    color: #edd920 !important;
+}
+
+.swal2-success-ring {
+    border: .25em solid rgba(237, 217, 32, 0.8) !important;
+}
+
+button[data-target="#nuevoAlbum"] {
+    padding: .25rem .5rem;
+    font-size: .875rem;
+    line-height: 1.5;
+    border-radius: .2rem;
+}
+
+.btn-yellow {
+    background-color: transparent;
+    border-color: #edd920;
+    color: #343a40;
+    height: 25px;
+    width: 25px;
+    margin-right: 5px;
+    padding: 0px;
+    line-height: 10px;
+    border-radius: 0;
+}
+
+.btn-yellow:hover {
+    background-color: #edd920;
+    border-color: #edd920;
+    color: #343a40;
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+section {
+    padding-bottom: 150px;
+}
+
+#container-total {
+    position: relative;
+    min-height: 100vh;
+}
+
+@media screen and (max-width:1200px) {
+    section {
+        padding-bottom: 250px;
+    }
+}
+
+.dashedborder {
+    border: 1px dashed #c4d1d9;
+    padding: 10px;
+}

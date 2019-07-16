@@ -1,0 +1,81 @@
+<div class="row">
+    <div class="col-md-4 classDiv">
+        <h5>Seleccione los filtros de consulta:</h5>
+    </div>
+</div>
+<br>
+<form [formGroup]="consultaForm" (ngSubmit)="consultar()">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="fechaInicio">Fecha inicio:</label>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input formControlName="fechaInicio" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #d="ngbDatepicker">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary far fa-calendar-alt" (click)="d.toggle()" type="button"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label for="fechaInicio">Fecha final:</label>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input formControlName="fechaFinal" outsideDays="collapsed" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #p="ngbDatepicker">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary far fa-calendar-alt" (click)="p.toggle()" type="button"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Canal:</label>
+                        <app-autocomplete [data]="canales" [form]="consultaForm" [control]="'canal'"></app-autocomplete>
+                    </div>
+                </div>
+                <div class="col-md-4" style="margin-top:31px;">
+                    <button [disabled]="!consultaForm.valid" type="submit" class="btn btn-dark button-style "><strong>Consultar</strong></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<div class="row">
+    <app-line-chart [configLine]="configCanalLine"></app-line-chart>
+</div>
+<app-loading [loading]="loading"></app-loading>
+<br>
+<div class="row">
+    <div class="col-md-6">
+        <label>Top 10 reproducciones</label>
+        <div class="table-responsive col-md-12">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Top</th>
+                        <th scope="col">Canción</th>
+                        <th scope="col">Reproducciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let top of tops">
+                        <td>{{top.top}}</td>
+                        <td>{{top.cancion}}</td>
+                        <td>{{top.ingresos}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <label>Reproducciones por país</label>
+        <app-pie-chart [configChart]="configChartPais"></app-pie-chart>
+    </div>
+</div>

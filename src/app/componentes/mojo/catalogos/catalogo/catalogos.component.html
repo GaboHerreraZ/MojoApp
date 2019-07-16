@@ -1,0 +1,66 @@
+<div class="row container-fluid" style="padding:0;">
+    <div class="col-12">
+        <div *ngIf="show" class="row">
+            <div class="col-md-4">
+                <label for="BuscarAlbum">Buscar album:</label>
+                <input [(ngModel)]="text" class="form-control" id="idBuscarAlbum" placeholder="ingrese el album">
+            </div>
+            <div class="col-md-4"></div>
+            <div id="nuevo-album-desktop" class="col-md-4 text-right">
+                <button style="margin-top:31px;" (click)=nuevoAlbum() type="button" class="btnNewArtistB" title="Nuevo Album">Nuevo Album</button>
+            </div>
+            <div id="nuevo-album-mobile" class="col-md-4 text-right" style="padding:0;">
+                <button style="margin-top:31px;" (click)=nuevoAlbum() type="button" class="btn btn-dark button-style" title="Nuevo Album"><strong>+</strong></button>
+            </div>
+        </div>
+        <app-album *ngIf="step && !show" [albumForm]="albumForm"></app-album>
+        <app-track *ngIf="!step && !show"></app-track>
+        <div class="row">
+            <div class="col-md-12">
+                <button *ngIf="!show && step" [disabled]="!albumForm.valid" (click)="step=false" type="button" class="btn btn-dark button-style "><strong>Siguiente</strong></button>
+                <button *ngIf="!show && !step" (click)="step=true" type="button" class="btn btn-dark button-style "><strong>Regresar</strong></button>
+                <button *ngIf="!show && !step" (click)="show=true" type="button" class="btn btn-dark button-style "><strong>Guardar</strong></button>
+            </div>
+        </div>
+        <br>
+
+        <div *ngIf="show" class="row">
+            <div class="table-responsive col-md-12">
+                <table class="table">
+                    <thead class="tableHead">
+                        <tr>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Upc</th>
+                            <th scope="col">Artista</th>
+                            <th scope="col">Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let album of albumes|search:text:'filtroAlbum'|paginate: { itemsPerPage: 5, currentPage: p }">
+                            <td>{{album.nombre}}</td>
+                            <td>{{album.upc}}</td>
+                            <td>{{album.artista}}</td>
+                            <td style="width:1%; white-space:nowrap;">
+                                <button title="Ver detalle" type="button" class="btn btn-dark button-style btn-xs btn-yellow" (click)="verDetalleAlbum(album)" data-toggle="modal" data-target="#detallesAlbum"><i class="fa fa-eye"></i></button>
+                                <button title="Editar" type="button" class="btn btn-secondary button-style btn-xs btn-yellow" (click)="editarAlbum(album)" data-toggle="modal" data-target="#editarAlbum"><i class="fa fa-edit"></i></button>
+                                <button title="Eliminar" class="btn btn-danger button-style btn-xs btn-yellow" style="margin-right:0 !important;">
+									<i class="fa fa-trash"></i>
+								</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+        <div *ngIf="show" class="row">
+            <div class="col-md-12 text-right">
+                <pagination-controls (pageChange)="p = $event" previousLabel="Regresar" nextLabel="Siguiente">
+                </pagination-controls>
+            </div>
+        </div>
+    </div>
+</div>
+<button style="margin-top:31px;" (click)=nuevoAlbum() type="button" class="btnNewArtistA" title="Nuevo Album" style="visibility:hidden"> + </button>
+
+<app-loading [loading]="loading"></app-loading>

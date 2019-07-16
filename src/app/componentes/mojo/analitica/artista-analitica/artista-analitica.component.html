@@ -1,0 +1,214 @@
+<div id="container-gral" class="container-fluid">
+    <div *ngIf="showSelect" class="redes row dashedborder w-100">
+        <div class="col-md-4 text-center">
+            <img style="width: 120px;height:120px;" src="assets/iconos/microfono.png" class="card-img" alt="microfono">
+        </div>
+        <div class="col-md-4" style="margin-top:1rem">
+            <div class="form-group">
+                <label>Artista:</label>
+                <select (change)="onChangeArtista($event)" class="form-control" id="artistaSelect">
+					<option>El Pepo</option>
+					<option>Los Rebeldes</option>
+					<option>Rocio Quiroz</option>
+				</select>
+            </div>
+        </div>
+        <div class="col-md-4" style="margin-top:3rem">
+            <button (click)="verAnaliticaArtista()" type="button" class="btn btn-dark button-style "><strong>Consultar</strong></button>
+        </div>
+    </div>
+    <div *ngIf="showInfo">
+        <div class="row">
+            <div class="col-md-6">
+                <button (click)="regresar()" type="button" class="btn btn-dark button-style "><strong>Regresar</strong></button>
+            </div>
+        </div>
+        <br>
+        <br>
+        <div *ngIf="showInfo" class="redes row">
+            <div class="col-12">
+                <h5>Followers:</h5>
+            </div>
+        </div>
+        <div class="row dashedborder">
+            <div class="col-12" style="padding:0;">
+                <ul class="text-center" width="100%" style="margin-bottom:0; padding: 0;">
+                    <li title="facebook" class="text-center">
+                        <div>
+                            <img class="img-style" src="assets/iconos/facebook.png">
+                            <strong class="cantidad">{{arFollowers[0].followers}}</strong>
+                            <p class="followers">Followers</p>
+                        </div>
+                    </li>
+                    <li title="Spotify" class="text-center">
+                        <div>
+                            <img class="img-style" src="assets/iconos/spotify.png">
+                            <strong class="cantidad">{{arFollowers[1].followers}}</strong>
+                            <p class="followers">Followers</p>
+                        </div>
+                    </li>
+                    <li title="Youtube" class="text-center">
+                        <div>
+                            <img class="img-style" src="assets/iconos/youtube.png">
+                            <strong class="cantidad">{{arFollowers[2].followers}}</strong>
+                            <p class="followers">Followers</p>
+                        </div>
+                    </li>
+                    <li title="Instagram" class="text-center">
+                        <div>
+                            <img class="img-style" src="assets/iconos/instagram.png">
+                            <strong class="cantidad">{{arFollowers[3].followers}}</strong>
+                            <p class="followers">Followers</p>
+                        </div>
+                    </li>
+                    <li title="iTunes" class="text-center">
+                        <div>
+                            <img class="img-style" src="assets/iconos/itunes.png">
+                            <strong class="cantidad">{{arFollowers[4].followers}}</strong>
+                            <p class="followers">Followers</p>
+                        </div>
+                    </li>
+                    <li title="Deezer" class="text-center">
+                        <div>
+                            <img class="img-style" src="assets/iconos/deezer.png">
+                            <strong class="cantidad">{{arFollowers[5].followers}}</strong>
+                            <p class="followers">Followers</p>
+                        </div>
+                    </li>
+                    <li title="Twitter" class="text-center">
+                        <div>
+                            <img class="img-style" src="assets/iconos/twitter.png">
+                            <strong class="cantidad">{{arFollowers[6].followers}}</strong>
+                            <p class="followers">Followers</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <br>
+        <div *ngIf="showInfo" class="redes row">
+            <div class="col-12">
+                <h5>Reproducciones:</h5>
+            </div>
+        </div>
+        <div class="row dashedborder">
+            <div class="col-12" style="padding: 0;">
+                <ul class="text-center" width="100%" style="margin-bottom:0; padding: 0;">
+                    <li title="Spotify" class="text-center">
+                        <div>
+                            <img class="img-style" src="assets/iconos/spotify.png">
+                            <strong class="cantidad">{{obStreams[0]}}</strong>
+                            <p class="followers">Streams</p>
+                        </div>
+                    </li>
+                    <li title="Youtube" class="text-center">
+                        <div>
+                            <img class="img-style" src="assets/iconos/youtube.png">
+                            <strong class="cantidad">{{obStreams[1]}}</strong>
+                            <p class="followers">Streams</p>
+                        </div>
+                    </li>
+                    <li title="iTunes" class="text-center">
+                        <div>
+                            <img class="img-style" src="assets/iconos/itunes.png">
+                            <strong class="cantidad">{{obStreams[4]}}</strong>
+                            <p class="followers">Streams</p>
+                        </div>
+                    </li>
+                    <li title="Deezer" class="text-center">
+                        <div>
+                            <img class="img-style" src="assets/iconos/deezer.png">
+                            <strong class="cantidad">{{obStreams[3]}}</strong>
+                            <p class="followers">Streams</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-12">
+                <h5>Filtros de consulta:</h5>
+            </div>
+        </div>
+        <br>
+        <form [formGroup]="consultaForm">
+            <div class="row">
+                <div class="col-md-3">
+                    <label for="fechaInicio">Fecha inicio:</label>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input formControlName="fechaInicio" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #d="ngbDatepicker">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary far fa-calendar-alt" (click)="d.toggle()" type="button"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label for="fechaInicio">Fecha final:</label>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input formControlName="fechaFinal" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #p="ngbDatepicker">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary far fa-calendar-alt" (click)="p.toggle()" type="button"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="canalSelect">Canal</label>
+                        <select formControlName="canal" class="form-control" id="canalSelect">
+                                    <option value="7">YouTube</option>
+                                    <option value="4">Spotify</option>
+                                </select>
+                    </div>
+                </div>
+                <div class="col-md-3" style="margin-top:31px;">
+                    <button (click)="consultarInformacion()" type="button" class="btn btn-dark button-style "><strong>Consultar</strong></button>
+                </div>
+            </div>
+        </form>
+        <br>
+        <div class="row text-center">
+            <div class="col-10">
+                <div class="chart text-center">
+                    <app-line-chart [configLine]="config"></app-line-chart>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-6">
+                <label>Top 10 reproducciones</label>
+                <div class="table-responsive col-md-12">
+                    <table class="table" style="width: 100%; border-spacing:0;">
+                        <thead class="thead-dark">
+                            <tr style="height: 30px" valign="middle">
+                                <th scope="col">Top</th>
+                                <th scope="col">Canción</th>
+                                <th scope="col">Reproducciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let top of tops">
+                                <td style="padding-left:20px !important;">{{top.top}}</td>
+                                <td>{{top.cancion}}</td>
+                                <td>{{top.ingresos|currency:'USD'}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label>Reproducciones por país</label>
+                <div class="chart text-center">
+                    <app-pie-chart [configChart]="configChartPais"></app-pie-chart>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<app-loading [loading]="loading"></app-loading>
