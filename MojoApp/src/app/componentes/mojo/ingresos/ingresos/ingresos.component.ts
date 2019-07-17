@@ -1,15 +1,15 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { BsDatepickerConfig, BsDatepickerViewMode } from 'ngx-bootstrap/datepicker';
-import { AccessComunesService } from '../../../servicios/mojo/comunes/access.comunes.service';
-import { Constante } from '../../../utilidades/constante';
-import { AlertService } from '../../../servicios/alert/alert.service';
-import { Mensaje } from '../../../utilidades/mensaje';
-import { AccessArtistaService } from '../../../servicios/mojo/artista/access.artista.service';
-import { DatatableComponent } from '../../../elementos/datatable/datatable.component';
+import { AccessComunesService } from '../../../../servicios/mojo/comunes/access.comunes.service';
+import { Constante } from '../../../../utilidades/constante';
+import { AlertService } from '../../../../servicios/alert/alert.service';
+import { Mensaje } from '../../../../utilidades/mensaje';
+import { AccessArtistaService } from '../../../../servicios/mojo/artista/access.artista.service';
+import { DatatableComponent } from '../../../../elementos/datatable/datatable.component';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { debounceTime, tap, switchMap, finalize } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
-import { AuthService } from '../../../servicios/auth/auth.service';
+import { AuthService } from '../../../../servicios/auth/auth.service';
 
 
 @Component({
