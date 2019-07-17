@@ -173,7 +173,6 @@ tbody tr td{
 		font-size: 1rem;
 	}
 	table tr{
-    background-color:black!important;
     color:#f4da30!important;
 		display: flex;
 		flex-direction: column;

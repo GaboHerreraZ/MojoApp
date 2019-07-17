@@ -5,10 +5,11 @@
     background-color: #161616;
     color: white;
     text-align: center;
-    padding-top: 20px;
     bottom: 0;
 }
-
+.container{
+  margin-top:2%!important;
+}
 div span.span-style {
     color: #edd920;
     margin-top: 10px;
@@ -42,7 +43,6 @@ div span.span-style {
     .col-md-4 {
         margin-left: 20px;
     }
-    .footer {}
 }
 
 @media(max-width:767px) {
