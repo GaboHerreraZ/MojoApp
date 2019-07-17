@@ -1,0 +1,25 @@
+.table {
+    width: 100% !important;
+    font-size: 13px;
+    margin-bottom: 15px;
+}
+
+.table td,
+.table th {
+    padding: .2rem !important;
+}
+
+.thead-dark th {
+    background-color: #161616 !important;
+    color: #edd920 !important;
+    padding: 0.25rem;
+    text-align: center;
+}
+
+tr {
+    text-align: center !important;
+}
+
+.filter {
+    width: 30%;
+}

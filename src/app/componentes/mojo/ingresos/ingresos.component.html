@@ -1,0 +1,367 @@
+<div class="container my-5">
+  <h2 class="text-center my-5">Tabla de ingresos</h2>
+  <div class="row">
+    <div class="col-xs-12 col-md-12 col-lg-6 backgroundGral">
+      <div class="row my-3">
+        <div class="col-lg-6">
+          <label>Fecha inicial</label>
+          <input class="form-control" type="text" placeholder="Ingresar fecha inicial" class="form-control" [bsConfig]="bsConfig" #dp="bsDatepicker" bsDatepicker>
+        </div>
+
+        <div class="col-lg-6">
+          <label>Fecha final</label>
+          <input class="form-control" type="text" placeholder="Ingresar fecha final" class="form-control" [bsConfig]="bsConfig" #dp="bsDatepicker" bsDatepicker>
+        </div>
+        <button style="margin-top:31px" class="btnGral">Consultar</button>
+      </div>
+
+      <div class="row marginBottom">
+        <div class="col-lg-6">
+          <label>Filtrar:</label>
+          <ng-select (change)="onChange($event)" [items]="filtro" bindLabel="nombre" placeholder="Seleccione filtro"></ng-select>
+          <div *ngIf="show">
+            <label>Por:</label>
+            <form [formGroup]="objectSelect">
+              <input class="form-control" [placeholder]="primerFiltro.nombre" [matAutocomplete]="auto" formControlName="object">
+              <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                <mat-option *ngIf="isLoading2" class="is-loading">Cargando...</mat-option>
+                <ng-container *ngIf="!isLoading2">
+                  <mat-option *ngFor="let object of objectFiltrados" [value]="object.nombre">
+                    <span>{{pais.nombre}}</span>
+                  </mat-option>
+                </ng-container>
+              </mat-autocomplete>
+            </form>
+          </div>
+          <div>
+            <mat-chip-list>
+              <mat-chip *ngFor="let filter of filters" [removable]="removable" (removed)="remove(filter)">{{filter.tipo}}:{{filter.valor}}
+                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+              </mat-chip>
+            </mat-chip-list>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="offset-lg-1" style="margin-left:3%!important"></div>
+
+    <div class="col-xs-12 col-md-12 col-lg-5 backgroundGral marginTop">
+      <div class="row my-4">
+        <div class="col align-self-start">
+          <h5>Estado de cuenta</h5>
+        </div>
+        <div class="col align-self-end">
+          <label for="" style="font-size:20px;font-weight:500">$0.00</label>
+        </div>
+      </div>
+      <hr style="border-color:yellow;">
+      <div class="row">
+        <div class="col align-self-start">
+          <ul style="list-style:none" class="no-padding">
+            <li class="lista">Ingresos</li>
+            <li class="lista">Detalle</li>
+          </ul>
+        </div>
+        <div class="col align-self-end">
+          <ul style="list-style:none" class="no-padding">
+            <li><label class="label" for="">$55.733,00</label></li>
+            <li><label class="label" for="">$53.102,86</label></li>
+          </ul>
+        </div>
+      </div>
+      <hr style="border-color:yellow;">
+      <div class="row">
+        <div class="col justify-content-start">
+          <ul style="list-style:none" class="no-padding">
+            <li class="lista">Pago</li>
+            <li class="lista">Descripción</li>
+          </ul>
+        </div>
+        <div class="col justify-content-end">
+          <ul style="list-style:none">
+            <li class="lista">$-6.12,00 </li>
+            <li class="lista">$-6.12,00 </li>
+          </ul>
+        </div>
+      </div>
+      <hr style="border-color:yellow;">
+      <div class="row">
+        <div class="col align-self-start">
+          <h5>Saldo pendiente</h5>
+        </div>
+        <div class="col align-self-end">
+          <label for="">$55.727,66</label>
+        </div>
+      </div>
+      <hr style="border-color:yellow;">
+    </div>
+  </div>
+</div>
+
+<!-- Tendencias de venta start -->
+<section class="white-seccion my-3">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-6 col-md-6 col-lg-6">
+        <div class="col align-content-start">
+          <h2 class="margin-centrado">Tendencias de venta</h2>
+        </div>
+      </div>
+      <div class="col-xs-4 offset-xs-2 col-md-6 offset-lg-3 col-lg-3 margin-centrado">
+        <button class="button-analitycs" type="button" name="button">Tienda</button>
+        <button class="button-analitycs active" type="button" name="button">País</button>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div>
+          <app-line-chart [configLine]="configCanalLine"></app-line-chart>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Tendencias de venta end -->
+<!--
+<div class="row">
+    <div class="col-md-2">
+        <label>Fecha inicial:</label>
+        <input class="form-control" type="text" placeholder="fecha" class="form-control" [bsConfig]="bsConfig" #dp="bsDatepicker" bsDatepicker>
+    </div>
+    <div class="col-md-2">
+        <label>Fecha final:</label>
+        <input class="form-control" type="text" placeholder="fecha" class="form-control" [bsConfig]="bsConfig" #dp="bsDatepicker" bsDatepicker>
+    </div>
+    <div class="col-md-2">
+        <button style="margin-top:31px" class="btn btn-dark button-style">Consultar</button>
+    </div>
+</div>
+<div class="dashedborder">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="row">
+        <div class="col-md-6">
+          <label>Filtrar:</label>
+          <ng-select (change)="onChange($event)" [items]="filtro" bindLabel="nombre" placeholder="Seleccione filtro">
+          </ng-select>
+        </div>
+        <div *ngIf="show" class="col-md-6">
+          <label>Por:</label>
+          <form [formGroup]="objectSelect">
+            <input class="form-control" [placeholder]="primerFiltro.nombre" [matAutocomplete]="auto" formControlName="object">
+            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+              <mat-option *ngIf="isLoading2" class="is-loading">Cargando...</mat-option>
+              <ng-container *ngIf="!isLoading2">
+                <mat-option *ngFor="let object of objectFiltrados" [value]="object.nombre">
+                  <span>{{pais.nombre}}</span>
+                </mat-option>
+              </ng-container>
+            </mat-autocomplete>
+          </form>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-md-12">
+          <mat-chip-list>
+            <mat-chip *ngFor="let filter of filters" [removable]="removable" (removed)="remove(filter)">{{filter.tipo}}:{{filter.valor}}
+              <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+            </mat-chip>
+          </mat-chip-list>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="row">
+        <div class="col-md-6">
+          <strong>Estado de cuenta</strong>
+        </div>
+        <div class="col-md-6 text-right">
+          $23,233.2
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-md-6">
+          <strong>Ingresos</strong>
+        </div>
+        <div class="col-md-6 text-right">
+          $23,233.2
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-8">
+          <label style="padding-left: 10px">
+            Detalle
+          </label>
+        </div>
+        <div class="col-md-4 text-right">
+          $23,233.2
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-md-6">
+          <strong>Pago</strong>
+        </div>
+        <div class="col-md-6 text-right">
+          $23,233.2
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-8">
+          <label style="padding-left: 10px">
+            Full tracks
+          </label>
+        </div>
+        <div class="col-md-4 text-right">
+          $23,233.2
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-md-12">
+          <h6><strong>Descripción</strong></h6>
+          <p>Detalle de pago ............</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+-->
+
+<!--
+<div class="row">
+    <div class="col-md-12">
+        <div id="chartContainer" style="height: 370px; width: 100%; margin-left:auto;margin-right:auto;"></div>
+    </div>
+</div>
+-->
+
+<div class="row my-5">
+  <div class="col-md-12">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#Imprint" role="tab" aria-controls="Imprint" aria-selected="true">Labes</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#Artist" role="tab" aria-controls="Artist" aria-selected="false">Artistas</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="contact-tab" data-toggle="tab" href="#Product" role="tab" aria-controls="Product" aria-selected="false">Albumes</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="contact-tab" data-toggle="tab" href="#Track" role="tab" aria-controls="Track" aria-selected="false">Tracks</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="contact-tab" data-toggle="tab" href="#Source" role="tab" aria-controls="Source" aria-selected="false">Tiendas</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="contact-tab" data-toggle="tab" href="#Country" role="tab" aria-controls="Country" aria-selected="false">País</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="contact-tab" data-toggle="tab" href="#Channel" role="tab" aria-controls="Channel" aria-selected="false">Periodo</a>
+      </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane fade show active" id="Imprint" role="tabpanel" aria-labelledby="home-tab">
+        <br>
+        <app-datatable [config]="configLabes"></app-datatable>
+      </div>
+      <div class="tab-pane fade" id="Artist" role="tabpanel" aria-labelledby="profile-tab">
+        <br>
+        <app-datatable [config]="configArtista"></app-datatable>
+      </div>
+      <div class="tab-pane fade" id="Product" role="tabpanel" aria-labelledby="contact-tab">
+        <br>
+        <app-datatable [config]="configAlbum"></app-datatable>
+      </div>
+      <div class="tab-pane fade" id="Track" role="tabpanel" aria-labelledby="contact-tab">
+        <br>
+        <app-datatable [config]="configTrack"></app-datatable>
+      </div>
+      <div class="tab-pane fade" id="Source" role="tabpanel" aria-labelledby="contact-tab">
+        <br>
+        <app-datatable [config]="configTienda"></app-datatable>
+      </div>
+      <div class="tab-pane fade" id="Country" role="tabpanel" aria-labelledby="contact-tab">
+        <br>
+        <app-datatable [config]="configPais"></app-datatable>
+      </div>
+      <div class="tab-pane fade" id="Channel" role="tabpanel" aria-labelledby="contact-tab">
+        <br>
+        <app-datatable [config]="configPeriodo"></app-datatable>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-loading [loading]="loading"></app-loading>
+
+<!--
+<div class="row">
+    <div class="col-md-12">
+        <div id="chartContainer" style="height: 370px; width: 100%; margin-left:auto;margin-right:auto;"></div>
+    </div>
+</div>
+-->
+<!--
+<form [formGroup]="consultaForm" (ngSubmit)="consultar()">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="fechaInicio">Fecha inicio:</label>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input formControlName="fechaInicio" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #d="ngbDatepicker">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary far fa-calendar-alt" (click)="d.toggle()" type="button"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label for="fechaInicio">Fecha final:</label>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input formControlName="fechaFinal" outsideDays="collapsed" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #p="ngbDatepicker">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary far fa-calendar-alt" (click)="p.toggle()" type="button"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Canal:</label>
+                        <app-autocomplete [data]="canales" [form]="consultaForm" [control]="'canal'"></app-autocomplete>
+                    </div>
+                </div>
+                <div class="col-md-4" style="margin-top:31px;">
+                    <button [disabled]="!consultaForm.valid" type="submit" class="btn btn-dark button-style "><strong>Consultar</strong></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<div class="row">
+    <app-line-chart [configLine]="configCanalLine"></app-line-chart>
+</div>
+<app-loading [loading]="loading"></app-loading>
+-->
+
+
+
+<!-- app start -->
+<section>
+  <app-loading [loading]="loading"></app-loading>
+</section>
+<!-- app end -->

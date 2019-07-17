@@ -1,0 +1,223 @@
+<div id="container-gral" class="container-fluid"> <!-- Container Fluid Start -->
+  <div class="container"> <!-- Container 1st container artist START -->
+    <div class="row rowCentrado">
+      <div class="col-xs-12 col-md-12 col-lg-5 backgroundGral p-5">
+        <img class="img-fluid" src="assets/iconos/microfono.png" class="card-img" alt="microfono">
+      </div>
+      <div class="offset-lg-2" style="margin-left:3%!important"></div>
+      <div class="col-xs-12 col-md-12 col-lg-5 backgroundGral marginTop p-5">
+        <div class="form-group">
+          <label>Artista:</label>
+          <select (change)="onChangeArtista($event)" class="form-control" id="artistaSelect">
+            <option>El Pepo</option>
+            <option>Los Rebeldes</option>
+            <option>Rocio Quiroz</option>
+          </select>
+        </div>
+        <div class="flex-row">
+          <!-- align buttons -->
+          <div class="d-flex justify-content-center">
+            <button (click)="verAnaliticaArtista()" type="button" class="background-btn">Consultar</button>
+            <div class="ml-3" *ngIf="showInfo">
+              <button (click)="regresar()" type="button" class="background-btnBlack">Regresar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> <!-- Container 1st container artist END -->
+
+  <div *ngIf="showInfo"> <!-- Show Info Start -->
+    <h2 class="text-center my-5">Analytics</h2>
+    <div class="container">
+      <div class="row rowCentrado">
+        <div class="col-xs-12 col-md-12 col-lg-6 backgroundGral p-5">
+          <h4 class="text-center">Followers</h4>
+            <ul class="ul">
+              <li class="li">
+                <div class="p-2">
+                  <!-- Facebook icon analytics start -->
+                  <img class="img-style" src="assets/iconos/facebook.png">
+                  <strong class="cantidad">{{arFollowers[0].followers}}</strong>
+                  <p class="followers">Followers</p>
+                </div><!-- Facebook icon analytics end -->
+              </li>
+              <li class="li">
+                <div class="p-2">
+                  <!-- Spotify icon analytics start -->
+                  <img class="img-style" src="assets/iconos/spotify.png">
+                  <strong class="cantidad">{{arFollowers[1].followers}}</strong>
+                  <p class="followers">Followers</p>
+                </div><!-- Spotify icon analytics end -->
+              </li>
+              <li class="li">
+                <div class="p-2">
+                  <!-- YouTube icon analytics start -->
+                  <img class="img-style" src="assets/iconos/youtube.png">
+                  <strong class="cantidad">{{arFollowers[2].followers}}</strong>
+                  <p class="followers">Followers</p>
+                </div><!-- YouTube icon analytics end -->
+              </li>
+              <li class="li">
+                <div class="p-2">
+                  <!-- Instagram icon analytics start -->
+                  <img class="img-style" src="assets/iconos/instagram.png">
+                  <strong class="cantidad">{{arFollowers[3].followers}}</strong>
+                  <p class="followers">Followers</p>
+                </div><!-- Instagram icon analytics end -->
+              </li>
+            </ul>
+            <ul>
+              <li class="li">
+                <div class="p-2">
+                  <!-- Twitter icon analytics start -->
+                  <img class="img-style" src="assets/iconos/twitter.png">
+                  <strong class="cantidad">{{arFollowers[6].followers}}</strong>
+                  <p class="followers">Followers</p>
+                </div><!-- Twitter icon analytics end -->
+              </li>
+              <li class="li">
+                <div class="p-2">
+                  <!-- DeeZer icon analytics start -->
+                  <img class="img-style" src="assets/iconos/deezer.png">
+                  <strong class="cantidad">{{arFollowers[5].followers}}</strong>
+                  <p class="followers">Followers</p>
+                </div><!-- DeeZer icon analytics end -->
+              </li>
+              <li class="li">
+                <div class="p-2">
+                  <!-- Itunes icon analytics start -->
+                  <img class="img-style" src="assets/iconos/itunes.png">
+                  <strong class="cantidad">{{arFollowers[4].followers}}</strong>
+                  <p class="followers">Followers</p>
+                </div><!-- Itunes icon analytics end -->
+              </li>
+            </ul>
+        </div>
+
+        <div class="offset-lg-1" style="margin-left:3%!important"></div>
+
+        <div class="col-xs-12 col-md-12 col-lg-5 backgroundGral marginTop p-5">
+          <h4 class="text-center">Reproducciones</h4>
+          <div class="iconsList">
+            <div class="p-2">
+              <!-- icon reproducciones Spotify start -->
+              <img class="img-style" src="assets/iconos/spotify.png">
+              <strong class="cantidad">{{obStreams[0]}}</strong>
+              <p class="followers">Streams</p>
+            </div><!-- icon reproducciones end -->
+
+            <div class="p-2">
+              <!-- icon reproducciones YouTube start -->
+              <img class="img-style" src="assets/iconos/youtube.png">
+              <strong class="cantidad">{{obStreams[1]}}</strong>
+              <p class="followers">Streams</p>
+            </div><!-- icon reproducciones YouTube end -->
+
+            <div class="p-2">
+              <!-- icon reproducciones Itunes start -->
+              <img class="img-style" src="assets/iconos/itunes.png">
+              <strong class="cantidad">{{obStreams[4]}}</strong>
+              <p class="followers">Streams</p>
+            </div><!-- icon reproducciones Itunes End -->
+
+            <div class="p-2">
+              <!-- icon reproducciones Deezer Start -->
+              <img class="img-style" src="assets/iconos/deezer.png">
+              <strong class="cantidad">{{obStreams[3]}}</strong>
+              <p class="followers">Streams</p>
+            </div><!-- icon reproducciones Deezer End -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <h2 class="text-center my-5">Ingresar filtros</h2>
+    <div class="row my-5" style="margin:auto">
+      <div class="col-xs-12 col-md-4 col-lg-6">
+        <div class="row">
+          <div class="col-md-6">
+            <label for="fechaInicio">Fecha inicio:</label>
+            <div class="form-group">
+              <div class="input-group">
+                <input formControlName="fechaInicio" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #d="ngbDatepicker">
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary far fa-calendar-alt" (click)="d.toggle()" type="button"></button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label for="fechaInicio">Fecha final:</label>
+            <div class="form-group">
+              <div class="input-group">
+                <input formControlName="fechaFinal" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #p="ngbDatepicker">
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary far fa-calendar-alt" (click)="p.toggle()" type="button"></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-12 col-md-4 col-lg-6">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="canalSelect">Canal</label>
+              <select formControlName="canal" class="form-control" id="canalSelect">
+                <option value="7">YouTube</option>
+                <option value="4">Spotify</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-4" style="margin-top:31px;">
+            <button [disabled]="!consultaForm.valid" type="submit" class="btnGral btnGralMobile btnSize"><strong>Consultar</strong></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+    <div class="row text-center">
+      <div class="col-10">
+        <div class="chart text-center">
+          <app-line-chart [configLine]="config"></app-line-chart>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12 col-md-12 col-lg-12">
+        <h2 class="text-center my-5">Top 10 reproducciones</h2>
+        <div class="table-responsive col-md-12">
+          <table class="table" >
+            <thead class="thead-dark">
+              <tr style="height: 30px" valign="middle">
+                <th scope="col" class="backgroundTable">Top</th>
+                <th scope="col" class="backgroundTable">Canción</th>
+                <th scope="col" class="backgroundTable">Reproducciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let top of tops">
+                <td data-titulo="Top ">{{top.top}}</td>
+                <td data-titulo="Canción ">{{top.cancion}}</td>
+                <td data-titulo="Ingresos ">{{top.ingresos|currency:'USD'}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div> <!-- Show Info End -->
+</div> <!-- Container Fluid End -->
+<app-loading [loading]="loading"></app-loading>
