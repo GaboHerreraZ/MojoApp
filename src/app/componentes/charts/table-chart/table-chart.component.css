@@ -1,0 +1,31 @@
+::ng-deep.google-visualization-table {
+    width: 100% !important;
+}
+
+::ng-deep.google-visualization-table-table {
+    width: 100% !important;
+}
+
+google-chart {
+    width: 100% !important;
+}
+
+.table td,
+.table th {
+    padding: .2rem !important;
+}
+
+::ng-deep.google-visualization-table-td {
+    padding: .2rem !important;
+}
+
+::ng-deep.google-visualization-table-th {
+    background-color: #161616 !important;
+    color: #edd920 !important;
+    padding: 0.25rem;
+    text-align: center;
+}
+
+::ng-deep.gradient {
+    background-image: none !important;
+}

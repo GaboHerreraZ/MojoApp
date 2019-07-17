@@ -1,14 +1,15 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { BsDatepickerConfig, BsDatepickerViewMode } from 'ngx-bootstrap/datepicker';
-import { AccessComunesService } from '../../../servicios/mojo/comunes/access.comunes.service';
-import { Constante } from '../../../utilidades/constante';
-import { AlertService } from '../../../servicios/alert/alert.service';
-import { Mensaje } from '../../../utilidades/mensaje';
-import { AccessArtistaService } from '../../../servicios/mojo/artista/access.artista.service';
-import { DatatableComponent } from '../../../elementos/datatable/datatable.component';
+import { AccessComunesService } from '../../../../servicios/mojo/comunes/access.comunes.service';
+import { Constante } from '../../../../utilidades/constante';
+import { AlertService } from '../../../../servicios/alert/alert.service';
+import { Mensaje } from '../../../../utilidades/mensaje';
+import { AccessArtistaService } from '../../../../servicios/mojo/artista/access.artista.service';
+import { DatatableComponent } from '../../../../elementos/datatable/datatable.component';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { debounceTime, tap, switchMap, finalize } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
+import { AuthService } from '../../../../servicios/auth/auth.service';
 
 
 @Component({
@@ -17,9 +18,9 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./ingresos.component.css']
 })
 export class IngresosComponent implements OnInit {
-
+  
   @ViewChild(DatatableComponent) dataTable: DatatableComponent;
-
+  
   minMode: BsDatepickerViewMode = 'month';
   bsConfig: Partial<BsDatepickerConfig>;
   show = false;
@@ -29,9 +30,8 @@ export class IngresosComponent implements OnInit {
   removable = true;
   objeto: any;
   loading: boolean;
-
+  
   filters: any[] = [];
-
   filtro = [
     { id: 'sello', nombre: 'Sello' },
     { id: 'album', nombre: 'Album' },
@@ -41,7 +41,7 @@ export class IngresosComponent implements OnInit {
     { id: 'pais', nombre: 'País' },
     { id: 'periodo', nombre: 'Periodo' }
   ];
-
+  
   //Variables Autocomplete server ejemplo  
   objectSelect: FormGroup;
   paisesFiltrados: any[] = [];
@@ -59,14 +59,36 @@ export class IngresosComponent implements OnInit {
   configTienda:any;
   configPais:any;
   configPeriodo:any;
-
+  
   constructor(private _comunService: AccessComunesService,
     private _artistaService: AccessArtistaService,
     private _message: AlertService,
+    private _authService:AuthService,
     private _http: HttpClient,
     private _fb: FormBuilder) {
 
   }
+ 
+  
+  ngOnInit() {
+    
+    this.bsConfig = Object.assign({}, {
+      minMode: this.minMode,
+      dateInputFormat: 'MM/YYYY'
+    });
+  
+    this.objectSelect = this._fb.group({
+      object: [""]
+    });
+  
+    this.loadingPaises();
+    
+    this.configDataTable();
+    this.loading = this._authService.validateSesion()?false:true;
+  
+  }
+
+ 
 
   onChange(event: any) {
     this.show = false;
@@ -128,6 +150,7 @@ export class IngresosComponent implements OnInit {
 
 
   onChangePor(event: any) {
+    console.log(event);
     this.segundoFiltro = event;
     let filtro: any;
     if (this.primerFiltro.id == "pais" || this.primerFiltro.id == "servicio") {
@@ -160,27 +183,12 @@ export class IngresosComponent implements OnInit {
 
 
 
-  ngOnInit() {
-    this.bsConfig = Object.assign({}, {
-      minMode: this.minMode,
-      dateInputFormat: 'MM/YYYY'
-    });
-
-    this.objectSelect = this._fb.group({
-      object: [""]
-    });
-
-    this.loadingPaises();
-    this.configDataTable();
-
-  }
 
   regresar() {
     this.dataTable.showData();
   }
 
     loadingPaises() {
-      console.log("entre");
     this.objectSelect.valueChanges
       .pipe(
         debounceTime(500),
@@ -188,7 +196,7 @@ export class IngresosComponent implements OnInit {
           this.objectFiltrados = [];
           this.isLoading2 = true;
         }), 
-        switchMap(value => this._http.get(`https://tsyxcs4qll.execute-api.us-east-1.amazonaws.com/dev/comboFilter?search=${value.object}C&comboValue=${this.primerFiltro.id}`)
+        switchMap(value => this._http.post(`https://tsyxcs4qll.execute-api.us-east-1.amazonaws.com/dev/comboFilter?search=${value.object}&comboValue=${this.primerFiltro.id}`,this.filters)
           .pipe(
             finalize(() => {
               this.isLoading2 = false
@@ -202,6 +210,7 @@ export class IngresosComponent implements OnInit {
         } else {
           this.objectFiltrados = data['res'];
         }
+        console.log("objetos",this.objectFiltrados)
       },error =>{
         this.objectFiltrados = [];
       });

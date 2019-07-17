@@ -1,0 +1,206 @@
+body{
+  background-color: #e9ebee!important;
+}
+.navbar{
+  padding: 0.2rem 1rem!important;
+}
+.backgroundGral{
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 2px 2px 2px 2px grey;
+}
+.btnGral{
+  border:none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  background-color:#f4db31;
+  color:black;
+  margin-left:1rem;
+}
+.background-btn{
+  border:none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  background-color:#f4db31;
+  color:black;
+}
+.background-btnBlack{
+  border:none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  background-color:black;
+  color:#f4db31;
+}
+.backgroundTable{
+  background-color: black!important;color:#f4db31!important;text-align: center;
+}
+.btnSize{
+  width:240px!important;
+  height: 50px;
+}
+.rowCentrado{
+  display: flex;
+  justify-content: center;
+}
+.iconsList{
+  display: flex;
+  justify-content: center;
+}
+.inputsDate{
+  flex: 0 0 calc(33.3% - 1rem);
+}
+.ul{
+  display: flex;
+  justify-content: center;
+  padding-left: 0!important;
+}
+.li{
+  display: flex;
+}
+.button-analitycs{
+  border:none;
+  border-radius: 10px;
+  background-color: white;
+  padding:1rem;
+}
+.button-analitycs:last-child{
+  margin-left: 10px;
+}
+.button-analitycs:hover{
+  background-color:#f4db31;
+  color:black;
+}
+.btnGralMobile{
+  width: 100%;
+}
+.btnGralMobile:hover{
+  background-color: black;
+  color:#f4da30;
+}
+.form-control{
+  border:none!important;
+  background-color:#fafafa!important;
+  border-bottom:1px solid #f4db31!important;
+}
+
+/*----- Buttons artista.component start <------*/
+
+
+.findArtist{
+  text-align:center;
+}
+
+/*----- Buttons artista.component end <------*/
+
+/*----->  style table start  <-----*/
+thead tr th{
+  background-color: black;
+  color:#f4db31;
+  text-align: center;
+}
+tbody tr td{
+  text-align:center;
+  background-color: white;
+}
+/*----->  style table end  <-----*/
+
+/*-----> media queries start <-----*/
+@media screen and (max-width: 1500px){
+    .form-control{
+      height: 50px!important;
+    }
+    .inputArtist{
+      border:none!important;
+      background-color:white!important;
+      border-bottom:1px solid #f4db31!important;
+    }
+    .btnNewArtistA{
+      border:none;
+      padding:10px 20px;
+      background-color:#f4db31;
+      border-radius: 10px;
+    }
+    .btnNewArtistB{
+      border:none;
+      padding:10px 20px;
+      background-color:#f4db31;
+      border-radius: 10px;
+    }
+/*--> Mobile start */
+@media ( min-width: 450px ) and (max-width: 767px){
+  .inputArtist{
+    width: 100%;
+  }
+  .btnNewArtistB{
+    visibility: hidden;
+  }
+  .background-btn{
+    margin-left: 0!important;
+    width: 100%;
+  }
+  .btnNewArtistA{
+    visibility: visible!important;
+		position: fixed;
+		right: 0;
+		bottom:0;
+		margin-right: 3rem;
+		margin-bottom:2rem;
+		background-color: #f4da30;
+		border-radius: 100px;
+		box-shadow:1px 1px 1px 1px grey;
+    font-size: 20px;
+
+  }
+  .btnNewArtist:hover, .btnGralMobile:hover{
+    background-color: black;
+		color:#f4da30;
+  }
+  .btnGralMobile{
+    margin-left: 0!important;
+    width: 100%!important;
+  }
+  .marginTop{
+    margin-top:2rem;
+  }
+  .marginBottom{
+    padding-bottom:3rem;
+  }
+
+
+
+  table{
+		width: 100%;
+		font-size: 1rem;
+	}
+	table tr{
+    background-color:black!important;
+    color:#f4da30!important;
+		display: flex;
+		flex-direction: column;
+		border-radius: 10px;
+		background-color: white;
+		box-shadow: 0 0 2px 0 grey;
+		padding: 1em;
+		margin-bottom: 1em;
+	}
+	table thead{
+		display: none;
+	}
+	table td{
+		text-align: center;
+	}
+	table td[data-titulo]{
+		display: flex;
+	}
+	table td[data-titulo]::before{
+		content: attr( data-titulo );
+		width: 8rem;
+		color:silver;
+		font-weight: 600;
+	}
+}
+
+
+
+
+/*-----> media queries end <-----*/

@@ -11,7 +11,8 @@ const routes: Routes = [
   children:[
     {path:'analitica',loadChildren:'./componentes/mojo/analitica/analitica/analitica-module/analitica.module#AnaliticaModule',},
     {path:'artista-analitica',loadChildren:'./componentes/mojo/analitica/artista-analitica/artista-analitica-module/artista-analitica.module#ArtistaAnaliticaModule',},
-    {path:'ingresos',loadChildren:'./componentes/mojo/ingresos/ingresos-module/ingresos.module#IngresosModule'},
+    {path:'ingresos',loadChildren:'./componentes/mojo/ingresos/ingresos/ingresos-module/ingresos.module#IngresosModule'},
+    {path:'egresos',loadChildren:'./componentes/mojo/ingresos/egresos/egresos-module/egresos.module#EgresosModule'},
     {path:'youtube',loadChildren:'./componentes/mojo/youtube/youtube-module/youtube.module#YoutubeModule'},
     {path:'catalogo',loadChildren:'./componentes/mojo/catalogos/catalogo/catalogo-module/catalogo.module#CatalogoModule'},
     {path:'artista',loadChildren:'./componentes/mojo/catalogos/artista/artista-module/artista.module#ArtistaModule'},
