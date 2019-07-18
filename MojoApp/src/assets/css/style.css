@@ -9,7 +9,29 @@ body{
   border-radius: 20px;
   box-shadow: 2px 2px 2px 2px grey;
 }
-.btnGral{
+.label {
+  display: flex;
+  justify-content: center;
+  font-weight: 600;
+}
+.centrarTexto{
+  display: block;
+  margin: 0 auto;
+}
+.contenedorEgreso{
+  width: 75%;
+  box-shadow: 2px 2px 2px 2px grey;
+  display: block;
+  margin: 0 auto;
+}
+.contenedor-90{
+  padding-bottom:3rem;
+  width: 100%;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 2px 2px 2px 2px grey;
+}
+.btnGral, .bgBtn{
   border:none;
   border-radius: 10px;
   padding: 10px 20px;
@@ -17,7 +39,47 @@ body{
   color:black;
   margin-left:1rem;
 }
-
+.background-btn{
+  border:none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  background-color:#f4db31;
+  color:black;
+}
+.background-btnBlack{
+  border:none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  background-color:black;
+  color:#f4db31;
+}
+.backgroundTable{
+  background-color: black!important;color:#f4db31!important;text-align: center;
+}
+.btnSize{
+  width:240px!important;
+  height: 50px;
+}
+.rowCentrado{
+  display: flex;
+  justify-content: center;
+}
+.iconsList{
+  display: flex;
+  justify-content: center;
+}
+.inputsDate{
+  flex: 0 0 calc(33.3% - 1rem);
+}
+.ul{
+  display: flex;
+  justify-content: center;
+  padding-left: 0!important;
+  list-style:none;
+}
+.li{
+  padding:2rem;
+}
 .button-analitycs{
   border:none;
   border-radius: 10px;
@@ -31,10 +93,22 @@ body{
   background-color:#f4db31;
   color:black;
 }
+.btnGralMobile{
+  width: 100%;
+}
+.btnGralMobile:hover{
+  background-color: black;
+  color:#f4da30;
+}
 .form-control{
   border:none!important;
   background-color:#fafafa!important;
   border-bottom:1px solid #f4db31!important;
+}
+.card-image{
+  padding:6rem;
+  display: block;
+  margin:0 auto;
 }
 
 /*----- Buttons artista.component start <------*/
@@ -88,6 +162,10 @@ tbody tr td{
   .btnNewArtistB{
     visibility: hidden;
   }
+  .background-btn{
+    margin-left: 0!important;
+    width: 100%;
+  }
   .btnNewArtistA{
     visibility: visible!important;
 		position: fixed;
@@ -101,9 +179,13 @@ tbody tr td{
     font-size: 20px;
 
   }
-  .btnNewArtist:hover{
+  .btnNewArtist:hover, .btnGralMobile:hover{
     background-color: black;
 		color:#f4da30;
+  }
+  .btnGralMobile{
+    margin-left: 0!important;
+    width: 100%!important;
   }
   .marginTop{
     margin-top:2rem;
@@ -111,13 +193,15 @@ tbody tr td{
   .marginBottom{
     padding-bottom:3rem;
   }
+
+
+
   table{
 		width: 100%;
 		font-size: 1rem;
 	}
 	table tr{
-    background-color:black;
-    color:#f4da30;
+    color:#f4da30!important;
 		display: flex;
 		flex-direction: column;
 		border-radius: 10px;

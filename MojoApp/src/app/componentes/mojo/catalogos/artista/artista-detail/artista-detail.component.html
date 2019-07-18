@@ -1,14 +1,14 @@
-<div class="card w-75" style="margin-left:7rem">
-	<div class="row no-gutters">
-		<div class="col-md-4 img-artist text-center">
-			<img style="width: 120px;height:120px;" src="assets/iconos/microfono.png" class="card-img" alt="microfono">
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12 col-md-12 col-lg-6">
+			<img src="assets/iconos/microfono.png" alt="microfono">
 		</div>
-		<div class="col-md-8">
-			<div class="card-body">
-				<h5 class="card-title">
-					<strong>{{artistaData.nombres}}</strong>
-					<hr>
-				</h5>
+		<div class="col-xs-12 col-md-12 col-lg-6">
+			<div class="card-body text-center">
+				<h2 class="card-title">
+					{{artistaData.nombres}}
+				</h2>
+				<hr>
 				<div class="text">
 					<div class="pb-3">
 						<span>País: </span>
@@ -20,33 +20,31 @@
 						<label *ngIf="artistaData.label != null"> {{artistaData.label}}</label>
 						<label *ngIf="artistaData.label == null"> ----- </label>
 					</div>
-					<div class="row">
-						<div class="col">
-							<div class="pb-3">
-								<span><img class="img-style" src="assets/iconos/spotify.png"></span>
-								<label *ngIf="artistaData.idSpotify != null"> {{artistaData.idSpotify}}</label>
-								<label *ngIf="artistaData.idSpotify == null"> ----- </label>
-							</div>
-							<div class="pb-3">
-								<span><img class="img-style" src="assets/iconos/facebook.png"></span>
-								<label *ngIf="artistaData.facebook != null"> {{artistaData.facebook}}</label>
-								<label *ngIf="artistaData.facebook == null"> ----- </label>
-							</div>
-						</div>
-						<div class="col">
-							<div class="pb-3">
-								<span><img class="img-style" src="assets/iconos/youtube.png"></span>
-								<label *ngIf="artistaData.canalYoutube != null"> {{artistaData.canalYoutube}}</label>
-								<label *ngIf="artistaData.canalYoutube == null"> ----- </label>
-							</div>
-							<div class="pb-3">
-								<span><img class="img-style" src="assets/iconos/Instagram.png"></span>
-								<label *ngIf="artistaData.instagram != null"> {{artistaData.instagram}}</label>
-								<label *ngIf="artistaData.instagram == null"> ----- </label>
-								{{artistaData.instagram}}
-							</div>
-						</div>
-					</div>
+
+					<ul class="ul">
+						<li class="li">
+							<span><img class="img-style" src="assets/iconos/spotify.png"></span>
+							<label *ngIf="artistaData.idSpotify != null"> {{artistaData.idSpotify}}</label>
+							<label *ngIf="artistaData.idSpotify == null"> ----- </label>
+						</li>
+						<li class="li">
+							<span><img class="img-style" src="assets/iconos/facebook.png"></span>
+							<label *ngIf="artistaData.facebook != null"> {{artistaData.facebook}}</label>
+							<label *ngIf="artistaData.facebook == null"> ----- </label>
+						</li>
+						<li class="li">
+							<span><img class="img-style" src="assets/iconos/youtube.png"></span>
+							<label *ngIf="artistaData.canalYoutube != null"> {{artistaData.canalYoutube}}</label>
+							<label *ngIf="artistaData.canalYoutube == null"> ----- </label>
+						</li>
+						<li class="li">
+							<span><img class="img-style" src="assets/iconos/Instagram.png"></span>
+							<label *ngIf="artistaData.instagram != null"> {{artistaData.instagram}}</label>
+							<label *ngIf="artistaData.instagram == null"> ----- </label>
+							{{artistaData.instagram}}
+						</li>
+					</ul>
+
 				</div>
 			</div>
 		</div>
