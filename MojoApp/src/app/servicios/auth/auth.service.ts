@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { map, tap, catchError } from 'rxjs/operators';
 import { of } from 'zen-observable';
 import { AlertService } from '../alert/alert.service';
+import { Constante } from '../../utilidades/constante';
 
 
 
@@ -71,6 +72,8 @@ export class AuthService {
         (result: any) => {
           this.loggedIn.next(false);
           this.sesion = undefined;
+          localStorage.removeItem(Constante.keyToken);
+          localStorage.removeItem(Constante.expTime);
           this._router.navigate(['/login']);
         },
         (error) => {
@@ -92,6 +95,8 @@ export class AuthService {
   }
 
   public setSesion(sesion:any){
+    localStorage.setItem(Constante.keyToken,sesion.idToken.jwtToken);
+    localStorage.setItem(Constante.expTime,`${sesion.idToken.payload.exp}000`);
     this.sesion = sesion;
   }
 
@@ -110,9 +115,8 @@ export class AuthService {
 
   public  validateSesion():boolean{
     let currentTime = new Date().getTime();
-    let nextTime = `${this.sesion.idToken.payload.exp}000`;
-    
-    let token = this.sesion.idToken.jwtToken;
+    let nextTime = localStorage.getItem(Constante.expTime);
+    let token = localStorage.getItem(Constante.keyToken);
 
       if(token === undefined){
         this._router.navigate(['/login']);

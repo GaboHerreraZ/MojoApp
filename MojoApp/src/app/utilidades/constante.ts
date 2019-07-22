@@ -18,7 +18,8 @@ export class Constante {
         public static readonly tituloLogin: string = 'Mojo-Login';
 
         /*Generales */
-        public static readonly keyToken: string = "CognitoIdentityServiceProvider.4d99sedbpatihnuihthqa9cqvd.sm@mojo.com.ar.idToken";
+        public static readonly keyToken: string = "idToken";
+        public static readonly expTime:string = "expTime";
 
         /* Nombres filtros pipe*/
         public static readonly artistaPipe: string = "filtroArtista";

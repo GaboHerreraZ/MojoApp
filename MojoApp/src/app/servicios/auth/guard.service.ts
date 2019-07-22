@@ -4,7 +4,6 @@ import { Observable, pipe } from 'rxjs';
 import { tap, map } from 'rxjs/operators';
 import { AuthService } from './auth.service';
 import { Constante } from '../../utilidades/constante';
-import { getLocaleDateTimeFormat } from '@angular/common';
 
 
 @Injectable({
@@ -23,7 +22,7 @@ export class GuardService implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean> | boolean {
     let token: string = localStorage.getItem(Constante.keyToken);
     this.sesion = this._authService.getSesion();
-    if(this.sesion === undefined){
+    if(token === undefined){
           return false;
     }else{
           return this._authService.validateSesion();
