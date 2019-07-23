@@ -42,6 +42,53 @@ body{
   display: flex;
   justify-content: center;
 }
+/*Styles loggin start*/
+.rowCentradoLoggin{
+  width: 50%;
+  display:block;
+  margin:0 auto;
+  padding-bottom:3rem;
+}
+.bgBlack{
+  background-color:black;
+  border-radius:10px;
+}
+.bgInput{
+  border:none;
+  width: 100%;
+  color:white;
+  background-color:black;
+  border-bottom:2px solid #f4db31;
+}
+.itemCentrado{
+display:block;
+margin: 0 auto;
+}
+.formCentrado{
+ display:flex;
+justify-content:center;
+}
+.iconSize{
+width: 40px;
+margin-right: 1rem;
+}
+.containerStyle{
+ position:absolute;
+ top:20%;
+ left:10%;
+ bottom:50%;
+ right:50%;
+}
+.form-group-size{
+padding-left: 2rem;
+padding-right: 2rem;
+}
+.rowCentrado{
+display:block;
+margin: 0 auto;
+padding-bottom: 3rem!important;
+}
+/*Styles Loggin End*/
 .iconsList{
   display: flex;
   justify-content: center;
@@ -198,8 +245,4 @@ tbody tr td{
 		font-weight: 600;
 	}
 }
-
-
-
-
 /*-----> media queries end <-----*/
