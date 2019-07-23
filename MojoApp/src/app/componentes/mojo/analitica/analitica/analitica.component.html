@@ -79,3 +79,39 @@
         <app-pie-chart [configChart]="configChartPais"></app-pie-chart>
     </div>
 </div>
+<h2 class="text-center">Seleccione los filtros de consulta</h2>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-md-12 col-lg-3">
+            <label for="fechaInicio">Fecha inicio:</label>
+            <div class="form-group">
+                <div class="input-group">
+                    <input formControlName="fechaInicio" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #d="ngbDatepicker">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary far fa-calendar-alt" (click)="d.toggle()" type="button"></button>
+                    </div>
+                </div>
+            </div> 
+        </div>
+        <div class="col-xs-12 col-md-12 col-lg-3">
+            <label for="fechaInicio">Fecha inicio:</label>
+            <div class="form-group">
+                <div class="input-group">
+                    <input formControlName="fechaInicio" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #d="ngbDatepicker">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary far fa-calendar-alt" (click)="d.toggle()" type="button"></button>
+                    </div>
+                </div>
+            </div> 
+        </div>
+        <div class="col-xs-12 col-md-12 col-lg-3">
+            <div class="form-group">
+                <label for="exampleFormControlInput1">Canal:</label>
+                <app-autocomplete [data]="canales" [form]="consultaForm" [control]="'canal'"></app-autocomplete>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-12 col-lg-3">
+            <button [disabled]="!consultaForm.valid" type="submit" class="btn btn-dark button-style "><strong>Consultar</strong></button>
+        </div>
+    </div>
+</div>
