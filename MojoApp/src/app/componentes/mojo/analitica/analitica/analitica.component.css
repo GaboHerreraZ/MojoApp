@@ -11,15 +11,6 @@
     width: 100% !important;
 }
 
-li {
-    display: inline;
-    margin-right: 7%;
-}
-
-li div {
-    display: inline;
-}
-
 .img-style {
     width: 40px;
     height: 40px;

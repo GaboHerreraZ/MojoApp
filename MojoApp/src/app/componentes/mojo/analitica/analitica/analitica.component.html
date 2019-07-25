@@ -1,4 +1,108 @@
-<div class="row">
+<div class="container">
+    <div class="d-flex justify-content-right">
+        <ul class="listStylenone">
+            <li><h2 class="fw-Titulo">Audiencia</h2></li>
+            <li><h3 class="fw-subTitulo">248.5k Listeners</h3></li>
+            <li><h5>17 / Jul</h5></li>
+        </ul>
+    </div>      
+</div>
+<!-- Container inputs start -->
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-md-12 col-lg-6 d-flex justify-content-start mt-4">
+            <ul class="ul">
+                <li><button class="btnAnalytics">Listeners</button></li>
+                <li><button class="btnAnalytics">Streams</button></li>
+                <li><button class="btnAnalytics">Followers</button></li>
+            </ul>
+        </div>
+        <div class="col-xs-12 col-md-12 col-lg-6 d-flex justify-content-end">
+            <ul class="listStylenone">
+                <li><label for="date" class="fw-subTitulo">Ingresar fecha</label></li>
+                <li><input type="date" class="dateInput" placeholder="Ingresar fecha"></li>
+            </ul>   
+        </div>
+    </div>
+</div>
+<!-- Container inputs end -->
+
+<hr>
+
+<!-- Analitycs Start -->
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-xs-12 col-md-12 col-lg-12">
+            <app-line-chart [configLine]="configCanalLine"></app-line-chart>    
+            <app-loading [loading]="loading"></app-loading>
+        </div>
+    </div>
+</div>
+<!-- Analitycs End -->
+
+<!-- Search artist start -->
+<div class="fw-700 container mt-5 d-flex">
+    <input class="form-control mr-sm-2 searchButton" aria-label="search" type="search" placeholder="Elegir artista para comparar">
+</div>
+<!-- Search artist end -->
+<hr> 
+
+<!-- Where your streams come from start -->
+<div class="container">
+    <h3 class="text-center fw-Titulo">Where your streams come from</h3>
+    <div class="row">
+        <div class="col-xs-12 col-md-12 col-lg-12">
+            <p style="padding-bottom:10rem;"></p>
+        </div>
+    </div>
+</div>
+<!-- Where your streams come from end -->
+
+<hr>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-md-12 col-lg-6" style="padding-bottom:10rem">
+            <h3 class="text-center fw-Titulo">Their gender</h3>
+        </div>
+        <div class="col-xs-12 col-md-12 col-lg-6" style="padding-bottom:10rem">
+            <h3 class="text-center fw-Titulo">Their Age</h3>
+        </div>
+    </div>
+</div>
+
+<hr>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-md-12 col-lg-5">
+            <table class="table">
+                <thead class="backgroundTable">
+                    <tr>
+                        <th scope="col">Top</th>
+                        <th scope="col">Canción</th>
+                        <th scope="col">Reproducciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let top of tops">
+                        <td>{{top.top}}</td>
+                        <td>{{top.cancion}}</td>
+                        <td>{{top.ingresos}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-xs-12 col-md-12 col-lg-7">
+            <label class="d-flex justify-content-center">Reproducciones por país</label>
+            <div class="d-flex justify-content-center">
+                <app-pie-chart [configChart]="configChartPais"></app-pie-chart>
+            </div>
+        </div>
+    </div>
+</div>
+<!--
+    <div class="row">
     <div class="col-md-4 classDiv">
         <h5>Seleccione los filtros de consulta:</h5>
     </div>
@@ -47,10 +151,7 @@
         </div>
     </div>
 </form>
-<div class="row">
-    <app-line-chart [configLine]="configCanalLine"></app-line-chart>
-</div>
-<app-loading [loading]="loading"></app-loading>
+
 <br>
 <div class="row">
     <div class="col-md-6">
@@ -110,8 +211,9 @@
                 <app-autocomplete [data]="canales" [form]="consultaForm" [control]="'canal'"></app-autocomplete>
             </div>
         </div>
-        <div class="col-xs-12 col-md-12 col-lg-3">
-            <button [disabled]="!consultaForm.valid" type="submit" class="btn btn-dark button-style "><strong>Consultar</strong></button>
+        <div class="col-xs-12 col-md-12 col-lg-3" style="margin-top:2rem">
+            <button [disabled]="!consultaForm.valid" type="submit" class="bgBtn"><strong>Consultar</strong></button>
         </div>
     </div>
 </div>
+-->

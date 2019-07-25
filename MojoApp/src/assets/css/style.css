@@ -1,6 +1,20 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+*{
+  font-family: 'Montserrat', sans-serif;
+}
 body{
   background-color: #e9ebee!important;
 }
+.fw-Titulo{
+  font-weight: 900;
+}
+.fw-subTitulo{
+  font-weight: 700;
+}
+.listStylenone{
+  list-style:none;
+}
+
 .navbar{
   padding: 0.2rem 1rem!important;
 }
@@ -54,8 +68,11 @@ body{
   color:#f4db31;
 }
 .backgroundTable{
-  background-color: black!important;color:#f4db31!important;text-align: center;
+  background-color: black!important;
+  color:#f4db31!important;
+  text-align: center;
 }
+
 .btnSize{
   width:240px!important;
   height: 50px;
@@ -71,11 +88,20 @@ body{
 .inputsDate{
   flex: 0 0 calc(33.3% - 1rem);
 }
+.dateInput{
+  border:none;
+  background-color:#fafafa;
+  border-radius:10px 10px 10px 10px;
+
+}
 .ul{
   display: flex;
   justify-content: center;
   padding-left: 0!important;
   list-style:none;
+}
+.listStylenone{
+  padding-left: 15px!important;
 }
 .li{
   padding:2rem;
@@ -99,6 +125,19 @@ body{
 .btnGralMobile:hover{
   background-color: black;
   color:#f4da30;
+}
+.btnAnalytics{
+  border:none;
+  padding: .2rem 1rem .2rem 1rem;
+  border-radius:10px 10px 10px 10px;
+  background-color:#f4da30;
+  margin-left:1rem;
+  font-weight: 600;
+}
+.btnAnalytics:hover{
+  background-color:black;
+  color:#f4da30;
+  transition:0.3s;
 }
 .form-control{
   border:none!important;

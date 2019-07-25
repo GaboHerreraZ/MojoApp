@@ -98,7 +98,7 @@ li a:hover {
 }
 
 .navbar {
-    background-color: #161616 !important;
+    background-color: black!important;
     width: 100%;
 }
 
@@ -106,9 +106,7 @@ li a {
     color: white;
     display: block;
     font-size: 16px;
-    font-family: Arial, Helvetica, sans-serif;
     padding-right: 30px !important;
-    transition: color 1s;
 }
 
 label {
@@ -125,7 +123,7 @@ label {
 }
 
 li a:hover {
-    color: gray !important;
+    color: yellow !important;
 }
 
 .active {
@@ -139,6 +137,7 @@ li a:hover {
 .dropdown-menu a:hover {
     background-color: #161616 !important;
     color: #edd920 !important;
+    transition:0.3s;
 }
 
 .logout {
@@ -149,6 +148,7 @@ li a:hover {
 
 .logout:hover {
     color: #edd920;
+    transition:0.3s;
 }
 
 .navbar-collapse {
@@ -172,9 +172,11 @@ li a:hover {
         color: white;
         display: block;
         font-size: 16px;
-        font-family: Arial, Helvetica, sans-serif;
         padding-right: 30px !important;
-        transition: color 1s;
+    }
+    li a:hover{
+        color:yellow;
+        transition:0.3s;
     }
     .logout {
         margin-left: 1%;
