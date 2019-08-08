@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ChartDataSets, ChartOptions } from 'chart.js';
+import { Chart, ChartDataSets, ChartOptions } from 'chart.js';
 import * as pluginAnnotations from 'chartjs-plugin-annotation';
 import { Title }     from '@angular/platform-browser';
 import { Constante } from 'src/app/utilidades/constante';
@@ -8,7 +8,11 @@ import { AccessComunesService } from '../../../../servicios/mojo/comunes/access.
 import { AlertService } from '../../../../servicios/alert/alert.service';
 import { Mensaje } from '../../../../utilidades/mensaje';
 import { AccessArtistaService } from '../../../../servicios/mojo/artista/access.artista.service';
-import { Chart } from '../../../../modelos/chart';
+import { GraficosComponent } from '../../analitica/graficos/graficos.component';
+
+
+/*Chart js */
+
 
 @Component({
   selector: 'app-analitica',
@@ -16,7 +20,6 @@ import { Chart } from '../../../../modelos/chart';
   styleUrls: ['./analitica.component.css']
 })
 export class AnaliticaComponent implements OnInit {
-
 
   consultaForm:FormGroup;
   configChartPais:Chart;
@@ -105,7 +108,6 @@ export class AnaliticaComponent implements OnInit {
     });
   }
 
-  /*
   public getArtistas() {
     this._serviciosArtista.getAccessArtistas();
     this._serviciosArtista.getArtistas().subscribe((res: any) => {
@@ -118,7 +120,7 @@ export class AnaliticaComponent implements OnInit {
     }, error => {
       this._message.error(Mensaje.noBackEnd);
     });
-  }*/
+  }
 
   get hola(){
     console.log("aaaa");
@@ -312,3 +314,5 @@ const tops2:any[]=[
     ingresos:"234.342"
   }
 ];
+
+

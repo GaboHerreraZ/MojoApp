@@ -8,7 +8,7 @@ export class AccessIngresosService {
 
   estadoCuenta = new Subject();
   ingresosPeriodo = new Subject();
-  detalleIngresos = new Subject();;
+  detalleIngresos = new Subject();
 
   constructor(private _ingresosService: IngresosService) { }
 

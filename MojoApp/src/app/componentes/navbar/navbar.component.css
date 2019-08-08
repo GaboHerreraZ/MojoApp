@@ -1,112 +1,18 @@
-/*.navbar-brand {
-    margin-left: 10% !important;
-}
-
-.navbar {
-    background-color: #161616 !important;
-    width: 100%;
-}
-
-li a {
-    color: white;
-    display: block;
-    font-size: 16px;
-    font-family: Arial, Helvetica, sans-serif;
-    padding-right: 30px !important;
-    transition: color 1s;
-}
-
-label {
-    margin-bottom: .0rem;
-    width: 100px;
-    line-height: 10px;
-}
-
-.class-icon {
-    font-size: 1em;
-    color: #edd920;
-    margin-left: 2%;
-    margin-right: 0;
-}
-
-li a:hover {
-    color: gray !important;
-    font-size: 17px !important;
-}
-
-.active {
-    color: #edd920 !important;
-}
-
-.dropdown-menu {
-    background-color: #161616 !important;
-}
-
-.dropdown-menu a:hover {
-    background-color: #161616 !important;
-    color: #edd920 !important;
-}
-
-.logout {
-    margin-left: 5%;
-    color: white;
-    cursor: pointer;
-}
-
-.logout:hover {
-    color: #edd920;
-}
-
-.navbar-collapse {
-    width: 100%;
-}
-
-@media screen and (max-width:1270px) {
-    .navbar-collapse {
-        margin-left: calc(50%-15px) !important;
-    }
-}
-
-@media screen and (max-width:992px) {
-    .navbar-collapse {
-        margin-left: calc(50%-10px) !important;
-    }
-    .navbar-brand {
-        margin-left: 0% !important;
-    }
-    li a {
-        color: white;
-        display: block;
-        font-size: 16px;
-        font-family: Arial, Helvetica, sans-serif;
-        padding-right: 30px !important;
-        transition: color 1s;
-    }
-    .logout {
-        margin-left: 1%;
-        color: white;
-        cursor: pointer;
-        display: block;
-    }
-}*/
-
-
-/*Estilos pam*/
-
-.navbar-brand {
-    margin-left: 10% !important;
-}
-
 .navbar {
     background-color: black!important;
-    width: 100%;
 }
 
 li a {
-    color: white;
+    color: #edd920;
     display: block;
     font-size: 16px;
     padding-right: 30px !important;
+}
+li a:hover{
+    color:black!important;
+    background-color:#edd920;
+    transition:0.5s;
+    border-radius: 2px;
 }
 
 label {
@@ -122,9 +28,6 @@ label {
     margin-right: 0;
 }
 
-li a:hover {
-    color: yellow !important;
-}
 
 .active {
     color: #edd920 !important;
@@ -141,7 +44,7 @@ li a:hover {
 }
 
 .logout {
-    margin-left: 5%;
+
     color: white;
     cursor: pointer;
 }
@@ -165,9 +68,7 @@ li a:hover {
     .navbar-collapse {
         margin-left: calc(50%-10px) !important;
     }
-    .navbar-brand {
-        margin-left: 0% !important;
-    }
+    
     li a {
         color: white;
         display: block;

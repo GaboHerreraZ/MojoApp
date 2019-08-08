@@ -1,37 +1,61 @@
-<div class="body-login full-height" style="background-image: url('./assets/img/Home.jpg');">
-
-    <div class="row row-login">
-        <div class="" *ngIf="show" style="width:100%">
-            <form [formGroup]="loginForm">
-                <div class="logo" style="text-align: center">
-                    <img class="img-fluid" src="./assets/img/logo-web.png">
-                </div>
-
-                <div class="inputContainer mt-5">
-                    <i class="fa fa-user icon"></i>
-                    <input placeholder="Email" type="text" formControlName="email" class="inputStyle" />
-                </div>
-                <div style="color:red;" *ngIf="submitted && f.email.errors">
-                    <small *ngIf="f.email.errors.required">Email es requerido</small>
-                </div>
-                <div class="inputContainer mt-5">
-                    <i class="fa fa-lock icon"></i>
-                    <input placeholder="Contraseña" type="password" formControlName="password" class="inputStyle" />
-                </div>
-                <div style="color:red;" *ngIf="submitted && f.password.errors">
-                    <small *ngIf="f.password.errors.required">Contraseña es requerida</small>
-                </div>
-                <div class="form-group mt-5">
-                    <button *ngIf="!newPassword" (click)="login()" class="btnLoggin">Ingresar</button>
-                    <button *ngIf="newPassword" (click)="resetPassword()" class="btn btn-dark button-style">Cambiar</button>
-                </div>
-                <div class="info-error" *ngIf="mensajeError != null">
-                    <small>{{mensajeError}}</small>
-                </div>
-            </form>
+<div
+  class="body-login full-height"
+  style="background-image: url('./assets/img/Home.jpg');"
+>
+  <div class="row row-login">
+    <div class="" *ngIf="show" style="width:100%">
+      <form [formGroup]="loginForm">
+        <div class="logo" style="text-align: center">
+          <img class="img-fluid" src="./assets/img/logo-web.png" />
         </div>
+
+        <div class="inputContainer mt-5">
+          <label>
+            <input
+              type="text"
+              required="required"
+              formControlName="email"
+              class="white"
+            />
+            <span>Email</span>
+          </label>
+        </div>
+        <div style="color:red;" *ngIf="submitted && f.email.errors">
+          <small *ngIf="f.email.errors.required">Email es requerido</small>
+        </div>
+        <div class="inputContainer">
+          <label>
+            <input
+              type="password"
+              required="required"
+              formControlName="password"
+              class="white"
+            />
+            <span>Contraseña</span>
+          </label>
+        </div>
+        <div style="color:red;" *ngIf="submitted && f.password.errors">
+          <small *ngIf="f.password.errors.required"
+            >Contraseña es requerida</small
+          >
+        </div>
+        <div class="form-group mt-5">
+          <button *ngIf="!newPassword" (click)="login()" class="btnLoggin">
+            Ingresar
+          </button>
+          <button
+            *ngIf="newPassword"
+            (click)="resetPassword()"
+            class="btn btn-dark button-style"
+          >
+            Cambiar
+          </button>
+        </div>
+        <div class="info-error" *ngIf="mensajeError != null">
+          <small>{{ mensajeError }}</small>
+        </div>
+      </form>
     </div>
-    <div class="row"></div>
-    <ngx-loading [show]="loading">
-    </ngx-loading>
+  </div>
+  <ngx-loading [show]="loading"> </ngx-loading>
 </div>

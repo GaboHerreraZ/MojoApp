@@ -8,7 +8,7 @@
       <div class="offset-lg-2" style="margin-left:3%!important"></div>
       <div class="col-xs-12 col-md-12 col-lg-5 backgroundGral marginTop p-5">
         <div class="form-group">
-          <label class="fw-subTitulo">Artista:</label>
+          <label class="fw-subTitulo">Elegir artista</label>
           <select (change)="onChangeArtista($event)" class="form-control" id="artistaSelect">
             <option>El Pepo</option>
             <option>Los Rebeldes</option>
@@ -18,17 +18,18 @@
         <div class="flex-row">
           <!-- align buttons -->
           <div class="d-flex justify-content-center">
-            <button (click)="verAnaliticaArtista()" type="button" class="background-btn fw-subTitulo">Consultar</button>
+            <button (click)="verAnaliticaArtista()" type="button" class="btnAnalytics fw-subTitulo">Consultar</button>
             <div class="ml-3" *ngIf="showInfo">
-              <button (click)="regresar()" type="button" class="background-btnBlack fw-subTitulo">Regresar</button>
+              <button (click)="regresar()" type="button" class="btnAnalyticsBlack fw-subTitulo">Regresar</button>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div> <!-- Container 1st container artist END -->
+<div class="animated fadeIn">
 
-  <div *ngIf="showInfo"> <!-- Show Info Start -->
+  <div *ngIf="showInfo animated fadeIn"> <!-- Show Info Start -->
     <h2 class="text-center my-5 fw-Titulo">Analytics</h2>
     <div class="container">
       <div class="row  ">
@@ -166,7 +167,7 @@
               </select>
          </div>
          <div class="col-xs-12 col-md-12 col-lg-3">
-          <button [disabled]="!consultaForm.valid" type="submit" class="btnGral btnGralMobile btnSize mt-4">Consultar</button> 
+          <button [disabled]="!consultaForm.valid" type="submit" class="btnAnalytics btnAnalyticsW95">Consultar</button> 
          </div> 
       </div>
     </div>
@@ -212,3 +213,4 @@
   </div> <!-- Show Info End -->
 </div> <!-- Container Fluid End -->
 <app-loading [loading]="loading"></app-loading>
+</div>

@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './componentes/login/login.component';
 import { GuardService } from './servicios/auth/guard.service';
@@ -16,6 +17,10 @@ const routes: Routes = [
     {path:'youtube',loadChildren:'./componentes/mojo/youtube/youtube-module/youtube.module#YoutubeModule'},
     {path:'catalogo',loadChildren:'./componentes/mojo/catalogos/catalogo/catalogo-module/catalogo.module#CatalogoModule'},
     {path:'artista',loadChildren:'./componentes/mojo/catalogos/artista/artista-module/artista.module#ArtistaModule'},
+    {path:'profile',loadChildren:'./componentes/mojo/profile/profile-module/profile.module#ProfileModule'},
+    {path:'afiliado',loadChildren:'./componentes/mojo/afiliado/afiliado-module/afiliado.module#AfiliadoModule'},
+
+    
     {path:'',redirectTo:'/mojo/analitica',pathMatch:'full'},
     {path:'**',redirectTo:'/mojo/analitica',pathMatch:'full'},
 

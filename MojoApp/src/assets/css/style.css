@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
 *{
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Open Sans', sans-serif;
 }
 body{
-  background-color: #e9ebee!important;
+  background-color: #dddddd!important;
 }
 .fw-Titulo{
   font-weight: 900;
@@ -14,14 +14,26 @@ body{
 .listStylenone{
   list-style:none;
 }
-
+.theme-green .bs-datepicker-head{
+  background-color: #f4db31!important;
+}
+.bs-datepicker-head{
+  min-width: 0!important;
+  height: 2.5rem!important;
+  padding:0!important;
+}
+.bs-datepicker-head button.current{
+  display:block!important;
+  margin:0 auto;
+  margin-top:-25px!important;
+}
 .navbar{
   padding: 0.2rem 1rem!important;
 }
 .backgroundGral{
   background-color: white;
-  border-radius: 20px;
-  box-shadow: 2px 2px 2px 2px grey;
+  border-radius: 5px;
+  box-shadow: 1px 1px 1px 1px grey;
 }
 .label {
   display: flex;
@@ -34,7 +46,7 @@ body{
 }
 .contenedorEgreso{
   width: 75%;
-  box-shadow: 2px 2px 2px 2px grey;
+  box-shadow: 1px 1px 1px 1px grey;
   display: block;
   margin: 0 auto;
 }
@@ -43,7 +55,7 @@ body{
   width: 100%;
   background-color: white;
   border-radius: 20px;
-  box-shadow: 2px 2px 2px 2px grey;
+  box-shadow: 1px 1px 1px 1px grey;
 }
 .btnGral, .bgBtn{
   border:none;
@@ -72,7 +84,6 @@ body{
   color:#f4db31!important;
   text-align: center;
 }
-
 .btnSize{
   width:240px!important;
   height: 50px;
@@ -92,7 +103,6 @@ body{
   border:none;
   background-color:#fafafa;
   border-radius:10px 10px 10px 10px;
-
 }
 .ul{
   display: flex;
@@ -104,7 +114,7 @@ body{
   padding-left: 15px!important;
 }
 .li{
-  padding:2rem;
+  padding:1rem;
 }
 .button-analitycs{
   border:none;
@@ -139,6 +149,24 @@ body{
   color:#f4da30;
   transition:0.3s;
 }
+.btnAnalyticsBlack{
+  border:none;
+  padding: .2rem 1rem .2rem 1rem;
+  border-radius:10px 10px 10px 10px;
+  color:#f4da30;
+  background-color:black;
+  margin-left:1rem;
+  font-weight: 600;
+}
+.btnAnalyticsBlack:hover{
+  background-color:#f4da30;
+  color:black;
+  transition:0.3s;
+}
+.btnAnalyticsW95{
+  width: 95%;
+  margin-top:2.5rem;
+}
 .form-control{
   border:none!important;
   background-color:#fafafa!important;
@@ -149,7 +177,9 @@ body{
   display: block;
   margin:0 auto;
 }
-
+.list-group-item{
+  border:none!important;
+}
 /*----- Buttons artista.component start <------*/
 
 
@@ -265,8 +295,83 @@ tbody tr td{
 		font-weight: 600;
 	}
 }
-
-
-
-
 /*-----> media queries end <-----*/
+
+/*-----> Animated start */
+.animated{
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+@keyframes fadeIn{
+  from{
+      opacity: 0 ;
+  }
+  to{
+      opacity: 1;
+  }
+}
+.fadeIn{
+  animation-name: fadeIn;
+}
+/*-----> Animated end */
+
+/*-----> Material inputs start */
+/*.wrapper {
+  max-width: 560px;
+  margin: 100px auto;
+}
+*/
+label {
+  position: relative;
+  display: block;
+  width: 30rem;
+
+}
+label > input {
+  position: relative;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #9e9e9e;
+  border-radius: 0;
+  outline: none;
+  height: 45px;
+  width: 100%;
+  font-size: 16px;
+  margin: 0 0 30px 0;
+  padding: 0;
+  box-shadow: none;
+  box-sizing: content-box;
+  transition: all .3s;
+}
+.white{
+  color:white;
+}
+label > input:valid + span {
+  transform: translateY(-25px) scale(0.8);
+  transform-origin: 0;
+}
+label > input:valid {
+  border-bottom: 1px solid #f4da30;
+  box-shadow: 0 1px 0 0 #f4da30;
+}
+label > span {
+  color: #9e9e9e;
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 16px;
+  cursor: text;
+  transition: .2s ease-out;
+}
+label > input:focus + span {
+  transform: translateY(-25px) scale(0.8);
+  transform-origin: 0;
+  color: #f4da30;
+}
+label > input:focus {
+  border-bottom: 1px solid #f4da30;
+  box-shadow: 0 1px 0 0 #f4da30;
+}
+/*-----> Material inputs end */

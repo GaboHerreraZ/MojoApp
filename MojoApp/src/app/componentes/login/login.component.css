@@ -19,7 +19,7 @@ label {
 
 .row-login {
     margin:0 auto;
-    width: 50%;
+    width: 35%;
     background-color: black;
     overflow: hidden;
     padding: 50px 40px 50px 40px;
@@ -50,6 +50,11 @@ label {
     display:block;
     margin: 0 auto;
     font-weight: 700;
+}
+.btnLoggin:hover{
+    background-color:Black;
+    color:#edd920;
+    transition: 0.3s;
 }
 .full-height {
     height: 100%;
