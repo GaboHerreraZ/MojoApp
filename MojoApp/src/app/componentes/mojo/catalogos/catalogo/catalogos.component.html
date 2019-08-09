@@ -1,21 +1,20 @@
-<div class="row container-fluid animated fadeIn" style="padding:0;">
+<div class="row container-fluid animated fadeI mt-5" style="padding:0;">
   <div class="col-12">
     <div *ngIf="show" class="row">
       <div class="col-md-4">
-        <label for="BuscarAlbum">
+        <label class="mt-1" for="BuscarAlbum">
           <input
             type="text"
-            required
+            class="w-50"
             [(ngModel)]="text"
             id="idBuscarAlbum"
-            class="mt-2"
+            placeholder="Buscar Album"
           />
-          <span>Buscar Album</span>
         </label>
       </div>
 
       <div class="col-md-4"></div>
-      <div id="nuevo-album-desktop" class="col-md-4 text-right">
+      <div id="nuevo-album-desktop" class="col-md-4 text-right animated fadeIn">
         <button
           style="margin-top:31px;"
           (click)="nuevoAlbum()"
@@ -75,7 +74,7 @@
     </div>
     <br />
 
-    <div *ngIf="show" class="row">
+    <div *ngIf="show" class="row animated fadeIn">
       <div class="table-responsive col-md-12">
         <table class="table">
           <thead class="tableHead">

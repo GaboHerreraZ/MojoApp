@@ -189,6 +189,22 @@ body{
 
 /*----- Buttons artista.component end <------*/
 
+/*----- Footer style start ------*/
+.footer {
+  position: fixed;
+  bottom: 0;
+  background-color: black;
+  text-align: center;
+  padding-top: 1rem;
+  width: 100%;
+  padding-bottom:1rem;
+  color:yellow;
+}
+.footer i{
+  padding: 0 1rem;
+}
+/*----- Footer style end ------*/
+
 /*----->  style table start  <-----*/
 thead tr th{
   background-color: black;
