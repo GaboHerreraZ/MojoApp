@@ -13,8 +13,9 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { FooterComponent } from './componentes/footer/footer.component';
 import { InterceptorService } from './servicios/interceptor/interceptor.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AfiliadoComponent } from './componentes/mojo/afiliado/afiliado.component';
+import { AfiliadoComponent } from './componentes/mojo/ingresos/afiliado/afiliado.component';
 import { GraficosComponent } from './componentes/mojo/analitica/graficos/graficos.component';
+import { AnticipoComponent } from './componentes/mojo/ingresos/anticipo/anticipo.component';
 
 
 @NgModule({
@@ -24,7 +25,6 @@ import { GraficosComponent } from './componentes/mojo/analitica/graficos/grafico
     LoginComponent,
     PaginasComponent,
     FooterComponent,
-    GraficosComponent,
   ],
   imports: [
     BrowserModule,
