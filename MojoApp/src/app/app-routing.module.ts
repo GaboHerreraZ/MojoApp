@@ -19,7 +19,8 @@ const routes: Routes = [
     {path:'catalogo',loadChildren:'./componentes/mojo/catalogos/catalogo/catalogo-module/catalogo.module#CatalogoModule'},
     {path:'artista',loadChildren:'./componentes/mojo/catalogos/artista/artista-module/artista.module#ArtistaModule'},
     {path:'profile',loadChildren:'./componentes/mojo/profile/profile-module/profile.module#ProfileModule'},
-    {path:'afiliado',loadChildren:'./componentes/mojo/afiliado/afiliado-module/afiliado.module#AfiliadoModule'},
+    {path:'afiliado',loadChildren:'./componentes/mojo/ingresos/afiliado/afiliado-module/afiliado.module#AfiliadoModule'},
+    {path:'graficos',loadChildren:'./componentes/graficos/graficos-module/graficos.module#GraficosModule'},
     
 
     

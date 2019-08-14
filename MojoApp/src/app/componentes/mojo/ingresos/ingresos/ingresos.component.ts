@@ -10,7 +10,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { debounceTime, tap, switchMap, finalize } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../../../servicios/auth/auth.service';
-
+import { Chart } from 'chart.js';
 
 @Component({
   selector: 'app-ingresos',
@@ -18,7 +18,7 @@ import { AuthService } from '../../../../servicios/auth/auth.service';
   styleUrls: ['./ingresos.component.css']
 })
 export class IngresosComponent implements OnInit {
-  
+  TendenciaChart:any = [];
   @ViewChild(DatatableComponent) dataTable: DatatableComponent;
   
   minMode: BsDatepickerViewMode = 'month';
@@ -85,6 +85,35 @@ export class IngresosComponent implements OnInit {
     
     this.configDataTable();
     this.loading = this._authService.validateSesion()?false:true;
+
+    /*Chart js Start*/
+    this.TendenciaChart = new Chart('tendenciaChart', {
+      type: 'line',
+    data: {
+    labels: ["Jan", "Feb", "March", "April", "May", "June","July","Aug","Sep","Oct","Nov","Dec"],
+    datasets: [{
+        label: 'Number of Items Sold in Months',
+        data: [9,7 , 3, 5, 2, 10,15,16,19,3,1,9],
+        fill:false,
+        lineTension:0.2,
+        borderColor:"red",
+        borderWidth: 1
+    }]
+    }, 
+    options: {
+    title:{
+        display:true
+    },
+    scales: {
+        yAxes: [{
+            ticks: {
+                beginAtZero:true
+            }
+        }]
+    }
+    }
+    });
+    /*Chart js End*/
   
   }
 

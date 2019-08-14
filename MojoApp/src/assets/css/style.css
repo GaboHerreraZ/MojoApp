@@ -5,6 +5,9 @@
 body{
   background-color: #dddddd!important;
 }
+.mt-10{
+  margin-top:6rem;
+}
 .fw-Titulo{
   font-weight: 900;
 }
@@ -32,7 +35,7 @@ body{
 }
 .backgroundGral{
   background-color: white;
-  border-radius: 5px;
+  border-radius: 3px;
   box-shadow: 1px 1px 1px 1px grey;
 }
 .label {

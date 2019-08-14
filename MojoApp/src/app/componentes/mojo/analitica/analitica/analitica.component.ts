@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Chart, ChartDataSets, ChartOptions } from 'chart.js';
 import * as pluginAnnotations from 'chartjs-plugin-annotation';
 import { Title }     from '@angular/platform-browser';
@@ -8,8 +8,6 @@ import { AccessComunesService } from '../../../../servicios/mojo/comunes/access.
 import { AlertService } from '../../../../servicios/alert/alert.service';
 import { Mensaje } from '../../../../utilidades/mensaje';
 import { AccessArtistaService } from '../../../../servicios/mojo/artista/access.artista.service';
-import { GraficosComponent } from '../../analitica/graficos/graficos.component';
-
 
 /*Chart js */
 
@@ -25,10 +23,16 @@ export class AnaliticaComponent implements OnInit {
   configChartPais:Chart;
   configCanalLine:Chart;
   tops = tops1;
- 
   loading:boolean;
   canales:any[];
   artistas:any[];
+//Charts
+  LineChart:any=[];
+  BarChart:any=[];
+  PieChart:any=[];
+  PaisChart:any=[];
+
+  AgeChart:any=[];
 
   constructor(private _tittleService:Title,
               private _formBuilder:FormBuilder,
@@ -40,6 +44,207 @@ export class AnaliticaComponent implements OnInit {
 
   ngOnInit() {
     this.setVariables();
+    /*Start Line Chart*/
+    this.LineChart = new Chart('lineChart', {
+      type: 'line',
+    data: {
+    labels: ["Jan", "Feb", "March", "April", "May", "June","July","Aug","Sep","Oct","Nov","Dec"],
+    datasets: [{
+        label: 'Number of Items Sold in Months',
+        data: [9,7 , 3, 5, 2, 10,15,16,19,3,1,9],
+        fill:false,
+        lineTension:0.2,
+        borderColor:"red",
+        borderWidth: 1
+    }]
+    }, 
+    options: {
+    title:{
+        text:"Line Chart",
+        display:true
+    },
+    scales: {
+        yAxes: [{
+            ticks: {
+                beginAtZero:true
+            }
+        }]
+    }
+    }
+    });
+    /*End Line Chart*/
+
+    /*Start Bar Chart*/
+    this.BarChart = new Chart('barChart', {
+      type: 'bar',
+    data: {
+     labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+     datasets: [{
+         label: '# of Votes',
+         data: [9,7 , 3, 5, 2, 10],
+         backgroundColor: [
+             'rgba(255, 99, 132, 0.2)',
+             'rgba(54, 162, 235, 0.2)',
+             'rgba(255, 206, 86, 0.2)',
+             'rgba(75, 192, 192, 0.2)',
+             'rgba(153, 102, 255, 0.2)',
+             'rgba(255, 159, 64, 0.2)'
+         ],
+         borderColor: [
+             'rgba(255,99,132,1)',
+             'rgba(54, 162, 235, 1)',
+             'rgba(255, 206, 86, 1)',
+             'rgba(75, 192, 192, 1)',
+             'rgba(153, 102, 255, 1)',
+             'rgba(255, 159, 64, 1)'
+         ],
+         borderWidth: 1
+     }]
+    }, 
+    options: {
+     title:{
+         text:"Bar Chart",
+         display:true
+     },
+     scales: {
+         yAxes: [{
+             ticks: {
+                 beginAtZero:true
+             }
+         }]
+     }
+    }
+    });
+    /*End Bar Chart*/
+
+    /*Start Pie Chart*/
+    this.PieChart = new Chart('pieChart', {
+      type: 'pie',
+    data: {
+     labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+     datasets: [{
+         label: '# of Votes',
+         data: [9,7 , 3, 5, 2, 10],
+         backgroundColor: [
+             'rgba(255, 99, 132, 0.2)',
+             'rgba(54, 162, 235, 0.2)',
+             'rgba(255, 206, 86, 0.2)',
+             'rgba(75, 192, 192, 0.2)',
+             'rgba(153, 102, 255, 0.2)',
+             'rgba(255, 159, 64, 0.2)'
+         ],
+         borderColor: [
+             'rgba(255,99,132,1)',
+             'rgba(54, 162, 235, 1)',
+             'rgba(255, 206, 86, 1)',
+             'rgba(75, 192, 192, 1)',
+             'rgba(153, 102, 255, 1)',
+             'rgba(255, 159, 64, 1)'
+         ],
+         borderWidth: 1
+     }]
+    }, 
+    options: {
+     title:{
+         text:"Bar Chart",
+         display:true
+     },
+     scales: {
+         yAxes: [{
+             ticks: {
+                 beginAtZero:true
+             }
+         }]
+     }
+    }
+    });
+    /*End Pie Chart*/
+
+    /* Age Chart Start */
+    this.AgeChart = new Chart('ageChart', {
+      type: 'pie',
+    data: {
+     labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+     datasets: [{
+         label: '# of Votes',
+         data: [9,7 , 3, 5, 2, 10],
+         backgroundColor: [
+             'rgba(255, 99, 132, 0.2)',
+             'rgba(54, 162, 235, 0.2)',
+             'rgba(255, 206, 86, 0.2)',
+             'rgba(75, 192, 192, 0.2)',
+             'rgba(153, 102, 255, 0.2)',
+             'rgba(255, 159, 64, 0.2)'
+         ],
+         borderColor: [
+             'rgba(255,99,132,1)',
+             'rgba(54, 162, 235, 1)',
+             'rgba(255, 206, 86, 1)',
+             'rgba(75, 192, 192, 1)',
+             'rgba(153, 102, 255, 1)',
+             'rgba(255, 159, 64, 1)'
+         ],
+         borderWidth: 1
+     }]
+    }, 
+    options: {
+     title:{
+         text:"Age Chart",
+         display:true
+     },
+     scales: {
+         yAxes: [{
+             ticks: {
+                 beginAtZero:true
+             }
+         }]
+     }
+    }
+    });
+    /* Age Chart End */
+
+    /*Start */
+    this.PaisChart = new Chart('paisChart', {
+      type: 'pie',
+    data: {
+     labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+     datasets: [{
+         label: '# of Votes',
+         data: [9,7 , 3, 5, 2, 10],
+         backgroundColor: [
+             'rgba(255, 99, 132, 0.2)',
+             'rgba(54, 162, 235, 0.2)',
+             'rgba(255, 206, 86, 0.2)',
+             'rgba(75, 192, 192, 0.2)',
+             'rgba(153, 102, 255, 0.2)',
+             'rgba(255, 159, 64, 0.2)'
+         ],
+         borderColor: [
+             'rgba(255,99,132,1)',
+             'rgba(54, 162, 235, 1)',
+             'rgba(255, 206, 86, 1)',
+             'rgba(75, 192, 192, 1)',
+             'rgba(153, 102, 255, 1)',
+             'rgba(255, 159, 64, 1)'
+         ],
+         borderWidth: 1
+     }]
+    }, 
+    options: {
+     title:{
+         text:"Pais Chart",
+         display:true
+     },
+     scales: {
+         yAxes: [{
+             ticks: {
+                 beginAtZero:true
+             }
+         }]
+     }
+    }
+    });
+    /*End  */
   }
   
 
@@ -205,7 +410,6 @@ export class AnaliticaComponent implements OnInit {
 
 }
 
-
 const tops1:any[]=[
   {
     top:1,
@@ -314,5 +518,6 @@ const tops2:any[]=[
     ingresos:"234.342"
   }
 ];
+
 
 

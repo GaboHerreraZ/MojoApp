@@ -14,8 +14,9 @@ import { FooterComponent } from './componentes/footer/footer.component';
 import { InterceptorService } from './servicios/interceptor/interceptor.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AfiliadoComponent } from './componentes/mojo/ingresos/afiliado/afiliado.component';
-import { GraficosComponent } from './componentes/mojo/analitica/graficos/graficos.component';
+import { GraficosComponent } from './componentes/graficos/graficos.component';
 import { AnticipoComponent } from './componentes/mojo/ingresos/anticipo/anticipo.component';
+
 
 
 @NgModule({
@@ -24,7 +25,7 @@ import { AnticipoComponent } from './componentes/mojo/ingresos/anticipo/anticipo
     NavbarComponent,
     LoginComponent,
     PaginasComponent,
-    FooterComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

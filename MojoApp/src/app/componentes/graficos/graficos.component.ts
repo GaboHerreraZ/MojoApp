@@ -10,7 +10,6 @@ import { Chart } from 'chart.js';
   
 
   export class GraficosComponent implements OnInit {
-  title = 'Ng7ChartJs By DotNet Techy';
   LineChart:any=[];
   BarChart:any=[];
   PieChart:any=[];

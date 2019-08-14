@@ -16,6 +16,10 @@ import { ComboChartComponent } from '../../componentes/charts/combo-chart/combo-
 import { NgSelectModule } from '@ng-select/ng-select';
 import { DatatableComponent } from '../../elementos/datatable/datatable.component';
 import { FilterPipe } from '../../pipes/filter.pipe';
+import { LineChartsComponent } from '../../componentes/chartsjs/line-charts/line-charts.component';
+import { TableChartsComponent } from 'src/app/componentes/chartsjs/table-charts/table-charts.component';
+import { PieChartsComponent } from '../../componentes/chartsjs/pie-charts/pie-charts.component';
+import { ComboChartsComponent } from '../../componentes/chartsjs/combo-charts/combo-charts.component';
 
 @NgModule({
   declarations: [
@@ -27,8 +31,12 @@ import { FilterPipe } from '../../pipes/filter.pipe';
     PieChartComponent,
     TableChartComponent,
     LineChartComponent,
-    ComboChartComponent
-
+    ComboChartComponent,
+    //Charts By Maximiliano
+    LineChartsComponent,
+    TableChartsComponent,
+    PieChartsComponent,
+    ComboChartsComponent
   ],
   imports: [
     CommonModule,

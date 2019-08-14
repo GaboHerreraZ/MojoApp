@@ -29,9 +29,18 @@
 }
 
 .button-style {
-    color: #edd920;
-    line-height: 15px;
-    border-radius: 0px;
+  border:none;
+  padding: .2rem 1rem .2rem 1rem;
+  border-radius:10px 10px 10px 10px;
+  color:black;
+  background-color:#f4da30;
+  margin-left:1rem;
+  font-weight: 600;
+}
+.button-style:hover{
+    transition: 0.3s;
+    color:#f4da30;
+    background-color:black;
 }
 
 .button-style i {
@@ -125,12 +134,8 @@ body {
 }
 
 
-body {
-    margin: 0;
-}
-
 section {
-    padding-bottom: 150px;
+    padding-bottom: 10rem;
 }
 
 #container-total {

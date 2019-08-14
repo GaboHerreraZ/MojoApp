@@ -23,43 +23,58 @@
                         </div>-->
                     </div>
                     <div class="form-group">
-                        <label for="">Nombres:</label>
+                        <!--<label for="">Nombres:</label>
                         <input type="text" class="form-control" placeholder="Nombres" id="nombres" required>
-                        <!--<div *ngIf="nuevoArtistaForm.get('nombres').invalid && (nuevoArtistaForm.get('nombres').dirty || nuevoArtistaForm.get('nombres').touched)" class="is-invalid">
+                        <div *ngIf="nuevoArtistaForm.get('nombres').invalid && (nuevoArtistaForm.get('nombres').dirty || nuevoArtistaForm.get('nombres').touched)" class="is-invalid">
                             <span *ngIf="nuevoArtistaForm.get('nombres').errors.required">
                                     Los nombres son requeridos
                                 </span>
                         </div>-->
+                        <label for="" class="w-100 mt-3">
+                                <input type="text" id="nombres" required>
+                                <span>Nombre</span>    
+                        </label>
                     </div>
                     <div class="form-group">
-                        <label for="">Apellidos:</label>
-                        <input type="text" class="form-control" placeholder="Apellidos" id="apellidos" required>
                         <!--<div *ngIf="nuevoArtistaForm.get('apellidos').invalid && (nuevoArtistaForm.get('apellidos').dirty || nuevoArtistaForm.get('apellidos').touched)" class="is-invalid">
                             <span *ngIf="nuevoArtistaForm.get('apellidos').errors.required">
                                     Los apellidos son requeridos
                                 </span>
                         </div>-->
+                        <label for="" class="w-100 mt-1">
+                                <input type="text" id="apellidos" required>
+                                <span>Apellido</span>    
+                        </label>
                     </div>
                     <div class="form-group">
-                        <label for="">Spotify:</label>
-                        <input type="text" class="form-control" placeholder="Su username en Spotify" id="spotify">
+                        <label for="" class="w-100 mt-1">
+                                <input type="text" id="spotify" required>
+                                <span>Usuario spotify</span>    
+                        </label>
                     </div>
                     <div class="form-group">
-                        <label for="">Facebook:</label>
-                        <input type="text" class="form-control" placeholder="Su username en Facebook" id="facebook">
+                        <label for="" class="w-100 mt-1">
+                                <input type="text" id="facebook" required>
+                                <span>Facebook</span>    
+                        </label>
+                        
                     </div>
                     <div class="form-group">
-                        <label for="">Spotify:</label>
-                        <input type="text" class="form-control" placeholder="Su username en Youtube" id="youtube">
+                        <label for="" class="w-100 mt-1">
+                                <input type="text" id="youtube" required>
+                                <span>Decia Spotify, pero el ID es youtube</span>    
+                        </label>
                     </div>
                     <div class="form-group">
-                        <label for="">Instagram:</label>
-                        <input type="text" class="form-control" placeholder="Su username en Instagram" id="instagram">
+                        <label for="" class="w-100 mt-1">
+                                <input type="text" id="instagram" required>
+                                <span>Instagram</span>    
+                        </label>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary button-style" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-dark button-style">Guardar</button>
+                    <button type="submit" class="btnAnalytics">Guardar</button>
                 </div>
             </form>
         </div>
