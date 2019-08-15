@@ -59,10 +59,6 @@ export class AnaliticaComponent implements OnInit {
     }]
     }, 
     options: {
-    title:{
-        text:"Line Chart",
-        display:true
-    },
     scales: {
         yAxes: [{
             ticks: {

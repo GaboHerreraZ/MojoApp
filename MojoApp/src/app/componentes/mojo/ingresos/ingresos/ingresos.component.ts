@@ -38,6 +38,7 @@ export class IngresosComponent implements OnInit {
     { id: 'artista', nombre: 'Artista' },
     { id: 'track', nombre: 'Track' },
     { id: 'servicio', nombre: 'Servicio' },
+    { id: 'afiliado', nombre: 'Afiliado' },
     { id: 'pais', nombre: 'País' },
     { id: 'periodo', nombre: 'Periodo' }
   ];

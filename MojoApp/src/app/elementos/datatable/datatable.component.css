@@ -1,20 +1,24 @@
 .table {
     width: 100% !important;
-    font-size: 13px;
     margin-bottom: 15px;
     padding:0!important;
 }
 
-.table td,
-.table th {
-    padding: 0.7rem !important;
-}
 
+.table-responsive{
+    padding-right: 0!important;
+    padding-left: 0!important;
+    /*-- CSS para ocultar --*/
+    overflow-x:hidden;
+    overflow-y:hidden;
+}
 .thead-dark th {
     background-color: black !important;
     color: #edd920 !important;
-    height: 3rem;
     text-align: center;
+    font-size:1rem;
+    border-color:#dddddd!important;
+    padding: .65rem;
 }
 
 tr {

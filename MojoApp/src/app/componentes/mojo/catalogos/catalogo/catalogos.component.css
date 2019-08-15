@@ -29,3 +29,11 @@
         display: block;
     }
 }
+.bgTitle{
+    background-image: url("src/assets/img/logoweb.png");
+    background-repeat: no-repeat;
+    padding:0!important;
+    background-position: bottom right;
+    height: 4rem;
+    opacity: 0.5;
+}

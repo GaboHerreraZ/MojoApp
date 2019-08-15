@@ -1,6 +1,10 @@
-<div class="container my-5 animated fadeIn">
-  <h2 class="text-center my-5 fw-Titulo">Tabla de ingresos</h2>
-  <div class="row">
+<div class="container mt-5 animated fadeIn">
+  <div class="bgTitle">
+      <h2 class="d-flex justify-content-start fw-Titulo">Tabla de ingresos</h2>
+  </div>
+  
+  <hr>  
+  <div class="row mt-5">
     <div class="col-xs-12 col-md-12 col-lg-6 backgroundGral">
       <div class="row my-3">
         <div class="col-lg-6">
@@ -23,7 +27,7 @@
         <div class="col-lg-6">
           <label>Filtrar:</label>
           <ng-select (change)="onChange($event)" [items]="filtro" bindLabel="nombre" placeholder="Seleccione filtro"></ng-select>
-          <div *ngIf="show">
+          <div *ngIf="show" >
             <label>Por:</label>
             <form [formGroup]="objectSelect">
               <input class="form-control" [placeholder]="primerFiltro.nombre" [matAutocomplete]="auto" formControlName="object">
@@ -120,7 +124,7 @@
 </div>
 
 <!-- Tendencias de venta start -->
-<section class="white-seccion">
+<section class="white-seccion mt-10">
   <div class="container">
     <div class="row ">
       <div class="col-xs-6 col-md-6 col-lg-6">
@@ -128,7 +132,7 @@
           <h2 class="margin-centrado fw-Titulo">Tendencias de venta</h2>
         </div>
       </div>
-      <div class="col-xs-4 offset-xs-2 col-md-6 offset-lg-2 col-lg-4 margin-centrado">
+      <div class="col-xs-4 offset-xs-2 col-md-6 offset-lg-2 col-lg-4 margin-centrado mt-2">
         <button class="btnAnalytics" type="button" name="button">Canal</button>
         <button class="btnAnalytics" type="button" name="button">Tienda</button>
         <button class="btnAnalytics" type="button" name="button">País</button>

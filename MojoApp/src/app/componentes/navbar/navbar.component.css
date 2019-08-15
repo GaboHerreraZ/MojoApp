@@ -1,9 +1,17 @@
 .navbar {
     background-color: black!important;
+    color:#edd920;
 }
-
-li a {
-    color: #edd920;
+.navbar .nav-item{
+    color:#edd920;
+}
+.dropdown-item {
+    color:#edd920;
+}
+.dropdown-item .navOption{
+    color:black;
+}
+li a {   
     display: block;
     font-size: 16px;
     padding-right: 30px !important;
@@ -29,17 +37,13 @@ label {
 }
 
 
-.active {
-    color: #edd920 !important;
-}
-
 .dropdown-menu {
-    background-color: #161616 !important;
+    background-color: black !important;
 }
 
 .dropdown-menu a:hover {
-    background-color: #161616 !important;
-    color: #edd920 !important;
+    background-color: #edd920 !important;
+    color:  black!important;
     transition:0.3s;
 }
 
@@ -86,3 +90,11 @@ label {
         display: block;
     }
 }
+.class1{
+    color:black!important;
+    background-color:#edd920!important;
+    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+    transition: box-shadow 0.3s;
+    border-radius:2px;
+}
+
