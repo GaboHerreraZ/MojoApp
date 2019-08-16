@@ -104,7 +104,7 @@ export class LoginComponent implements OnInit {
       this._authService.getCurrentSesion().subscribe(
         (sesion:any)=>{
             this._authService.setSesion(sesion);
-            this._router.navigate(['/mojo/analitica']);
+            this._router.navigate(['/mojo/ingresos']);
           }
       );
     }

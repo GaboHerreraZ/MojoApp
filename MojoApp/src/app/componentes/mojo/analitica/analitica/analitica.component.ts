@@ -48,7 +48,7 @@ export class AnaliticaComponent implements OnInit {
     this.LineChart = new Chart('lineChart', {
       type: 'line',
     data: {
-    labels: ["Jan", "Feb", "March", "April", "May", "June","July","Aug","Sep","Oct","Nov","Dec"],
+    labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"],
     datasets: [{
         label: 'Number of Items Sold in Months',
         data: [9,7 , 3, 5, 2, 10,15,16,19,3,1,9],
@@ -74,7 +74,7 @@ export class AnaliticaComponent implements OnInit {
     this.BarChart = new Chart('barChart', {
       type: 'bar',
     data: {
-     labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+    labels: ["Rojo", "Azul", "Amarillo", "Verde", "Violeta", "Naranja"],
      datasets: [{
          label: '# of Votes',
          data: [9,7 , 3, 5, 2, 10],
@@ -98,10 +98,7 @@ export class AnaliticaComponent implements OnInit {
      }]
     }, 
     options: {
-     title:{
-         text:"Bar Chart",
-         display:true
-     },
+
      scales: {
          yAxes: [{
              ticks: {
@@ -117,7 +114,7 @@ export class AnaliticaComponent implements OnInit {
     this.PieChart = new Chart('pieChart', {
       type: 'pie',
     data: {
-     labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+      labels: ["Rojo", "Azul", "Amarillo", "Verde", "Violeta", "Naranja"],
      datasets: [{
          label: '# of Votes',
          data: [9,7 , 3, 5, 2, 10],
@@ -141,10 +138,6 @@ export class AnaliticaComponent implements OnInit {
      }]
     }, 
     options: {
-     title:{
-         text:"Bar Chart",
-         display:true
-     },
      scales: {
          yAxes: [{
              ticks: {
@@ -160,7 +153,7 @@ export class AnaliticaComponent implements OnInit {
     this.AgeChart = new Chart('ageChart', {
       type: 'pie',
     data: {
-     labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+     labels: ["Rojo", "Azul", "Amarillo", "Verde", "Violeta", "Naranja"],
      datasets: [{
          label: '# of Votes',
          data: [9,7 , 3, 5, 2, 10],
@@ -184,10 +177,6 @@ export class AnaliticaComponent implements OnInit {
      }]
     }, 
     options: {
-     title:{
-         text:"Age Chart",
-         display:true
-     },
      scales: {
          yAxes: [{
              ticks: {
@@ -203,7 +192,7 @@ export class AnaliticaComponent implements OnInit {
     this.PaisChart = new Chart('paisChart', {
       type: 'pie',
     data: {
-     labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+      labels: ["Rojo", "Azul", "Amarillo", "Verde", "Violeta", "Naranja"],
      datasets: [{
          label: '# of Votes',
          data: [9,7 , 3, 5, 2, 10],
@@ -227,10 +216,6 @@ export class AnaliticaComponent implements OnInit {
      }]
     }, 
     options: {
-     title:{
-         text:"Pais Chart",
-         display:true
-     },
      scales: {
          yAxes: [{
              ticks: {

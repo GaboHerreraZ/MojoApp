@@ -24,8 +24,8 @@ const routes: Routes = [
     
 
     
-    {path:'',redirectTo:'/mojo/analitica',pathMatch:'full'},
-    {path:'**',redirectTo:'/mojo/analitica',pathMatch:'full'},
+    {path:'',redirectTo:'/mojo/ingresos',pathMatch:'full'},
+    {path:'**',redirectTo:'/mojo/ingresos',pathMatch:'full'},
 
   ]  
 },

@@ -12,15 +12,16 @@
 .is-invalid {
     color: red;
 }
-
+.bgTitle{
+    background-image: url("src/assets/img/logoweb.png");
+    background-repeat: no-repeat;
+    padding:0!important;
+    background-position: bottom right;
+    height: 4rem;
+    opacity: 0.5;
+}
 
 /*Nuevos estilos*/
-
-::ng-deep input:focus {
-    border-color: #edd920 !important;
-    border: 2px solid #edd920 !important;
-    box-shadow: 0 0 0 0.1rem #edd920 !important;
-}
 
 ::ng-deep input {
     width: 70%;

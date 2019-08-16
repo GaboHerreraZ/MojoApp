@@ -1,6 +1,7 @@
 .navbar {
     background-color: black!important;
     color:#edd920;
+    
 }
 .navbar .nav-item{
     color:#edd920;
@@ -17,11 +18,22 @@ li a {
     padding-right: 30px !important;
 }
 li a:hover{
-    color:black!important;
-    background-color:#edd920;
+    color:#edd920!important;
     transition:0.5s;
     border-radius: 2px;
 }
+li a:hover:not(.active) {
+  
+ 
+    color: #D8FC62;
+    border:solid 2px #edd920;
+  }
+  
+  .active {
+    border: solid 2px #edd920;
+    color: hotpink
+  }
+
 
 label {
     margin-bottom: .0rem;
@@ -91,8 +103,7 @@ label {
     }
 }
 .class1{
-    color:black!important;
-    background-color:#edd920!important;
+    color:#edd920!important;
     box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
     transition: box-shadow 0.3s;
     border-radius:2px;

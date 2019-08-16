@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { BsDatepickerConfig, BsDatepickerViewMode } from 'ngx-bootstrap/datepicker';
+import { BsDatepickerConfig, BsDatepickerViewMode, BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { AccessComunesService } from '../../../../servicios/mojo/comunes/access.comunes.service';
 import { Constante } from '../../../../utilidades/constante';
 import { AlertService } from '../../../../servicios/alert/alert.service';
@@ -11,6 +11,8 @@ import { debounceTime, tap, switchMap, finalize } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../../../servicios/auth/auth.service';
 import { Chart } from 'chart.js';
+import { defineLocale } from 'ngx-bootstrap/chronos';
+import { esLocale } from 'ngx-bootstrap/locale';
 
 @Component({
   selector: 'app-ingresos',
@@ -66,16 +68,20 @@ export class IngresosComponent implements OnInit {
     private _message: AlertService,
     private _authService:AuthService,
     private _http: HttpClient,
-    private _fb: FormBuilder) {
-
+    private _fb: FormBuilder,
+    private localeService: BsLocaleService) {
+      defineLocale('es', esLocale);
   }
  
   
   ngOnInit() {
-    
+   // this.localeService.use('es');
+
     this.bsConfig = Object.assign({}, {
       minMode: this.minMode,
-      dateInputFormat: 'MM/YYYY'
+      dateInputFormat: 'MM/YYYY',
+      locale: 'es',
+      
     });
   
     this.objectSelect = this._fb.group({
@@ -91,7 +97,7 @@ export class IngresosComponent implements OnInit {
     this.TendenciaChart = new Chart('tendenciaChart', {
       type: 'line',
     data: {
-    labels: ["Jan", "Feb", "March", "April", "May", "June","July","Aug","Sep","Oct","Nov","Dec"],
+    labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"],
     datasets: [{
         label: 'Number of Items Sold in Months',
         data: [9,7 , 3, 5, 2, 10,15,16,19,3,1,9],

@@ -1,7 +1,5 @@
 <div class="container mt-5 animated fadeIn">
-  <div class="bgTitle">
       <h2 class="d-flex justify-content-start fw-Titulo">Tabla de ingresos</h2>
-  </div>
   
   <hr>  
   <div class="row mt-5">
@@ -61,7 +59,7 @@
           <ul style="list-style:none;display: flex;margin:0 2rem">
             <li style="color:gray">Período </li>  
             <li style="color:gray"><span style="padding:0 10px;">12/ago/2018 </span> - </li>
-            <li style="color:gray"><span style="padding:0 10px;">12/ago/2019 </span> </li>
+            <li style="color:gray"><span style="padding:0 10px;">12/sep/2019 </span> </li>
           </ul>
         </div>
         
@@ -79,9 +77,8 @@
                 <span>$55.733,00 </span>
               </li>
               <ul style="list-style: none;font-size:10px;padding:0 5px;">
-                  <li>Período <span></span> </li>
-                  <li>Anticipo/Descuento <span></span> </li>
-                  <li>Pago Factura <span></span> </li>  
+                  <li><span>Ingreso </span> </li>
+                  <li>Fecha <span> 16 - ago - 2019 </span> </li>
                 </ul>
             </ul>
       </div>
@@ -94,12 +91,14 @@
                 <span>$-6.12,00 </span>
               </li>
               <ul style="list-style: none;font-size:10px;padding:0 5px;">
-                  <li>Cheque <span style="color:gray">#NovQ318T</span> Emitido: <span style="color:gray">11/09/2018</span></li>
+                  <li>Anticipo <span style="color:gray">#NovQ318T</span> Emitido: <span style="color:gray">11/09/2018</span></li>
+                  <li>Devolución: <span style="color:gray">11/09/2018</span></li>
                 </ul>
               <li class="d-flex justify-content-between align-items-center">
                 Descripción
                 <span>$-6.12,00 </span>
               </li>
+              <li style="list-style: none;font-size:10px;padding:0 5px;">Factura <span style="color:gray"> A #3251</span> Emitido: <span style="color:gray">11/09/2018</span></li>
               <!--<ul style="list-style: none;font-size:10px;padding:0 5px;">
                   <li>lorem 1 ▼</li>
                   <li>lorem 2</li>
@@ -124,28 +123,23 @@
 </div>
 
 <!-- Tendencias de venta start -->
-<section class="white-seccion mt-10">
+<section class="white-seccion mt-10 backgroundGral p-5">
   <div class="container">
     <div class="row ">
       <div class="col-xs-6 col-md-6 col-lg-6">
         <div class="col align-content-start">
-          <h2 class="margin-centrado fw-Titulo">Tendencias de venta</h2>
+          <h2 class="margin-centrado fw-Titulo">Tendencias de ingresos</h2>
         </div>
       </div>
-      <div class="col-xs-4 offset-xs-2 col-md-6 offset-lg-2 col-lg-4 margin-centrado mt-2">
-        <button class="btnAnalytics" type="button" name="button">Canal</button>
-        <button class="btnAnalytics" type="button" name="button">Tienda</button>
+      <div class="col-xs-4 offset-xs-2 col-md-6 offset-lg-3 col-lg-3 margin-centrado mt-2">
+        <button class="btnAnalytics" type="button" name="button">Servicio</button>
         <button class="btnAnalytics" type="button" name="button">País</button>
       </div>
     </div>
-  </div>
-  <div class="container">
     <div class="row">
       <div class="col-xs-12 col-md-12 col-lg-12">
-        <div>
-          <canvas id="tendenciaChart" ></canvas>
-        </div>
-      </div>
+        <canvas id="tendenciaChart" ></canvas>
+    </div>
     </div>
   </div>
 </section>
@@ -266,7 +260,7 @@
 </div>
 -->
 
-<div class="row">
+<div class="row mt-10">
   <div class="col-md-12">
     <ul class="nav nav-tabs" id="myTab" role="tablist" style="background-color:black;height:43px">
       <li class="nav-item">

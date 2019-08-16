@@ -1,17 +1,27 @@
 <div class="animated fadeIn mt-5">
-        <div class="bgTitle">
-                <h2 class="d-flex justify-content-start fw-Titulo">Analytics</h2>
-        </div>
-        <hr>
-<div class="container mt-5">
+    <h2 class="d-flex justify-content-start fw-Titulo">Analytics</h2>
+    <hr>
+<div class="container mt-5 backgroundGral p-5">
     <div class="d-flex justify-content-right">
         <ul class="listStylenone">
-            <li><h2 class="fw-Titulo">Audiencia</h2></li>
-            <li><h3 class="fw-subTitulo">248.5k Listeners</h3></li>
-            <li><h5>17 / Jul</h5></li>
+            <li><h2 class="fw-Titulo"><span>Audiencia</span></h2></li>
+            <li><h3 class="fw-subTitulo"><span>248.5k Listeners</span></h3></li>
+            <li><h5><span>17 / Jul</span></h5></li>
+            <li>
+                <label class="mt-5">
+                    <input type="text" required="required" />
+                    <span>Elegir artista</span>
+                </label>  
+            </li>
         </ul>
-    </div>      
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <canvas id="lineChart" ></canvas>
+        </div>
+    </div>
 </div>
+<hr>
 <!-- Container inputs start 
 <div class="container">
     <div class="row">
@@ -30,34 +40,7 @@
     </div>
 </div>
 Container inputs end -->
-<div class="container">
-    <div class="row">
-        <div class="col-lg-12">
-            <canvas id="lineChart" ></canvas>
-        </div>
-    </div>
-</div>
-<hr>
 
-<!-- Analitycs Start -->
-<div class="container mt-5">
-    <div class="row">
-        <div class="col-xs-12 col-md-12 col-lg-12">
-            <!-- Analytics -->
-            <!-- Analytics -->
-            <!-- Analytics -->
-
-            
-            
-
-            <!-- Analytics -->
-            <!-- Analytics -->
-            <!-- Analytics -->
-
-        </div>
-    </div>
-</div>
-<!-- Analitycs End -->
 
 <!-- Search artist start -->
 <div class="fw-700 container mt-5 d-flex">
@@ -67,8 +50,9 @@ Container inputs end -->
 <hr> 
 
 <!-- Where your streams come from start -->
-<div class="container">
-    <h3 class="text-center fw-Titulo">Where your streams come from</h3>
+<div class="container backgroundGral p-5">
+    <h3 class="text-center fw-Titulo">
+        De dónde vienen tus reproducciones</h3>
     <div class="row">
         <div class="col-xs-12 col-md-12 col-lg-12">
             <canvas id="barChart"></canvas>
@@ -81,12 +65,12 @@ Container inputs end -->
 
 <div class="container">
     <div class="row">
-        <div class="col-xs-12 col-md-12 col-lg-6" style="padding-bottom:10rem">
-            <h3 class="text-center fw-Titulo">Their gender</h3>
+        <div class="col-xs-12 col-md-12 col-lg-6 backgroundGral p-5" style="padding-bottom:10rem">
+            <h3 class="text-center fw-Titulo">Género</h3>
             <canvas id="pieChart"></canvas>
         </div>
-        <div class="col-xs-12 col-md-12 col-lg-6" style="padding-bottom:10rem">
-            <h3 class="text-center fw-Titulo">Their Age</h3>
+        <div class="col-xs-12 col-md-12 col-lg-6 backgroundGral p-5" style="padding-bottom:10rem">
+            <h3 class="text-center fw-Titulo">Edad</h3>
             <canvas id="ageChart"></canvas>
         </div>
     </div>
@@ -114,7 +98,7 @@ Container inputs end -->
                 </tbody>
             </table>
         </div>
-        <div class="col-xs-12 col-md-12 col-lg-7">
+        <div class="col-xs-12 col-md-12 col-lg-7 backgroundGral p-5">
             <label class="d-flex justify-content-center">Reproducciones por país</label>
             <div class="d-flex justify-content-center">
                     <canvas id="paisChart"></canvas>
