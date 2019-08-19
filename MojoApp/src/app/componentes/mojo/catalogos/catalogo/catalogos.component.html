@@ -20,10 +20,9 @@
       <div class="col-md-4"></div>
       <div id="nuevo-album-desktop" class="col-md-4 text-right animated fadeIn">
         <button
-          style="margin-top:31px;"
           (click)="nuevoAlbum()"
           type="button"
-          class="btnAnalytics"
+          class="btnAnalytics mt-3"
           title="Nuevo Album"
         >
           Nuevo Album
@@ -35,7 +34,6 @@
         style="padding:0;"
       >
         <button
-          style="margin-top:31px;"
           (click)="nuevoAlbum()"
           type="button"
           class="btn btn-dark button-style"
@@ -124,7 +122,6 @@
                 <button
                   title="Eliminar"
                   class="btn btn-danger button-style btn-xs btn-yellow"
-                  style="margin-right:0 !important;"
                 >
                   <i class="fa fa-trash"></i>
                 </button>
@@ -147,12 +144,11 @@
   </div>
 </div>
 <button
-  style="margin-top:31px;"
+  style="margin-top:31px;visibility:hidden"
   (click)="nuevoAlbum()"
   type="button"
   class="btnNewArtistA"
   title="Nuevo Album"
-  style="visibility:hidden"
 >
   +
 </button>

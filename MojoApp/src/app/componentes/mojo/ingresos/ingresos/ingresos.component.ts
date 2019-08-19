@@ -121,6 +121,35 @@ export class IngresosComponent implements OnInit {
     }
     });
     /*Chart js End*/
+
+        /*Chart js Start pais*/
+        this.TendenciaChart = new Chart('tendenciaChartPais', {
+          type: 'line',
+        data: {
+        labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"],
+        datasets: [{
+            label: 'Number of Items Sold in Months',
+            data: [9,7 , 3, 5, 2, 10,15,16,19,3,1,9],
+            fill:false,
+            lineTension:0.2,
+            borderColor:"red",
+            borderWidth: 1
+        }]
+        }, 
+        options: {
+        title:{
+            display:true
+        },
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+        }
+        });
+        /*Chart js End*/
   
   }
 

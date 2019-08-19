@@ -18,21 +18,9 @@ li a {
     padding-right: 30px !important;
 }
 li a:hover{
-    color:#edd920!important;
+    color:#dddddd;
     transition:0.5s;
-    border-radius: 2px;
 }
-li a:hover:not(.active) {
-  
- 
-    color: #D8FC62;
-    border:solid 2px #edd920;
-  }
-  
-  .active {
-    border: solid 2px #edd920;
-    color: hotpink
-  }
 
 
 label {
@@ -103,9 +91,10 @@ label {
     }
 }
 .class1{
-    color:#edd920!important;
+    color:#dddddd!important;
     box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
     transition: box-shadow 0.3s;
     border-radius:2px;
+    margin-bottom:5px;
 }
 

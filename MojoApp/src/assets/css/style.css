@@ -5,6 +5,9 @@
 body{
   background-color: #dddddd!important;
 }
+.hrIngresos{
+  border-color:yellow!important;
+}
 .mt-10{
   margin-top:6rem;
 }
@@ -13,9 +16,6 @@ body{
 }
 .fw-subTitulo{
   font-weight: 700;
-}
-.listStylenone{
-  list-style:none;
 }
 .theme-green .bs-datepicker-head{
   background-color: #f4db31!important;
@@ -29,6 +29,11 @@ body{
   display:block!important;
   margin:0 auto;
   margin-top:-25px!important;
+}
+.centrarBtn{
+  display: block!important;
+  margin:0 auto!important;
+  padding: 0.3rem 4rem!important;
 }
 .navbar{
   padding: 0.2rem 1rem!important;
